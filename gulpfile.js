@@ -11,6 +11,33 @@ var cache = require('gulp-cache');
 var runSequence = require('run-sequence');
 var wiredep = require('wiredep').stream;
 var autoprefixer = require('gulp-autoprefixer');
+
+//browserify
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var gutil = require('gulp-util');
+var sourcemaps = require('gulp-sourcemaps');
+var babelify = require('babelify');
+
+gulp.task('browserify', function () {
+  // set up the browserify instance on a task basis
+    return browserify({
+        entries: './public_src/es6/app.js',
+        debug: true
+        
+    })
+    .transform("babelify", {presets: ["es2015"]})
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./public_src/js'));
+});
+
  
 gulp.task('autoprefixer', function () {
 	return gulp.src('app/css/**/*.css')
@@ -47,6 +74,7 @@ gulp.task('browserSync',function(){
 
 gulp.task('watch',function(){
     gulp.watch('./public_src/scss/**/*.scss', ['sass']);
+    gulp.watch('./public_src/es6/**/*.js', ['browserify']);
     gulp.watch('./public_src/*.html',browserSync.reload);
     gulp.watch('./public_src/js/**/*.js',browserSync.reload);    
 });
@@ -54,7 +82,6 @@ gulp.task('watch',function(){
 gulp.task('useref', function(){
     return gulp.src('public_src/**/*.html')
     .pipe(useref())
-    .pipe(gulpIf('*.js',uglify()))
     .pipe(gulpIf('*.css',cssnano()))
     .pipe(gulp.dest('public'));
 });
@@ -74,7 +101,7 @@ gulp.task('fonts', function(){
 });
 
 gulp.task('clean:dist',function(){
-    return del.sync('public_src');
+    return del.sync('public');
 });
 
 gulp.task('cache:clear',function(callback){
@@ -88,10 +115,10 @@ gulp.task('wiredep',function(){
 });
 
 gulp.task('build',function(callback){
-    runSequence('clean:dist','wiredep', 'sass', 'autoprefixer',
+    runSequence('clean:dist','wiredep', 'sass','browserify', 'autoprefixer',
     ['useref','images','fonts']);
 });
 
 gulp.task('default',function(){
-    runSequence('sass','wiredep',['autoprefixer','browserSync','watch']);
+    runSequence('sass','browserify','wiredep',['autoprefixer','browserSync','watch']);
 });

@@ -50,7 +50,8 @@ gulp.task('autoprefixer', function () {
 
 gulp.task('sass',function(){
    return gulp.src('public_src/scss/**/*.scss')
-   .pipe(sass())
+   .pipe(sourcemaps.init())
+   .pipe(sass({includePaths: ['public_src/lib/foundation-sites/scss','public_src/lib/motion-ui/src']}))
    .pipe(autoprefixer({
 			browsers: ['last 2 versions'],
 			cascade: false

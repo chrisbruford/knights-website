@@ -5,22 +5,36 @@
     <base href="/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000026">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Knights of Karma">
+    <meta name="application-name" content="Knights of Karma">
+    <meta name="theme-color" content="#ffffff">
+
     <title>Knights of Karma - An Elite Dangerous Playergroup</title>
     <meta name="description" content="An Elite Dangerous playergroup founded to provide a home for all Commanders. As long as they follow our one rule: don't be a dick">
     <!-- build:css css/app.min.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="lib/motion-ui/dist/motion-ui.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="css/app.css">
     <!-- endbuild -->
 </head>
 
 <body>
-    Dr Toxic is an ammature explorer
+    <p class="small-3 columns">Dr Toxic is an ammature explorer</p>
 
     <!-- build:js js/main.min.js -->
     <!-- bower:js -->
     <script src="lib/angular/angular.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/what-input/what-input.js"></script>
+    <script src="lib/foundation-sites/dist/foundation.js"></script>
+    <script src="lib/motion-ui/dist/motion-ui.js"></script>
     <!-- endbower -->
     <script src="js/app.js"></script>
     <!-- endbuild -->

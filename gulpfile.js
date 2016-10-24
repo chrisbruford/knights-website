@@ -95,6 +95,11 @@ gulp.task('images',function(){
    .pipe(gulp.dest('public/images'));
 });
 
+gulp.task('favicon',function(){
+   return gulp.src('public_src/*.+(jpg|gif|png|svg|ico|json)')
+   .pipe(gulp.dest('public'));
+});
+
 
 gulp.task('fonts', function(){
    return gulp.src('public_src/font/**/*')
@@ -117,7 +122,7 @@ gulp.task('wiredep',function(){
 
 gulp.task('build',function(callback){
     runSequence('clean:dist','wiredep', 'sass','browserify', 'autoprefixer',
-    ['useref','images','fonts']);
+    ['useref','images','fonts','favicon']);
 });
 
 gulp.task('default',function(){

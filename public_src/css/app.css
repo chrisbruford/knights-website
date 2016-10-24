@@ -4133,6 +4133,10 @@ table.hover tbody tr:nth-of-type(even):hover {
 body {
   background-color: #ffffff; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Rubik", sans-serif;
+  text-transform: uppercase; }
+
 .black {
   background-color: #000000;
   color: #ffffff;

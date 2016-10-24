@@ -1,9 +1,16 @@
 @import 'foundation-imports';
 $primary-color: #ffffff;
 $secondary-color: #000000;
+$header-font: 'Rubik', sans-serif;
+
 
 body {
   background-color: $primary-color;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: $header-font;
+  text-transform: uppercase;
 }
 
 .black {

@@ -1,5 +1,19 @@
 @import 'foundation-imports';
+$primary-color: #ffffff;
+$secondary-color: #000000;
 
 body {
-  background-color: pink;
+  background-color: $primary-color;
+}
+
+.black {
+  background-color: $secondary-color;
+  color: $primary-color;
+  padding: 4em 0;
+}
+
+.white {
+  background-color: $primary-color;
+  color: $secondary-color;
+  padding: 4em 0;
 }

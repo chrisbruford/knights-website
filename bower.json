@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.8",
     "foundation-sites": "^6.2.4",
     "motion-ui": "^1.2.2"
   },

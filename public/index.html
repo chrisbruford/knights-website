@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="kokApp">
+<html>
 
 <head>
 	<base href="/">
@@ -25,25 +25,35 @@
 	<link rel="stylesheet" href="css/app.min.css">
 </head>
 
-<body>
+<body ng-app="kokApp">
 
-    <nav class="menu-centered">
-        <ul class="menu">
-            <li class="topbar-title"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1em"></li>
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>
-        </ul>
-    </nav>
-
-	<div class="black">
-		<div class="row">
-			<div class="small-12 columns">
-				<img src="http://placehold.it/2160x900" alt="Placeholder">
+	<div data-sticky-container>
+		<nav class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
+			<div class="top-bar-title">
+				<ul class="menu">
+					<li class="menu-text"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></li>
+				</ul>
 			</div>
-		</div>
+
+			<div class="top-bar-left">
+				<ul class="menu">
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+				</ul>
+			</div>
+
+			<div class="top-bar-right">
+				<ul class="menu">
+					<li><a href="#">Join Us</a></li>
+					<li><a href="#">Login</a></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
+
+	<kok-video src="videos/small-kok-intro.mp4"></kok-video>
 
 	<div class="white">
 		<div class="row">
@@ -65,7 +75,7 @@
 		</div>
 	</div>
 
-	<div class="black"  style="background-image: url(images/wingman.png);background-size:cover">
+	<div class="black" style="background-image: url(images/wingman.png);background-size:cover">
 		<div class="row">
 			<div class="small-4 columns">
 				<h1>

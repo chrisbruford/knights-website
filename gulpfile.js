@@ -76,7 +76,9 @@ gulp.task('browserSync',function(){
 gulp.task('watch',function(){
     gulp.watch('./public_src/scss/**/*.scss', ['sass']);
     gulp.watch('./public_src/es6/**/*.js', ['browserify']);
+    gulp.watch('./public_src/modules/**/*.js', ['browserify']);
     gulp.watch('./public_src/*.html',browserSync.reload);
+    gulp.watch('./public_src/modules/**/*.html',browserSync.reload);
     gulp.watch('./public_src/js/**/*.js',browserSync.reload);    
 });
 
@@ -95,6 +97,16 @@ gulp.task('images',function(){
    })))
    .pipe(gulp.dest('public/images'));
 });
+
+gulp.task('videos',function(){
+   return gulp.src('public_src/videos/**/*.+(mp4|avi)')
+   .pipe(gulp.dest('public/videos'));
+});
+
+gulp.task('modules',function(){
+    return gulp.src('public_src/modules/**/*.html')
+    .pipe(gulp.dest('public/modules'))
+})
 
 gulp.task('favicon',function(){
    return gulp.src('public_src/*.+(jpg|gif|png|svg|ico|json)')
@@ -123,7 +135,7 @@ gulp.task('wiredep',function(){
 
 gulp.task('build',function(callback){
     runSequence('clean:dist','wiredep', 'sass','browserify', 'autoprefixer',
-    ['useref','images','fonts','favicon']);
+    ['useref','images','videos','fonts','favicon','modules']);
 });
 
 gulp.task('default',function(){

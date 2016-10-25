@@ -47,6 +47,7 @@ $topbar-unstack-breakpoint: medium !default;
   &,
   ul {
     background-color: $topbar-background;
+    opacity: 0.85;
   }
 
   // Check if $topbar-background is differnt from $topbar-background-submenu

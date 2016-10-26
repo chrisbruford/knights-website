@@ -3,7 +3,7 @@
 
     let angular = require('angular');
     angular.module('kokApp',[]);
-
+    $(document).foundation();
 })();
 
 require('../modules/video');

@@ -115,8 +115,8 @@ gulp.task('favicon',function(){
 
 
 gulp.task('fonts', function(){
-   return gulp.src('public_src/font/**/*')
-   .pipe(gulp.dest('public/font')); 
+   return gulp.src('public_src/fonts/**/*')
+   .pipe(gulp.dest('public/fonts')); 
 });
 
 gulp.task('clean:dist',function(){

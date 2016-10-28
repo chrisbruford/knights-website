@@ -1,12 +1,17 @@
-(function(){
+(function () {
     "use strict";
 
     let angular = require('angular');
-    angular.module('kokApp',[]);
-    $(document).foundation();
+    angular.module('kokApp', [])
+        .run(['$timeout','$document','$rootScope',function ($timeout,$document,$rootScope) {
+            $($document).foundation();            
+        }]);
 })();
 
 require('../modules/video');
+require('../modules/modal');
+require('../modules/signup');
+require('../modules/services');
 
 
 

@@ -32,6 +32,35 @@
 
 <body ng-app="kokApp">
 
+	<kok-modal modal-id="loginModal">
+		<h1>And you are?</h1>
+		<p>Enter your login details below</p>
+		<hr>
+		<div class="row">
+			<div class="small-3 columns">
+				<label class="text-right middle" for="cmdrname">CMDR Name:</label>
+			</div>
+			<div class="small-9 columns">
+				<input type="text" id="cmdrname" name="cmdrname" placeholder="CMDR Name">
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-3 columns">
+				<label class="text-right middle" for="pwd">Password:</label>
+			</div>
+			<div class="small-9 columns">
+				<input type="password" id="pwd" name="pwd" placeholder="Password">
+			</div>
+		</div>
+	</kok-modal>
+
+	<kok-modal modal-id="signUpModal">
+		<h1>Sign-Up Form</h1>
+		<p>Please complete our 7-second form</p>
+		<hr>
+		<kok-signup></kok-signup>
+	</kok-modal>
+
 	<div data-sticky-container>
 		<nav class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
 			<div class="top-bar-title">
@@ -51,14 +80,14 @@
 
 			<div class="top-bar-right">
 				<ul class="menu">
-					<li><a href="#">Join Us</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a data-open="signUpModal">Join Us</a></li>
+					<li><a data-open="loginModal">Login</a></li>
 				</ul>
 			</div>
 		</nav>
 	</div>
 
-	<kok-video src="videos/small-kok-intro.mp4"></kok-video>
+	<kok-video src="videos/kok-intro-4-web-opt-500kbps.mp4"></kok-video>
 
 	<div class="white">
 		<div class="row">
@@ -67,15 +96,26 @@
 			</div>
 			<div class="small-6 columns">
 				<h1>
-					Lorem
-					</h4>
-					<p class="text-justify">ipsum dolor sit amet, consectetur adipisicing elit. Commodi blanditiis minima sequi magnam possimus repellat ea autem
-						illo obcaecati maiores, deserunt aut cupiditate architecto assumenda consectetur accusantium, dolorem placeat laboriosam
-						ipsa pariatur dolores culpa voluptate eius omnis voluptates? Autem possimus natus delectus facilis maiores alias tempora
-						atque magni laudantium ipsum? Error neque esse, vitae eos excepturi eligendi cum nobis tenetur tempora sapiente saepe
-						explicabo accusantium voluptatum tempore possimus fugit commodi ea omnis dignissimos officia porro officiis, assumenda!
-						Omnis ut impedit nostrum eos nulla natus cupiditate dolore, illo numquam libero neque, earum sunt officiis vitae sint
-						minima soluta sapiente officia quidem.</p>
+					welcome home
+				</h1>
+				<blockquote>
+					Space is dangerous commander - and when you’re alone, no one can hear you scream
+					<cite>Unknown CMDR</cite>
+				</blockquote>
+
+				<p class="text-justify">
+					The Knights of Karma were founded by like-minded commanders in dangerous times looking for a place to call home, and a group of commanders they
+					could chat, fly and exchange knowledge with. We didn't want to make the mistake telling other commanders how to pilot their
+					craft and so we welcome pilots of all creeds - we simply ask that they each follow our one rule: don't be a dick.
+				</p>
+				<p class="text-justify">
+					Since our inception hundreds of commanders have been warmly welcomed into the order of the Knights of Karma and we stand side by side with other
+					like minded groups whom believe as we do that their we are stronger together.
+				</p>
+				<p class="text-justify">
+					If you're a pirate, a trader, a force for good or one of pure evil you will be welcomed within the Knights. Just don't be a dick about it.
+				</p>
+				
 			</div>
 		</div>
 	</div>

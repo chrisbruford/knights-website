@@ -12,7 +12,7 @@ $topbar-padding: 0.5rem !default;
 
 /// Background color for the top bar. This color also cascades to menus within the top bar.
 /// @type Color
-$topbar-background: $light-gray !default;
+$topbar-background: rgba(0,0,0,0.85) !default;
 
 /// Background color submenus within the top bar. Usefull if $topbar-background is transparent.
 /// @type Color
@@ -44,10 +44,8 @@ $topbar-unstack-breakpoint: medium !default;
 
   padding: $topbar-padding;
 
-  &,
-  ul {
+  & {
     background-color: $topbar-background;
-    opacity: 0.85;
   }
 
   // Check if $topbar-background is differnt from $topbar-background-submenu

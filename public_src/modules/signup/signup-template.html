@@ -1,0 +1,57 @@
+<row>
+	<div class="small-12 columns">
+		<label for="xi-cmdr-name">CMDR Name</label>
+	</div>
+	<div class="small-12 columns">
+		<input type="text" id="xi-cmdr-name" name="x-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
+	</div>
+</row>
+
+<row>
+	<div class="small-12 columns">
+		<label for="xi-role">Favourite Game Role</label>
+	</div>
+	<div class="small-12 columns">
+		<select name="xi-role" id="xi-role" ng-options="gameRole for gameRole in signupCtrl.gameRoles" ng-model="signupCtrl.selectedGameRole"></select>
+	</div>
+</row>
+
+<row>
+	<div class="small-12 columns">
+		<label for="xi-platform">PC or XBOX?</label>
+	</div>
+	<div class="small-12 columns">
+		<select name="xi-platform" id="xi-platform" ng-options="platform for platform in signupCtrl.platforms" ng-model="signupCtrl.selectedPlatform"></select>
+	</div>
+</row>
+
+<row>
+	<div class="small-12 columns">
+		<label for="xi-platform">Continent</label>
+	</div>
+	<div class="small-12 columns">
+		<select name="xi-continent" id="xi-continent" ng-options="continent for continent in signupCtrl.continents | orderBy: 'toString()'"
+			ng-model="signupCtrl.selectedContinent"></select>
+	</div>
+</row>
+
+<row>
+	<div class="small-12 columns">
+		<label for="xi-reason">Why are you interested in joining?</label>
+			<small>
+				Optional. This is not used to accept/reject CMDRs it is 
+				purely so we can focus on the activities people tell us they 
+				joined us for, keep it as short or long or non-existent as 
+				you want!
+			</small>
+	</div>
+	<div class="small-12 columns">
+		<input type="text" id="xi-cmdr-name" name="x-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
+	</div>
+</row>
+
+<row>
+	<small-12>
+		<button type="submit">Submit</button>
+	</small-12>
+</row>

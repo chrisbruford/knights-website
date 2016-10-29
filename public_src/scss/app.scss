@@ -1,57 +1,84 @@
 @import 'foundation-imports';
 @import 'foundation-icons';
-$primary-color: #ffffff;
-$secondary-color: #000000;
-$header-font: 'Rubik', sans-serif;
-
-body,html {
-  background-color: $secondary-color;
-}
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: $header-font;
   text-transform: uppercase;
 }
 
-.black {
-  background-color: $secondary-color;
-  color: $primary-color;
-  padding: 4em 0;
-  position: relative;
-  &.video {
-    padding: 0;
-    canvas {
-      width: 100%;
+//link rule exceptions 
+nav {
+  &.sticky {
+    z-index: 9999;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      color: scale-color($anchor-color, $lightness: -30%)
     }
   }
-  
-  .mute {
-    position: absolute;
-    top: 7%;
-    right: 5%;
-    font-size:2em;
-    color: white;
+}
+
+cite a, .white cite a, a.button {
+  text-decoration: none;
+}
+
+//black and white background striped classes
+
+.white,.black {
+  background-color: $white;
+  color: $black;
+  padding: 4em 0;
+  min-height: 100vh;
+  >.row {
+    min-height: 100vh;
+  }
+  >.row:first-child {
+    min-height: 80vh;
+  }
+}
+
+.black {
+  background-color: $black;
+  color: $white;
+}
+
+//header video handling
+
+.video {
+  padding: 0;
+  position: relative;
+  min-height: 0vh;
+  canvas {
+    width: 100%;
+  }
+}
+
+.mute {
+  position: absolute;
+  top: 7%;
+  right: 5%;
+  font-size:2em;
+  color: $white;
+  transition: transform 0.3s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.vid-controls {
+  display: inline-block;
+  position: absolute;
+  top: 7%;
+  left: 5%;
+  font-size:2em;
+  color: $white;
+  [class^="fi-"] {
+    display: inline-block;
     transition: transform 0.3s;
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
-    }
-  }
-
-  .vid-controls {
-    display: inline-block;
-    position: absolute;
-    top: 7%;
-    left: 5%;
-    font-size:2em;
-    color: white;
-    [class^="fi-"] {
-      display: inline-block;
-      transition: transform 0.3s;
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-      }
     }
   }
 }
@@ -66,12 +93,40 @@ h1,h2,h3,h4,h5,h6 {
   opacity: 0.5;
 }
 
-.white {
-  background-color: $primary-color;
-  color: $secondary-color;
-  padding: 4em 0;
+.kok-logo {
+  margin-bottom: 2em;
 }
 
-video {
-  width: 100%;
+//header image classes
+.wingman {
+  background-image: url('../images/wingman.png');
+}
+
+.beluga-pulsar {
+  background-image: url('../images/beluga-pulsar.png');
+}
+
+.low-fly-cutter-courier {
+  background-image: url('../images/low-fly-cutter-courier.png');
+}
+
+.cover {
+  background-size:cover;
+}
+
+//discord widget
+
+.discord-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: filter 0.3s;
+}
+
+.discord-gallery {
+  list-style: none;
+  li {
+    display: inline-block;
+    margin: 2px;
+  }
 }

@@ -333,6 +333,25 @@ $abbr-underline: 1px dotted $black !default;
     }
   }
 
+  .white a {
+    color: $anchor-alt-color;
+    text-decoration: $anchor-text-decoration;
+    line-height: inherit;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $anchor-alt-color-hover;
+      @if $anchor-text-decoration-hover != $anchor-text-decoration {
+        text-decoration: $anchor-text-decoration-hover;
+      }
+    }
+
+    img {
+      border: 0;
+    }
+  }
+
   // Horizontal rule
   hr {
     max-width: $hr-width;

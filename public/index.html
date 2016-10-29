@@ -26,24 +26,23 @@
 </head>
 
 <body ng-app="kokApp">
-
 	<kok-modal modal-id="loginModal">
 		<h1>And you are?</h1>
 		<p>Enter your login details below</p>
 		<hr>
 		<div class="row">
-			<div class="small-3 columns">
+			<div class="small-12 medium-4 large-3 columns">
 				<label class="text-right middle" for="cmdrname">CMDR Name:</label>
 			</div>
-			<div class="small-9 columns">
+			<div class="small-12 medium-8 large-9 columns">
 				<input type="text" id="cmdrname" name="cmdrname" placeholder="CMDR Name">
 			</div>
 		</div>
 		<div class="row">
-			<div class="small-3 columns">
+			<div class="small-12 medium-4 large-3 columns">
 				<label class="text-right middle" for="pwd">Password:</label>
 			</div>
-			<div class="small-9 columns">
+			<div class="small-12 medium-8 large-9 columns">
 				<input type="password" id="pwd" name="pwd" placeholder="Password">
 			</div>
 			<div class="row">
@@ -54,6 +53,12 @@
 		</div>
 	</kok-modal>
 
+	<kok-modal modal-id="being-a-dick">
+		<div class="text-center">
+			<img src="images/howtonotbeadick.jpg" alt="Flow chat describing how to not be a dick">
+		</div>
+	</kok-modal>
+
 	<kok-modal modal-id="signUpModal">
 		<h1>Sign-Up Form</h1>
 		<p>Please complete our 7-second form</p>
@@ -61,25 +66,31 @@
 		<kok-signup></kok-signup>
 	</kok-modal>
 
+	<div class="title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
+			<button class="menu-icon" type="button" data-toggle></button>
+			<div class="title-bar-title">Menu</div>
+	</div>
+
 	<div data-sticky-container>
-		<nav class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
+		<nav id="top-menu" class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
 			<div class="top-bar-title">
-				<ul class="menu">
-					<li class="menu-text"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></li>
+				<ul class="vertical medium-horizontal menu">
+					<li class="menu-text"><a href="/#/"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></a></li>
 				</ul>
 			</div>
 
 			<div class="top-bar-left">
-				<ul class="menu">
-					<li><a href="#">Link 1</a></li>
-					<li><a href="#">Link 2</a></li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
+				<ul class="vertical medium-horizontal menu">
+					<li><a href="/#/">Home</a></li>
+					<li><a href="/#/contact">Contact</a></li>
+					<li><a href="#">Roster</a></li>
+					<li><a href="#">Gallery</a></li>
+					<li><a href="#">News</a></li>
 				</ul>
 			</div>
 
 			<div class="top-bar-right">
-				<ul class="menu">
+				<ul class="vertical medium-horizontal menu">
 					<li><a data-open="signUpModal">Join Us</a></li>
 					<li><a data-open="loginModal">Login</a></li>
 				</ul>
@@ -87,58 +98,9 @@
 		</nav>
 	</div>
 
-	<kok-video src="videos/kok-intro-4-web-opt-500kbps.mp4"></kok-video>
+	<div ng-view>
 
-	<div class="white">
-		<div class="row">
-			<div class="small-12 medium-4 columns">
-				<img src="images/Coat of Arms.png" alt="Knights of Karma logo">
-			</div>
-			<div class="small-12 medium-8 columns">
-				<h1>
-					welcome home
-				</h1>
-				<blockquote>
-					Space is dangerous commander - and when you’re alone, no one can hear you scream
-					<cite>Unknown CMDR</cite>
-				</blockquote>
-
-				<p class="text-justify">
-					The Knights of Karma were founded by like-minded commanders in dangerous times looking for a place to call home, and a group of commanders they
-					could chat, fly and exchange knowledge with. We didn't want to make the mistake telling other commanders how to pilot their
-					craft and so we welcome pilots of all creeds - we simply ask that they each follow our one rule: don't be a dick.
-				</p>
-				<p class="text-justify">
-					Since our inception hundreds of commanders have been warmly welcomed into the order of the Knights of Karma and we stand side by side with other
-					like minded groups whom believe as we do that their we are stronger together.
-				</p>
-				<p class="text-justify">
-					If you're a pirate, a trader, a force for good or one of pure evil you will be welcomed within the Knights. Just don't be a dick about it.
-				</p>
-				
-			</div>
-		</div>
 	</div>
-
-	<div class="black" style="background-image: url(images/wingman.png);background-size:cover">
-		<div class="row">
-			<div class="small-12 medium-8 large-4 columns">
-				<h1>
-					Lorem ipsum
-				</h1>
-				<p class="text-justify">
-					dolor sit amet, consectetur adipisicing elit. Commodi blanditiis minima sequi magnam possimus repellat ea autem illo
-					obcaecati maiores, deserunt aut cupiditate architecto assumenda consectetur accusantium, dolorem placeat laboriosam
-					ipsa pariatur dolores culpa voluptate eius omnis voluptates? Autem possimus natus delectus facilis maiores alias tempora
-					atque magni laudantium ipsum? Error neque esse, vitae eos excepturi eligendi cum nobis tenetur tempora sapiente saepe
-					explicabo accusantium voluptatum tempore possimus fugit commodi ea omnis dignissimos officia porro officiis, assumenda!
-					Omnis ut impedit nostrum eos nulla natus cupiditate dolore, illo numquam libero neque, earum sunt officiis vitae sint
-					minima soluta sapiente officia quidem.
-				</p>
-			</div>
-		</div>
-	</div>
-
 	<script src="js/main.min.js"></script>
 </body>
 

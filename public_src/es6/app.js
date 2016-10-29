@@ -2,9 +2,19 @@
     "use strict";
 
     let angular = require('angular');
-    angular.module('kokApp', [])
+    require('angular-route');
+
+    angular.module('kokApp', ['ngRoute'])
         .run(['$timeout','$document','$rootScope',function ($timeout,$document,$rootScope) {
             $($document).foundation();            
+        }])
+        .config(['$routeProvider',function($routeProvider){
+            $routeProvider.when('/',{
+                templateUrl: 'routes/home.html',
+            })
+            .when('/contact',{
+                templateUrl: 'routes/contact.html',
+            })
         }]);
 })();
 
@@ -12,6 +22,7 @@ require('../modules/video');
 require('../modules/modal');
 require('../modules/signup');
 require('../modules/services');
+require('../modules/discord');
 
 
 

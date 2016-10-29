@@ -2,10 +2,11 @@
 module.exports = function(){
 
     function link(scope, element, attrs, controller) {
+
         const canvas = element[0].querySelector('canvas');
         const context = canvas.getContext('2d');
         
-        //butons
+        //buttons
         const muteBtn = element[0].querySelector('.mute');
         const playBtn = element[0].querySelector('.fi-play');
         const stopBtn = element[0].querySelector('.fi-stop');

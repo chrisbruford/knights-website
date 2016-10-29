@@ -1,0 +1,9 @@
+<div class="kok-discord">
+    
+        <ul class="discord-gallery">
+            <li ng-repeat="member in discordCtrl.members">
+                <img class="discord-avatar {{member.status}}" ng-src="{{member.avatar_url}}" alt="{{member.username}}'s avatar" title="{{member.username}}">
+            </li>
+        </ul>
+    
+</div>

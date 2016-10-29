@@ -78,6 +78,7 @@ gulp.task('watch',function(){
     gulp.watch('./public_src/es6/**/*.js', ['browserify']);
     gulp.watch('./public_src/modules/**/*.js', ['browserify']);
     gulp.watch('./public_src/*.html',browserSync.reload);
+    gulp.watch('./public_src/routes/*.html',browserSync.reload);
     gulp.watch('./public_src/modules/**/*.html',browserSync.reload);
     gulp.watch('./public_src/js/**/*.js',browserSync.reload);    
 });

@@ -29,11 +29,17 @@ cite a, .white cite a, a.button {
   color: $black;
   padding: 4em 0;
   min-height: 100vh;
+  &:first-child {
+    min-height: 80vh;
+  }
   >.row {
     min-height: 100vh;
   }
   >.row:first-child {
     min-height: 80vh;
+  }
+  &.video {
+    min-height: 0;
   }
 }
 
@@ -47,8 +53,7 @@ cite a, .white cite a, a.button {
 .video {
   padding: 0;
   position: relative;
-  min-height: 0vh;
-  canvas {
+  video {
     width: 100%;
   }
 }
@@ -129,4 +134,10 @@ cite a, .white cite a, a.button {
     display: inline-block;
     margin: 2px;
   }
+}
+
+//modal
+
+article.reveal {
+  z-index: 99999;
 }

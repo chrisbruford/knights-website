@@ -5,6 +5,5 @@ module.exports = function(DataService){
 
     discordData.then((data)=>{
         this.members = data.members;
-        console.dir(this.members);
     });
 };

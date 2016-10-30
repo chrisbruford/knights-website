@@ -14,7 +14,8 @@
             controller: "modalCtrl",
             controllerAs: "modalCtrl",
             scope: {
-                "modalId": "@"
+                "modalId": "@",
+                "modalClass": "@"
             },
             link
         }

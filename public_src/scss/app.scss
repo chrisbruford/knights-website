@@ -32,11 +32,17 @@ cite a, .white cite a, a.button {
   &:first-child {
     min-height: 80vh;
   }
+  &.full-height:first-child {
+    min-height: 100vh;
+  }
   >.row {
     min-height: 100vh;
   }
   >.row:first-child {
     min-height: 80vh;
+  }
+  >.row.full-height:first-child {
+    min-height: 100vh;
   }
   &.video {
     min-height: 0;
@@ -115,8 +121,17 @@ cite a, .white cite a, a.button {
   background-image: url('../images/low-fly-cutter-courier.png');
 }
 
+.nebula-adder {
+  background-image: url('../images/nebula-adder1.png');
+}
+
+.sunrise-asp {
+  background-image: url('../images/sunrise-asp.png');
+}
+
 .cover {
   background-size:cover;
+  background-position: center center;
 }
 
 //discord widget
@@ -138,6 +153,36 @@ cite a, .white cite a, a.button {
 
 //modal
 
-article.reveal {
+article.reveal,.reveal-overlay {
   z-index: 99999;
+}
+
+//member profiles
+
+.profile-images {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile-thumbnail {
+  border-radius: 50%;
+}
+
+.profile-list {
+  list-style: none;
+}
+
+//gallery
+
+.gallery-img {
+  cursor: pointer;
+}
+
+.gallery-modal-img {
+  max-height: 80vh;
+}
+
+article#gallery-modal {
+  width: auto;
 }

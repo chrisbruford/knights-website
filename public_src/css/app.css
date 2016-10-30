@@ -5368,10 +5368,14 @@ cite a, .white cite a, a.button {
   min-height: 100vh; }
   .white:first-child, .black:first-child {
     min-height: 80vh; }
+  .white.full-height:first-child, .black.full-height:first-child {
+    min-height: 100vh; }
   .white > .row, .black > .row {
     min-height: 100vh; }
   .white > .row:first-child, .black > .row:first-child {
     min-height: 80vh; }
+  .white > .row.full-height:first-child, .black > .row.full-height:first-child {
+    min-height: 100vh; }
   .white.video, .black.video {
     min-height: 0; }
 
@@ -5431,8 +5435,15 @@ cite a, .white cite a, a.button {
 .low-fly-cutter-courier {
   background-image: url("../images/low-fly-cutter-courier.png"); }
 
+.nebula-adder {
+  background-image: url("../images/nebula-adder1.png"); }
+
+.sunrise-asp {
+  background-image: url("../images/sunrise-asp.png"); }
+
 .cover {
-  background-size: cover; }
+  background-size: cover;
+  background-position: center center; }
 
 .discord-avatar {
   height: 50px;
@@ -5446,5 +5457,25 @@ cite a, .white cite a, a.button {
     display: inline-block;
     margin: 2px; }
 
-article.reveal {
+article.reveal, .reveal-overlay {
   z-index: 99999; }
+
+.profile-images {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%; }
+
+.profile-thumbnail {
+  border-radius: 50%; }
+
+.profile-list {
+  list-style: none; }
+
+.gallery-img {
+  cursor: pointer; }
+
+.gallery-modal-img {
+  max-height: 80vh; }
+
+article#gallery-modal {
+  width: auto; }

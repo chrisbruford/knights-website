@@ -10,19 +10,21 @@
         }])
         .config(['$routeProvider',function($routeProvider){
             $routeProvider.when('/',{
-                templateUrl: 'routes/home.html',
+                templateUrl: 'routes/home.html'
             })
             .when('/contact',{
-                templateUrl: 'routes/contact.html',
+                templateUrl: 'routes/contact.html'
+            })
+            .when('/roster',{
+                templateUrl: 'routes/roster.html'
+            })
+            .when('/gallery',{
+                templateUrl: 'routes/gallery.html'
             })
         }]);
 })();
 
-require('../modules/video');
-require('../modules/modal');
-require('../modules/signup');
-require('../modules/services');
-require('../modules/discord');
+require('../modules');
 
 
 

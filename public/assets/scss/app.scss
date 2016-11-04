@@ -1,0 +1,293 @@
+@import 'foundation-imports';
+@import 'foundation-icons';
+
+
+//typography
+h1,h2,h3,h4,h5,h6 {
+  text-transform: uppercase;
+}
+
+//link rule exceptions 
+nav {
+  &.sticky {
+    z-index: 9999;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      color: scale-color($anchor-color, $lightness: -30%)
+    }
+  }
+}
+
+cite a, .white cite a, a.button {
+  text-decoration: none;
+}
+
+.black a.button, .white a.button {
+  color: $black;
+}
+
+//topbar
+
+.top-bar ul {
+  background-color: transparent;
+}
+
+//black and white background striped classes
+
+.white,.black {
+  background-color: $white;
+  color: $black;
+  padding: 4em 0;
+  min-height: 100vh;
+  &:first-child {
+    min-height: 80vh;
+  }
+  &.full-height:first-child {
+    min-height: 100vh;
+  }
+  >.row {
+    min-height: 100vh;
+  }
+  >.row:first-child {
+    min-height: 80vh;
+  }
+  >.row.full-height:first-child {
+    min-height: 100vh;
+  }
+  &.video {
+    min-height: 0;
+  }
+  a { 
+    color: $anchor-alt-color;
+  }
+}
+
+.black {
+  background-color: $black;
+  color: $white;
+  a { 
+    color: $anchor-color;
+  }
+}
+
+//header video handling
+
+.video {
+  padding: 0;
+  position: relative;
+  video {
+    width: 100%;
+  }
+}
+
+.mute {
+  position: absolute;
+  top: 7%;
+  right: 5%;
+  font-size:2em;
+  color: $white;
+  transition: transform 0.3s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.vid-controls {
+  display: inline-block;
+  position: absolute;
+  top: 7%;
+  left: 5%;
+  font-size:2em;
+  color: $white;
+  [class^="fi-"] {
+    display: inline-block;
+    transition: transform 0.3s;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.black-white-stripes {
+  width: 100%;
+  background-image:url(../images/black-horizontal-stripes.png);
+  position:absolute;
+  top:0;
+  bottom: 0;
+  left:0;
+  opacity: 0.5;
+}
+
+.kok-logo {
+  margin-bottom: 2em;
+}
+
+//header image classes
+.wingman {
+  background-image: url('../images/wingman-s.png');
+  @include breakpoint(medium) {
+    background-image: url('../images/wingman-m.png');
+  }
+  @include breakpoint(large) {
+    background-image: url('../images/wingman-l.png');
+  }
+}
+
+.beluga-pulsar {
+  background-image: url('../images/beluga-pulsar-s.jpg');
+  @include breakpoint(portrait) {
+    background-image: url('../images/beluga-pulsar-s-portrait.jpg');
+  }
+  @include breakpoint(medium) {
+    background-image: url('../images/beluga-pulsar-m.jpg');
+    @include breakpoint(portrait) {
+      background-image: url('../images/beluga-pulsar-m-portrait.jpg');
+    }
+  }
+  @include breakpoint(large) {
+    background-image: url('../images/beluga-pulsar-l.jpg');
+  }
+}
+
+.low-fly-cutter-courier {
+  background-image: url('../images/low-fly-cutter-courier-s.jpg');
+  @include breakpoint(portrait) {
+    background-image: url('../images/low-fly-cutter-courier-s-portrait.jpg');
+  }
+  @include breakpoint(medium) {
+    background-image: url('../images/low-fly-cutter-courier-m.jpg');
+  }
+  @include breakpoint(large) {
+    background-image: url('../images/low-fly-cutter-courier-l.jpg');
+  }
+}
+
+.nebula-adder {
+  background-image: url('../images/nebula-adder-s.jpg');
+  @include breakpoint(portrait) {
+      background-image: url('../images/nebula-adder-s-portrait.jpg');
+    }
+  @include breakpoint(medium) {
+    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-m.jpg');
+    @include breakpoint(portrait) {
+      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-m-portrait.jpg');
+    }
+  }
+  @include breakpoint(large) {
+    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-l.jpg');
+    @include breakpoint(portrait) {
+      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-l-portrait.jpg');
+    }
+  }
+}
+
+.sunrise-asp {
+  background-image: url('../images/sunrise-asp-s.jpg');
+  @include breakpoint(portrait) {
+      background-image: url('../images/sunrise-asp-s-portrait.jpg');
+    }
+
+  @include breakpoint(medium) {
+    background-image: url('../images/sunrise-asp-m.jpg');
+    @include breakpoint(portrait) {
+      background-image: url('../images/sunrise-asp-m-portrait.jpg');
+    }
+  }
+  @include breakpoint(large) {
+    background-image: url('../images/sunrise-asp-l.jpg');
+    @include breakpoint(portrait) {
+      background-image: url('../images/sunrise-asp-l-portrait.jpg');
+    }
+  }
+}
+
+.mummy-orca-fade {
+  background-image: url('../images/mummy-orca-fade-s.png');
+  @include breakpoint(medium) {
+    background-image: url('../images/mummy-orca-fade-m.png');
+  }
+  @include breakpoint(large) {
+    background-image: url('../images/mummy-orca-fade-l.png');
+  }
+}
+
+.rings-adder {
+  background-image: url('../images/rings-adder-s.jpg');
+  @include breakpoint(portrait) {
+    background-image: url('../images/rings-adder-s-portrait.jpg');
+  }
+  @include breakpoint(medium) {
+    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-m.jpg');
+    @include breakpoint(portrait) {
+    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-m-portrait.jpg');
+  }
+  }
+  @include breakpoint(large) {
+    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-l.jpg');
+    @include breakpoint(portrait) {
+    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-l-portrait.jpg');
+  }
+  }
+}
+
+.cover {
+  background-size:cover;
+  background-position: center center;
+}
+
+//discord widget
+
+.discord-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: filter 0.3s;
+}
+
+.discord-gallery {
+  list-style: none;
+  li {
+    display: inline-block;
+    margin: 2px;
+  }
+}
+
+//modal
+
+article.reveal,.reveal-overlay {
+  z-index: 99999;
+}
+
+//member profiles
+
+.profile-images {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile-thumbnail {
+  border-radius: 50%;
+}
+
+.profile-list {
+  list-style: none;
+}
+
+//gallery
+
+.gallery-img {
+  cursor: pointer;
+}
+
+.gallery-modal-img {
+  max-height: 80vh; 
+}
+
+article#gallery-modal {
+  width: auto;
+}

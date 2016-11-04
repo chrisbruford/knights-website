@@ -2,7 +2,7 @@
     <div class="row small-up-2 medium-up-4 large-up-8">
         <div class="columns" ng-repeat="image in GalleryCtrl.gallery">
             <div class="thumbnail">
-                <img class="gallery-img" ng-src="{{image.src}}" alt="{{image.alt}}" ng-click="GalleryCtrl.selectImage(image)" data-open="gallery-modal">
+                <img class="gallery-img" ng-src="{{image.thumb}}" alt="{{image.alt}}" ng-click="GalleryCtrl.selectImage(image)" data-open="gallery-modal">
             </div>
         </div>
     </div>

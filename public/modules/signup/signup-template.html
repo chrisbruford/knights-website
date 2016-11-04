@@ -3,7 +3,7 @@
 		<label for="xi-cmdr-name">CMDR Name</label>
 	</div>
 	<div class="small-12 columns">
-		<input type="text" id="xi-cmdr-name" name="x-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
+		<input type="text" id="xi-cmdr-name" name="xi-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
 	</div>
 </row>
 
@@ -46,12 +46,12 @@
 			</small>
 	</div>
 	<div class="small-12 columns">
-		<input type="text" id="xi-cmdr-name" name="x-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
+		<textarea id="xi-reason" name="xi-reason" ng-model="signupCtrl.selectedReason" placeholder="I like to have friends" required></textarea>
 	</div>
 </row>
 
 <row>
-	<small-12>
-		<button type="submit">Submit</button>
-	</small-12>
+	<div class="small-12 columns">
+		<button type="submit" class="button">Submit</button>
+	</div>
 </row>

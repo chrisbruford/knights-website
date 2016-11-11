@@ -7,8 +7,12 @@
     require('angular-route');
 
     angular.module('kokApp', ['ngRoute'])
-        .run(['$document',function ($document) {
-            $($document).foundation();            
+        .run(['$document','$rootScope',function ($document,$rootScope) {
+
+            $rootScope.$on('$viewContentLoaded', function () {
+                $($document).foundation();
+            });
+
         }])
         .config(['$routeProvider',function($routeProvider){
             $routeProvider.when('/',{

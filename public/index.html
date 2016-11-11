@@ -26,6 +26,15 @@
 </head>
 
 <body ng-app="kokApp">
+
+	<kok-navigation></kok-navigation>
+
+	<div ng-view>
+
+	</div>
+
+	<!-- MODALS -->
+
 	<kok-modal modal-id="loginModal">
 		<h1>And you are?</h1>
 		<p>Enter your login details below</p>
@@ -60,50 +69,10 @@
 	</kok-modal>
 
 	<kok-modal modal-id="signUpModal">
-		<h1>Sign-Up Form</h1>
-		<p>Please complete our 7-second form</p>
-		<hr>
 		<kok-signup></kok-signup>
 	</kok-modal>
-
-	<div class="title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
-			<button class="menu-icon" type="button" data-toggle></button>
-			<div class="title-bar-title">Menu</div>
-	</div>
-
-	<div data-sticky-container>
-		<nav id="top-menu" class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
-			<div class="top-bar-title">
-				<ul class="vertical medium-horizontal menu">
-					<li class="menu-text"><a href="/#/"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></a></li>
-				</ul>
-			</div>
-
-			<div class="top-bar-left">
-				<ul class="vertical medium-horizontal menu">
-					<li><a href="/#/">Home</a></li>
-					<li><a href="/#/contact">Contact</a></li>
-					<li><a href="/#/wings">Wings</a></li>
-					<li><a href="/#/roster">Roster</a></li>
-					<li><a href="/#/gallery">Gallery</a></li>
-				</ul>
-			</div>
-
-			<div class="top-bar-right">
-				<ul class="vertical medium-horizontal menu">
-					<li><a data-open="signUpModal">Join Us</a></li>
-					<li><a data-open="loginModal">Login</a></li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-
-	<div ng-view>
-
-	</div>
-	
 	<script src="js/app.min.js"></script>
-	
+
 </body>
 
 </html>

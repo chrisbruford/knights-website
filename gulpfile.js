@@ -14,7 +14,6 @@ let wiredep = require('wiredep').stream;
 let autoprefixer = require('gulp-autoprefixer');
 let nodemon = require('gulp-nodemon');
 
-
 //browserify
 let browserify = require('browserify');
 let source = require('vinyl-source-stream');
@@ -81,6 +80,7 @@ gulp.task('nodemon', function () {
             'node_modules/'
         ],
         watch: [
+            "./",
             "*.*",
             "routes",
             "modules"

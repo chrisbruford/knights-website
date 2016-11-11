@@ -1,13 +1,36 @@
 "use strict";
 
-module.exports = function(gameRoles,platforms,continents) {
+module.exports = function(gameRoles,platforms,continents,AuthService) {
     let vm = this;
+
+    vm.registered = false;
+    vm.registrationError = null;
+
     vm.gameRoles = gameRoles;
     vm.platforms = platforms;
     vm.continents = continents;
 
-    vm.selectedGameRole = vm.gameRoles[0];
-    vm.selectedPlatform = vm.platforms[0];
-    vm.selectedContinent = vm.continents[vm.continents.indexOf("Africa")];
-    vm.selectedCmdrName = "";
+    vm.gameRole = vm.gameRoles[0];
+    vm.platform = vm.platforms[0];
+    vm.continent = vm.continents[vm.continents.indexOf("Africa")];
+    vm.cmdrName = "";
+
+    vm.register = () => {
+        AuthService.register({
+            username: vm.cmdrName,
+            password: vm.password,
+            gameRole: vm.gameRole,
+            platform: vm.platform,
+            continent: vm.continent,
+            reasonToJoin: vm.reason
+        })
+        .then(user=>{
+            vm.registered = true;
+            AuthService.authenticate();
+            vm.user = user;
+        })
+        .catch(err=>{
+            vm.registrationError = err;
+        });
+    }
 }

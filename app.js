@@ -1,17 +1,17 @@
 "use strict";
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var instructors = require('./routes/instructors');
-var rooms = require('./routes/rooms');
-var courses = require('./routes/courses');
+//routes
+let home = require('./routes/index');
+let register = require('./routes/register');
+let members = require('./routes/members');
 
-var app = express();
+let app = express();
 
 app.locals.courses = require('./data/courses');
 
@@ -31,10 +31,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', routes);
-app.use('/instructors', instructors);
-app.use('/rooms', rooms);
-app.use('/courses', courses);
+app.use('/', home);
+app.use('/register',register);
+app.use('/members',members);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

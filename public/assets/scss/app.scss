@@ -291,3 +291,18 @@ article.reveal,.reveal-overlay {
 article#gallery-modal {
   width: auto;
 }
+
+//forms
+
+form {
+  .ng-invalid.ng-dirty.ng-touched {
+    $background: $input-background-invalid;
+    $background-alpha: 0.1;
+    
+    background-color: rgba($background, $background-alpha);
+    border-color: $background;
+    ~span.form-error {
+      display: block;
+  }
+  }
+}

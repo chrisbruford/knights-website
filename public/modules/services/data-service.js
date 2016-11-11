@@ -6,25 +6,9 @@ module.exports = function($http,$q) {
         .then(res=>res.data);
     }
 
-    this.getMembers = () => {
-        return $q((resolve,reject)=>{
-            resolve([
-                {
-                    name: "PFL Georgia",
-                    activity: "Exploration/Bounty Hunting",
-                    ship: "HMS Golden Tennis Racket",
-                    bio: "Not good at bios so.....lol",
-                    src: "images/profile/pflgeorgia1.png"
-                },
-                {
-                    name: "Jorer",
-                    activity: "Combat",
-                    ship: "Sky of Ice",
-                    bio: "Getting destroyed by 'it' is the order of the day",
-                    src: "images/profile/jorer.png"
-                }
-            ]);
-        }).then(data => data);
+    this.getMembers = (user) => {
+        return $http.get(`/members/user/${user}`) 
+        .then(res => res.data);
     }
 
     this.getGallery = () => {

@@ -1,57 +1,98 @@
-<row>
-	<div class="small-12 columns">
-		<label for="xi-cmdr-name">CMDR Name</label>
+<div>
+	<div ng-show="signupCtrl.registered">
+		<h1>Nice one</h1>
+		<p>You're all registered {{signupCtrl.cmdrName}}</p>
 	</div>
-	<div class="small-12 columns">
-		<input type="text" id="xi-cmdr-name" name="xi-cmdr-name" ng-model="selectedCmdrName" placeholder="CMDR Name" required>
-	</div>
-</row>
+	<form ng-submit="signupCtrl.register()" name="signupForm" ng-show="!signupCtrl.registered">
+		<h1>Sign-Up</h1>
+		<p>Please complete our 7-second form</p>
+		<hr>
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-cmdr-name">CMDR Name</label>
+			</div>
+			<div class="small-12 columns">
+				<input type="text" id="xi-cmdr-name" name="xi-cmdr-name" ng-model="signupCtrl.cmdrName" placeholder="CMDR Name" kok-cmdr-name
+					required>
+				<span class="form-error" ng-show="signupForm['xi-cmdr-name'].$error.cmdrName">That name is already taken</span>
+				<span class="form-error" ng-show="signupForm['xi-cmdr-name'].$error.required">This field is required</span>
+			</div>
+		</row>
 
-<row>
-	<div class="small-12 columns">
-		<label for="xi-role">Favourite Game Role</label>
-	</div>
-	<div class="small-12 columns">
-		<select name="xi-role" id="xi-role" ng-options="gameRole for gameRole in signupCtrl.gameRoles" ng-model="signupCtrl.selectedGameRole"></select>
-	</div>
-</row>
+		<div class="row">
+			<div class="small-12 columns">
+				<label for="xi-password">Password</label>
+			</div>
+			<div class="small-12 columns">
+				<input type="password" id="xi-password" name="xi-password" ng-model="signupCtrl.password" minlength="8" required>
+				<p class="help-text">At least 8 characters</p>
+				<span class="form-error" ng-show="signupForm['xi-password'].$error.required">This field is required</span>
+				<span class="form-error" ng-show="signupForm['xi-password'].$error.minlength">Please choose a password longer than 8 characters</span>
+			</div>
+		</div>
 
-<row>
-	<div class="small-12 columns">
-		<label for="xi-platform">PC or XBOX?</label>
-	</div>
-	<div class="small-12 columns">
-		<select name="xi-platform" id="xi-platform" ng-options="platform for platform in signupCtrl.platforms" ng-model="signupCtrl.selectedPlatform"></select>
-	</div>
-</row>
+		<div class="row">
+			<div class="small-12 columns">
+				<label for="xi-confirm-password">Confirm password</label>
+			</div>
+			<div class="small-12 columns">
+				<input type="password" id="xi-confirm-password" name="xi-confirm-password" ng-model="signupCtrl.confirmPassword" minlength="8"
+					kok-password="signupCtrl.password" required>
+				<span class="form-error" ng-show="signupForm['xi-confirm-password'].$error.kokPassword">Your passwords don't match</span>
+				<span class="form-error" ng-show="signupForm['xi-confirm-password'].$error.required">This field is required</span>
+			</div>
+		</div>
 
-<row>
-	<div class="small-12 columns">
-		<label for="xi-platform">Continent</label>
-	</div>
-	<div class="small-12 columns">
-		<select name="xi-continent" id="xi-continent" ng-options="continent for continent in signupCtrl.continents | orderBy: 'toString()'"
-			ng-model="signupCtrl.selectedContinent"></select>
-	</div>
-</row>
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-role">Favourite Game Role</label>
+			</div>
+			<div class="small-12 columns">
+				<select name="xi-role" id="xi-role" ng-options="gameRole for gameRole in signupCtrl.gameRoles" ng-model="signupCtrl.gameRole"></select>
+			</div>
+		</row>
 
-<row>
-	<div class="small-12 columns">
-		<label for="xi-reason">Why are you interested in joining?</label>
-			<small>
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-platform">PC or XBOX?</label>
+			</div>
+			<div class="small-12 columns">
+				<select name="xi-platform" id="xi-platform" ng-options="platform for platform in signupCtrl.platforms" ng-model="signupCtrl.platform"></select>
+			</div>
+		</row>
+
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-platform">Continent</label>
+			</div>
+			<div class="small-12 columns">
+				<select name="xi-continent" id="xi-continent" ng-options="continent for continent in signupCtrl.continents | orderBy: 'toString()'"
+					ng-model="signupCtrl.continent"></select>
+			</div>
+		</row>
+
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-reason">Why are you interested in joining?</label>
+				<small>
 				Optional. This is not used to accept/reject CMDRs it is 
 				purely so we can focus on the activities people tell us they 
 				joined us for, keep it as short or long or non-existent as 
 				you want!
 			</small>
-	</div>
-	<div class="small-12 columns">
-		<textarea id="xi-reason" name="xi-reason" ng-model="signupCtrl.selectedReason" placeholder="I like to have friends" required></textarea>
-	</div>
-</row>
+			</div>
+			<div class="small-12 columns">
+				<textarea id="xi-reason" name="xi-reason" ng-model="signupCtrl.reason" placeholder="I like to have friends" maxlength="1000">
+			</textarea>
+				<p class="help-text">Max 1,000 characters</p>
+				<span class="form-error" ng-show="signupForm['xi-reason'].$error.maxlength">Please limit your response to 1,000 characters</span>
+			</div>
+		</row>
 
-<row>
-	<div class="small-12 columns">
-		<button type="submit" class="button">Submit</button>
-	</div>
-</row>
+		<row>
+			<div class="small-12 columns">
+				<button type="submit" class="button" ng-disabled="signupForm.$invalid">Submit</button>
+			</div>
+		</row>
+	</form>
+</div>

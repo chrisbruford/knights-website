@@ -3,7 +3,7 @@
 		<h1>Nice one</h1>
 		<p>You're all registered {{signupCtrl.cmdrName}}</p>
 	</div>
-	<form ng-submit="signupCtrl.register()" name="signupForm" ng-show="!signupCtrl.registered">
+	<form ng-submit="signupForm.$valid && signupCtrl.register()" name="signupForm" ng-show="!signupCtrl.registered">
 		<h1>Sign-Up</h1>
 		<p>Please complete our 7-second form</p>
 		<hr>
@@ -12,10 +12,12 @@
 				<label for="xi-cmdr-name">CMDR Name</label>
 			</div>
 			<div class="small-12 columns">
-				<input type="text" id="xi-cmdr-name" name="xi-cmdr-name" ng-model="signupCtrl.cmdrName" placeholder="CMDR Name" kok-cmdr-name
+				<input type="text" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" id="xi-cmdr-name" name="xi-cmdr-name" ng-model="signupCtrl.cmdrName" placeholder="CMDR Name" kok-cmdr-name
 					required>
-				<span class="form-error" ng-show="signupForm['xi-cmdr-name'].$error.cmdrName">That name is already taken</span>
-				<span class="form-error" ng-show="signupForm['xi-cmdr-name'].$error.required">This field is required</span>
+				<div ng-messages="signupForm['xi-cmdr-name'].$error" ng-show="signupForm.$submitted || signupForm['xi-cmdr-name'].$dirty">
+					<span class="form-error" ng-message="required">This field is required</span>
+					<span class="form-error" ng-message="cmdrName">That name is already taken</span>
+				</div>
 			</div>
 		</row>
 
@@ -26,8 +28,10 @@
 			<div class="small-12 columns">
 				<input type="password" id="xi-password" name="xi-password" ng-model="signupCtrl.password" minlength="8" required>
 				<p class="help-text">At least 8 characters</p>
-				<span class="form-error" ng-show="signupForm['xi-password'].$error.required">This field is required</span>
-				<span class="form-error" ng-show="signupForm['xi-password'].$error.minlength">Please choose a password longer than 8 characters</span>
+				<div ng-messages="signupForm['xi-password'].$error" ng-show="signupForm.$submitted || (signupForm['xi-password'].$dirty && signupForm['xi-password'].$touched)">
+					<span class="form-error" ng-message="required">This field is required</span>
+					<span class="form-error" ng-message="minlength">Please choose a password longer than 8 characters</span>
+				</div>
 			</div>
 		</div>
 
@@ -38,8 +42,10 @@
 			<div class="small-12 columns">
 				<input type="password" id="xi-confirm-password" name="xi-confirm-password" ng-model="signupCtrl.confirmPassword" minlength="8"
 					kok-password="signupCtrl.password" required>
-				<span class="form-error" ng-show="signupForm['xi-confirm-password'].$error.kokPassword">Your passwords don't match</span>
-				<span class="form-error" ng-show="signupForm['xi-confirm-password'].$error.required">This field is required</span>
+				<div ng-messages="signupForm['xi-confirm-password'].$error" ng-show="signupForm.$submitted || (signupForm['xi-confirm-password'].$dirty && signupForm['xi-confirm-password'].$touched)">
+					<span class="form-error" ng-message="required">This field is required</span>
+					<span class="form-error" ng-message="kokPassword">Your passwords don't match</span>
+				</div>
 			</div>
 		</div>
 
@@ -85,7 +91,9 @@
 				<textarea id="xi-reason" name="xi-reason" ng-model="signupCtrl.reason" placeholder="I like to have friends" maxlength="1000">
 			</textarea>
 				<p class="help-text">Max 1,000 characters</p>
-				<span class="form-error" ng-show="signupForm['xi-reason'].$error.maxlength">Please limit your response to 1,000 characters</span>
+				<div ng-messages="signupForm['xi-reason'].$error">
+					<span class="form-error" ng-message="maxlength">Please limit your response to 1,000 characters</span>
+				</div>
 			</div>
 		</row>
 

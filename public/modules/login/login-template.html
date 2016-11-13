@@ -1,0 +1,40 @@
+<section>
+    <div ng-show="LoginCtrl.authentication.success">
+        <h1>Hello.</h1>
+        <p>Welcome back {{LoginCtrl.cmdrName}}</p>
+    </div>
+    <form ng-submit="loginForm.$valid && LoginCtrl.authenticate()" name="loginForm" ng-show="!LoginCtrl.authentication.success">
+        <h1>And you are?</h1>
+        <p>Enter your login details below</p>
+        <hr>
+        <div class="row">
+            <div class="small-12 medium-4 large-3 columns">
+                <label class="text-right middle" for="username">CMDR Name:</label>
+            </div>
+            <div class="small-12 medium-8 large-9 columns">
+                <input type="text" id="cmdrName" name="cmdrName" placeholder="CMDR Name" ng-model="LoginCtrl.cmdrName" required>
+                <div ng-messages="loginForm['cmdrName'].$error" ng-show="loginForm.$submitted || (loginForm.cmdrName.$dirty && loginForm.cmdrName.$touched)">
+                    <span ng-message="required" class="form-error">This field is required</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 medium-4 large-3 columns">
+                <label class="text-right middle" for="password">Password:</label>
+            </div>
+            <div class="small-12 medium-8 large-9 columns">
+                <input type="password" id="password" name="password" placeholder="Password" ng-model="LoginCtrl.password" required>
+                <span class="form-error" ng-show="loginForm['password'].$error.required && (loginForm.$submitted || (loginForm.password.$dirty && loginForm.password.$touched))">This field is required</span>
+                <div ng-messages="LoginCtrl.authentication" ng-show="loginForm.$submitted || (loginForm.password.$dirty && loginForm.password.$touched)">
+                    <span class="form-error" ng-message="failure">Username or Password incorrect. Please try again.</span>
+                    <span class="form-error" ng-message="error">System error. Please try again later or contact an administrator.</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-12 columns">
+                    <button type="submit" class="button" ng-disabled="loginForm.$invalid">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

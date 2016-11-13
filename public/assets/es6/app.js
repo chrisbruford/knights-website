@@ -5,8 +5,9 @@
 
     let angular = require('angular');
     require('angular-route');
+    require('angular-messages');
 
-    angular.module('kokApp', ['ngRoute'])
+    angular.module('kokApp', ['ngRoute','ngMessages'])
         .run(['$document','$rootScope',function ($document,$rootScope) {
 
             $rootScope.$on('$viewContentLoaded', function () {

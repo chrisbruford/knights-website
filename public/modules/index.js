@@ -1,3 +1,4 @@
+"use strict";
 require('./video');
 require('./modal');
 require('./signup');
@@ -7,3 +8,4 @@ require('./profiles');
 require('./gallery');
 require('./wings');
 require('./navigation');
+require('./login');

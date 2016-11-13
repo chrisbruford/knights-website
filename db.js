@@ -8,8 +8,6 @@ let pwd = secrets.db_pwd;
 
 let url = "mongodb://localhost:27017/kok_db";
 
-mongoose.Promise = global.Promise;
-
 module.exports = new Promise((resolve, reject) => {
     mongoose.connect(url, { user: user, pass: pwd },
         function (err, db) {

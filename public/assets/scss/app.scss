@@ -301,8 +301,8 @@ form {
     
     background-color: rgba($background, $background-alpha);
     border-color: $background;
-    ~span.form-error {
+  }
+  span.form-error {
       display: block;
-  }
-  }
+    }
 }

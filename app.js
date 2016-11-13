@@ -53,8 +53,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', home);
-app.use('/register', register);
-app.use('/members', members);
+// app.use('/register', register);
+// app.use('/members', members);
 // app.use('/login', login);
 // app.use('/logout', logout);
 

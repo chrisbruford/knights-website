@@ -13,10 +13,10 @@ let bodyParser = require('body-parser');
 
 //routes
 let home = require('./routes/index');
-let register = require('./routes/register');
-let members = require('./routes/members');
-//let login = require('./routes/login');
-//let logout = require('./routes/logout');
+// let register = require('./routes/register');
+// let members = require('./routes/members');
+// let login = require('./routes/login');
+// let logout = require('./routes/logout');
 
 //let app = express();
 

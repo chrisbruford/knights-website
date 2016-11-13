@@ -5,17 +5,17 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-// let mongoose = require('mongoose');
+let mongoose = require('mongoose');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let session = require('express-session');
 
 //routes
 let home = require('./routes/index');
-// let register = require('./routes/register');
-// let members = require('./routes/members');
-// let login = require('./routes/login');
-// let logout = require('./routes/logout');
+let register = require('./routes/register');
+let members = require('./routes/members');
+let login = require('./routes/login');
+let logout = require('./routes/logout');
 
 let app = express();
 
@@ -28,20 +28,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(session({secret:'anything'}));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(session({secret:'anything'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //mongoose passport config
 
-// require('./db').then(mongoose => {
-//   mongoose.Promise = global.Promise;
-//   require('./models/user').then(User => {
-//     passport.use(new LocalStrategy(User.authenticate()));
-//     passport.serializeUser(User.serializeUser());
-//     passport.deserializeUser(User.deserializeUser());
-//   });
-// })
+require('./db').then(mongoose => {
+  mongoose.Promise = global.Promise;
+  require('./models/user').then(User => {
+    passport.use(new LocalStrategy(User.authenticate()));
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+  });
+})
 
 
 //allow CORS requests
@@ -52,10 +52,10 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', home);
-// app.use('/register', register);
-// app.use('/members', members);
-// app.use('/login', login);
-// app.use('/logout', logout);
+app.use('/register', register);
+app.use('/members', members);
+app.use('/login', login);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

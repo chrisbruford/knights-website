@@ -7,8 +7,8 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let passport = require('passport');
-let LocalStrategy = require('passport-local').Strategy;
-let session = require('express-session');
+// let LocalStrategy = require('passport-local').Strategy;
+// let session = require('express-session');
 
 //routes
 let home = require('./routes/index');

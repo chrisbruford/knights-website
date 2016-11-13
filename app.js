@@ -5,11 +5,10 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-//let mongoose = require('mongoose');
-//let passport = require('passport');
-//let LocalStrategy = require('passport-local').Strategy;
-//let session = require('express-session');
-
+// let mongoose = require('mongoose');
+// let passport = require('passport');
+// let LocalStrategy = require('passport-local').Strategy;
+// let session = require('express-session');
 
 //routes
 let home = require('./routes/index');
@@ -18,9 +17,9 @@ let home = require('./routes/index');
 // let login = require('./routes/login');
 // let logout = require('./routes/logout');
 
-//let app = express();
+let app = express();
 
-//app.locals.courses = require('./data/courses');
+app.locals.courses = require('./data/courses');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -29,9 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(session({secret:'anything'}));
-//app.use(passport.initialize());
-//app.use(passport.session());
+// app.use(session({secret:'anything'}));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //mongoose passport config
 

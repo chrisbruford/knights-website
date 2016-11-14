@@ -3,35 +3,33 @@
     <div class="title-bar-title">Menu</div>
 </div>
 
-<div data-sticky-container>
-    <nav id="top-menu" class="top-bar sticky" data-sticky data-options="marginTop:0;" style="width:100%">
-        <div class="top-bar-title">
-            <ul class="vertical medium-horizontal menu">
-                <li class="menu-text">
-                    <a href="/#/"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></a>
-                </li>
-            </ul>
-        </div>
+<nav id="top-menu" class="top-bar" data-options="marginTop:0;" style="width:100%">
+    <div class="top-bar-title">
+        <ul class="vertical medium-horizontal menu">
+            <li class="menu-text">
+                <a href="/#/"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></a>
+            </li>
+        </ul>
+    </div>
 
-        <div class="top-bar-left">
-            <ul class="vertical medium-horizontal menu">
-                <li><a href="/#/">Home</a></li>
-                <li><a href="/#/contact">Contact</a></li>
-                <li><a href="/#/wings">Wings</a></li>
-                <li><a href="/#/roster">Roster</a></li>
-                <li><a href="/#/gallery">Gallery</a></li>
-            </ul>
-        </div>
+    <div class="top-bar-left">
+        <ul class="vertical medium-horizontal menu">
+            <li><a href="/#/">Home</a></li>
+            <li><a href="/#/contact">Contact</a></li>
+            <li><a href="/#/wings">Wings</a></li>
+            <li><a href="/#/roster">Roster</a></li>
+            <li><a href="/#/gallery">Gallery</a></li>
+        </ul>
+    </div>
 
-        <div class="top-bar-right">
-            <ul class="vertical medium-horizontal menu">
-                <li ng-show="!NavigationCtrl.authenticated"><a data-open="signUpModal">Join Us</a></li>
-                <li ng-show="!NavigationCtrl.authenticated"><a data-open="loginModal">Login</a></li>
-                <li ng-show="NavigationCtrl.authenticated"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
+    <div class="top-bar-right">
+        <ul class="vertical medium-horizontal menu">
+            <li ng-show="!NavigationCtrl.authenticated"><a data-open="signUpModal">Join Us</a></li>
+            <li ng-show="!NavigationCtrl.authenticated"><a data-open="loginModal">Login</a></li>
+            <li ng-show="NavigationCtrl.authenticated"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 <script>    
     $('#top-menu,.title-bar').foundation();
 </script>

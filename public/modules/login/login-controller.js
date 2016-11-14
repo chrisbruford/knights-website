@@ -7,7 +7,12 @@ module.exports = function(AuthService,$scope){
         error: false
     };
 
-    $scope.$on('authenticated',event=>vm.authentication.success = AuthService.authenticated);
+    $scope.$on('authenticated',event=>{
+        vm.authentication.success = AuthService.authenticated;
+        vm.authentication.failure = false;
+        vm.authentication.error = false;
+    });
+    
     $scope.$on('deauthenticated',event=>vm.authentication.success = AuthService.authenticated);
     
     vm.authenticate = function(){

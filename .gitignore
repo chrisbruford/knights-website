@@ -1,3 +1,4 @@
 node_modules
 azure.err
 *.publishsettings
+secrets.js

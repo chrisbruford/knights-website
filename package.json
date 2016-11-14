@@ -25,7 +25,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "serve-favicon": "~2.3.0",
-    "async":"^2.1.2"
+    "async":"^2.1.2",
+    "bluebird":"^3.4.6"
   },
   "devDependencies": {
     "browser-sync": "^2.17.5",

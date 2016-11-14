@@ -8,7 +8,6 @@ module.exports = function($scope,AuthService){
 
     vm.logout = function() {
         AuthService.logout()
-        .then(data=>console.log('logged out'))
         .catch(err=>console.log(err));
     }
 

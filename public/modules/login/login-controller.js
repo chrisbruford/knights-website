@@ -1,11 +1,14 @@
 "use strict";
-module.exports = function(AuthService,$q){
+module.exports = function(AuthService,$scope){
     let vm = this;
     vm.authentication = {
         success: false,
         failure: false,
         error: false
     };
+
+    $scope.$on('authenticated',event=>vm.authentication.success = AuthService.authenticated);
+    $scope.$on('deauthenticated',event=>vm.authentication.success = AuthService.authenticated);
     
     vm.authenticate = function(){
         AuthService.authenticate({

@@ -1,14 +1,9 @@
 "use strict";
-module.exports = function(AuthService,$document) {
+module.exports = function ($document,$timeout) {
     return {
         templateUrl: 'modules/navigation/navigation-template.html',
         restrict: 'E',
         controller: 'NavigationCtrl',
         controllerAs: 'NavigationCtrl',
-        link
-    }
-
-    function link(scope,elem,attrs,ctrl) {
-        $(document).foundation();
     }
 }

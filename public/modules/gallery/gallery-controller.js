@@ -4,7 +4,6 @@ module.exports = function(DataService){
     data.then(data=>this.gallery = data);
 
     this.selectImage = (image) => {
-        this.selectedImage = image;
-        console.dir(this.selectedImage); 
+        this.selectedImage = image; 
     }
 }

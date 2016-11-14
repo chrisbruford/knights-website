@@ -11,7 +11,7 @@
         .run(['$document','$rootScope',function ($document,$rootScope) {
 
             $rootScope.$on('$viewContentLoaded', function () {
-                $($document).foundation();
+                //$($document).foundation();
             });
 
         }])

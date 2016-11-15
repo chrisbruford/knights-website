@@ -1,10 +1,9 @@
 "use strict";
 
 let mongoose = require('mongoose');
-let secrets = require('./secrets');
 
-let user = process.env.db_uname || secrets.db_user;
-let pwd = process.env.db_pwd || secrets.db_pwd;
+let user = process.env.db_uname || require('./secrets').db_user;
+let pwd = process.env.db_pwd || require('./secrets').db_pwd;
 
 let url = process.env.dbURL || "mongodb://localhost:27017/kok_db";
 

@@ -6,8 +6,8 @@ module.exports = function($http,$q) {
         .then(res=>res.data);
     }
 
-    this.getMembers = (user) => {
-        return $http.get(`/members/user/${user}`) 
+    this.getMembersByUsername = (username) => {
+        return $http.get(`/members/user/${username}`) 
         .then(res => res.data);
     }
 

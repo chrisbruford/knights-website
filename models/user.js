@@ -30,7 +30,7 @@ module.exports = new Promise((resolve, reject) => {
                     type: String,
                     required: false,
                     maxlength: 1000
-                },
+                }
             });
 
             User.plugin(passportLocalMongoose);

@@ -9,3 +9,4 @@ require('./gallery');
 require('./wings');
 require('./navigation');
 require('./login');
+require('./admin');

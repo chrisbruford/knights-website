@@ -1,7 +1,10 @@
 module.exports = function(DataService) {
-    let data = DataService.getMembers({});
-    data.then(data=>{
-        this.members = data;
+    let vm = this;
+    
+    DataService.getMembersByUsername("")
+    .then(data=>{
+        vm.members = data;
+        console.dir(vm.members);
     });
 
 }

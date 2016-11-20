@@ -27,6 +27,9 @@
             .when('/wings',{
                 templateUrl: 'routes/wings.html'
             })
+            .when('/account',{
+                templateUrl: 'routes/account.html'
+            })
         }]);
 })();
 

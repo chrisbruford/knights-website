@@ -5,7 +5,13 @@ let passport = require('passport');
 
 router.post('/', passport.authenticate('local'), 
 function(req, res) {
-        res.json({username: req.user.username});
+        res.json({
+                username: req.user.username,
+                continent: req.user.continent,
+                gameRole: req.user.gameRole,
+                level: req.user.level,
+                reasonToJoin: req.user.reasonToJoin
+        });
 });
 
 

@@ -13,7 +13,8 @@ router.post('/', (req, res) => {
                 platform: req.body.platform,
                 continent: req.body.continent,
                 reasonToJoin: req.body.reasonToJoin,
-                level: 0
+                level: 0,
+                activated: false
         }), req.body.password, (err, user) => {
             
             if (err) { console.log(err); return res.json(err); }

@@ -13,6 +13,7 @@ let runSequence = require('run-sequence');
 let wiredep = require('wiredep').stream;
 let autoprefixer = require('gulp-autoprefixer');
 let nodemon = require('gulp-nodemon');
+let KarmaServer = require('karma').Server;
 
 //browserify
 let browserify = require('browserify');
@@ -91,7 +92,14 @@ gulp.task('nodemon',['browserSync'], function () {
             cb();
         }
     });
-})
+});
+
+gulp.task('test', function (done) {
+  new KarmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 gulp.task('watch', function () {
     gulp.watch('./public/assets/scss/**/*.scss', ['sass']);
@@ -115,5 +123,5 @@ gulp.task('cache:clear', function (callback) {
 });
 
 gulp.task('default', function () {
-    runSequence(['sass', 'browserify','images'], 'nodemon', 'watch');
+    runSequence(['sass', 'browserify','images'], 'nodemon', 'watch', 'test');
 });

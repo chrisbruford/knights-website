@@ -234,6 +234,22 @@ cite a, .white cite a, a.button {
   }
 }
 
+.courier-pulsar {
+  background-image: url('../images/courier-pulsar-s.jpg');
+  @include breakpoint(portrait) {
+      background-image: url('../images/courier-pulsar-s-portrait.jpg');
+    }
+  @include breakpoint(medium) {
+    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-m.jpg');
+    @include breakpoint(portrait) {
+      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-m-portrait.jpg');
+    }
+  }
+  @include breakpoint(large) {
+    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-l.jpg');
+  }
+}
+
 .cover {
   background-size:cover;
   background-position: center center;

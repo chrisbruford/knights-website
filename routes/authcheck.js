@@ -1,0 +1,27 @@
+"use strict";
+let express = require('express');
+let router = express.Router();
+let passport = require('passport');
+
+router.get('/', function (req, res) {
+    
+    if (req.user) {
+        console.log('req.user:');
+        console.log(req.user);
+        res.json({
+            username: req.user.username,
+            continent: req.user.continent,
+            gameRole: req.user.gameRole,
+            level: req.user.level,
+            reasonToJoin: req.user.reasonToJoin
+        });
+    }
+
+    else {
+        res.json(null);
+    }
+});
+
+
+
+module.exports = router;

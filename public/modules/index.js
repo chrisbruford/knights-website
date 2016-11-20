@@ -10,3 +10,4 @@ require('./wings');
 require('./navigation');
 require('./login');
 require('./admin');
+require('./account');

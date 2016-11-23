@@ -24,10 +24,10 @@
 
     <div class="top-bar-right">
         <ul class="vertical medium-horizontal menu">
-            <li ng-show="!NavigationCtrl.authenticated"><a data-open="signUpModal">Join Us</a></li>
-            <li ng-show="!NavigationCtrl.authenticated"><a data-open="loginModal">Login</a></li>
-            <li ng-show="NavigationCtrl.authenticated"><a href="/#/account">Account</a></li>
-            <li ng-show="NavigationCtrl.authenticated"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
+            <li ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
+            <li ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
+            <li ng-show="NavigationCtrl.user"><a href="/#/account">Account</a></li>
+            <li ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
         </ul>
     </div>
 </nav>

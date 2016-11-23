@@ -1,5 +1,5 @@
 "use strict";
 module.exports = function(AuthService){
     let vm = this;
-    vm.user = AuthService.authedUser;
+    vm.user = AuthService.user;
 };

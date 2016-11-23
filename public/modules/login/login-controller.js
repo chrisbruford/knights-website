@@ -1,6 +1,9 @@
 "use strict";
 module.exports = function (AuthService, $scope) {
     let vm = this;
+
+    vm.user = null;
+
     vm.authentication = {
         success: false,
         failure: false,
@@ -8,12 +11,17 @@ module.exports = function (AuthService, $scope) {
     };
 
     $scope.$on('authenticated', event => {
-        vm.authentication.success = AuthService.authenticated;
+        vm.authentication.success = true;
         vm.authentication.failure = false;
         vm.authentication.error = false;
+        vm.user = AuthService.user;
     });
 
-    $scope.$on('deauthenticated', event => vm.authentication.success = AuthService.authenticated);
+    $scope.$on('deauthenticated', event => {
+        vm.authentication.success = false;
+        vm.user = AuthService.user;
+
+    });
 
     vm.authenticate = function () {
         return AuthService.authenticate({
@@ -23,6 +31,7 @@ module.exports = function (AuthService, $scope) {
             .then(data => {
                 vm.authentication.success = true;
                 vm.cmdrName = data.username;
+                vm.user = data;
             })
             .catch(err => {
                 if (err.status == 401) {

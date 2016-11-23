@@ -1,7 +1,7 @@
 <section>
-    <div ng-show="LoginCtrl.authentication.success">
+    <div ng-show="LoginCtrl.user">
         <h1>Hello.</h1>
-        <p>Welcome back {{LoginCtrl.cmdrName}}</p>
+        <p>Welcome back {{LoginCtrl.user.username}}</p>
     </div>
     <form ng-submit="loginForm.$valid && LoginCtrl.authenticate()" name="loginForm" ng-show="!LoginCtrl.authentication.success">
         <h1>And you are?</h1>

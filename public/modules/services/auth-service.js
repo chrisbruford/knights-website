@@ -1,8 +1,7 @@
 "use strict";
 module.exports = function ($http,$q,$rootScope) {
     let AuthService = this;
-    AuthService.authenticated = false;
-    AuthService.authedUser = {};
+    AuthService.user = null;
 
     AuthService.authCheck = function() {
         return $q((resolve,reject)=>{
@@ -10,17 +9,17 @@ module.exports = function ($http,$q,$rootScope) {
             .then(res => {
                 let data = res.data;
                 if (data) {
-                    AuthService.authenticated = true;
+                    AuthService.user = data;
                     $rootScope.$broadcast('authenticated');
                     resolve(data);
                 } else {
-                    AuthService.authenticated = false;
+                    AuthService.user = null;
                     $rootScope.$broadcast('deauthenticated');
                     reject(data);
                 }
             })
             .catch(err => {
-                AuthService.authenticated = false;
+                AuthService.user = data;
                 $rootScope.$broadcast('deauthenticated');
                 reject(err);
             })
@@ -28,11 +27,9 @@ module.exports = function ($http,$q,$rootScope) {
     }
 
     AuthService.authCheck().then(user=>{
-        AuthService.authenticated = true;
-        AuthService.authedUser = user;
+        AuthService.user = user;
     }).catch(rej => {
-        AuthService.authenticated = false;
-        AuthService.authedUser = {};
+        AuthService.user = null;
     });    
 
     AuthService.register = (newUser) => {
@@ -50,12 +47,9 @@ module.exports = function ($http,$q,$rootScope) {
             $http.post('/login',user)
             .then(res=>{
                 let user = res.data
-                resolve(user);
-                AuthService.authenticated = true;
-                
-                this.authedUser = user;
-
+                AuthService.user = user;
                 $rootScope.$broadcast('authenticated');
+                resolve(user);
             })
             .catch(err=>reject(err));
         });
@@ -67,7 +61,7 @@ module.exports = function ($http,$q,$rootScope) {
             .then(res=>{
                 let loggedOut = res.data.loggedOut;
                 if (loggedOut) {
-                    AuthService.authenticated = false;
+                    AuthService.user = null;
                     $rootScope.$broadcast('deauthenticated');
                     resolve(loggedOut);
                 } else {

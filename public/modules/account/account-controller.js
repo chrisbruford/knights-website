@@ -1,5 +1,7 @@
 "use strict";
-module.exports = function(AuthService){
+module.exports = function(continents, gameRoles, platforms){
     let vm = this;
-    vm.user = AuthService.user;
+    vm.continents = continents;
+    vm.gameRoles = gameRoles;
+    vm.platforms = platforms;
 };

@@ -26,6 +26,7 @@
         <ul class="vertical medium-horizontal menu">
             <li ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
             <li ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
+            <li ng-show="NavigationCtrl.user.level>=0"><a href="/#/admin">Admin</a></li>
             <li ng-show="NavigationCtrl.user"><a href="/#/account">Account</a></li>
             <li ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
         </ul>

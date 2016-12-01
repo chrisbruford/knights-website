@@ -10,7 +10,9 @@ function(req, res) {
                 continent: req.user.continent,
                 gameRole: req.user.gameRole,
                 level: req.user.level,
-                reasonToJoin: req.user.reasonToJoin
+                reasonToJoin: req.user.reasonToJoin,
+                platform: req.user.platform,
+                shipName: req.user.shipName
         });
 });
 

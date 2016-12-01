@@ -1,0 +1,33 @@
+<div>
+    <table>
+        <thead>
+            <th>Username</th>
+            <th>Level</th>
+            <th>Game Role</th>
+            <th>Platform</th>
+            <th>Continent</th>
+            <th>Reason</th>
+            <th>Activated</th>
+            <th>Ship Name</th>
+            <th>Bio</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in AdminCtrl.users">
+                <td ng-click="AdminCtrl.setUser(user)" data-open="edit-user">{{user.username}}</td>
+                <td>{{user.level}}</td>
+                <td>{{user.gameRole}}</td>
+                <td>{{user.platform}}</td>
+                <td>{{user.continent}}</td>
+                <td>{{user.reason}}</td>
+                <td>{{user.activated}}</td>
+                <td>{{user.shipName}}</td>
+                <td>{{user.bio}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <kok-modal modal-id="edit-user">
+        <kok-account user="AdminCtrl.userToEdit"></kok-account>
+    </kok-modal>
+
+</div>

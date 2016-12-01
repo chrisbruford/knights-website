@@ -34,6 +34,16 @@ module.exports = new Promise((resolve, reject) => {
                 activated: {
                     type: Boolean,
                     required: true
+                },
+                shipName: {
+                    type: String,
+                    required: false,
+                    maxlength: 50
+                },
+                bio: {
+                    type: String,
+                    required: false,
+                    maxlength: 1000
                 }
             });
 

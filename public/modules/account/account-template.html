@@ -1,9 +1,27 @@
-<form>
+<form name="accountForm">
     <label for="username">CMDR Name:</label>
-    <input type="text" name="username" id="username">
+    <input type="text" name="username" id="username" ng-model="user.username" disabled>
 
     <label for="continent">continent</label>
-    
-</form>
+    <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="user.continent"></select>
 
-{{AccountCtrl.user}}
+    <label for="game-role">Favourite game role</label>
+    <select name="game-role" id="game-role" ng-options="gameRole for gameRole in AccountCtrl.gameRoles" ng-model="user.gameRole"></select>
+
+    <label for="platform">Platform</label>
+    <select name="platform" id="platform" ng-options="platform for platform in AccountCtrl.platforms" ng-model="user.platform"></select>
+
+    <label for="ship-name">Ship name</label>
+    <input type="text" id="ship-name" name="ship-name" ng-model="user.shipName" ng-maxlength="50">
+    <p class="help-text">Max 50 characters [{{50-AccountCtrl.shipName.length}} remaining]</p>
+    <div ng-messages="accountForm['ship-name'].$error" ng-show="accountForm.$submitted || accountForm['ship-name'].$dirty">
+        <span class="form-error" ng-message="maxlength">Please limit to 50 characters</span>
+    </div>
+
+    <label for="bio">Your back-story</label>
+    <textarea name="bio" id="bio" ng-model="user.bio" ng-maxlength="1000"></textarea>
+    <p class="help-text">Max 1,000 characters [{{1000-AccountCtrl.bio.length}} remaining]</p>
+    <div ng-messages="accountForm.bio.$error" ng-show="accountForm.$submitted || accountForm.bio.$dirty">
+        <span class="form-error" ng-message="maxlength">Please limit to 1,000 characters</span>
+    </div>
+</form>

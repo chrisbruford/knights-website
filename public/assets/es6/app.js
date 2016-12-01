@@ -30,6 +30,9 @@
             .when('/account',{
                 templateUrl: 'routes/account.html'
             })
+            .when('/admin',{
+                templateUrl: 'routes/admin.html'
+            })
         }]);
 })();
 

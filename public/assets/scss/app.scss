@@ -127,133 +127,7 @@ cite a, .white cite a, a.button {
 }
 
 //header image classes
-.wingman {
-  background-image: url('../images/wingman-s.png');
-  @include breakpoint(medium) {
-    background-image: url('../images/wingman-m.png');
-  }
-  @include breakpoint(large) {
-    background-image: url('../images/wingman-l.png');
-  }
-}
-
-.beluga-pulsar {
-  background-image: url('../images/beluga-pulsar-s.jpg');
-  @include breakpoint(portrait) {
-    background-image: url('../images/beluga-pulsar-s-portrait.jpg');
-  }
-  @include breakpoint(medium) {
-    background-image: url('../images/beluga-pulsar-m.jpg');
-    @include breakpoint(portrait) {
-      background-image: url('../images/beluga-pulsar-m-portrait.jpg');
-    }
-  }
-  @include breakpoint(large) {
-    background-image: url('../images/beluga-pulsar-l.jpg');
-  }
-}
-
-.low-fly-cutter-courier {
-  background-image: url('../images/low-fly-cutter-courier-s.jpg');
-  @include breakpoint(portrait) {
-    background-image: url('../images/low-fly-cutter-courier-s-portrait.jpg');
-  }
-  @include breakpoint(medium) {
-    background-image: url('../images/low-fly-cutter-courier-m.jpg');
-  }
-  @include breakpoint(large) {
-    background-image: url('../images/low-fly-cutter-courier-l.jpg');
-  }
-}
-
-.nebula-adder {
-  background-image: url('../images/nebula-adder-s.jpg');
-  @include breakpoint(portrait) {
-      background-image: url('../images/nebula-adder-s-portrait.jpg');
-    }
-  @include breakpoint(medium) {
-    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-m.jpg');
-    @include breakpoint(portrait) {
-      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-m-portrait.jpg');
-    }
-  }
-  @include breakpoint(large) {
-    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-l.jpg');
-    @include breakpoint(portrait) {
-      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/nebula-adder-l-portrait.jpg');
-    }
-  }
-}
-
-.sunrise-asp {
-  background-image: url('../images/sunrise-asp-s.jpg');
-  @include breakpoint(portrait) {
-      background-image: url('../images/sunrise-asp-s-portrait.jpg');
-    }
-
-  @include breakpoint(medium) {
-    background-image: url('../images/sunrise-asp-m.jpg');
-    @include breakpoint(portrait) {
-      background-image: url('../images/sunrise-asp-m-portrait.jpg');
-    }
-  }
-  @include breakpoint(large) {
-    background-image: url('../images/sunrise-asp-l.jpg');
-    @include breakpoint(portrait) {
-      background-image: url('../images/sunrise-asp-l-portrait.jpg');
-    }
-  }
-}
-
-.mummy-orca-fade {
-  background-image: url('../images/mummy-orca-fade-s.png');
-  @include breakpoint(medium) {
-    background-image: url('../images/mummy-orca-fade-m.png');
-  }
-  @include breakpoint(large) {
-    background-image: url('../images/mummy-orca-fade-l.png');
-  }
-}
-
-.rings-adder {
-  background-image: url('../images/rings-adder-s.jpg');
-  @include breakpoint(portrait) {
-    background-image: url('../images/rings-adder-s-portrait.jpg');
-  }
-  @include breakpoint(medium) {
-    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-m.jpg');
-    @include breakpoint(portrait) {
-    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-m-portrait.jpg');
-  }
-  }
-  @include breakpoint(large) {
-    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-l.jpg');
-    @include breakpoint(portrait) {
-    background-image: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 50%), url('../images/rings-adder-l-portrait.jpg');
-  }
-  }
-}
-
-.courier-pulsar {
-  background-image: url('../images/courier-pulsar-s.jpg');
-  @include breakpoint(portrait) {
-      background-image: url('../images/courier-pulsar-s-portrait.jpg');
-    }
-  @include breakpoint(medium) {
-    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-m.jpg');
-    @include breakpoint(portrait) {
-      background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-m-portrait.jpg');
-    }
-  }
-  @include breakpoint(large) {
-    background-image: linear-gradient(to right, rgba(0,0,0,0) 50%,rgba(0,0,0,1) 100%), url('../images/courier-pulsar-l.jpg');
-  }
-}
-
-.cover {
-  background-size:cover;
-  background-position: center center;
-}
+@import 'header-images';
 
 //discord widget
 
@@ -310,6 +184,26 @@ article#gallery-modal {
 
 //forms
 
+.black form {
+  color: $white;
+  label {
+    color: $white;
+  }
+  
+  .help-text {
+    color: $white;
+  }
+
+  .ng-invalid.ng-dirty.ng-touched {
+    color: $white;  
+    $background: $input-background-invalid;
+    $background-alpha: 0.6;
+    
+    background-color: rgba($background, $background-alpha);
+    border-color: $background;
+  }
+}
+
 form {
   .ng-invalid.ng-dirty.ng-touched {
     $background: $input-background-invalid;
@@ -321,4 +215,8 @@ form {
   span.form-error {
       display: block;
     }
+
+  textarea {
+    height: 8em;
+  }
 }

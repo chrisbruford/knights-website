@@ -1,7 +1,6 @@
 "use strict";
 module.exports = function ($http,$q,$rootScope) {
     let AuthService = this;
-    AuthService.user = null;
 
     AuthService.authCheck = function() {
         return $q((resolve,reject)=>{
@@ -30,7 +29,7 @@ module.exports = function ($http,$q,$rootScope) {
         AuthService.user = user;
     }).catch(rej => {
         AuthService.user = null;
-    });    
+    });
 
     AuthService.register = (newUser) => {
         return $q((resolve, reject) => {

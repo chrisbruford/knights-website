@@ -1,5 +1,6 @@
 "use strict";
 module.exports = function(DataService,$scope){
+
     let vm = this;
     vm.users = [];
 

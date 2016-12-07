@@ -221,4 +221,19 @@ form {
   }
 }
 
+.ajaxLoader {
+  vertical-align: top;
+  display: inline-block;
+  .loader {
+
+  }
+  .success {
+    color: lawngreen;
+  }
+  .fail {
+    color: red;
+  }
+
+}
+
 @import 'admin-page';

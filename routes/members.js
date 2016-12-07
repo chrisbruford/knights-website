@@ -35,25 +35,27 @@ router.get('/user', (req, res) => {
 
 router.post('/update', (req, res) => {
     let user = req.body.user
-    if (req.user && (req.user.level > 3 || req.user._id == user._id)) {
-        if (req.user.level > user.level) {
-            require('../models/user')
-                .then(User => {
-                    let promise = User.findOneAndUpdate({ _id: user._id }, user, {
-                        new: true,
-                        runValidators: true,
-                    })
-                    return promise;
+    let isSelf = user._id == req.user._id;
+
+    if (req.user && ((req.user.level > 3 && req.user.level > user.level) || (isSelf && req.user.level == user.level))) {
+        require('../models/user')
+            .then(User => {
+                let promise = User.findOneAndUpdate({ _id: user._id }, user, {
+                    new: true,
+                    runValidators: true,
                 })
-                .then(user => {
-                    res.json(user);
-                })
-                .catch(err => {
-                    res.json(err);
-                })
-        }
+                console.log('updated user');
+                return promise;
+            })
+            .then(user => {
+                res.json(user);
+            })
+            .catch(err => {
+                res.json(err);
+            })
+    } else {
+        res.sendStatus(401);
     }
-    res.sendStatus(401);
 })
 
 module.exports = router;

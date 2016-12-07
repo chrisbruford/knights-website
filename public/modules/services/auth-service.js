@@ -18,7 +18,7 @@ module.exports = function ($http,$q,$rootScope) {
                 }
             })
             .catch(err => {
-                AuthService.user = data;
+                AuthService.user = null;
                 $rootScope.$broadcast('deauthenticated');
                 reject(err);
             })

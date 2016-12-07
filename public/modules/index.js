@@ -12,3 +12,4 @@ require('./login');
 require('./admin');
 require('./account');
 require('./myAccount');
+require('./ajaxLoader');

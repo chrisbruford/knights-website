@@ -28,5 +28,9 @@
         <span class="form-error" ng-message="maxlength">Please limit to 1,000 characters</span>
     </div>
 
-    <button class="button" ng-click="AccountCtrl.updateUser(user)">Update</button>
+    <div>
+        <button class="button" ng-click="AccountCtrl.updateUser(user)">Update</button>
+        <kok-ajax-loader state="AccountCtrl.submitState"></kok-ajax-loader>
+    </div>
+
 </form>

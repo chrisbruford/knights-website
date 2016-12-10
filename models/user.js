@@ -48,7 +48,7 @@ module.exports = new Promise((resolve, reject) => {
                 avatar: {
                     type: String,
                     required: false,
-                    default: '/public/images/profile/generic.png'
+                    default: '/images/profile/generic.png'
                 }
             });
 

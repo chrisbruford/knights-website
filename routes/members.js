@@ -4,24 +4,18 @@ var router = express.Router();
 let passport = require('passport');
 
 router.get('/user/:username', (req, res) => {
-    if (req.user && req.user.level >=3) {
         require('../models/user')
             .then(User => {
                 let username = req.params.username;
-                let userToFind = username ? { username } : {};
+                let userToFind = username != 'undefined' ? { username } : {};
                 User.find(userToFind)
                     .then(result => {
                         res.json(result);
                     })
                     .catch(err => {
-                        console.log(err);
                         res.json(err);
                     });
             });
-        }
-        else {
-            res.sendStatus(401);
-        }
 });
 
 router.get('/user', (req, res) => {
@@ -33,7 +27,6 @@ router.get('/user', (req, res) => {
                     res.json(result);
                 })
                 .catch(err => {
-                    console.log(err);
                     res.json(err);
                 });
         });
@@ -50,7 +43,6 @@ router.get('/all', (req, res) => {
                     res.json(result);
                 })
                 .catch(err => {
-                    console.log(err);
                     res.json(err);
                 });
         });
@@ -67,7 +59,6 @@ router.post('/update', (req, res) => {
                     new: true,
                     runValidators: true,
                 })
-                console.log('updated user');
                 return promise;
             })
             .then(user => {

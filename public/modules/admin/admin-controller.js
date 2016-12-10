@@ -8,7 +8,7 @@ module.exports = function(DataService,$scope){
         vm.userToEdit = user;
     }
 
-    DataService.getMembers()
+    DataService.getMembersByUsername()
         .then(users => vm.users = users)
         .catch(err => console.log(err))
 }

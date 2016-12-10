@@ -4,7 +4,6 @@ module.exports = function(DataService) {
     DataService.getMembers()
     .then(data=>{
         vm.members = data;
-        console.dir(vm.members);
     });
 
 }

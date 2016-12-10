@@ -12,7 +12,8 @@ function(req, res) {
                 level: req.user.level,
                 reasonToJoin: req.user.reasonToJoin,
                 platform: req.user.platform,
-                shipName: req.user.shipName
+                shipName: req.user.shipName,
+                _id: req.user._id
         });
 });
 

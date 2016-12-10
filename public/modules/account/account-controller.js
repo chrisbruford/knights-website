@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(continents, gameRoles, platforms,UserService){
+module.exports = function(continents, gameRoles, platforms, UserService){
 
     let vm = this;
     vm.continents = continents;

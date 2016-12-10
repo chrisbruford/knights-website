@@ -5,7 +5,7 @@
     <label for="level">Access level</label>
     <input type="number" name="level" id="level" ng-model="user.level" max=4 min=0>
 
-    <label for="continent">continent</label>
+    <label for="continent">Continent</label>
     <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="user.continent"></select>
 
     <label for="game-role">Favourite game role</label>
@@ -21,7 +21,7 @@
         <span class="form-error" ng-message="maxlength">Please limit to 50 characters</span>
     </div>
 
-    <label for="bio">Your back-story</label>
+    <label for="bio">Back-story</label>
     <textarea name="bio" id="bio" ng-model="user.bio" ng-maxlength="1000"></textarea>
     <p class="help-text">Max 1,000 characters [{{1000-user.bio.length}} remaining]</p>
     <div ng-messages="accountForm.bio.$error" ng-show="accountForm.$submitted || accountForm.bio.$dirty">

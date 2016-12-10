@@ -42,6 +42,20 @@ router.get('/user', (req, res) => {
     }
 });
 
+router.get('/all', (req, res) => {
+        require('../models/user')
+        .then(User => {
+            User.find({}).where('level').gte(1)
+                .then(result => {
+                    res.json(result);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.json(err);
+                });
+        });
+});
+
 router.post('/update', (req, res) => {
     let user = req.body.user
     let isSelf = user._id == req.user._id;

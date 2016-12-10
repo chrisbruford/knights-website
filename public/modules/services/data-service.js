@@ -12,7 +12,7 @@ module.exports = function($http,$q) {
     }
 
     this.getMembers = () => {
-        return $http.get(`/members/user`) 
+        return $http.get(`/members/all`) 
         .then(res => res.data);
     }
 

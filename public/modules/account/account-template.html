@@ -2,8 +2,8 @@
     <label for="username">CMDR Name</label>
     <input type="text" name="username" id="username" ng-model="user.username" disabled>
 
-    <label for="level">Access level</label>
-    <input type="number" name="level" id="level" ng-model="user.level" max=4 min=0>
+    <label for="level" ng-show="AccountCtrl.user.level >= 3">Access level</label>
+    <input type="number" name="level" id="level" ng-model="user.level" max=4 min=0 ng-show="AccountCtrl.user.level >= 3">
 
     <label for="continent">Continent</label>
     <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="user.continent"></select>

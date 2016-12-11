@@ -52,7 +52,7 @@ router.post('/update', (req, res) => {
     let user = req.body.user
     let isSelf = user._id == req.user._id;
 
-    if (req.user && ((req.user.level >= 3 && req.user.level > user.level) || (isSelf && req.user.level == user.level))) {
+    if (req.user && ((req.user.level >= 3 && req.user.level >= user.level) || (isSelf && req.user.level == user.level))) {
         require('../models/user')
             .then(User => {
                 let promise = User.findOneAndUpdate({ _id: user._id }, user, {

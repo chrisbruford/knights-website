@@ -34,6 +34,21 @@ module.exports = new Promise((resolve, reject) => {
                 activated: {
                     type: Boolean,
                     required: true
+                },
+                shipName: {
+                    type: String,
+                    required: false,
+                    maxlength: 50
+                },
+                bio: {
+                    type: String,
+                    required: false,
+                    maxlength: 1000
+                },
+                avatar: {
+                    type: String,
+                    required: false,
+                    default: '/images/profile/generic.png'
                 }
             });
 

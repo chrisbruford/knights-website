@@ -11,6 +11,11 @@ module.exports = function($http,$q) {
         .then(res => res.data);
     }
 
+    this.getMembers = () => {
+        return $http.get(`/members/all`) 
+        .then(res => res.data);
+    }
+
     this.getGallery = () => {
         return $q((resolve,reject)=>{
             resolve([

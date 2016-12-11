@@ -1,4 +1,4 @@
 "use strict";
 angular.module('kokApp')
-.controller('AccountCtrl',['AuthService',require('./account-controller')])
+.controller('AccountCtrl',['continents','gameRoles','platforms','UserService',require('./account-controller')])
 .directive('kokAccount',[require('./account-directive')])

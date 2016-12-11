@@ -1,7 +1,7 @@
 <div class="media-object" ng-repeat="member in ProfilesCtrl.members">
 	<div class="media-object-section middle">
 		<div class="thumbnail profile-thumbnail">
-			<img class="profile-images" ng-src="{{member.src}}" alt="Avatar for {{member.name}}" title="{{member.name}}">
+			<img class="profile-images" ng-src="{{member.avatar}}" alt="Avatar for {{member.name}}" title="{{member.name}}">
 		</div>
 	</div>
 
@@ -10,8 +10,8 @@
 
 		<ul class="profile-list">
 			<li><strong>Favourite Activity:</strong> {{member.gameRole}}</li>
-			<li><strong>Ship:</strong> {{member.ship}}</li>
-			<li><strong>Bio:</strong> {{member.bio}}</li>
+			<li><strong>Ship:</strong> {{member.shipName}}</li>
+			<li class="text-justify"><strong>Bio:</strong> {{member.bio}}</li>
 		</ul>
 	</div>
 

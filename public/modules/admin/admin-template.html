@@ -1,0 +1,33 @@
+<div>
+    <table>
+        <thead>
+            <th>Username</th>
+            <th>Level</th>
+            <th>Game Role</th>
+            <th>Platform</th>
+            <th>Continent</th>
+            <th>Reason</th>
+            <th>Activated</th>
+            <th>Ship Name</th>
+            <th>Bio</th>
+        </thead>
+        <tbody>
+            <tr ng-click="AdminCtrl.setUser(user)" ng-repeat="user in AdminCtrl.users">
+                <td>{{user.username}}</td>
+                <td>{{user.level}}</td>
+                <td>{{user.gameRole}}</td>
+                <td>{{user.platform}}</td>
+                <td>{{user.continent}}</td>
+                <td>{{user.reason}}</td>
+                <td>{{user.activated}}</td>
+                <td>{{user.shipName}}</td>
+                <td>{{user.bio}}</td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <kok-account user="AdminCtrl.userToEdit"></kok-account>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

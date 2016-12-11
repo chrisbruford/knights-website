@@ -1,10 +1,10 @@
 "use strict";
 module.exports = function($scope,AuthService){
     let vm = this;
-    vm.authenticated = AuthService.authenticated;
+    vm.user = AuthService.user;
 
-    $scope.$on('authenticated',event=>vm.authenticated = AuthService.authenticated);
-    $scope.$on('deauthenticated',event=>vm.authenticated = AuthService.authenticated);
+    $scope.$on('authenticated',event=>vm.user = AuthService.user);
+    $scope.$on('deauthenticated',event=>vm.user = AuthService.user);
 
     vm.logout = function() {
         AuthService.logout()

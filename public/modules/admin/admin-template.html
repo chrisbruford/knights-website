@@ -1,4 +1,6 @@
 <div>
+    <label for="searchText">Search</label>
+    <input type="search" name="searchText" id="searchText" ng-model="AdminCtrl.searchText">
     <table>
         <caption>
             <h1>Users</h1>
@@ -15,7 +17,7 @@
             <th>Bio</th>
         </thead>
         <tbody>
-            <tr ng-click="AdminCtrl.setUser(user)" ng-repeat="user in AdminCtrl.users">
+            <tr ng-click="AdminCtrl.setUser(user)" ng-repeat="user in AdminCtrl.users | filter:AdminCtrl.searchText">
                 <td>{{user.username}}</td>
                 <td>{{user.level}}</td>
                 <td>{{user.gameRole}}</td>

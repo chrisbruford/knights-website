@@ -4,7 +4,7 @@ module.exports = function(AuthService){
         scope:{
             user: '='
         },
-        templateUrl: 'modules/account/account-template.html',
+        templateUrl: 'secure/templates/account/account-template.html',
         controller: 'AccountCtrl',
         controllerAs: 'AccountCtrl',
         restrict: 'E',

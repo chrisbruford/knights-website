@@ -13,24 +13,21 @@
 
     <div class="top-bar-left">
         <ul class="vertical medium-horizontal menu">
-            <li><a href="/#/">Home</a></li>
-            <li><a href="/#/contact">Contact</a></li>
-            <li><a href="/#/wings">Wings</a></li>
-            <li><a href="/#/roster">Roster</a></li>
-            <li><a href="/#/gallery">Gallery</a></li>
+            <li class="menu-item"><a href="/#/">Home</a></li>
+            <li class="menu-item"><a href="/#/contact">Contact</a></li>
+            <li class="menu-item"><a href="/#/wings">Wings</a></li>
+            <li class="menu-item"><a href="/#/roster">Roster</a></li>
+            <li class="menu-item"><a href="/#/gallery">Gallery</a></li>
         </ul>
     </div>
 
     <div class="top-bar-right">
         <ul class="vertical medium-horizontal menu">
-            <li ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
-            <li ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
-            <li ng-show="NavigationCtrl.user.level >= 3"><a href="/#/admin">Admin</a></li>
-            <li ng-show="NavigationCtrl.user"><a href="/#/account">Account</a></li>
-            <li ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
+            <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
+            <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
+            <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3"><a href="/#/admin">Admin</a></li>
+            <li class="menu-item" ng-show="NavigationCtrl.user"><a href="/#/account">Account</a></li>
+            <li class="menu-item" ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
         </ul>
     </div>
 </nav>
-<script>    
-    $('#top-menu,.title-bar').foundation();
-</script>

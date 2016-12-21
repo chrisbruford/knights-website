@@ -4,7 +4,6 @@
 
         function link(scope,element,attrs,controller) {
             element.foundation();
-            scope.$on('$destroy',()=>console.log('modal scope destroyed'))
         }
 
         return {

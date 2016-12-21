@@ -1,5 +1,5 @@
 <div class="row small-up-1 large-up-2">
-	<div class="media-object column" ng-repeat="member in ProfilesCtrl.members | orderBy:'level':true">
+	<div class="media-object column" ng-repeat="member in ProfilesCtrl.members | orderBy:['-level',username]">
 		
 		<div class="media-object-section middle">
 			<div class="thumbnail profile-thumbnail">

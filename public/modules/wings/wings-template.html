@@ -1,6 +1,8 @@
 <div class="row small-up-1 medium-up-3 large-up-4 align-center">
     <div class="column" ng-repeat="wing in WingsCtrl.wings">
+        <img ng-src="{{wing.src}}" alt="{{wing.alt}}">
         <h3>{{wing.name}}<br><small>{{wing.role}}</small></h3>
+        <p class="text-justify">{{wing.test}}</p>
         <p class="text-justify">{{wing.description}}</p>
     </div>
 </div>

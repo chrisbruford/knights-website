@@ -8,6 +8,7 @@ require('./profiles');
 require('./gallery');
 require('./wings');
 require('./navigation');
+require('./footer')
 require('./login');
 require('./admin');
 require('./account');

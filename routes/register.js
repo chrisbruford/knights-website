@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
                             from: 'admin@knightsofkarma.com',
                             to: user.email,
                             subject: 'Knights of Karma Registration',
-                            text: 'Please follow this link to activate your login with Knights of Karma',
+                            text: 'You have registered on the Knights of Karma website. Please follow this link to activate your login.',
                             html: '<html><head></head><body><h1>Knights of Karma Registration</h1></body></html>'
                         }
 

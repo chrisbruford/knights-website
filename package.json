@@ -58,5 +58,6 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "wiredep": "^4.0.0"
-  }
+  },
+  "engines" : { "node" : "^6.9.1" }
 }

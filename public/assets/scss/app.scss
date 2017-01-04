@@ -47,7 +47,7 @@ cite a, .white cite a, a.button {
   &.full-height:first-child {
     min-height: 100vh;
   }
-  >.row {
+  >.row:not(.shrink) {
     min-height: 100vh;
   }
   >.row:first-child {

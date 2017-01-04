@@ -1,0 +1,10 @@
+<table ng-show="LeaderboardCtrl.top10">
+    <tr>
+        <th>Nickname</th>
+        <th>Karma</th>
+    </tr>
+    <tr ng-repeat="user in LeaderboardCtrl.top10 | orderBy:'karma':true">
+        <td>user.nickname</td>
+        <td>user.karma</td>
+    </tr>
+</table>

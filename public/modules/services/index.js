@@ -6,6 +6,7 @@
     .service("UtilService",[require('./util-service')])
     .service("DataService",['$http','$q',require('./data-service')])
     .service("UserService",['$http',require('./user-service')])
+    .service("Leaderboard",['$http','$q',require('./leaderboard-service')])
 
     //app constants
     .constant("gameRoles",require("./game-roles-service"))

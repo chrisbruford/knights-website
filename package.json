@@ -9,6 +9,8 @@
     "angular": "^1.5.8",
     "angular-messages": "^1.5.8",
     "angular-route": "^1.5.8",
+    "async": "^2.1.2",
+    "bluebird": "^3.4.6",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "^2.2.0",
@@ -21,12 +23,12 @@
     "mongoose": "^4.6.6",
     "morgan": "~1.7.0",
     "motion-ui": "^1.2.2",
+    "nodemailer": "^2.7.0",
+    "nodemailer-mailgun-transport": "^1.2.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
-    "serve-favicon": "~2.3.0",
-    "async": "^2.1.2",
-    "bluebird": "^3.4.6"
+    "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.8",

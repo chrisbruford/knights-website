@@ -49,6 +49,11 @@ module.exports = new Promise((resolve, reject) => {
                     type: String,
                     required: false,
                     default: '/images/profile/generic.png'
+                },
+                email: {
+                    type: String,
+                    required: true,
+                    unique: true
                 }
             });
 

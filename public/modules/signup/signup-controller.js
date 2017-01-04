@@ -22,7 +22,8 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
             gameRole: vm.gameRole,
             platform: vm.platform,
             continent: vm.continent,
-            reasonToJoin: vm.reason
+            reasonToJoin: vm.reason,
+            email: vm.email
         })
         .then(user=>{
             vm.registered = true;

@@ -168,6 +168,12 @@ article.reveal,.reveal-overlay {
   list-style: none;
 }
 
+//wing
+
+.wing-img {
+  padding: 0 15% 4em;
+}
+
 //gallery
 
 .gallery-img {
@@ -180,6 +186,13 @@ article.reveal,.reveal-overlay {
 
 article#gallery-modal {
   width: auto;
+}
+
+//footer
+
+.footer {
+  color: $white;
+  margin: 2em;
 }
 
 //forms

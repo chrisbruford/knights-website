@@ -10,6 +10,8 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let session = require('express-session');
 
+//nonsense comment to test something in git
+
 //routes
 let home = require('./routes/index');
 let register = require('./routes/register');

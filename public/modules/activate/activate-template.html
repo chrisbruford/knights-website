@@ -1,0 +1,14 @@
+<div>
+    <h1>
+        {{ActivateCtrl.activated === true ? "Activated" : "Oops!"}}
+    </h1>
+    <blockquote ng-show="ActivateCtrl.activated">
+        "You just activated a nuclear warhead my friend"
+        <cite>
+            "Vic Deakins"
+        </cite>
+    </blockquote>
+    <p class="text-justify">
+        {{ActivateCtrl.activated === true ? "You may now log in to your account" : "Sorry but we couldn't activate this user account"}}        
+    </p>
+</div>

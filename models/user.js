@@ -1,6 +1,7 @@
 "use strict";
 
 module.exports = new Promise((resolve, reject) => {
+    let uuid = require('uuid');
     require('../db')
         .then(mongoose => {
             let Schema = mongoose.Schema;
@@ -54,8 +55,27 @@ module.exports = new Promise((resolve, reject) => {
                     type: String,
                     required: true,
                     unique: true
+                },
+                token: {
+                    type: String
                 }
             });
+
+            User.methods.setToken = function() {
+                return new Promise((resolve,reject)=>{
+                    let user = this;
+                    let token = uuid.v4().replace(/-/g,'');
+                    user.set('token',token);
+                    
+                    user.save(function(err){
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(token);
+                        }
+                    })
+                })
+            }
 
             User.plugin(passportLocalMongoose);
             resolve(mongoose.model('User', User));

@@ -33,6 +33,9 @@
             .when('/admin',{
                 templateUrl: 'routes/admin.html'
             })
+            .when('/activate/:token',{
+                templateUrl: 'routes/activate.html'
+            })
         }]);
 })();
 

@@ -34,6 +34,20 @@
 			</div>
 		</row>
 
+		<row>
+			<div class="small-12 columns">
+				<label for="xi-confirm-email">Confirm E-mail Address</label>
+			</div>
+			<div class="small-12 columns">
+				<input type="email" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" id="xi-confirm-email" name="xi-confirm-email" ng-model="signupCtrl.confirmEmail" placeholder="someone@domain.com" kok-email="signupCtrl.email" required>
+				<div ng-messages="signupForm['xi-confirm-email'].$error" ng-show="signupForm.$submitted || signupForm['xi-confirm-email'].$dirty">
+					<span class="form-error" ng-message="required">This field is required</span>
+					<span class="form-error" ng-message="email">Please enter a valid email address</span>
+					<span class="form-error" ng-message="kokEmail">Your e-mail addresses don't match</span>
+				</div>
+			</div>
+		</row>
+
 		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-password">Password</label>

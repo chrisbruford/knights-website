@@ -20,6 +20,7 @@ let login = require('./routes/login');
 let logout = require('./routes/logout');
 let authcheck = require('./routes/authcheck');
 let secure = require('./routes/secure');
+let activate = require('./routes/activate');
 
 let app = express();
 
@@ -62,6 +63,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/authcheck', authcheck);
 app.use('/secure', secure);
+app.use('/activate',activate);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

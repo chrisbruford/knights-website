@@ -15,7 +15,13 @@ router.get('/user/:username', (req, res) => {
                     .catch(err => {
                         res.json(err);
                     });
-            });
+            })
+            .catch(
+                err=>{
+                    console.log(err);
+                    res.json(err);
+                }
+            );
 });
 
 router.get('/user', (req, res) => {

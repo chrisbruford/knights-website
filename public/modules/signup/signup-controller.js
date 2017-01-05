@@ -27,7 +27,6 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
         })
         .then(user=>{
             vm.registered = true;
-            AuthService.authenticate();
             vm.user = user;
         })
         .catch(err=>{

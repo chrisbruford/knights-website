@@ -6,9 +6,8 @@ let passport = require('passport');
 router.post('/', (req, res) => {
     require('../models/user')
         .then(User => {
-            User.register(new User({
+            let newUser = new User({
                 username: req.body.username,
-                password: req.body.password,
                 gameRole: req.body.gameRole,
                 platform: req.body.platform,
                 continent: req.body.continent,
@@ -16,41 +15,59 @@ router.post('/', (req, res) => {
                 level: 0,
                 email: req.body.email,
                 activated: false
-            }), req.body.password, (err, user) => {
+            });
+
+            User.register(newUser, req.body.password, (err, user) => {
 
                 if (err) { console.log(err); return res.json(err); }
 
                 else {
-                    //passport.authenticate('local')(req, res, () => {
-                        console.log(user);
-                        let nodemailer = require('../modules/mailer');
-                        console.log(nodemailer);
 
-                        let options = {
-                            from: 'admin@knightsofkarma.com',
-                            to: user.email,
-                            subject: 'Knights of Karma Registration',
-                            text: 'You have registered on the Knights of Karma website. Please follow this link to activate your login.',
-                            html: '<html><head></head><body><h1>Knights of Karma Registration</h1></body></html>'
-                        }
+                    //set token on user and send email with url containing token
+                    let token = user.setToken()
+                        .then(token => {
+                            let domain = process.env.domain || require('../secrets').domain;
+                            let url = `${domain}/#/activate/${token}`
 
-                        nodemailer.sendMail(options, function (err, info) {
-                            if (err) {
-                                console.log('sendMail Error: ' + err);
+                            let nodemailer = require('../modules/mailer');
+
+                            let options = {
+                                from: 'admin@knightsofkarma.com',
+                                to: user.email,
+                                subject: 'Knights of Karma Registration',
+                                text: `You have registered on the Knights of Karma website. Please follow this link to activate your login:
+                                ${url}`,
+                                html: `
+                                    <html>
+                                        <head></head>
+                                        <body>
+                                            <h1>Knights of Karma Registration</h1>
+                                            <p>Hi ${user.username},</p>
+                                            <p>Please follow this link to activate your login</p>
+                                            <p><a href=${url}>${url}</a></p>
+                                        </body>
+                                    </html>`
                             }
-                            else {
-                                console.log('Response: ' + info);
-                            }
-                        });
 
-                        console.log('mail sent');
+                            nodemailer.sendMail(options, function (err, info) {
+                                if (err) {
+                                    console.log('sendMail Error: ' + err);
+                                }
+                            });
 
-                        res.json(user);
-
-                    //})
+                            res.json(user);
+                        })
+                        .catch(err=>{
+                            console.log('token error',err);
+                            res.sendStatus(500);
+                        })
                 }
 
             });
+        })
+        .catch(err=>{
+            console.log('Registration error:',err);
+            res.sendStatus(500);
         });
 });
 

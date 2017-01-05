@@ -6,6 +6,8 @@ module.exports = function($scope,AuthService){
     $scope.$on('authenticated',event=>vm.user = AuthService.user);
     $scope.$on('deauthenticated',event=>vm.user = AuthService.user);
 
+    AuthService.authCheck();
+
     vm.logout = function() {
         AuthService.logout()
         .catch(err=>console.log(err));

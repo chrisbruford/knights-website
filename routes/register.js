@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
                             let nodemailer = require('../modules/mailer');
 
                             let options = {
-                                from: 'admin@knightsofkarma.com',
+                                from: 'admin@mail.knightsofkarma.com',
                                 to: user.email,
                                 subject: 'Knights of Karma Registration',
                                 text: `You have registered on the Knights of Karma website. Please follow this link to activate your login:

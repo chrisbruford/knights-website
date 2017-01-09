@@ -1,10 +1,9 @@
 "use strict";
 let nodemailer = require('nodemailer');
 let mg = require('nodemailer-mailgun-transport');
-let secrets = require('../../secrets.js');
 
-let api_key = process.env.nm_api_key || secrets.nodemailer.api_key;
-let domain = process.env.nm_domain || secrets.nodemailer.domain;
+let api_key = process.env.nm_api_key || require('../../secrets.js').nodemailer.api_key;
+let domain = process.env.nm_domain || require('../../secrets.js').nodemailer.domain;
 
 let auth = {
   auth: {api_key,domain}

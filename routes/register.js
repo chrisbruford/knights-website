@@ -22,7 +22,6 @@ router.post('/', (req, res) => {
                 if (err) { console.log(err); return res.json(err); }
 
                 else {
-
                     //set token on user and send email with url containing token
                     let token = user.setToken()
                         .then(token => {

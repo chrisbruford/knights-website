@@ -4,7 +4,7 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
     let vm = this;
 
     vm.registered = false;
-    vm.registrationError = null;
+    vm.registrationState;
 
     vm.gameRoles = gameRoles;
     vm.platforms = platforms;
@@ -16,6 +16,8 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
     vm.cmdrName = "";
 
     vm.register = () => {
+        vm.registrationState = "loading";
+
         AuthService.register({
             username: vm.cmdrName,
             password: vm.password,
@@ -27,9 +29,11 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
         })
         .then(user=>{
             vm.registered = true;
+            vm.registrationState = "success";
             vm.user = user;
         })
         .catch(err=>{
+            vm.registrationState = "fail";
             vm.registrationError = err;
         });
     }

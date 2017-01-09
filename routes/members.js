@@ -24,6 +24,27 @@ router.get('/user/:username', (req, res) => {
             );
 });
 
+router.get('/email/:email', (req, res) => {
+        require('../models/user')
+            .then(User => {
+                let email = req.params.email;
+                let emailToFind = email != 'undefined' ? { email } : {};
+                User.find(emailToFind)
+                    .then(result => {
+                        res.json(result);
+                    })
+                    .catch(err => {
+                        res.json(err);
+                    });
+            })
+            .catch(
+                err=>{
+                    console.log(err);
+                    res.json(err);
+                }
+            );
+});
+
 router.get('/user', (req, res) => {
     if (req.user && req.user.level >= 3) {
         require('../models/user')

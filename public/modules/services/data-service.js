@@ -11,6 +11,11 @@ module.exports = function($http,$q) {
         .then(res => res.data);
     }
 
+    this.getMembersByEmail = (email) => {
+        return $http.get(`/members/email/${email}`) 
+        .then(res => res.data);
+    }
+
     this.getMembers = () => {
         return $http.get(`/members/all`) 
         .then(res => res.data);

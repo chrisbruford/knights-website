@@ -27,10 +27,11 @@
 				<label for="xi-email">E-mail Address</label>
 			</div>
 			<div class="small-12 columns">
-				<input type="email" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" id="xi-email" name="xi-email" ng-model="signupCtrl.email" placeholder="someone@domain.com" required>
+				<input type="email" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" id="xi-email" name="xi-email" ng-model="signupCtrl.email" placeholder="someone@domain.com" kok-unique-email required>
 				<div ng-messages="signupForm['xi-email'].$error" ng-show="signupForm.$submitted || signupForm['xi-email'].$dirty">
 					<span class="form-error" ng-message="required">This field is required</span>
 					<span class="form-error" ng-message="email">Please enter a valid email address</span>
+					<span class="form-error" ng-message="kokUniqueEmail">That email is already in use</span>
 				</div>
 			</div>
 		</row>
@@ -128,6 +129,7 @@
 		<row>
 			<div class="small-12 columns">
 				<button type="submit" class="button" ng-disabled="signupForm.$invalid">Submit</button>
+				<kok-ajax-loader state="signupCtrl.registrationState"></kok-ajax-loader>
 			</div>
 		</row>
 	</form>

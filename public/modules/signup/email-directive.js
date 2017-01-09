@@ -9,6 +9,7 @@ module.exports = function() {
             ctrl.$validators.kokEmail = function(modelVal,viewVal) {
                 return modelVal == scope.kokEmail;
             }
+
             scope.$watch("kokEmail",function(){
                 ctrl.$validate();
             })

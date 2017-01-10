@@ -54,7 +54,7 @@ module.exports = new Promise((resolve, reject) => {
                 email: {
                     type: String,
                     required: true,
-                    //unique: true
+                    unique: true
                 },
                 token: {
                     type: String

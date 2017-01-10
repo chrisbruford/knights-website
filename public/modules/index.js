@@ -16,3 +16,4 @@ require('./myAccount');
 require('./ajaxLoader');
 require('./leaderboard');
 require('./activate');
+require('./common');

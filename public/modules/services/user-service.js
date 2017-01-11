@@ -9,6 +9,14 @@ module.exports = function($http) {
     }
 
     this.recoverPassword = function(user) {
-        return $http.get(`/recover/${user.username}`);
+        return $http.get(`/recover/${user.username}`).then(res=>res.data);
+    }
+
+    this.resetPassword = function(token) {
+        return $http.get(`/resetpassword/${token}`).then(res=>res.data);
+    }
+    
+    this.setPassword = function(params) {
+        return $http.post('/resetpassword/newpass',params)
     }
 }

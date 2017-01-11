@@ -17,3 +17,4 @@ require('./ajaxLoader');
 require('./leaderboard');
 require('./activate');
 require('./common');
+require('./resetPassword');

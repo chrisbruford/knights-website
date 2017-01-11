@@ -76,6 +76,9 @@ cite a, .white cite a, a.button {
   a { 
     color: $anchor-color;
   }
+  label {
+    color: $white;
+  }
 }
 
 //header video handling

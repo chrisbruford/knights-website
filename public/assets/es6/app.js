@@ -50,6 +50,9 @@
             .when('/activate/:token',{
                 templateUrl: 'routes/activate.html'
             })
+            .when('/resetpassword/:token',{
+                templateUrl: 'routes/resetpassword.html'
+            })
         }]);
 })();
 

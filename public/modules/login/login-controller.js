@@ -50,9 +50,11 @@ module.exports = function (UserService, AuthService, $scope) {
         return UserService.recoverPassword({
             username: vm.recCmdrName,
         })
-            .then(data => {
-                vm.passwordRecovery = false;
-                vm.recoverySubmitted = true;
+            .then(res => {
+                if (res) {
+                    vm.passwordRecovery = false;
+                    vm.recoverySubmitted = true;
+                }
             });
     }
 }

@@ -86,6 +86,8 @@ cite a, .white cite a, a.button {
 .video {
   padding: 0;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   video {
     width: 100%;
   }

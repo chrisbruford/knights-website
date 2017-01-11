@@ -156,6 +156,10 @@ cite a, .white cite a, a.button {
 
 article.reveal,.reveal-overlay {
   z-index: 99999;
+  color: $black;
+  a {
+    color: $black;
+  }
 }
 
 //member profiles

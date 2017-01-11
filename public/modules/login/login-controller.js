@@ -1,8 +1,11 @@
 "use strict";
-module.exports = function (AuthService, $scope) {
+module.exports = function (UserService, AuthService, $scope) {
     let vm = this;
 
     vm.user = null;
+
+    vm.passwordRecovery = false;
+    vm.recoverySubmitted = false;
 
     vm.authentication = {
         success: false,
@@ -40,6 +43,16 @@ module.exports = function (AuthService, $scope) {
                 else {
                     vm.authentication.error = true;
                 }
+            });
+    }
+
+    vm.recoverPassword = function () {
+        return UserService.recoverPassword({
+            username: vm.recCmdrName,
+        })
+            .then(data => {
+                vm.passwordRecovery = false;
+                vm.recoverySubmitted = true;
             });
     }
 }

@@ -63,6 +63,11 @@ module.exports = new Promise((resolve, reject) => {
                     type: Date,
                     default: Date.now,
                     expires: '2d'
+                },
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                    required: true
                 }
             });
 

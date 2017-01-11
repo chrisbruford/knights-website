@@ -19,7 +19,7 @@ module.exports = [
         alt: "Castille Badge",
         name: "Castille",
         role: "Trade",
-        description: "Trade. The life blood of all factions. Castille Wing Knights are trade specialists, typically found in stripped down ships with nothing but cargo racks - the bravest amongst them even prioritising cargo space over shields. Not only will you find Castille Knights generating huge amounts of Credits for themselves, but they play a vitol role in the support of our minor faction ensuring it remains fiscally beauyant."
+        description: "Trade. The life blood of all factions. Castille Wing Knights are trade specialists, typically found in stripped down ships with nothing but cargo racks - the bravest amongst them even prioritising cargo space over shields. Not only will you find Castille Knights generating huge amounts of Credits for themselves, but they play a vital role in the support of our minor faction ensuring it remains fiscally beauyant."
     },
     {
         src: "images/wings/Iberia-Malta.png",

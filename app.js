@@ -66,7 +66,7 @@ app.use('/secure', secure);
 app.use('/activate',activate);
 app.use('/recover',recover);
 app.use('/resetpassword',resetPassword);
-app.use('/.well-known', express.static('.well-known'));
+app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

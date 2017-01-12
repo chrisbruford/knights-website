@@ -8,124 +8,124 @@
 }
 
 .wingman {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/wingman-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/wingman-s.jpg');
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/wingman-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/wingman-m.jpg');
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/wingman-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/wingman-l.jpg');
   }
 }
 
 .beluga-pulsar {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/beluga-pulsar-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/beluga-pulsar-s.jpg');
   @include breakpoint(portrait) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/beluga-pulsar-s-portrait.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/beluga-pulsar-s-portrait.jpg');
   }
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/beluga-pulsar-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/beluga-pulsar-m.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/beluga-pulsar-m-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/beluga-pulsar-m-portrait.jpg');
     }
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/beluga-pulsar-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/beluga-pulsar-l.jpg');
   }
 }
 
 .low-fly-cutter-courier {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/low-fly-cutter-courier-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/low-fly-cutter-courier-s.jpg');
   @include breakpoint(portrait) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/low-fly-cutter-courier-s-portrait.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/low-fly-cutter-courier-s-portrait.jpg');
   }
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/low-fly-cutter-courier-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/low-fly-cutter-courier-m.jpg');
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/low-fly-cutter-courier-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/low-fly-cutter-courier-l.jpg');
   }
 }
 
 .nebula-adder {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-s.jpg');
   @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-s-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-s-portrait.jpg');
     }
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-m.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-m-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-m-portrait.jpg');
     }
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-l.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/nebula-adder-l-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/nebula-adder-l-portrait.jpg');
     }
   }
 }
 
 .sunrise-asp {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-s.jpg');
   @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-s-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-s-portrait.jpg');
     }
 
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-m.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-m-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-m-portrait.jpg');
     }
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-l.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/sunrise-asp-l-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/sunrise-asp-l-portrait.jpg');
     }
   }
 }
 
 .mummy-orca-fade {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/mummy-orca-fade-s.png');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/mummy-orca-fade-s.png');
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/mummy-orca-fade-m.png');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/mummy-orca-fade-m.png');
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/mummy-orca-fade-l.png');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/mummy-orca-fade-l.png');
   }
 }
 
 .rings-adder {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-s.jpg');
   @include breakpoint(portrait) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-s-portrait.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-s-portrait.jpg');
   }
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-m.jpg');
     @include breakpoint(portrait) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-m-portrait.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-m-portrait.jpg');
   }
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-l.jpg');
     @include breakpoint(portrait) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/rings-adder-l-portrait.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/rings-adder-l-portrait.jpg');
   }
   }
 }
 
 .courier-pulsar {
-  background-image: url(../images/black-horizontal-stripes.png), url('../images/courier-pulsar-s.jpg');
+  background-image: url(../images/black-vertical-stripes.png), url('../images/courier-pulsar-s.jpg');
   @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/courier-pulsar-s-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/courier-pulsar-s-portrait.jpg');
     }
   @include breakpoint(medium) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/courier-pulsar-m.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/courier-pulsar-m.jpg');
     @include breakpoint(portrait) {
-      background-image: url(../images/black-horizontal-stripes.png), url('../images/courier-pulsar-m-portrait.jpg');
+      background-image: url(../images/black-vertical-stripes.png), url('../images/courier-pulsar-m-portrait.jpg');
     }
   }
   @include breakpoint(large) {
-    background-image: url(../images/black-horizontal-stripes.png), url('../images/courier-pulsar-l.jpg');
+    background-image: url(../images/black-vertical-stripes.png), url('../images/courier-pulsar-l.jpg');
   }
 }

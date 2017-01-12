@@ -1,4 +1,5 @@
 "use strict";
 angular.module('kokApp')
     .controller('GalleryCtrl', ['DataService', require('./gallery-controller')])
-    .directive('kokGallery', [require('./gallery-directive')]);
+    .directive('kokGallery', [require('./gallery-directive')])
+    .directive('kokGalleryNavigation', [require('./gallery-navigation-directive')])

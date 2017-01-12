@@ -9,6 +9,7 @@ let mongoose = require('mongoose');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let session = require('express-session');
+let helmet = require('helmet');
 
 //routes
 let home = require('./routes/index');
@@ -53,6 +54,26 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+
+//use secure connections
+function requireHTTPS(req, res, next) {
+    var isAzure = req.get('x-site-deployment-id'),
+        isSsl = req.get('x-arr-ssl');
+
+    if (isAzure && !isSsl) {
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+
+    next();
+}
+
+app.use(requireHTTPS);
+app.use(helmet.hsts({
+    maxAge: 10886400000,     // Must be at least 18 weeks to be approved by Google
+    includeSubdomains: true, // Must be enabled to be approved by Google
+    preload: true
+}));
+
 
 //serve
 

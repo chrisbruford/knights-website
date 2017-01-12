@@ -17,6 +17,9 @@ nav {
     &:hover {
       color: scale-color($anchor-color, $lightness: -30%)
     }
+    &:focus {
+      color: $anchor-color;
+    }
   }
 }
 

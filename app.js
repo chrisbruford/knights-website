@@ -10,8 +10,6 @@ let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let session = require('express-session');
 
-//nonsense comment to test something in git
-
 //routes
 let home = require('./routes/index');
 let register = require('./routes/register');
@@ -25,8 +23,6 @@ let recover = require('./routes/recover');
 let resetPassword = require('./routes/resetPassword');
 
 let app = express();
-
-app.locals.courses = require('./data/courses');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -58,6 +54,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+//serve
+
 app.use('/', home);
 app.use('/register', register);
 app.use('/members', members);
@@ -68,6 +66,7 @@ app.use('/secure', secure);
 app.use('/activate',activate);
 app.use('/recover',recover);
 app.use('/resetpassword',resetPassword);
+app.use('/.well-known', express.static('.well-known'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

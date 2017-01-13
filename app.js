@@ -25,6 +25,21 @@ let resetPassword = require('./routes/resetPassword');
 
 let app = express();
 
+//security headers
+
+app.use(helmet({
+    hsts: {
+      force: true,
+      maxAge: 300
+    }
+}))
+
+app.use(requireHTTPS);
+app.use(function (req, res, next) {
+  res.header("X-powered-by", "Blood, sweat, and tears")
+  next()
+})
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -32,7 +47,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret:'anything'}));
+app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -57,23 +72,15 @@ app.use(function (req, res, next) {
 
 //use secure connections
 function requireHTTPS(req, res, next) {
-    var isAzure = req.get('x-site-deployment-id'),
-        isSsl = req.get('x-arr-ssl');
+  var isAzure = req.get('x-site-deployment-id'),
+    isSsl = req.get('x-arr-ssl');
 
-    if (isAzure && !isSsl) {
-        return res.redirect('https://' + req.get('host') + req.url);
-    }
+  if (isAzure && !isSsl) {
+    return res.redirect('https://' + req.get('host') + req.url);
+  }
 
-    next();
+  next();
 }
-
-app.use(requireHTTPS);
-app.use(helmet.hsts({
-    maxAge: 10886400000,     // Must be at least 18 weeks to be approved by Google
-    includeSubdomains: true, // Must be enabled to be approved by Google
-    preload: true
-}));
-
 
 //serve
 
@@ -84,9 +91,9 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/authcheck', authcheck);
 app.use('/secure', secure);
-app.use('/activate',activate);
-app.use('/recover',recover);
-app.use('/resetpassword',resetPassword);
+app.use('/activate', activate);
+app.use('/recover', recover);
+app.use('/resetpassword', resetPassword);
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
 // catch 404 and forward to error handler

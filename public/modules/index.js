@@ -18,3 +18,4 @@ require('./leaderboard');
 require('./activate');
 require('./common');
 require('./resetPassword');
+require('./myActions');

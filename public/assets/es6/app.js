@@ -6,8 +6,9 @@
     let angular = require('angular');
     require('angular-route');
     require('angular-messages');
+    require('ng-file-upload');
 
-    angular.module('kokApp', ['ngRoute','ngMessages'])
+    angular.module('kokApp', ['ngRoute','ngMessages','ngFileUpload'])
         .run(['$document','$rootScope',function ($document,$rootScope) {
                 $($document).foundation();
         }])

@@ -22,6 +22,7 @@ let secure = require('./routes/secure');
 let activate = require('./routes/activate');
 let recover = require('./routes/recover');
 let resetPassword = require('./routes/resetPassword');
+let uploads = require('./routes/uploads');
 
 let app = express();
 
@@ -94,6 +95,7 @@ app.use('/secure', secure);
 app.use('/activate', activate);
 app.use('/recover', recover);
 app.use('/resetpassword', resetPassword);
+app.use('/uploads', uploads);
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
 // catch 404 and forward to error handler

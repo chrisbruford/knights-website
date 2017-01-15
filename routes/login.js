@@ -13,6 +13,7 @@ function(req, res) {
                 reasonToJoin: req.user.reasonToJoin,
                 platform: req.user.platform,
                 shipName: req.user.shipName,
+                wings: req.user.wings,
                 _id: req.user._id
         });
 });

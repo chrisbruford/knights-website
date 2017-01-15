@@ -13,6 +13,7 @@ router.get('/', function (req, res) {
             reasonToJoin: req.user.reasonToJoin,
             _id: req.user._id,
             platform: req.user.platform,
+            wings: req.user.wings,
             shipName: req.user.shipName
         });
     }

@@ -19,4 +19,12 @@ module.exports = function($http) {
     this.setPassword = function(params) {
         return $http.post('/resetpassword/newpass',params)
     }
+
+    this.joinWing = (wingName) => {
+        return $http.post(`wing/join`,{wingName}).then(res=>res.data);
+    }
+
+    this.leaveWing = (wingName) => {
+        return $http.post(`wing/leave`,{wingName}).then(res=>res.data);
+    }
 }

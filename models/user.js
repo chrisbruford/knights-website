@@ -2,8 +2,10 @@
 
 module.exports = new Promise((resolve, reject) => {
     let uuid = require('uuid');
-    require('../db')
-        .then(mongoose => {
+    Promise.all([require('../db'), require('./wing')])
+        .then(res => {
+            let mongoose = res[0];
+            let wing = res[1];
             let Schema = mongoose.Schema;
             let passportLocalMongoose = require('passport-local-mongoose');
 
@@ -68,7 +70,9 @@ module.exports = new Promise((resolve, reject) => {
                     type: Date,
                     default: Date.now,
                     required: true
-                }
+                },
+                wings: [wing],
+                default: []
             });
 
             User.methods.setToken = function () {
@@ -89,8 +93,8 @@ module.exports = new Promise((resolve, reject) => {
 
             User.plugin(passportLocalMongoose);
 
-            let model = mongoose.model('User',User);
-            
+            let model = mongoose.model('User', User);
+
             model.ensureIndexes(function (err) {
                 console.log('ensure index', err)
             })

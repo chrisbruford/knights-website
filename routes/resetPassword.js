@@ -6,7 +6,6 @@ let passport = require('passport');
 router.post('/newpass',function(req,res){
     //pull in models and then find the user that
     //matches the username found in the Token document
-    console.log('I bet this errors');
     Promise.all([require('../models/recoveryToken'),require('../models/user')])
     .then(array=>{
         console.log('you lose the bet big boy');

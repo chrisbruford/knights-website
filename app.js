@@ -29,10 +29,10 @@ let app = express();
 //security headers
 
 app.use(helmet({
-    hsts: {
-      force: true,
-      maxAge: 300
-    }
+  hsts: {
+    force: true,
+    maxAge: 300
+  }
 }))
 
 app.use(requireHTTPS);

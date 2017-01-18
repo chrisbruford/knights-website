@@ -7,8 +7,9 @@ module.exports = function ($scope, Upload, AuthService) {
     vm.uploadImage = function () {
         if (vm.file) {
             vm.file.upload = Upload.upload({
-                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                data: { file: file }
+                url: '/uploads/gallery',
+                method: 'POST',
+                file: vm.file
             });
 
             vm.file.upload.then(function (response) {
@@ -16,8 +17,8 @@ module.exports = function ($scope, Upload, AuthService) {
                     vm.file.result = response.data;
                 });
             }, function (response) {
-                if (response.status > 0){}
-                    // $scope.errorMsg = response.status + ': ' + response.data;
+                if (response.status > 0) { }
+                // $scope.errorMsg = response.status + ': ' + response.data;
             }, function (evt) {
                 vm.file.progress = Math.min(100, parseInt(100.0 *
                     evt.loaded / evt.total));

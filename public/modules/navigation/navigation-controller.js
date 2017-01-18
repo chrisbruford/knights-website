@@ -10,8 +10,6 @@ module.exports = function ($scope, AuthService,$location) {
         return ($location.path() === path);
     }
 
-    AuthService.authCheck();
-
     vm.logout = function() {
         AuthService.logout()
             .catch(err => console.log(err));

@@ -47,9 +47,13 @@ module.exports = function ($http, $q, $rootScope) {
             $http.post('/login', user)
                 .then(res => {
                     let user = res.data
-                    AuthService.user = user;
-                    $rootScope.$broadcast('authenticated');
-                    resolve(user);
+                    if (user) {
+                        AuthService.user = user;
+                        $rootScope.$broadcast('authenticated');
+                        resolve(user);
+                    } else {
+                        reject('No user found');
+                    }
                 })
                 .catch(err => {
                     reject(err)

@@ -1,25 +1,23 @@
 "use strict";
-module.exports = new Promise((resolve,reject)=>{
-    require('../db').then(mongoose=>{
 
-        let wings = require('../public/modules/services/wings-service');
-        let names = [];
+let mongoose = require('../db')
 
-        wings.forEach(wing=>{
-            names.push(wings.name);
-        });
+let wings = require('../public/modules/services/wings-service');
+let names = [];
 
-        let Schema = mongoose.Schema;
-        
-        let wing = new Schema({
-            name: {
-                type: String,
-                required: true,
-                enum: names
-            },
-            badges: Array
-        });
+wings.forEach(wing => {
+    names.push(wings.name);
+});
 
-        resolve(wing);
-    })
-})
+let Schema = mongoose.Schema;
+
+let wing = new Schema({
+    name: {
+        type: String,
+        required: true,
+        enum: names
+    },
+    badges: Array
+});
+
+module.exports = wing;

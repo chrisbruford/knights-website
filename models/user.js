@@ -2,109 +2,103 @@
 
 module.exports = new Promise((resolve, reject) => {
     let uuid = require('uuid');
-    Promise.all([require('../db'), require('./wing')])
-        .then(res => {
-            let mongoose = res[0];
-            let wing = res[1];
-            let Schema = mongoose.Schema;
-            let passportLocalMongoose = require('passport-local-mongoose');
+    let mongoose = require('../db');
+    let wing = require('./wing');
 
-            let User = new Schema({
-                level: {
-                    type: Number,
-                    required: true
-                },
-                gameRole: {
-                    type: String,
-                    required: true,
-                    enum: require('../public/modules/services/game-roles-service')
-                },
-                platform: {
-                    type: String,
-                    required: true,
-                    enum: require('../public/modules/services/platforms-service')
-                },
-                continent: {
-                    type: String,
-                    required: true,
-                    enum: require('../public/modules/services/continents-service')
-                },
-                reasonToJoin: {
-                    type: String,
-                    required: false,
-                    maxlength: 1000
-                },
-                activated: {
-                    type: Boolean,
-                    required: true
-                },
-                shipName: {
-                    type: String,
-                    required: false,
-                    maxlength: 50
-                },
-                bio: {
-                    type: String,
-                    required: false,
-                    maxlength: 1000
-                },
-                avatar: {
-                    type: String,
-                    required: false,
-                    default: '/images/profile/generic.png'
-                },
-                email: {
-                    type: String,
-                    required: true,
-                    unique: true
-                },
-                token: {
-                    type: String
-                },
-                expire: {
-                    type: Date,
-                    default: Date.now,
-                    expires: '2d'
-                },
-                createdAt: {
-                    type: Date,
-                    default: Date.now,
-                    required: true
-                },
-                wings: [wing],
-                default: []
-            });
+    let Schema = mongoose.Schema;
+    let passportLocalMongoose = require('passport-local-mongoose');
 
-            User.methods.setToken = function () {
-                return new Promise((resolve, reject) => {
-                    let user = this;
-                    let token = uuid.v4().replace(/-/g, '');
-                    user.set('token', token);
+    let User = new Schema({
+        level: {
+            type: Number,
+            required: true
+        },
+        gameRole: {
+            type: String,
+            required: true,
+            enum: require('../public/modules/services/game-roles-service')
+        },
+        platform: {
+            type: String,
+            required: true,
+            enum: require('../public/modules/services/platforms-service')
+        },
+        continent: {
+            type: String,
+            required: true,
+            enum: require('../public/modules/services/continents-service')
+        },
+        reasonToJoin: {
+            type: String,
+            required: false,
+            maxlength: 1000
+        },
+        activated: {
+            type: Boolean,
+            required: true
+        },
+        shipName: {
+            type: String,
+            required: false,
+            maxlength: 50
+        },
+        bio: {
+            type: String,
+            required: false,
+            maxlength: 1000
+        },
+        avatar: {
+            type: String,
+            required: false,
+            default: '/images/profile/generic.png'
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        token: {
+            type: String
+        },
+        expire: {
+            type: Date,
+            default: Date.now,
+            expires: '2d'
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            required: true
+        },
+        wings: [wing],
+        default: []
+    });
 
-                    user.save(function (err) {
-                        if (err) {
-                            reject(err)
-                        } else {
-                            resolve(token);
-                        }
-                    })
-                })
-            }
+    User.methods.setToken = function () {
+        return new Promise((resolve, reject) => {
+            let user = this;
+            let token = uuid.v4().replace(/-/g, '');
+            user.set('token', token);
 
-            User.plugin(passportLocalMongoose);
-
-            let model = mongoose.model('User', User);
-
-            model.ensureIndexes(function (err) {
-                console.log('ensure index', err)
+            user.save(function (err) {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(token);
+                }
             })
-
-            resolve(model);
         })
-        .catch(err => {
-            console.dir(err);
-            reject(err);
-        });
+    }
+
+    User.plugin(passportLocalMongoose);
+
+    let model = mongoose.model('User', User);
+
+    model.ensureIndexes(function (err) {
+        console.log('ensure index', err)
+    })
+
+    resolve(model);
 });
 
 

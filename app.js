@@ -5,11 +5,12 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let mongoose = require('mongoose');
+let mongoose = require('./db');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let session = require('express-session');
 let helmet = require('helmet');
+let MongoStore = require('connect-mongo')(session);
 
 //routes
 let home = require('./routes/index');
@@ -48,20 +49,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'anything' }));
+
+//mongo session store
+
+let store = new MongoStore({mongooseConnection: mongoose.connection});
+
+app.use(session({
+  store: new MongoStore({mongooseConnection: mongoose.connection}),
+  secret: process.env.db_uname || require('./secrets').cookieSecret
+}))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 //mongoose passport config
-
-require('./db').then(mongoose => {
-  mongoose.Promise = global.Promise;
-  require('./models/user').then(User => {
-    passport.use(new LocalStrategy(User.authenticate()));
-    passport.serializeUser(User.serializeUser());
-    passport.deserializeUser(User.deserializeUser());
-  });
-})
+mongoose.Promise = global.Promise;
+require('./models/user').then(User => {
+  passport.use(new LocalStrategy(User.authenticate()));
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
+});
 
 
 //allow CORS requests
@@ -110,6 +117,7 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function (err, req, res, next) {
+    console.log(err);
     res.status(err.status || 500);
     res.send(err.message);
   });
@@ -118,6 +126,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
+  console.log(err);
   res.status(err.status || 500);
   res.send(err.message);
 });

@@ -140,7 +140,12 @@ router.get('/:token?', function (req, res, next) {
             return User.findOne(user);
         })
         .then(user => {
-            if (user) res.json(true);
+            if (user) {
+                res.json(true);
+            }
+            else {
+                res.json(false);
+            }
         })
         .catch(err => {
             console.log(err);

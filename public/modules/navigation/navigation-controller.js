@@ -6,11 +6,6 @@ module.exports = function ($scope, AuthService,$location) {
     $scope.$on('authenticated', event => vm.user = AuthService.user);
     $scope.$on('deauthenticated', event => vm.user = AuthService.user);
 
-    $scope.$on('$locationChangeStart', function(event,next,current) {
-        console.log(next,current);
-        console.log($location.path());
-    });
-
     vm.isActive = function(path){
         return ($location.path() === path);
     }

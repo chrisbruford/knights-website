@@ -7,15 +7,11 @@ router.get('/:token', function (req, res) {
     require('../models/user')
         .then(User => {
             let token = req.params.token;
-            User.findOne({ token })
-                .then(user => {
-                    if (user) {
-                        user.activated = true;
-                        user.token = undefined;
-                        user.expire = undefined;
-                        return user.save();
-                    }
-                })
+            User.findOneAndUpdate({ token },{$set:{
+                activated: true,
+                token: null,
+                expire: null                    
+            }})
                 .then(User => {
                     if (User) {
                         res.json(true);
@@ -26,7 +22,7 @@ router.get('/:token', function (req, res) {
                 })
                 .catch(err => {
                     console.log('activation/find user error: ', err);
-                    throw err;
+                    res.json(false);
                 })
         })
         .catch(err => {

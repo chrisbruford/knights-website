@@ -8,6 +8,10 @@ module.exports = function($http) {
         return $http.get(`/activate/${token}`).then(res=>res.data);
     }
 
+    this.requestActivation = function() {
+        return $http.get('/activate/new').then(res=>res.data);
+    }
+
     this.recoverPassword = function(user) {
         return $http.get(`/recover/${user.username}`).then(res=>res.data);
     }

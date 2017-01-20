@@ -13,11 +13,11 @@
 
     <div class="top-bar-left">
         <ul class="vertical medium-horizontal menu">
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/')}"><a href="/#/">Home</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/contact')}"><a href="/#/contact">Contact</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/wings')}"><a href="/#/wings">Wings</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/roster')}"><a href="/#/roster">Roster</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/gallery')}"><a href="/#/gallery">Gallery</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/')}"><a href="/">Home</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/contact')}"><a href="/contact">Contact</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/wings')}"><a href="/wings">Wings</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/roster')}"><a href="/roster">Roster</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/gallery')}"><a href="/gallery">Gallery</a></li>
             <li class="hide-for-medium-up"><hr></li>
         </ul>
     </div>
@@ -27,12 +27,12 @@
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
             <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3" ng-class="{selected: NavigationCtrl.isActive('/admin')}">
-                <a href="/#/admin">Admin</a></li>
+                <a href="/admin">Admin</a></li>
             <li class="menu-item" ng-show="NavigationCtrl.user" ng-class="{selected: NavigationCtrl.isActive('/account') || NavigationCtrl.isActive('/resetpassword')}">
                 <a>Account</a>
                 <ul class="menu">
-                    <li><a href="/#/account">Profile</a></li>
-                    <li><a href="/#/resetpassword"  ng-class="NavigationCtrl.selectAccount">Change Password</a></li>
+                    <li><a href="/account">Profile</a></li>
+                    <li><a href="/changepassword"  ng-class="NavigationCtrl.selectAccount">Change Password</a></li>
                 </ul>
             </li>
             <li class="menu-item" ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>

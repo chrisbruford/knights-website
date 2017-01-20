@@ -11,7 +11,8 @@
         .run(['$document','$rootScope',function ($document,$rootScope) {
                 $($document).foundation();
         }])
-        .config(['$routeProvider',function($routeProvider){
+        .config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
+            
             $routeProvider.when('/',{
                 templateUrl: 'routes/home.html',
                 routePage: 'Home'
@@ -43,9 +44,16 @@
             .when('/activate/:token',{
                 templateUrl: 'routes/activate.html'
             })
-            .when('/resetpassword/:token?',{
+            .when('/changepassword/:token?',{
                 templateUrl: 'routes/resetpassword.html'
             })
+            .otherwise(({
+                redirectTo: '/'
+            }));
+
+
+            $locationProvider.html5Mode(true);
+
         }]);
 })();
 

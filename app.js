@@ -91,19 +91,25 @@ function requireHTTPS(req, res, next) {
 }
 
 //serve
-
 app.use('/', home);
-app.use('/register', register);
-app.use('/members', members);
-app.use('/login', login);
-app.use('/logout', logout);
-app.use('/authcheck', authcheck);
-app.use('/secure', secure);
-app.use('/activate', activate);
-app.use('/recover', recover);
-app.use('/resetpassword', resetPassword);
-app.use('/wing', wing);
+app.use('/api/register', register);
+app.use('/api/members', members);
+app.use('/api/login', login);
+app.use('/api/logout', logout);
+app.use('/api/authcheck', authcheck);
+app.use('/api/activate', activate);
+app.use('/api/recover', recover);
+app.use('/api/resetpassword', resetPassword);
+app.use('/api/wing', wing);
+
+//for Let's Encrypt
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
+
+//checks auth level before sending these
+app.use('/secure', secure);
+
+//catchall redirect for angular html5Mode
+app.use('/*',home);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
                     let token = user.setToken()
                         .then(token => {
                             let domain = process.env.domain || require('../secrets').domain;
-                            let url = `${domain}/#/activate/${token}`
+                            let url = `${domain}/activate/${token}`
 
                             let nodemailer = require('../modules/mailer');
 

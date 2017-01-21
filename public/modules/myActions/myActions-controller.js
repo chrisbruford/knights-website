@@ -9,7 +9,9 @@ module.exports = function ($scope, Upload, AuthService) {
             vm.file.upload = Upload.upload({
                 url: '/uploads/gallery',
                 method: 'POST',
-                file: vm.file
+                // title: 'yoyo',
+                data: { file: vm.file, title: vm.title }
+                // file: vm.file
             });
 
             vm.file.upload.then(function (response) {
@@ -18,7 +20,7 @@ module.exports = function ($scope, Upload, AuthService) {
                 });
             }, function (response) {
                 if (response.status > 0) { }
-                // $scope.errorMsg = response.status + ': ' + response.data;
+                vm.errorMsg = response.status + ': ' + response.data;
             }, function (evt) {
                 vm.file.progress = Math.min(100, parseInt(100.0 *
                     evt.loaded / evt.total));
@@ -27,8 +29,7 @@ module.exports = function ($scope, Upload, AuthService) {
     }
 
     vm.browseImage = function (file, errFiles) {
-        $scope.file = file;
         vm.file = file;
-        $scope.errFile = errFiles && errFiles[0];
+        vm.errFile = errFiles && errFiles[0];
     }
 }

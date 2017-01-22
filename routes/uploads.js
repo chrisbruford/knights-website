@@ -27,7 +27,7 @@ router.get('/gallery', (req, res) => {
 
 router.post('/gallery', (req, res) => {
     //multers disk storage settings
-    let home = './public/assets/'
+    let home = './public/'
     let folder = 'images/gallery/';
     let filename = '';
 

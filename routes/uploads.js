@@ -62,8 +62,6 @@ router.post('/gallery', (req, res) => {
         }
         else {
             response = { fileCreated: true };
-            console.log(req.file);
-            console.log(req.body);
 
             let title = req.body.title;
 

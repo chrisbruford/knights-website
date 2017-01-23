@@ -9,15 +9,16 @@ module.exports = function ($scope, Upload, AuthService) {
             vm.file.upload = Upload.upload({
                 url: '/uploads/gallery',
                 method: 'POST',
-                // title: 'yoyo',
                 data: { file: vm.file, title: vm.title }
-                // file: vm.file
             });
 
             vm.file.upload.then(function (response) {
-                $timeout(function () {
-                    vm.file.result = response.data;
-                });
+                // $timeout(function () {
+                //     vm.file.result = response.data;
+                // });
+                vm.file = null;
+                vm.title = "";
+                vm.image = null;
             }, function (response) {
                 if (response.status > 0) { }
                 vm.errorMsg = response.status + ': ' + response.data;

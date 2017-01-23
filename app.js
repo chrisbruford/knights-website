@@ -137,4 +137,8 @@ app.use(function (err, req, res, next) {
   res.send(err.message);
 });
 
+//Discord bot
+console.log('firing up kokbot');
+require('./modules/kok-bot');
+
 module.exports = app;

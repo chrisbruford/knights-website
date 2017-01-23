@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "libsass.vcxproj",
+      "type": "msbuild",
+      "request": "launch",
+      "project": "node_modules\\node-sass\\src\\libsass\\win\\libsass.vcxproj",
+      "configurations": [
+        {
+          "name": "default",
+          "args": []
+        },
+        {
+          "name": "Debug|Win32",
+          "output": "node_modules\\node-sass\\src\\libsass\\win\\bin\\Debug\\libsass.dll"
+        },
+        {
+          "name": "Debug|x64",
+          "output": "node_modules\\node-sass\\src\\libsass\\win\\bin\\Debug\\libsass.dll"
+        },
+        {
+          "name": "Release|Win32",
+          "output": "node_modules\\node-sass\\src\\libsass\\win\\bin\\libsass.dll"
+        },
+        {
+          "name": "Release|x64",
+          "output": "node_modules\\node-sass\\src\\libsass\\win\\bin\\libsass.dll"
+        }
+      ]
+    }
+  ]
+}

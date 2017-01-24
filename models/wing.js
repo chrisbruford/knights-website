@@ -1,6 +1,6 @@
 "use strict";
 
-let mongoose = require('../db')
+let mongoose = require('../db');
 
 let wings = require('../public/modules/services/wings-service');
 let names = [];

@@ -139,6 +139,9 @@ app.use(function (err, req, res, next) {
 
 //Discord bot
 console.log('firing up kokbot');
-require('./modules/kok-bot');
+let kokBot = require('./modules/kok-bot');
+
+//local variables
+app.locals.guildID = "unknown";
 
 module.exports = app;

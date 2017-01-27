@@ -1,7 +1,6 @@
 "use strict";
 console.log('starting kokbot');
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = require('./modules/common/client');
 
 //initialise
 client.on("ready", () => {
@@ -21,4 +20,9 @@ client.login(require('../../secrets.js').discordToken)
 })
 
 //commands
-require('./modules/common/commands')(client);
+require('./modules/common/commands');
+
+//modules
+let register = require('./modules/register');
+
+module.exports.register = register;

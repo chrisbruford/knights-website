@@ -69,6 +69,28 @@ client.on("message", msg => {
             })
         }
 
+        else if (msg.content.startsWith("-addAdminRole")) {
+            reqAccess(msg.guild, msg.member, 3)
+            .then(() => {
+                roles.addAdminRole(msg);
+            })
+            .catch(err => {
+                console.log(err);
+                msg.channel.sendMessage("Um....sorry couldn't do that");
+            })
+        }
+
+        else if (msg.content.startsWith("-removeAdminRole")) {
+            reqAccess(msg.guild, msg.member, 3)
+            .then(() => {
+                roles.removeAdminRole(msg);
+            })
+            .catch(err => {
+                console.log(err);
+                msg.channel.sendMessage("Um....sorry couldn't do that");
+            })
+        }
+
         //----------------------------------moderator commands :: LEVEL 2----------------------------------//
         else if (msg.content.startsWith("-listRoles")) {
             reqAccess(msg.guild, msg.member, 2).then(() => {
@@ -136,38 +158,32 @@ function reqAccess(guild, member, reqLevel) {
         //would give them sufficient access. Otherwise it skips that check.
         //as soon as they have sufficient access it skips all future checks.
         if (userRoles) {
-            guildModel.find({ guildID })
+            guildModel.findOne({ guildID })
                 .then(guildDoc => {
                     if (guildDoc) {
                         let memberRoles = guildDoc.memberRoles;
                         let moderatorRoles = guildDoc.moderatorRoles;
                         let adminRoles = guildDoc.adminRoles;
 
-                        if (memberRoles && reqLevel < 1) {
+                        if (memberRoles && reqLevel <= 1) {
                             bool = memberRoles.some(memberRole => {
-                                return memberRoles.some(memberRole => {
-                                    return memberRole === memberRole;
-                                });
+                                return userRoles.get(memberRole);
                             });
                         }
 
-                        if (!bool && moderatorRoles && reqLevel < 2) {
+                        if (!bool && moderatorRoles && reqLevel <= 2) {
                             bool = moderatorRoles.some(moderatorRole => {
-                                return moderatorRoles.some(moderatorRole => {
-                                    return moderatorRole === moderatorRole;
-                                });
+                                return userRoles.get(moderatorRole);
                             });
                         }
 
-                        if (!bool && adminRoles && reqLevel < 3) {
+                        if (!bool && adminRoles && reqLevel <= 3) {
                             bool = adminRoles.some(adminRole => {
-                                return adminRoles.some(adminRole => {
-                                    return adminRole === adminRole;
-                                });
+                                return userRoles.get(adminRole);
                             });
                         }
 
-                        if (!bool && reqLevel < 4) {
+                        if (!bool && reqLevel <= 4) {
                             bool = guild.owner.id === member.id;
                         }
                         bool ? resolve(true) : reject(false);

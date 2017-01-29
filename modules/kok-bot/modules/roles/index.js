@@ -1,2 +1,2 @@
 "use strict";
-module.exports = require('./roles');
+module.exports.listRoles = require('./listRoles');

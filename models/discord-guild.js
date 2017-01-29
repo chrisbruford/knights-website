@@ -5,19 +5,22 @@ let Schema = mongoose.Schema;
 
 let guild = new Schema({
     guildID: {
-        type: Number,
+        type: String,
         unique: true
     },
     adminChannelID: {
-        type: Number,
+        type: String,
         unique: true
     },
     logChannelID: {
-        type: Number,
+        type: String,
         unique: true
     },
-    ignoreUsers: [Number],
-    ignoreChannels: [Number]
+    ignoreUsers: [String],
+    ignoreChannels: [String],
+    adminRoles: [String],
+    moderatorRoles: [String],
+    memberRoles: [String]
 });
 
 let model = mongoose.model('discordGuild',guild);

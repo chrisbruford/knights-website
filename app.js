@@ -142,6 +142,6 @@ console.log('firing up kokbot');
 let kokBot = require('./modules/kok-bot');
 
 //local variables
-app.locals.guildID = "unknown";
+app.locals.guildID = "272391171416784897";
 
 module.exports = app;

@@ -8,8 +8,9 @@ let Schema = mongoose.Schema;
 let discordWing = new Schema({
     wing: wing,
     roleID: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        unique: true
     }
 });
 

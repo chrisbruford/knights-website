@@ -138,7 +138,6 @@ app.use(function (err, req, res, next) {
 });
 
 //Discord bot
-console.log('firing up kokbot');
 let kokBot = require('./modules/kok-bot');
 
 //local variables

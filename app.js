@@ -79,6 +79,8 @@ passport.use(new DiscordStrategy({
   clientID: process.env.discordClientID || require('./secrets').discord.clientID,
   clientSecret: process.env.discordClientSecret || require('./secrets').discord.clientSecret,
   callbackURL: process.env.discordCallback || require('./secrets').discord.callback,
+  resave: true,
+  saveUninitialized: true,
   scope
 },
   function (accessToken, refreshToken, profile, done) {

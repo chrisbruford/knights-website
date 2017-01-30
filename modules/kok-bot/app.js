@@ -11,7 +11,7 @@ client.on("error", err => {
     console.log('kokbot error:', err)
 })
 
-client.login(require('../../secrets.js').discordToken)
+client.login(require('../../secrets.js').discord.token)
 .then(token => {
     console.log('bot logged in okay');
 })

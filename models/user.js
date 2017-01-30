@@ -71,7 +71,7 @@ module.exports = new Promise((resolve, reject) => {
             required: true
         },
         wings: [wing],
-        default: []
+        discordID: String
     });
 
     User.methods.setToken = function () {

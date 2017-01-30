@@ -8,6 +8,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('./db');
 let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
+let DiscordStrategy = require('passport-discord').Strategy;
 let session = require('express-session');
 let helmet = require('helmet');
 let MongoStore = require('connect-mongo')(session);
@@ -24,16 +25,17 @@ let activate = require('./routes/activate');
 let recover = require('./routes/recover');
 let resetPassword = require('./routes/resetPassword');
 let wing = require('./routes/wing');
+let discordAuth = require('./routes/discord-auth')
 
 let app = express();
 
 //security headers
 
 app.use(helmet({
-    hsts: {
-      force: true,
-      maxAge: 300
-    }
+  hsts: {
+    force: true,
+    maxAge: 300
+  }
 }))
 
 app.use(requireHTTPS);
@@ -52,10 +54,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //mongo session store
 
-let store = new MongoStore({mongooseConnection: mongoose.connection});
+let store = new MongoStore({ mongooseConnection: mongoose.connection });
 
 app.use(session({
-  store: new MongoStore({mongooseConnection: mongoose.connection}),
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.db_uname || require('./secrets').cookieSecret
 }))
 
@@ -70,6 +72,19 @@ require('./models/user').then(User => {
   passport.deserializeUser(User.deserializeUser());
 });
 
+//discord passport config
+let scope = ['identify'];
+
+passport.use(new DiscordStrategy({
+  clientID: require('./secrets.js').discord.clientID,
+  clientSecret: require('./secrets.js').discord.clientSecret,
+  callbackURL: require('./secrets.js').discord.callback,
+  scope
+},
+  function (accessToken, refreshToken, profile, done) {
+    done(null, profile);
+  }
+))
 
 //allow CORS requests
 app.use(function (req, res, next) {
@@ -101,6 +116,7 @@ app.use('/api/activate', activate);
 app.use('/api/recover', recover);
 app.use('/api/resetpassword', resetPassword);
 app.use('/api/wing', wing);
+app.use('/discord', discordAuth);
 
 //for Let's Encrypt
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
@@ -109,7 +125,7 @@ app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 app.use('/secure', secure);
 
 //catchall redirect for angular html5Mode
-app.use('/*',home);
+app.use('/*', home);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

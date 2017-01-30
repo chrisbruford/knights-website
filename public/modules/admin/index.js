@@ -1,4 +1,4 @@
 "use strict";
 angular.module('kokApp')
-.controller('AdminCtrl',['DataService','$scope',require('./admin-controller')])
+.controller('AdminCtrl',['DataService','continents','gameRoles','platforms','UserService','AuthService',require('./admin-controller')])
 .directive('kokAdmin',[require('./admin-directive')]);

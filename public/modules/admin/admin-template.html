@@ -28,11 +28,43 @@
                 <td>{{user.shipName}}</td>
                 <td>{{user.bio}}</td>
             </tr>
-            <tr>
-                <td colspan="9">
-                    <kok-account user="AdminCtrl.userToEdit"></kok-account>
-                </td>
-            </tr>
         </tbody>
     </table>
+
+    <form name="accountForm">
+        <label for="username">CMDR Name</label>
+        <input type="text" name="username" id="username" ng-model="AdminCtrl.userToEdit.username" disabled>
+
+        <label for="level">Access level</label>
+        <input type="number" name="level" id="level" ng-model="AdminCtrl.userToEdit.level" max="{{AdminCtrl.AdminCtrl.userToEdit.level}}" min=0>
+
+        <label for="continent">Continent</label>
+        <select name="continent" id="continent" ng-options="continent for continent in AdminCtrl.continents" ng-model="AdminCtrl.userToEdit.continent"></select>
+
+        <label for="game-role">Favourite game role</label>
+        <select name="game-role" id="game-role" ng-options="gameRole for gameRole in AdminCtrl.gameRoles" ng-model="AdminCtrl.userToEdit.gameRole"></select>
+
+        <label for="platform">Platform</label>
+        <select name="platform" id="platform" ng-options="platform for platform in AdminCtrl.platforms" ng-model="AdminCtrl.userToEdit.platform"></select>
+
+        <label for="ship-name">Ship name</label>
+        <input type="text" id="ship-name" name="ship-name" ng-model="AdminCtrl.userToEdit.shipName" ng-maxlength="50">
+        <p class="help-text">Max 50 characters [{{50-AdminCtrl.userToEdit.shipName.length}} remaining]</p>
+        <div ng-messages="accountForm['ship-name'].$error" ng-show="accountForm.$submitted || accountForm['ship-name'].$dirty">
+            <span class="form-error" ng-message="maxlength">Please limit to 50 characters</span>
+        </div>
+
+        <label for="bio">Back-story</label>
+        <textarea name="bio" id="bio" ng-model="AdminCtrl.userToEdit.bio" ng-maxlength="1000"></textarea>
+        <p class="help-text">Max 1,000 characters [{{1000-AdminCtrl.userToEdit.bio.length}} remaining]</p>
+        <div ng-messages="accountForm.bio.$error" ng-show="accountForm.$submitted || accountForm.bio.$dirty">
+            <span class="form-error" ng-message="maxlength">Please limit to 1,000 characters</span>
+        </div>
+
+        <div>
+            <button class="button" ng-click="AdminCtrl.updateUser(user)">Update</button>
+            <kok-ajax-loader state="AdminCtrl.submitState"></kok-ajax-loader>
+        </div>
+
+    </form>
 </div>

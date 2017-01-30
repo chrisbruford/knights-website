@@ -76,9 +76,9 @@ require('./models/user').then(User => {
 let scope = ['identify'];
 
 passport.use(new DiscordStrategy({
-  clientID: require('./secrets.js').discord.clientID,
-  clientSecret: require('./secrets.js').discord.clientSecret,
-  callbackURL: require('./secrets.js').discord.callback,
+  clientID: process.env.discordClientID || require('./secrets.js').discord.clientID,
+  clientSecret: process.env.discordClientSecret || require('./secrets.js').discord.clientSecret,
+  callbackURL: process.env.discordCallback ||require('./secrets.js').discord.callback,
   scope
 },
   function (accessToken, refreshToken, profile, done) {

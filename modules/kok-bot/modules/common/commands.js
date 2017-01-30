@@ -212,6 +212,9 @@ function reqAccess(guild, member, reqLevel) {
                         }
 
                         if (!bool && reqLevel <= 4) {
+                            console.log(`guild.owner.id: ${guild.owner.id}`);
+                            console.log(`reqLevel: ${reqLevel}`);
+                            console.log(`member.id: ${member.id}`);
                             bool = guild.owner.id === member.id;
                         }
                         bool ? resolve(true) : reject(false);

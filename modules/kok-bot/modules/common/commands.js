@@ -222,15 +222,17 @@ function reqAccess(guild, member, reqLevel) {
                             console.log(`member.id: ${member.id}`);
                             bool = guild.owner.id === member.id;
                         }
-                        bool ? resolve(true) : reject(false);
+                        bool ? resolve(true) : reject(new Error("Insufficient access"));
 
+                    } else if (bool = guild.owner.id === member.id) {
+                        resolve(bool)
                     } else {
-                        reject(false)
+                        reject(new Error("Guild record not found and not an owner"))
                     }
                 })
                 .catch(err => console.log(err));
         } else {
-            reject(false);
+            reject(new Error("User has no roles"));
         }
     })
 }

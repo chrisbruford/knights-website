@@ -56,7 +56,8 @@ router.post('/', (req, res) => {
 
                             res.json(user);
                             let kokBot = require('../modules/kok-bot');
-                            kokBot.register.announce(req.app.locals.guildID,user.username);
+                            let guildID = process.env.guildID || require('../../secrets').discord.guildID;
+                            kokBot.register.announce(guildID,user.username);
                         })
                         .catch(err=>{
                             console.log('token error',err);

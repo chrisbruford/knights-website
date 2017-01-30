@@ -15,7 +15,4 @@ module.exports = function(DataService,wings) {
             title: wing.alt
         }
     });
-
-    console.dir(vm.wingPics);
-
 }

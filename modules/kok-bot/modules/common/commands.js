@@ -177,6 +177,11 @@ function reqAccess(guild, member, reqLevel) {
 
     return new Promise((resolve, reject) => {
 
+        console.log('runnig reqAccess');
+        console.log(guild);
+        console.log(member);
+        console.log(reqLevel);
+
         let bool = false;
         let guildID = guild.id;
         let userRoles = member.roles;

@@ -58,7 +58,7 @@ let store = new MongoStore({ mongooseConnection: mongoose.connection });
 
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  secret: process.env.db_uname || require('./secrets').cookieSecret
+  secret: process.env.cookieSecret || require('./secrets').cookieSecret
 }))
 
 app.use(passport.initialize());

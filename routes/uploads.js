@@ -64,6 +64,7 @@ router.post('/gallery', (req, res) => {
             response = { fileCreated: true };
 
             let title = req.body.title;
+            console.log(title);
 
             sharp(home + imageLocation)
                 .resize(500, 281)
@@ -72,11 +73,11 @@ router.post('/gallery', (req, res) => {
                     require('../models/gallery')
                         .then(Image => {
                             let newImage = new Image({
-                                src: imageLocation,
-                                thumb: thumbLocation,
+                                url: imageLocation,
+                                thumbUrl: thumbLocation,
                                 alt: title,
                                 title: title
-                            })
+                            });
 
                             newImage.save(function (err) {
                                 if (err) {
@@ -84,6 +85,7 @@ router.post('/gallery', (req, res) => {
                                         upload: response,
                                         error: err
                                     });
+                                    console.log(err);
                                 } else {
                                     res.send({
                                         upload: response,

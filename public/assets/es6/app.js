@@ -14,7 +14,7 @@
         .run(['$document', '$rootScope', function ($document, $rootScope) {
             $($document).foundation();
         }])
-        .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        .config(['$routeProvider', '$locationProvider', 'ngImageGalleryOptsProvider', function ($routeProvider, $locationProvider, ngImageGalleryOptsProvider) {
             $routeProvider
                 .when('/', {
                     templateUrl: 'routes/home.html',
@@ -58,7 +58,16 @@
                     templateUrl: 'routes/resetpassword.html'
                 });
             $locationProvider.hashPrefix('');
-            $locationProvider.html5Mode(true);
+            // $locationProvider.html5Mode(true);
+
+            ngImageGalleryOptsProvider.setOpts({
+                thumbnails: true,
+                inline: false,
+                imgBubbles: false,
+                bgClose: true,
+                bubbles: true,
+                imgAnim: 'fadeup',
+            });
         }]);
 })();
 

@@ -1,7 +1,6 @@
 @import 'foundation-imports';
 @import 'foundation-icons';
 
-
 //typography
 h1,h2,h3,h4,h5,h6 {
   text-transform: uppercase;
@@ -280,3 +279,30 @@ form {
 }
 
 @import 'admin-page';
+
+//ng-image-gallery
+@import 'ng-image-gallery.min.css';
+
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
+  background-image: url(../images/image_gallery/icons/external-link.svg); 
+}
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .close:before {
+  background-image: url(../images/image_gallery/icons/close.svg); 
+}
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .prev {
+  left: 0px;
+  background-image: url(../images/image_gallery/icons/prev.svg); 
+}
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .next {
+  right: 0px;
+  background-image: url(../images/image_gallery/icons/next.svg); 
+}
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
+  background-image: url(../images/image_gallery/icons/external-link-inline.svg); 
+}
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .prev {
+  background-image: url(../images/image_gallery/icons/prev-inline.svg); 
+}
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .next {
+  background-image: url(../images/image_gallery/icons/next-inline.svg); 
+}

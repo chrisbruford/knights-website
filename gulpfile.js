@@ -72,7 +72,7 @@ gulp.task('browserSync', function () {
     })
 });
 
-gulp.task('nodemon',['browserSync'], function () {
+gulp.task('nodemon', ['browserSync'], function () {
     return nodemon({
         script: './bin/www',
         ext: 'js html',
@@ -95,16 +95,16 @@ gulp.task('nodemon',['browserSync'], function () {
 });
 
 gulp.task('test', function (done) {
-  new KarmaServer({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done).start();
+    new KarmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
 });
 
 gulp.task('watch', function () {
     gulp.watch('./public/assets/scss/**/*.scss', ['sass']);
-    gulp.watch('./public/assets/es6/**/*.js', ['browserify',browserSync.reload]);
-    gulp.watch('./public/modules/**/*.js', ['browserify',browserSync.reload]);
+    gulp.watch('./public/assets/es6/**/*.js', ['browserify', browserSync.reload]);
+    gulp.watch('./public/modules/**/*.js', ['browserify', browserSync.reload]);
     gulp.watch('./public/*.html', browserSync.reload);
     gulp.watch('./public/routes/*.html', browserSync.reload);
     gulp.watch('./public/modules/**/*.html', browserSync.reload);

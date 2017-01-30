@@ -8,11 +8,11 @@ module.exports = new Promise((resolve, reject) => {
             // let passportLocalMongoose = require('passport-local-mongoose');
 
             let Image = new Schema({
-                src: {
+                url: {
                     type: String,
                     required: true
                 },
-                thumb: {
+                thumbUrl: {
                     type: String,
                     required: true
                 },

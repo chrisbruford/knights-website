@@ -209,6 +209,14 @@ article#gallery-modal {
     width: auto;
 }
 
+.upload-image {
+    padding: 0;
+    min-height: 0;
+    &:first-child {
+        min-height: 0;
+    }
+}
+
 //footer
 .footer {
     color: $white;
@@ -305,4 +313,27 @@ form {
 
 .ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .next {
     background-image: url(../images/image_gallery/icons/next-inline.svg);
+}
+
+.ng-image-gallery .ng-image-gallery-thumbnails .thumb {
+    width: 180px;
+    height: 130px;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+}
+
+.ng-image-gallery {
+    margin: 0 50px;
+}
+
+.thumb:hover {
+    box-shadow: 0 0 6px 1px hsla(0, 0%, 100%, .5);
+    transition: box-shadow .2s ease-out;
+}
+
+.ng-image-gallery .ng-image-gallery-thumbnails .thumb:not(:last-child) {
+    margin-right: 15px;
+    margin-bottom: 15px;
 }

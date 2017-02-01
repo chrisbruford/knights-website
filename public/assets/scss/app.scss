@@ -1,4 +1,4 @@
-        @import 'foundation-imports';
+@import 'foundation-imports';
 @import 'foundation-icons';
 //typography
 h1,
@@ -35,17 +35,6 @@ a.button {
 .black a.button,
 .white a.button {
     color: $black;
-}
-
-//topbar
-.top-bar ul {
-    background-color: transparent;
-}
-
-.selected {
-    -moz-box-shadow: 0px -2px $white inset;
-    -webkit-box-shadow: 0px -2px $white inset;
-    box-shadow: 0px -2px $white inset;
 }
 
 @import 'nav-bar';
@@ -284,6 +273,7 @@ form {
         color: red;
     }
 }
+
 //ngCloak
 [ng\:cloak],
 [ng-cloak],
@@ -294,52 +284,62 @@ form {
     display: none !important;
 }
 
-    @import 'admin-page';
-    //ng-image-gallery
-    @import 'ng-image-gallery.min.css';
-    .ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
-        background-image: url(../images/image_gallery/icons/external-link.svg);
-    }
-    .ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .close:before {
-        background-image: url(../images/image_gallery/icons/close.svg);
-    }
-    .ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .prev {
-        left: 0px;
-        background-image: url(../images/image_gallery/icons/prev.svg);
-    }
-    .ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .next {
-        right: 0px;
-        background-image: url(../images/image_gallery/icons/next.svg);
-    }
-    .ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
-        background-image: url(../images/image_gallery/icons/external-link-inline.svg);
-    }
-    .ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .prev {
-        background-image: url(../images/image_gallery/icons/prev-inline.svg);
-    }
-    .ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .next {
-        background-image: url(../images/image_gallery/icons/next-inline.svg);
-    }
-    .ng-image-gallery .ng-image-gallery-thumbnails .thumb {
-        width: 180px;
-        height: 130px;
-        border-radius: 3px;
-        background-size: cover;
-        background-position: center center;
-        cursor: pointer;
-    }
-    .ng-image-gallery {
-        margin: 0 50px;
-    }
-    .thumb:hover {
-        box-shadow: 0 0 6px 1px hsla(0, 0%, 100%, .5);
-        transition: box-shadow .2s ease-out;
-    }
-    
-.ng-image-gallery .ng-image-gallery-thumbnails .thumb:not(:last-child) {
-        margin-right: 15px;
-        margin-bottom: 15px;
+@import 'admin-page';
+//ng-image-gallery
+@import 'ng-image-gallery.min.css';
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
+    background-image: url(../images/image_gallery/icons/external-link.svg);
 }
+
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .close:before {
+    background-image: url(../images/image_gallery/icons/close.svg);
+}
+
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .prev {
+    left: 0px;
+    background-image: url(../images/image_gallery/icons/prev.svg);
+}
+
+.ng-image-gallery .ng-image-gallery-modal .ng-image-gallery-content .next {
+    right: 0px;
+    background-image: url(../images/image_gallery/icons/next.svg);
+}
+
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .destroy-icons-container .ext-url:before {
+    background-image: url(../images/image_gallery/icons/external-link-inline.svg);
+}
+
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .prev {
+    background-image: url(../images/image_gallery/icons/prev-inline.svg);
+}
+
+.ng-image-gallery.inline .ng-image-gallery-modal .ng-image-gallery-content .next {
+    background-image: url(../images/image_gallery/icons/next-inline.svg);
+}
+
+.ng-image-gallery .ng-image-gallery-thumbnails .thumb {
+    width: 180px;
+    height: 130px;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+}
+
+.ng-image-gallery {
+    margin: 0 50px;
+}
+
+.thumb:hover {
+    box-shadow: 0 0 6px 1px hsla(0, 0%, 100%, .5);
+    transition: box-shadow .2s ease-out;
+}
+
+.ng-image-gallery .ng-image-gallery-thumbnails .thumb:not(:last-child) {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
 @keyframes spinner {
     25% {
         transform: rotate(90deg);
@@ -354,6 +354,7 @@ form {
         transform: rotate(360deg);
     }
 }
+
 .pointer {
     cursor: pointer;
 }

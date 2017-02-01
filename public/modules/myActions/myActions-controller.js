@@ -2,10 +2,13 @@
 
 module.exports = function ($scope, Upload, AuthService) {
     let vm = this;
-    vm.user = AuthService.user
+    vm.user = AuthService.user;
+
+    $scope.$on('authenticated', event => vm.user = AuthService.user);
+    $scope.$on('deauthenticated', event => vm.user = AuthService.user);
 
     vm.uploadImage = function () {
-        if (vm.file) {
+        if (vm.file && vm.user && vm.user.level >= 1) {
             vm.file.upload = Upload.upload({
                 url: '/api/uploads/gallery',
                 method: 'POST',

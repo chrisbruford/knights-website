@@ -9,7 +9,6 @@ module.exports = function (DataService, AuthService, $scope) {
 
     let data = DataService.getGallery();
     data.then(data => {
-        console.log(data);
         $scope.images = data;
     });
 }

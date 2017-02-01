@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 
                             res.json(user);
                             let kokBot = require('../modules/kok-bot');
-                            let guildID = process.env.guildID || require('../../secrets').discord.guildID;
+                            let guildID = process.env.guildID || require('../secrets').discord.guildID;
                             kokBot.register.announce(guildID,user.username);
                         })
                         .catch(err=>{

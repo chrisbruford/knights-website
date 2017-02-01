@@ -19,3 +19,4 @@ require('./activate');
 require('./common');
 require('./resetPassword');
 require('./myActions');
+require('./messageBar');

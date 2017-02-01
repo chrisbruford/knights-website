@@ -5,16 +5,15 @@ let passport = require('passport');
 
 router.post('/', passport.authenticate('local'), 
 function(req, res) {
-        res.json({
-                username: req.user.username,
-                continent: req.user.continent,
-                gameRole: req.user.gameRole,
-                level: req.user.level,
-                reasonToJoin: req.user.reasonToJoin,
-                platform: req.user.platform,
-                shipName: req.user.shipName,
-                _id: req.user._id
-        });
+        require('../models/user')
+        .then(userModel=>{
+                return userModel.findOne({username: req.user.username});
+        })
+        .then(user=>res.json(user))
+        .catch(err=>{
+                console.log(err);
+                res.json(null);
+        })
 });
 
 

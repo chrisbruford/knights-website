@@ -1,36 +1,44 @@
-<form name="accountForm">
-    <label for="username">CMDR Name</label>
-    <input type="text" name="username" id="username" ng-model="user.username" disabled>
+<section>
+    <aside class="row align-middle" ng-show="!AccountCtrl.user.discordID">
+        <div class="small-12 columns">
+            Link to
+            <a href="discord/auth" target="_self">
+                <img src="/images/discord-logo.svg" alt="Discord Logo" width="150">
+            </a>
+        </div>
+    </aside>
 
-    <label for="level" ng-show="AccountCtrl.user.level >= 3">Access level</label>
-    <input type="number" name="level" id="level" ng-model="user.level" max="{{AccountCtrl.user.level}}" min=0 ng-show="AccountCtrl.user.level >= 3">
+    <form name="accountForm">
+        <label for="username">CMDR Name</label>
+        <input type="text" name="username" id="username" ng-model="AccountCtrl.user.username" disabled>
 
-    <label for="continent">Continent</label>
-    <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="user.continent"></select>
+        <label for="continent">Continent</label>
+        <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="AccountCtrl.user.continent"></select>
 
-    <label for="game-role">Favourite game role</label>
-    <select name="game-role" id="game-role" ng-options="gameRole for gameRole in AccountCtrl.gameRoles" ng-model="user.gameRole"></select>
+        <label for="game-role">Favourite game role</label>
+        <select name="game-role" id="game-role" ng-options="gameRole for gameRole in AccountCtrl.gameRoles" ng-model="AccountCtrl.user.gameRole"></select>
 
-    <label for="platform">Platform</label>
-    <select name="platform" id="platform" ng-options="platform for platform in AccountCtrl.platforms" ng-model="user.platform"></select>
+        <label for="platform">Platform</label>
+        <select name="platform" id="platform" ng-options="platform for platform in AccountCtrl.platforms" ng-model="AccountCtrl.user.platform"></select>
 
-    <label for="ship-name">Ship name</label>
-    <input type="text" id="ship-name" name="ship-name" ng-model="user.shipName" ng-maxlength="50">
-    <p class="help-text">Max 50 characters [{{50-user.shipName.length}} remaining]</p>
-    <div ng-messages="accountForm['ship-name'].$error" ng-show="accountForm.$submitted || accountForm['ship-name'].$dirty">
-        <span class="form-error" ng-message="maxlength">Please limit to 50 characters</span>
-    </div>
+        <label for="ship-name">Ship name</label>
+        <input type="text" id="ship-name" name="ship-name" ng-model="AccountCtrl.user.shipName" ng-maxlength="50">
+        <p class="help-text">Max 50 characters [{{50-AccountCtrl.user.shipName.length}} remaining]</p>
+        <div ng-messages="accountForm['ship-name'].$error" ng-show="accountForm.$submitted || accountForm['ship-name'].$dirty">
+            <span class="form-error" ng-message="maxlength">Please limit to 50 characters</span>
+        </div>
 
-    <label for="bio">Back-story</label>
-    <textarea name="bio" id="bio" ng-model="user.bio" ng-maxlength="1000"></textarea>
-    <p class="help-text">Max 1,000 characters [{{1000-user.bio.length}} remaining]</p>
-    <div ng-messages="accountForm.bio.$error" ng-show="accountForm.$submitted || accountForm.bio.$dirty">
-        <span class="form-error" ng-message="maxlength">Please limit to 1,000 characters</span>
-    </div>
+        <label for="bio">Back-story</label>
+        <textarea name="bio" id="bio" ng-model="AccountCtrl.user.bio" ng-maxlength="1000"></textarea>
+        <p class="help-text">Max 1,000 characters [{{1000-AccountCtrl.user.bio.length}} remaining]</p>
+        <div ng-messages="accountForm.bio.$error" ng-show="accountForm.$submitted || accountForm.bio.$dirty">
+            <span class="form-error" ng-message="maxlength">Please limit to 1,000 characters</span>
+        </div>
 
-    <div>
-        <button class="button" ng-click="AccountCtrl.updateUser(user)">Update</button>
-        <kok-ajax-loader state="AccountCtrl.submitState"></kok-ajax-loader>
-    </div>
+        <div>
+            <button class="button" ng-click="AccountCtrl.updateUser(AccountCtrl.user)">Update</button>
+            <kok-ajax-loader state="AccountCtrl.submitState"></kok-ajax-loader>
+        </div>
 
-</form>
+    </form>
+</section>

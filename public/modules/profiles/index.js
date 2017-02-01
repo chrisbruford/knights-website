@@ -1,4 +1,4 @@
 "use strict";
 angular.module('kokApp')
-    .controller('ProfilesCtrl',['DataService',require('./profiles-controller')])
+    .controller('ProfilesCtrl',['DataService','wings',require('./profiles-controller')])
     .directive('kokProfiles',[require('./profiles-directive')]);

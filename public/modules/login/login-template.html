@@ -1,4 +1,5 @@
 <section>
+    <!--headers-->
     <div ng-show="LoginCtrl.user">
         <h1>Hello.</h1>
         <p>Welcome back {{LoginCtrl.user.username}}</p>
@@ -8,6 +9,8 @@
         <p>An e-mail has been sent to the registered address. Please check your inbox for instructions.</p>
         <button class="button" ng-click="LoginCtrl.recoverySubmitted=false">Retry Login</button>
     </div>
+
+    <!--main login form-->
     <form ng-submit="loginForm.$valid && LoginCtrl.authenticate()" name="loginForm" ng-show="!LoginCtrl.authentication.success && !LoginCtrl.passwordRecovery && !LoginCtrl.recoverySubmitted">
         <h1>And you are?</h1>
         <p>Enter your login details below</p>
@@ -36,20 +39,23 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-                <div class="small-12 columns">
-                    <button type="submit" class="button" ng-disabled="loginForm.$invalid">Submit</button>
-                </div>
+        <div class="row align-middle">
+            <div class="shrink columns">
+                <button type="submit" class="button" ng-disabled="loginForm.$invalid">Submit</button>
             </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><a ng-click="LoginCtrl.passwordRecovery = true"><small>Forgot Password</small></a></p>
-                </div>
+            <div class="columns">
+                <kok-ajax-loader state="LoginCtrl.loginState"></kok-ajax-loader>
             </div>
-    </form>
-    
-    <!-- forgotten password form -->
+        </div>
 
+        <div class="row">
+            <div class="small-12 columns">
+                <p><a ng-click="LoginCtrl.passwordRecovery = true"><small>Forgot Password</small></a></p>
+            </div>
+        </div>
+    </form>
+
+    <!-- forgotten password form -->
     <form ng-submit="recoveryForm.$valid && LoginCtrl.recoverPassword()" name="recoveryForm" ng-show="!LoginCtrl.authentication.success && LoginCtrl.passwordRecovery">
         <h1>Oops!</h1>
         <p>To recover your password, please submit the below form</p>
@@ -65,15 +71,15 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
-                <div class="small-12 columns">
-                    <button type="submit" class="button" ng-disabled="recoveryForm.$invalid">Submit</button>
-                </div>
+            <div class="small-12 columns">
+                <button type="submit" class="button" ng-disabled="recoveryForm.$invalid">Submit</button>
             </div>
-            <div class="row">
-                <div class="small-12 columns">
-                    <p><a href="" ng-click="LoginCtrl.passwordRecovery=false"><small>Nevermind, remembered it now</small><a></p>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <p><a href="" ng-click="LoginCtrl.passwordRecovery=false"><small>Nevermind, remembered it now</small><a></p>
                 </div>
             </div>
     </form>

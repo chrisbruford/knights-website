@@ -5,18 +5,18 @@ let passport = require('passport');
 
 router.get('/', function (req, res) {
     if (req.user) {
-        res.json({
-            username: req.user.username,
-            continent: req.user.continent,
-            gameRole: req.user.gameRole,
-            level: req.user.level,
-            reasonToJoin: req.user.reasonToJoin,
-            _id: req.user._id,
-            platform: req.user.platform,
-            shipName: req.user.shipName
-        });
+        require('../models/user')
+        .then(User=>{
+            return User.findOne(req.user);
+        })
+        .then(user=>{
+            res.json(user);
+        })
+        .catch(err=>{
+            console.log(err);
+            res.json(null);
+        })
     }
-
     else {
         res.json(null);
     }

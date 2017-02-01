@@ -6,6 +6,28 @@
         <div class="small-12 medium-8 large-8 columns">
             <h3>{{wing.name}}<br><small>{{wing.role}}</small></h3>
             <p class="text-justify">{{wing.description}}</p>
+            
+            <!--join wing button-->
+            <div class="row align-middle" ng-show="WingsCtrl.user.level > 0 && WingsCtrl.wingsJoined.indexOf(wing.name) === -1">
+                <div class="shrink columns">
+                    <button class="button" ng-click="WingsCtrl.joinWing(wing)">Join Wing</button>
+                </div>
+                <div class="columns">
+                    <kok-ajax-loader state="WingsCtrl.joinStatus[wing.name]"></kok-ajax-loader>
+                </div>
+            </div>
+
+            <!--leave wing button-->
+            <div class="row align-middle" ng-show="WingsCtrl.user.level > 0 && WingsCtrl.wingsJoined.indexOf(wing.name) !== -1">
+                <div class="shrink columns">
+                    <button class="button" ng-click="WingsCtrl.leaveWing(wing)">Leave Wing</button>
+                </div>
+                <div class="columns">
+                    <kok-ajax-loader state="WingsCtrl.leaveStatus[wing.name]"></kok-ajax-loader>
+                </div>
+            </div>
+
         </div>
     </div>
+
 </div>

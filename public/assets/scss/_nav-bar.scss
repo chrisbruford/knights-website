@@ -1,0 +1,11 @@
+//general
+
+.top-bar > ul {
+  background-color: transparent;
+}
+
+.selected {
+  -moz-box-shadow: 0px -2px $white inset;
+  -webkit-box-shadow: 0px -2px $white inset;
+  box-shadow: 0px -2px $white inset;
+}

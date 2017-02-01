@@ -61,7 +61,7 @@ gulp.task('sass', function () {
         }));
 });
 
-gulp.task('browserSync', function () {
+gulp.task('browserSync',['nodemon'], function () {
 
     browserSync.init({
         port: 3876,
@@ -72,7 +72,8 @@ gulp.task('browserSync', function () {
     })
 });
 
-gulp.task('nodemon', ['browserSync'], function () {
+gulp.task('nodemon', function (cb) {
+    let called = false;
     return nodemon({
         script: './bin/www',
         ext: 'js html',
@@ -91,6 +92,8 @@ gulp.task('nodemon', ['browserSync'], function () {
             called = true;
             cb();
         }
+    }).on('restart',evt=>{
+        console.log('--------------------nodemon restarting--------------------')
     });
 });
 
@@ -123,5 +126,5 @@ gulp.task('cache:clear', function (callback) {
 });
 
 gulp.task('default', function () {
-    runSequence(['sass', 'browserify'], 'nodemon', 'watch', 'test');
+    runSequence(['sass', 'browserify'], 'browserSync', 'watch', 'test');
 });

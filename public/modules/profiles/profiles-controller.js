@@ -1,4 +1,4 @@
-module.exports = function(DataService) {
+module.exports = function(DataService,wings) {
     let vm = this;
     
     DataService.getMembers()
@@ -6,4 +6,13 @@ module.exports = function(DataService) {
         vm.members = data;
     });
 
+    vm.wingPics = {};
+
+    wings.forEach(wing=>{
+        vm.wingPics[wing.name] = {
+            src: wing.src,
+            alt: wing.alt,
+            title: wing.alt
+        }
+    });
 }

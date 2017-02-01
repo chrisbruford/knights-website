@@ -8,7 +8,7 @@
 		<h1>Sign-Up</h1>
 		<p>Please complete our 7-second form</p>
 		<hr>
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-cmdr-name">CMDR Name</label>
 			</div>
@@ -20,9 +20,9 @@
 					<span class="form-error" ng-message="cmdrName">That name is already taken</span>
 				</div>
 			</div>
-		</row>
+		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-email">E-mail Address</label>
 			</div>
@@ -34,9 +34,9 @@
 					<span class="form-error" ng-message="kokUniqueEmail">That email is already in use</span>
 				</div>
 			</div>
-		</row>
+		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-confirm-email">Confirm E-mail Address</label>
 			</div>
@@ -48,7 +48,7 @@
 					<span class="form-error" ng-message="kokEmail">Your e-mail addresses don't match</span>
 				</div>
 			</div>
-		</row>
+		</div>
 
 		<div class="row">
 			<div class="small-12 columns">
@@ -78,25 +78,25 @@
 			</div>
 		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-role">Favourite Game Role</label>
 			</div>
 			<div class="small-12 columns">
 				<select name="xi-role" id="xi-role" ng-options="gameRole for gameRole in signupCtrl.gameRoles" ng-model="signupCtrl.gameRole"></select>
 			</div>
-		</row>
+		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-platform">PC or XBOX?</label>
 			</div>
 			<div class="small-12 columns">
 				<select name="xi-platform" id="xi-platform" ng-options="platform for platform in signupCtrl.platforms" ng-model="signupCtrl.platform"></select>
 			</div>
-		</row>
+		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-platform">Continent</label>
 			</div>
@@ -104,9 +104,9 @@
 				<select name="xi-continent" id="xi-continent" ng-options="continent for continent in signupCtrl.continents | orderBy: 'toString()'"
 					ng-model="signupCtrl.continent"></select>
 			</div>
-		</row>
+		</div>
 
-		<row>
+		<div class="row">
 			<div class="small-12 columns">
 				<label for="xi-reason">Why are you interested in joining?</label>
 				<small>
@@ -124,13 +124,15 @@
 					<span class="form-error" ng-message="maxlength">Please limit your response to 1,000 characters</span>
 				</div>
 			</div>
-		</row>
+		</div>
 
-		<row>
-			<div class="small-12 columns">
+		<div class="row align-middle">
+			<div class="shrink columns">
 				<button type="submit" class="button" ng-disabled="signupForm.$invalid">Submit</button>
+			</div>
+			<div class="columns">
 				<kok-ajax-loader state="signupCtrl.registrationState"></kok-ajax-loader>
 			</div>
-		</row>
+		</div>
 	</form>
 </div>

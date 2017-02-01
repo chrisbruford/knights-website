@@ -4,7 +4,7 @@ module.exports = function ($http, $q, $rootScope) {
 
     AuthService.authCheck = function () {
         return $q((resolve, reject) => {
-            $http.get('/authcheck')
+            $http.get('/api/authcheck')
                 .then(res => {
                     let data = res.data;
                     if (data) {
@@ -33,7 +33,7 @@ module.exports = function ($http, $q, $rootScope) {
 
     AuthService.register = (newUser) => {
         return $q((resolve, reject) => {
-            $http.post('/register', newUser)
+            $http.post('/api/register', newUser)
                 .then(res => {
                     resolve(res.config.data);
                 }
@@ -44,12 +44,16 @@ module.exports = function ($http, $q, $rootScope) {
 
     AuthService.authenticate = function (user) {
         return $q((resolve, reject) => {
-            $http.post('/login', user)
+            $http.post('/api/login', user)
                 .then(res => {
                     let user = res.data
-                    AuthService.user = user;
-                    $rootScope.$broadcast('authenticated');
-                    resolve(user);
+                    if (user) {
+                        AuthService.user = user;
+                        $rootScope.$broadcast('authenticated');
+                        resolve(user);
+                    } else {
+                        reject('No user found');
+                    }
                 })
                 .catch(err => {
                     reject(err)
@@ -59,7 +63,7 @@ module.exports = function ($http, $q, $rootScope) {
 
     AuthService.logout = function (user) {
         return $q((resolve, reject) => {
-            $http.get('/logout')
+            $http.get('/api/logout')
                 .then(res => {
                     let loggedOut = res.data.loggedOut;
                     if (loggedOut) {

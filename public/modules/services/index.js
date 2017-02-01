@@ -12,5 +12,8 @@
     .constant("gameRoles",require("./game-roles-service"))
     .constant("platforms",require("./platforms-service"))
     .constant("continents",require("./continents-service"))
-    .constant("wings",require("./wings-service"));
-})(window.angular);
+    .constant("wings",require("./wings-service"))
+
+    //app values
+    .value("kokErrors",require("./errors"))
+;})(window.angular);

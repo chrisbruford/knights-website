@@ -18,47 +18,44 @@
             $routeProvider
                 .when('/', {
                     templateUrl: 'routes/home.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Home'
                 })
                 .when('/contact', {
                     templateUrl: 'routes/contact.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Contact'
                 })
                 .when('/roster', {
                     templateUrl: 'routes/roster.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Roster'
                 })
                 .when('/gallery', {
                     templateUrl: 'routes/gallery.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Gallery'
                 })
                 .when('/wings', {
                     templateUrl: 'routes/wings.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Wings'
                 })
                 .when('/account', {
                     templateUrl: 'routes/account.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Account'
                 })
                 .when('/admin', {
                     templateUrl: 'routes/admin.html',
-                    controller: 'RouteCtrl',
                     routePage: 'Admin'
                 })
                 .when('/activate/:token', {
                     templateUrl: 'routes/activate.html'
                 })
-                .when('/resetpassword/:token', {
+                .when('/changepassword/:token?', {
                     templateUrl: 'routes/resetpassword.html'
-                });
+                })
+                .otherwise(({
+                    redirectTo: '/'
+                }));
+
+            $locationProvider.html5Mode(true);
             $locationProvider.hashPrefix('');
-            // $locationProvider.html5Mode(true);
 
             ngImageGalleryOptsProvider.setOpts({
                 thumbnails: true,

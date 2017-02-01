@@ -7,22 +7,22 @@ module.exports = function($http,$q) {
     }
 
     this.getMembersByUsername = (username) => {
-        return $http.get(`/members/user/${username}`) 
+        return $http.get(`/api/members/user/${username}`) 
         .then(res => res.data);
     }
 
     this.getMembersByEmail = (email) => {
-        return $http.get(`/members/email/${email}`) 
+        return $http.get(`/api/members/email/${email}`) 
         .then(res => res.data);
     }
 
     this.getMembers = () => {
-        return $http.get(`/members/all`) 
+        return $http.get(`/api/members/all`) 
         .then(res => res.data);
     }
     
     this.getGallery = () => {
-        return $http.get('/uploads/gallery')
+        return $http.get('/api/uploads/gallery')
         .then(res => res.data);
     }
 }

@@ -1,17 +1,20 @@
 "use strict";
 console.log('starting kokbot');
 const client = require('./modules/common/client');
+let token = process.env.discordToken || require('../../secrets').discord.token;
+let kokGuildID = process.env.guildID || require('../../secrets').discord.guildID;
+var guild;
 
 //initialise
 client.on("ready", () => {
-    console.log("Bot is ready");
+    console.log('kokbot logged in');
+    guild = client.guilds.get(kokGuildID);
 });
 
 client.on("error", err => {
     console.log('kokbot error:', err)
 })
 
-let token = process.env.discordToken || require('../../secrets').discord.token
 client.login(token)
 .then(token => {
     console.log('bot logged in okay');
@@ -22,6 +25,20 @@ client.login(token)
 
 //commands
 require('./modules/common/commands');
+
+//event listeners
+const wings = require('./modules/wings')
+const wingController = require('../../controllers/wingController');
+
+wingController.on('joinWing',(evt)=>{
+    let member = guild.members.get(evt.user.discordID);
+    wings.joinWing(evt.wingName,member);
+})
+
+wingController.on('leaveWing',(evt)=>{
+    let member = guild.members.get(evt.user.discordID);
+    wings.leaveWing(evt.wingName,member);
+})
 
 //modules
 let register = require('./modules/register');

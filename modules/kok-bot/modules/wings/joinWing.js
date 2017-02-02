@@ -1,26 +1,27 @@
 "use strict";
 const discordWingModel = require('../../../../models/discord-wing');
 
-module.exports = (msg) => {
-    let msgSplit = msg.content.split(" ");
-    let wingName = msgSplit[1];
+module.exports = (wingName,member) => {
+    return new Promise((resolve, reject) => {
 
-    discordWingModel.findOne({"wing.name": wingName})
-    .then(wing=>{
-        if (wing) {
-            msg.member.addRole(wing.roleID)
-            .then(()=>msg.channel.sendMessage('Your wish, is my command!'))
-            .catch(err=>{
-                console.log(err);
-                msg.channel.sendMessage("Computer says no.");
+
+        discordWingModel.findOne({ "wing.name": wingName })
+            .then(wing => {
+                if (wing) {
+                    member.addRole(wing.roleID)
+                        .then(() => resolve(member))
+                        .catch(err => {
+                            console.log(err);
+                            reject(err);
+                        })
+
+                } else {
+                    reject(new Error('Wing not found'));
+                }
             })
-            
-        } else {
-            msg.channel.sendMessage('Wing not found');
-        }
-    })
-    .catch(err=>{
-        console.log(err);
-        msg.channel.sendMessage('Eeek! problems :(');
+            .catch(err => {
+                console.log(err);
+                reject(new Error(err));
+            })
     })
 }

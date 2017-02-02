@@ -77,7 +77,9 @@ client.on("message", msg => {
                         console.log(err);
                         msg.channel.sendMessage(responseDict.fail());
                     })
+                break;
 
+            
             case "-guildid":
                 reqAccess(msg.guild, msg.member, 3)
                     .then(() => {
@@ -85,99 +87,146 @@ client.on("message", msg => {
                     })
                     .catch(err => {
                         console.log(err);
-                        msg.channel.sendMessage("Um....sorry couldn't do that");
+                        msg.channel.sendMessage(responseDict.fail());
                     })
+                break;
 
-        }
+            case "-addadminrole":
+                reqAccess(msg.guild, msg.member, 3)
+                    .then(() => {
+                        let msgSplit = msg.content.split(" ");
+                        let adminRoleID = msgSplit[1];
+                        let thisGuild = msg.guild;
+                        return roles.addAdminRole(adminRoleID, thisGuild);
+                    })
+                    .then(() => msg.channel.sendMessage(responseDict.success()))
+                    .catch(err => {
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail());
+                    })
+                break;
 
-        if (msg.content.startsWith("-listChannels")) {
-            reqAccess(msg.guild, msg.member, 3)
-                .then(() => {
-                    channels.listChannels(msg)
-                })
-                .catch(err => {
+            case "-removeadminrole":
+                reqAccess(msg.guild, msg.member, 3)
+                    .then(() => {
+                        let msgSplit = msg.content.split(" ");
+                        let adminRoleID = msgSplit[1];
+                        let thisGuild = msg.guild;
+                        return roles.removeAdminRole(adminRoleID, thisGuild);
+                    })
+                    .then(() => msg.channel.sendMessage(responseDict.success()))
+                    .catch(err => {
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail());
+                    })
+                break;
+
+            case "-listadminroles":
+                reqAccess(msg.guild, msg.member, 3)
+                    .then(() => roles.listAdminRoles(msg.guild.id))
+                    .then(res => {
+                        if (res) {
+                            msg.channel.sendMessage(res)
+                                .catch(err => console.log(err));
+                        } else {
+                            msg.channel.sendMessage(responseDict.fail())
+                                .catch(err => console.log(err));
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail())
+                            .catch(err => console.log(err));
+                    })
+                break;
+
+
+            case "-listchannels":
+                reqAccess(msg.guild, msg.member, 3)
+                    .then(() => {
+                        channels.listChannels(msg)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail());
+                    })
+                break;
+
+            case "-addadminchannel":
+                reqAccess(msg.guild, msg.member, 3)
+                    .then(() => {
+                        channels.addAdminChannel(msg);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail());
+                    })
+                break;
+            case "-listroles":
+                reqAccess(msg.guild, msg.member, 2).then(() => {
+                    roles.listRoles(msg);
+                }).catch(err => {
                     console.log(err);
-                    msg.channel.sendMessage("Um....sorry couldn't do that");
+                    msg.channel.sendMessage(responseDict.fail());
                 })
-        }
 
-        else if (msg.content.startsWith("-addAdminChannel")) {
-            reqAccess(msg.guild, msg.member, 3)
-                .then(() => {
-                    channels.addAdminChannel(msg);
-                })
-                .catch(err => {
+                break;
+            
+            
+            //----------------------------------member commands :: LEVEL 1----------------------------------//
+            case "-joinwing":
+                reqAccess(msg.guild, msg.member, 1).then(() => {
+                    let msgSplit = msg.content.split(" ");
+                    let wingName = msgSplit[1];
+                    let member = msg.member;
+                    wings.joinWing(wingName,member)
+                    .then(wing=>msg.channel.sendMessage(responseDict.success()))
+                    .catch(err=>{
+                        console.log(err);
+                        msg.channel.sendMessage(responseDict.fail());
+                    })
+                }).catch(err => {
                     console.log(err);
-                    msg.channel.sendMessage("Um....sorry couldn't do that");
+                    msg.channel.sendMessage(responseDict.fail())
+                    .catch(err=>console.log(err));
                 })
-        }
+                //add wing to user on website
+                break;
 
-        else if (msg.content.startsWith("-addAdminRole")) {
-            reqAccess(msg.guild, msg.member, 3)
-                .then(() => {
-                    roles.addAdminRole(msg);
-                })
-                .catch(err => {
+            case "-leavewing":
+                reqAccess(msg.guild, msg.member, 1).then(() => {
+                    let msgSplit = msg.content.split(" ");
+                    let wingName = msgSplit[1];
+                    wings.leaveWing(wingName,msg.member)
+                    .then(wing=>msg.channel.sendMessage(responseDict.success()))
+                    .catch(err=>{
+                        console.log(err)
+                        msg.channel.sendMessage(responseDict.fail())
+                        .catch(err=>console.log(err))
+                    })
+                }).catch(err => {
                     console.log(err);
-                    msg.channel.sendMessage("Um....sorry couldn't do that");
+                    msg.channel.sendMessage(responseDict.fail())
+                    .catch(err=>console.log(err));
                 })
-        }
+                //remove wing from user on website
+                break;
 
-        else if (msg.content.startsWith("-removeAdminRole")) {
-            reqAccess(msg.guild, msg.member, 3)
-                .then(() => {
-                    roles.removeAdminRole(msg);
-                })
-                .catch(err => {
-                    console.log(err);
-                    msg.channel.sendMessage("Um....sorry couldn't do that");
-                })
-        }
-
-        //----------------------------------moderator commands :: LEVEL 2----------------------------------//
-        else if (msg.content.startsWith("-listRoles")) {
-            reqAccess(msg.guild, msg.member, 2).then(() => {
-                roles.listRoles(msg);
-            }).catch(err => {
-                console.log(err);
-                msg.channel.sendMessage("Um....sorry couldn't do that");
-            })
-
-        }
-
-        //----------------------------------member commands :: LEVEL 1----------------------------------//
-        else if (msg.content.startsWith("-joinWing")) {
-            reqAccess(msg.guild, msg.member, 1).then(() => {
-                wings.joinWing(msg);
-            }).catch(err => {
-                console.log(err);
-                msg.channel.sendMessage("Um....sorry couldn't do that");
-            })
-            //add wing to user on website
-        }
-
-        else if (msg.content.startsWith("-leaveWing")) {
-            reqAccess(msg.guild, msg.member, 1).then(() => {
-                wings.leaveWing(msg);
-            }).catch(err => {
-                console.log(err);
-                msg.channel.sendMessage("Um....sorry couldn't do that");
-            })
-            //remove wing from user on website
-        }
-
-        //----------------------------------everyone commands :: LEVEL 0----------------------------------//
-        else if (msg.content.startsWith("-hi")) {
-            msg.channel.sendMessage("Hello");
+            //----------------------------------everyone commands :: LEVEL 0----------------------------------//
+            case "-hi":
+                msg.channel.sendMessage("Hello")
+                .catch(err=>console.log(err));
+                break;
         }
     }
+    //----------------------------------moderator commands :: LEVEL 2----------------------------------//
+
 });
 
 function reqAccess(guild, member, reqLevel) {
 
     return new Promise((resolve, reject) => {
 
-        console.log('runnig reqAccess');
         console.log(guild);
         console.log(member);
         console.log(reqLevel);

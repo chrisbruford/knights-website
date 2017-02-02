@@ -12,7 +12,7 @@ module.exports = function ($scope, Upload, AuthService) {
             vm.file.upload = Upload.upload({
                 url: '/api/uploads/gallery',
                 method: 'POST',
-                data: { file: vm.file, title: vm.title }
+                data: { file: vm.file, title: vm.title, email: vm.user.email }
             });
 
             vm.file.upload.then(function (response) {

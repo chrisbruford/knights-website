@@ -41,7 +41,7 @@ client.on("message", msg => {
                         let thisGuild = msg.guild;
                         return wings.addWing(wingName, roleID, thisGuild);
                     })
-                    .then(msg.channel.sendMessage(responseDict.success()))
+                    .then(wing=>msg.channel.sendMessage(responseDict.success()))
                     .catch(err => {
                         console.log(err);
                         msg.channel.sendMessage(responseDict.fail());

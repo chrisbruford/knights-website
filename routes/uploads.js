@@ -7,9 +7,9 @@ let sharp = require('sharp');
 let fs = require('fs-extra');
 
 router.get('/gallery', (req, res) => {
-    require('../models/gallery')
-        .then(Image => {
-            Image.find({})
+    require('../models/gallery-image')
+        .then(galleryImage => {
+            galleryImage.find({})
                 .then(result => {
                     res.json(result);
                 })
@@ -64,19 +64,21 @@ router.post('/gallery', (req, res) => {
             response = { fileCreated: true };
 
             let title = req.body.title;
+            let email = req.body.email;
             console.log(title);
 
             sharp(home + imageLocation)
                 .resize(500, 281)
                 .toFile(home + thumbLocation)
                 .then(function (value) {
-                    require('../models/gallery')
-                        .then(Image => {
-                            let newImage = new Image({
+                    require('../models/gallery-image')
+                        .then(galleryImage => {
+                            let newImage = new galleryImage({
                                 url: imageLocation,
                                 thumbUrl: thumbLocation,
                                 alt: title,
-                                title: title
+                                title: title,
+                                email: email
                             });
 
                             newImage.save(function (err) {

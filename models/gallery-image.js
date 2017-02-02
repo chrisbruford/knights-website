@@ -6,7 +6,7 @@ module.exports = new Promise((resolve, reject) => {
     let Schema = mongoose.Schema;
     // let passportLocalMongoose = require('passport-local-mongoose');
 
-    let Image = new Schema({
+    let galleryImage = new Schema({
         url: {
             type: String,
             required: true
@@ -23,6 +23,10 @@ module.exports = new Promise((resolve, reject) => {
             type: String,
             required: true
         },
+        email: {
+            type: String,
+            required: true
+        },
         createdAt: {
             type: Date,
             default: Date.now,
@@ -30,7 +34,7 @@ module.exports = new Promise((resolve, reject) => {
         }
     });
 
-    let model = mongoose.model('Image', Image);
+    let model = mongoose.model('galleryImage', galleryImage);
 
     resolve(model);
 });

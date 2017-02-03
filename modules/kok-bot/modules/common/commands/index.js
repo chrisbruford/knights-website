@@ -10,6 +10,7 @@ const adminRoles = require("./adminRoles");
 const moderatorRoles = require("./moderatorRoles");
 const memberRoles = require("./memberRoles");
 const wings = require("./wings");
+const reqAccess = require("../reqAccess");
 
 client.on("message", msg => {
     //don't bother with anything if it didn't even starts with prefix

@@ -1,5 +1,5 @@
 "use strict";
 module.exports.listRoles = require('./listRoles');
-module.exports.addAdminRole = require('./addAdminRole');
-module.exports.removeAdminRole = require('./removeAdminRole');
-module.exports.listAdminRoles = require('./listAdminRoles');
+module.exports.admins = require('./admins');
+module.exports.moderators = require('./moderators');
+module.exports.members = require('./members');

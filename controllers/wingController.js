@@ -16,8 +16,12 @@ function WingController() {
                             $addToSet: { wings: { name: wingName } }
                         })
                         .then((user) => {
-                            this.emit('joinWing',{user,wingName});
-                            return resolve(user)
+                            if (user) {
+                                this.emit('joinWing',{user,wingName});
+                                return resolve(user);
+                            } else {
+                                return reject(new Error("No such user"));
+                            }
                         })
                         .catch(err => {
                             console.log(err);

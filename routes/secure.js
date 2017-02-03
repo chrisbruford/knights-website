@@ -20,17 +20,20 @@ router.get('/templates/:module/:file', (req, res) => {
                 if (user.level >= 3) {
                     res.sendFile(path.resolve(__dirname, `../public/modules/${module}/${file}`));
                 } else {
-                    res.sendStatus(401);
+                    // res.sendStatus(401);
+                    res.sendFile(path.resolve(__dirname, '../public/access-denied.html'));
                 }
                 break;
             case 'account':
                 res.sendFile(path.resolve(__dirname, `../public/modules/${module}/${file}`));
                 break;
             default:
-                res.sendStatus(401);
+                // res.sendStatus(401);
+                res.sendFile(path.resolve(__dirname, '../public/access-denied.html'));
         }
     } else {
-        res.sendStatus(401);
+        // res.sendStatus(401);
+        res.sendFile(path.resolve(__dirname, '../public/access-denied.html'));
     }
 
 

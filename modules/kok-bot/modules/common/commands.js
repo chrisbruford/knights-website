@@ -8,6 +8,8 @@ const roles = require('../roles');
 const channels = require('../channels');
 const wings = require('../wings');
 
+const wingController = require('../../../../controllers/wingController');
+
 let guildModel = require('../../../../models/discord-guild');
 
 client.on("message", msg => {
@@ -174,12 +176,16 @@ client.on("message", msg => {
             
             
             //----------------------------------member commands :: LEVEL 1----------------------------------//
+            //joinwing will call the two methods required ()
             case "-joinwing":
                 reqAccess(msg.guild, msg.member, 1).then(() => {
                     let msgSplit = msg.content.split(" ");
                     let wingName = msgSplit[1];
                     let member = msg.member;
-                    wings.joinWing(wingName,member)
+                    Promise.all([
+                        wings.joinWing(wingName,member),
+                        wingController.joinWing({discordID: member.id},wingName)
+                    ])
                     .then(wing=>msg.channel.sendMessage(responseDict.success()))
                     .catch(err=>{
                         console.log(err);
@@ -197,7 +203,11 @@ client.on("message", msg => {
                 reqAccess(msg.guild, msg.member, 1).then(() => {
                     let msgSplit = msg.content.split(" ");
                     let wingName = msgSplit[1];
-                    wings.leaveWing(wingName,msg.member)
+                    let member = msg.member;
+                    Promise.all([
+                        wings.leaveWing(wingName,msg.member),
+                        wingController.leaveWing({discordID: member.id},wingName)
+                    ])
                     .then(wing=>msg.channel.sendMessage(responseDict.success()))
                     .catch(err=>{
                         console.log(err)

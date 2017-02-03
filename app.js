@@ -111,7 +111,7 @@ function requireHTTPS(req, res, next) {
 //serve
 app.use('/', home);
 app.use('/secure', secure);
-app.use('/api/uploads', uploads);
+// app.use('/api/uploads', uploads);
 app.use('/api/register', register);
 app.use('/api/members', members);
 app.use('/api/login', login);

@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 let passport = require('passport');
 let multer = require('multer');
-let sharp = require('sharp');
+let jimp = require('jimp');
 let fs = require('fs-extra');
 
 router.get('/gallery', (req, res) => {
@@ -67,35 +67,36 @@ router.post('/gallery', (req, res) => {
             let email = req.body.email;
             console.log(title);
 
-            sharp(home + imageLocation)
-                .resize(500, 281)
-                .toFile(home + thumbLocation)
-                .then(function (value) {
-                    require('../models/gallery-image')
-                        .then(galleryImage => {
-                            let newImage = new galleryImage({
-                                url: imageLocation,
-                                thumbUrl: thumbLocation,
-                                alt: title,
-                                title: title,
-                                email: email
-                            });
+            jimp.read(home + imageLocation)
+                .then(image => {
+                    image.resize(500, 281)
+                        .write((home + thumbLocation), function () {
+                            require('../models/gallery-image')
+                                .then(galleryImage => {
+                                    let newImage = new galleryImage({
+                                        url: imageLocation,
+                                        thumbUrl: thumbLocation,
+                                        alt: title,
+                                        title: title,
+                                        email: email
+                                    });
 
-                            newImage.save(function (err) {
-                                if (err) {
-                                    res.send({
-                                        upload: response,
-                                        error: err
-                                    });
-                                    console.log(err);
-                                } else {
-                                    res.send({
-                                        upload: response,
-                                        success: newImage
-                                    });
-                                }
-                            })
-                        });
+                                    newImage.save(function (err) {
+                                        if (err) {
+                                            res.send({
+                                                upload: response,
+                                                error: err
+                                            });
+                                            console.log(err);
+                                        } else {
+                                            res.send({
+                                                upload: response,
+                                                success: newImage
+                                            });
+                                        }
+                                    })
+                                })
+                        })
                 }).catch(function (err) {
                     console.log(err);
                 });

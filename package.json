@@ -7,10 +7,10 @@
     "gulp": "gulp"
   },
   "dependencies": {
-    "angular": "^1.5.8",
+    "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
-    "angular-messages": "^1.5.8",
-    "angular-route": "^1.5.8",
+    "angular-messages": "^1.6.1",
+    "angular-route": "^1.6.1",
     "async": "^2.1.2",
     "bluebird": "^3.4.6",
     "body-parser": "~1.15.1",

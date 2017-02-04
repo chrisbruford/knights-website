@@ -5,7 +5,8 @@ require('./signup');
 require('./services');
 require('./discord');
 require('./profiles');
-// require('./gallery');
+require('./gallery');
+require('./galleryDash');
 require('./wings');
 require('./navigation');
 require('./footer')

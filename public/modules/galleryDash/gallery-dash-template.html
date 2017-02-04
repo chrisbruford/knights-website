@@ -1,0 +1,8 @@
+<div class="white">
+    <h1>hohohoho</h1>
+    <div class="row small-up-2 medium-up-4 large-up-8">
+        <div class="columns" ng-repeat="image in GalleryDashCtrl.images">
+            <img class="{GalleryDashCtrl.selectState}" ng-src="{{image.thumbUrl}}" ng-click="GalleryDashCtrl.imageSelDes(image._id)">
+        </div>
+    </div>
+</div>

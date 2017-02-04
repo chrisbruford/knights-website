@@ -64,6 +64,27 @@ function WingController() {
             })
         })
     }
+
+    this.listMembers = (wingName) => {
+        return new Promise((resolve, reject) => {
+            require('../models/user')
+            .then(userModel=>{
+                userModel.find({"wings.name": {$eq: wingName}},{username: 1})
+                .then(users=>{
+                    console.log(users);
+                    resolve(users);
+                })
+                .catch(err=>{
+                    console.log(err);
+                    reject(err);
+                })
+            })
+            .catch(err=>{
+                console.log(err);
+                reject(err);
+            })
+        })
+    }
 }
 
 util.inherits(WingController,eventEmitter);

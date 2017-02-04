@@ -106,4 +106,32 @@ function Wings() {
                 .catch(err => console.log(err));
         })
     }
+
+    this.members = (msg, msgSplit) => {
+
+        reqAccess(msg.guild, msg.member, 2).then(() => {
+
+            let wingName = msgSplit[2];
+            let member = msg.member;
+
+            wingController.listMembers(wingName)
+                .then(users => {
+                    if (users.length) {
+                        let message = "```\n" + wingName + "\n----------\n";
+                        users.forEach(user=>{
+                            message += `${user.username} \n`;
+                        })
+                        message += "```"
+                        msg.channel.sendMessage(message);
+                    } else {
+                        msg.channel.sendMessage("No users in that wing I'm afraid!");
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    msg.channel.sendMessage(responseDict.fail());
+                })
+        })
+    }
+
 }

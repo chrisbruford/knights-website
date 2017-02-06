@@ -340,21 +340,8 @@ form {
     margin-bottom: 15px;
 }
 
-@keyframes spinner {
-    25% {
-        transform: rotate(90deg);
-    }
-    50% {
-        transform: rotate(180deg);
-    }
-    75% {
-        transform: rotate(270deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.pointer {
-    cursor: pointer;
+//GalleryDash
+.imgselected {
+    box-shadow: 0 0 6px 3px hsl(240, 100%, 40%);
+    transition: box-shadow .2s ease-out;
 }

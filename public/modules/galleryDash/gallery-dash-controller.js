@@ -15,6 +15,11 @@ module.exports = function (DataService, AuthService, $scope) {
         vm.images = data;
     });
 
+    vm.isSelected = imageId => {
+        console.log('Triggered' + imageId);
+        return (vm.selected.indexOf(imageId) > -1)
+    }
+
     vm.imageSelDes = imageId => {
         console.log(imageId);
         if (vm.selected.indexOf(imageId) < 0) {

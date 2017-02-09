@@ -345,3 +345,16 @@ form {
     box-shadow: 0 0 6px 3px hsl(240, 100%, 40%);
     transition: box-shadow .2s ease-out;
 }
+
+.dashboard a.button {
+    color: $black;
+}
+
+.dashboard {
+    background-color: $white;
+    color: $black;
+    padding: 4em 0;
+    a {
+        color: $anchor-alt-color;
+    }
+}

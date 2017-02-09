@@ -6,6 +6,8 @@ let multer = require('multer');
 let jimp = require('jimp');
 let fs = require('fs-extra');
 
+let home = './public/'
+
 router.get('/gallery', (req, res) => {
     require('../models/gallery-image')
         .then(galleryImage => {
@@ -27,7 +29,6 @@ router.get('/gallery', (req, res) => {
 
 router.post('/gallery', (req, res) => {
     //multers disk storage settings
-    let home = './public/'
     let folder = 'images/gallery/';
     let filename = '';
 
@@ -104,5 +105,22 @@ router.post('/gallery', (req, res) => {
     })
 
 });
+
+router.delete('/gallery/del/:imageid', (req, res) => {
+    require('../models/gallery-image')
+        .then(galleryImage => {
+            galleryImage.findByIdAndRemove(req.params.imageid, function (err, image) {
+                fs.unlink(home + image.url, function () {
+                    fs.unlink(home + image.thumbUrl, function () {
+                        res.send({
+                            status: "200",
+                            responseType: "string",
+                            response: "success"
+                        });
+                    })
+                });
+            })
+        })
+})
 
 module.exports = router;

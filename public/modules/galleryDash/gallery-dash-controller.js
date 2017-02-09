@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (DataService, AuthService, $scope) {
+module.exports = function (DataService, AuthService, $scope, $http) {
     let vm = this;
     let data = "";
     vm.selectState = "deselected";
@@ -16,12 +16,16 @@ module.exports = function (DataService, AuthService, $scope) {
     });
 
     vm.isSelected = imageId => {
-        console.log('Triggered' + imageId);
         return (vm.selected.indexOf(imageId) > -1)
     }
 
+    vm.imageDel = function () {
+        vm.selected.forEach(function (element) {
+            $http.delete('/api/uploads/gallery/del/' + element);
+        }, this);
+    }
+
     vm.imageSelDes = imageId => {
-        console.log(imageId);
         if (vm.selected.indexOf(imageId) < 0) {
             vm.selected.push(imageId);
         } else {
@@ -30,6 +34,5 @@ module.exports = function (DataService, AuthService, $scope) {
                 1
             );
         }
-        console.log(vm.selected);
     }
 }

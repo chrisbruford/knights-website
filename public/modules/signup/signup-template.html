@@ -1,8 +1,13 @@
 <div>
 	<div ng-show="signupCtrl.registered">
 		<h1>Nice one {{signupCtrl.cmdrName}}</h1>
-		<p>Please activate your account via the link sent to your inbox</p>
-		<p>Failure to do so within 48hrs will result in your account being deleted.</p>
+		<p>Please now join us on <a href="https://discord.gg/sZqUUxM" target="_blank">Discord</a></p>
+		<p>
+			<strong>
+				An activation link has been sent to your e-mail address.
+				<br/>Please complete activation within 48hrs.
+			</strong>
+		</p>
 	</div>
 	<form ng-submit="signupForm.$valid && signupCtrl.register()" name="signupForm" ng-show="!signupCtrl.registered">
 		<h1>Sign-Up</h1>

@@ -37,90 +37,95 @@ router.post('/gallery', (req, res) => {
 
     let response = '';
 
-    let storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, home + folder)
-        },
-        filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            filename = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
-            imageLocation = folder + filename;
-            thumbLocation = folder + 'thumb' + filename;
-            cb(null, filename)
-        }
-    });
+    if (req.user.level >= 1) {
 
-    //multer settings
+        let storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, home + folder)
+            },
+            filename: function (req, file, cb) {
+                var datetimestamp = Date.now();
+                filename = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
+                imageLocation = folder + filename;
+                thumbLocation = folder + 'thumb' + filename;
+                cb(null, filename)
+            }
+        });
 
-    let upload = multer({
-        storage: storage
-    }).single('file');
+        console.log(req.user);
 
-    upload(req, res, function (err) {
-        if (err) {
-            res.json({ error_code: 1, err_desc: err });
-            return;
-        }
-        else {
-            response = { fileCreated: true };
+        //multer settings
 
-            let title = req.body.title;
-            let email = req.body.email;
-            console.log(title);
+        let upload = multer({
+            storage: storage
+        }).single('file');
 
-            jimp.read(home + imageLocation)
-                .then(image => {
-                    image.resize(500, 281)
-                        .write((home + thumbLocation), function () {
-                            require('../models/gallery-image')
-                                .then(galleryImage => {
-                                    let newImage = new galleryImage({
-                                        url: imageLocation,
-                                        thumbUrl: thumbLocation,
-                                        alt: title,
-                                        title: title,
-                                        email: email
-                                    });
+        upload(req, res, function (err) {
+            if (err) {
+                res.json({ error_code: 1, err_desc: err });
+                return;
+            }
+            else {
+                response = { fileCreated: true };
 
-                                    newImage.save(function (err) {
-                                        if (err) {
-                                            res.send({
-                                                upload: response,
-                                                error: err
-                                            });
-                                            console.log(err);
-                                        } else {
-                                            res.send({
-                                                upload: response,
-                                                success: newImage
-                                            });
-                                        }
+                let title = req.body.title;
+                let email = req.body.email;
+
+                jimp.read(home + imageLocation)
+                    .then(image => {
+                        image.resize(500, 281)
+                            .write((home + thumbLocation), function () {
+                                require('../models/gallery-image')
+                                    .then(galleryImage => {
+                                        let newImage = new galleryImage({
+                                            url: imageLocation,
+                                            thumbUrl: thumbLocation,
+                                            alt: title,
+                                            title: title,
+                                            email: email
+                                        });
+
+                                        newImage.save(function (err) {
+                                            if (err) {
+                                                res.send({
+                                                    upload: response,
+                                                    error: err
+                                                });
+                                                console.log(err);
+                                            } else {
+                                                res.send({
+                                                    upload: response,
+                                                    success: newImage
+                                                });
+                                            }
+                                        })
                                     })
-                                })
-                        })
-                }).catch(function (err) {
-                    console.log(err);
-                });
-        }
-    })
-
+                            })
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+            }
+        })
+    }
 });
 
 router.delete('/gallery/del/:imageid', (req, res) => {
-    require('../models/gallery-image')
-        .then(galleryImage => {
-            galleryImage.findByIdAndRemove(req.params.imageid, function (err, image) {
-                fs.unlink(home + image.url, function () {
-                    fs.unlink(home + image.thumbUrl, function () {
-                        res.send({
-                            status: "200",
-                            responseType: "string",
-                            response: "success"
-                        });
-                    })
-                });
+    if (req.user.level >= 3) {
+        require('../models/gallery-image')
+            .then(galleryImage => {
+                galleryImage.findByIdAndRemove(req.params.imageid, function (err, image) {
+                    fs.unlink(home + image.url, function () {
+                        fs.unlink(home + image.thumbUrl, function () {
+                            res.send({
+                                status: "200",
+                                responseType: "string",
+                                response: "success"
+                            });
+                        })
+                    });
+                })
             })
-        })
+    }
 })
 
 module.exports = router;

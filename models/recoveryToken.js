@@ -2,7 +2,7 @@
 
 module.exports = new Promise((resolve, reject) => {
     let uuid = require('uuid');
-    let mongoose = require('../db');
+    let mongoose = require('../db').mongoose;
 
     let Schema = mongoose.Schema;
 

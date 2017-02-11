@@ -1,6 +1,6 @@
 "use strict";
 
-let mongoose = require('../db');
+let mongoose = require('../db').mongoose;
 let wing = require('./wing');
 
 let Schema = mongoose.Schema;

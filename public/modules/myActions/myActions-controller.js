@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function ($scope, Upload, AuthService) {
+module.exports = function ($scope, $rootScope, Upload, AuthService) {
     let vm = this;
     vm.user = AuthService.user;
 
@@ -16,9 +16,7 @@ module.exports = function ($scope, Upload, AuthService) {
             });
 
             vm.file.upload.then(function (response) {
-                // $timeout(function () {
-                //     vm.file.result = response.data;
-                // });
+                $rootScope.$broadcast('fileProcessed');
                 vm.file = null;
                 vm.title = "";
                 vm.image = null;

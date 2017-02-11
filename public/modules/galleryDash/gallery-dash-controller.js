@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function (DataService, AuthService, $scope, $http) {
+module.exports = function (DataService, AuthService, $scope, $http, $q) {
     let vm = this;
     let data = "";
     vm.selectState = "deselected";
@@ -20,9 +20,15 @@ module.exports = function (DataService, AuthService, $scope, $http) {
     }
 
     vm.imageDel = function () {
+        let promises = [];
         vm.selected.forEach(function (element) {
-            $http.delete('/api/uploads/gallery/del/' + element);
+            promises.push($http.delete('/api/uploads/gallery/del/' + element));
         }, this);
+
+        $q.all(promises).then(function(){
+            vm.selected = [];
+            DataService.getGallery().then(data => vm.images = data)
+        })
     }
 
     vm.imageSelDes = imageId => {

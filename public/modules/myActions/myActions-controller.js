@@ -8,6 +8,7 @@ module.exports = function ($scope, $rootScope, Upload, AuthService) {
     $scope.$on('deauthenticated', event => vm.user = AuthService.user);
 
     vm.uploadImage = function () {
+        vm.uploadState = "loading";
         if (vm.file && vm.user && vm.user.level >= 1) {
             vm.file.upload = Upload.upload({
                 url: '/api/uploads/gallery',
@@ -21,13 +22,17 @@ module.exports = function ($scope, $rootScope, Upload, AuthService) {
                 vm.title = "";
                 vm.image = null;
                 $scope.uploadForm.$setPristine();
+                vm.uploadState = "success";
             }, function (response) {
                 if (response.status > 0) { }
                 vm.errorMsg = response.status + ': ' + response.data;
+                vm.uploadState = "fail";
             }, function (evt) {
                 vm.file.progress = Math.min(100, parseInt(100.0 *
                     evt.loaded / evt.total));
             });
+        } else {
+            vm.uploadState = "fail";
         }
     }
 

@@ -20,14 +20,18 @@ module.exports = function (DataService, AuthService, $scope, $http, $q) {
     }
 
     vm.imageDel = function () {
+        vm.deleteState = "loading";
         let promises = [];
         vm.selected.forEach(function (element) {
             promises.push($http.delete('/api/uploads/gallery/del/' + element));
         }, this);
 
-        $q.all(promises).then(function(){
+        $q.all(promises).then(function () {
+            vm.deleteState = "success";
             vm.selected = [];
             DataService.getGallery().then(data => vm.images = data)
+        }).catch(function () {
+            vm.deleteState = "fail";
         })
     }
 

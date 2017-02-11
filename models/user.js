@@ -6,7 +6,7 @@ module.exports = new Promise((resolve, reject) => {
     let mongoose = db.mongoose;
     let wing = require('./wing');
 
-    if (mongoose.connection.readyState != 1) {
+    if (mongoose.connection.readyState != 0) {
         console.log(`Not connected to DB. Requesting new connection.`);
         db.connect();
     }

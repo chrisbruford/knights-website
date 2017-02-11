@@ -3,7 +3,7 @@
 let db = require('../db');
 let mongoose = db.mongoose;
 
-if (mongoose.connection.readyState != 1) {
+if (mongoose.connection.readyState != 0) {
     console.log(`Not connected to DB. Requesting new connection.`);
     db.connect();
 }

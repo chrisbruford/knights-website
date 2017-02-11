@@ -20,6 +20,7 @@ module.exports = function ($scope, $rootScope, Upload, AuthService) {
                 vm.file = null;
                 vm.title = "";
                 vm.image = null;
+                $scope.uploadForm.$setPristine();
             }, function (response) {
                 if (response.status > 0) { }
                 vm.errorMsg = response.status + ': ' + response.data;

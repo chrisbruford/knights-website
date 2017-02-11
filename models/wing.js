@@ -1,6 +1,12 @@
 "use strict";
 
-let mongoose = require('../db').mongoose;
+let db = require('../db');
+let mongoose = db.mongoose;
+
+if (mongoose.connection.readyState != 1) {
+    console.log(`Not connected to DB. Requesting new connection.`);
+    db.connect();
+}
 
 let wings = require('../public/modules/services/wings-service');
 let names = [];

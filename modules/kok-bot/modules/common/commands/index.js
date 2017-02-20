@@ -20,13 +20,14 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("listroles", require("./listRoles"));
     this.commandsMap.set("hi", require("./hi"));
     this.commandsMap.set("notes", require("./notes"));
+    this.commandsMap.set("dist", require("./dist"));
     this.commandsMap.set("help", require("./help"));
 }
 
 client.on("message", msg => {
     //don't bother with anything if it didn't even starts with prefix
     if (msg.content.startsWith(prefix)) {
-        let messageString = msg.content.replace(/\s+/g, ' ').trim();
+        let messageString = msg.content.replace(/\s+/g, ' ').trim(); //Removes extra spaces and trims the ends
         let messageArray = messageString.split(" ");
         let command = messageArray[0].toLowerCase().substring(1);
         let commandArguments = "";

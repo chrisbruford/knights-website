@@ -62,6 +62,6 @@ function Dist() {
     }
 }
 
-let helpMessage = "dist - Coming soon :tm:";
+let helpMessage = "dist <system1,system2> - Find the straight line distance between the two systems";
 
 help.AddHelp("dist", helpMessage);

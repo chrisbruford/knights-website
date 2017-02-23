@@ -56,8 +56,10 @@ function Dist() {
                     console.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
-        } else {
+        } else if (argsArray.length > 2) {
             msg.channel.sendMessage(responseDict.tooManyParams());
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
         }
     }
 }

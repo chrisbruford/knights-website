@@ -1,37 +1,29 @@
 "use strict";
+const dateHelper = require('../dateHelper.js');
 const help = require("./help");
 
 module.exports = new Time();
 
 function Time() {
 
-    function DateFormat(date, digits) {
-        for (var i = 0; i < digits; i++) {
-            date = "0" + date;
-        }
-
-        return date.slice(-digits);
-    }
-
     this.exec = (msg, commandArguments) => {
         let argsArray = [];
         if (commandArguments.length === 0) {
             var date = new Date();
 
-            var utcDate = date.getUTCDate();
-            var utcDay = date.getUTCDay();
-            var utcFullYear = date.getUTCFullYear();
-            var utcHours = date.getUTCHours();
-            var utcMinutes = date.getUTCMinutes();
-            var utcMonth = date.getUTCMonth();
-            var utcSeconds = date.getUTCSeconds();
+            var utcDateObj = dateHelper.getUTCObj(date);
+
+            var utcDate = utcDateObj.utcDate;
+            var utcDay = utcDateObj.utcDay;
+            var utcFullYear = utcDateObj.utcFullYear;
+            var utcHours = utcDateObj.utcHours;
+            var utcMinutes = utcDateObj.utcMinutes;
+            var utcMonth = utcDateObj.utcMonth;
+            var utcSeconds = utcDateObj.utcSeconds;
 
             var output = "UTC Time :timer:\n";
 
-            var dayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            var monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-            output = output + dayArray[utcDay] + ', ' + monthArray[utcMonth] + ' ' + DateFormat(utcDate, 2) + ', ' + utcFullYear + '\n' + DateFormat(utcHours, 2) + ':' + DateFormat(utcMinutes, 2) + ':' + DateFormat(utcSeconds, 2);
+            output = output + dateHelper.weekdays(utcDay) + ', ' + dateHelper.months(utcMonth) + ' ' + dateHelper.DateFormat(utcDate, 2) + ', ' + utcFullYear + '\n' + dateHelper.DateFormat(utcHours, 2) + ':' + dateHelper.DateFormat(utcMinutes, 2) + ':' + dateHelper.DateFormat(utcSeconds, 2);
 
             msg.channel.sendMessage(output);
         } else {

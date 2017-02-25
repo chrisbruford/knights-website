@@ -24,6 +24,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("time", require("./time"));
     this.commandsMap.set("whois", require("./whois"));
     this.commandsMap.set("guildinfo", require("./guildinfo"));
+    this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
 }
 
@@ -43,6 +44,16 @@ client.on("message", msg => {
             this.commandsMap.get(command).exec(msg, commandArguments);
         } else {
             msg.channel.sendMessage(responseDict.notACommand());
+        }
+    } else {
+        if (msg.mentions.users.filterArray(function (user) {
+            if (user.id === client.user.id) {
+                return true;
+            } else {
+                return false;
+            }
+        }).length > 0) {
+            msg.channel.sendMessage(responseDict.botMentioned());
         }
     }
 });

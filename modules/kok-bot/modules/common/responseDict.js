@@ -46,3 +46,12 @@ module.exports.notACommand = () => {
 
     return dictionary[Math.floor(Math.random() * dictionary.length)];
 }
+
+module.exports.botMentioned = () => {
+    let dictionary = [
+        "Someone called me!!",
+        "I'm here :raised_hand:"
+    ];
+
+    return dictionary[Math.floor(Math.random() * dictionary.length)];
+}

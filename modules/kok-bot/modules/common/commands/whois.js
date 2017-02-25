@@ -96,6 +96,8 @@ function Whois() {
                     console.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
         }
     }
 }

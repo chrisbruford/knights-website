@@ -23,6 +23,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("dist", require("./dist"));
     this.commandsMap.set("time", require("./time"));
     this.commandsMap.set("whois", require("./whois"));
+    this.commandsMap.set("guildinfo", require("./guildinfo"));
     this.commandsMap.set("help", require("./help"));
 }
 
@@ -38,6 +39,7 @@ client.on("message", msg => {
             commandArguments = messageArray.slice(1, messageArray.length).join(" ");
         }
         if (this.commandsMap.has(command)) {
+            console.log(command + " command requested");
             this.commandsMap.get(command).exec(msg, commandArguments);
         } else {
             msg.channel.sendMessage(responseDict.notACommand());

@@ -41,7 +41,14 @@ router.post('/gallery', (req, res) => {
 
         let storage = multer.diskStorage({
             destination: function (req, file, cb) {
-                cb(null, home + folder)
+                var directory = home + folder;
+                fs.ensureDir(directory, err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        cb(null, directory);
+                    }
+                })
             },
             filename: function (req, file, cb) {
                 var datetimestamp = Date.now();

@@ -50,6 +50,9 @@
                 .when('/changepassword/:token?', {
                     templateUrl: 'routes/resetpassword.html'
                 })
+                .when('/gallerydashmod',{
+                    templateUrl: 'routes/gallerydashmod.html'
+                })
                 .otherwise(({
                     redirectTo: '/'
                 }));

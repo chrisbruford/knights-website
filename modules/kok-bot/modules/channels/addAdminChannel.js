@@ -1,11 +1,11 @@
 "use strict";
 const discordGuildModel = require('../../../../models/discord-guild');
+const responseDict = require('../common/responseDict');
 
-module.exports = (msg) => {
-    let msgSplit = msg.content.split(" ");
-    let adminChannelID = msgSplit[1];
+module.exports = (msg, commandArguments) => {
+    let argsArray = commandArguments.split(" ");
+    let adminChannelID = argsArray[0];
     let thisGuild = msg.guild;
-
 
     if (thisGuild.channels.get(adminChannelID)) {
         discordGuildModel.findOneAndUpdate(
@@ -17,11 +17,11 @@ module.exports = (msg) => {
                 setDefaultsOnInsert: true
             })
             .then(guild => {
-                msg.channel.sendMessage('It is done!');
+                msg.channel.sendMessage(responseDict.success());
             })
             .catch(err => {
                 console.log(err);
-                msg.channel.sendMessage(`Sorry, I failed you :(`);
+                msg.channel.sendMessage(responseDict.fail());
             })
     } else {
         msg.channel.sendMessage("That Channel doesn't exist");

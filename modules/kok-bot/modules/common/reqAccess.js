@@ -2,9 +2,9 @@
 module.exports = (guild, member, reqLevel) => {
 
     return new Promise((resolve, reject) => {
-        console.log(guild);
-        console.log(member);
-        console.log(reqLevel);
+        // console.log(guild);
+        // console.log(member);
+        // console.log(reqLevel);
 
         let bool = false;
         let guildID = guild.id;

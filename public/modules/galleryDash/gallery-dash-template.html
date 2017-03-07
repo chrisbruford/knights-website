@@ -1,0 +1,25 @@
+<div class="dashboard">
+    <div class="row">
+        <div class="small-12 medium-8 large-8">
+            <h1>Gallery Uploads Control</h1>
+        </div>
+        <div class="small-12 medium-4 large-4">
+            <div class="row">
+                <div class="shrink columns">
+                    <button class="button" ng-click="GalleryDashCtrl.imageDel()">Delete</button>
+                </div>
+                <div class="columns">
+                    <kok-ajax-loader state="GalleryDashCtrl.deleteState"></kok-ajax-loader>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row small-up-2 medium-up-4 large-up-8">
+        <div class="columns" ng-repeat="image in GalleryDashCtrl.images">
+            <div class=".dash-thumb">
+                <img class="{GalleryDashCtrl.selectState}" ng-src="{{image.thumbUrl}}" ng-class="{imgselected:GalleryDashCtrl.isSelected(image._id)}"
+                    ng-click="GalleryDashCtrl.imageSelDes(image._id)">
+            </div>
+        </div>
+    </div>
+</div>

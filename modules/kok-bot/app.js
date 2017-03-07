@@ -16,28 +16,29 @@ client.on("error", err => {
 })
 
 client.login(token)
-.then(token => {
-    console.log('bot logged in okay');
-})
-.catch(err => {
-    console.log('login error:', err);
-})
+    .then(token => {
+        console.log('bot logged in okay');
+    })
+    .catch(err => {
+        console.log('login error:', err);
+    })
 
 //commands
-require('./modules/common/commands');
+const commands = require('./modules/common/commands');
+commands.initiateCommands();
 
 //event listeners
 const wings = require('./modules/wings')
 const wingController = require('../../controllers/wingController');
 
-wingController.on('joinWing',(evt)=>{
+wingController.on('joinWing', (evt) => {
     let member = guild.members.get(evt.user.discordID);
-    wings.joinWing(evt.wingName,member);
+    wings.joinWing(evt.wingName, member);
 })
 
-wingController.on('leaveWing',(evt)=>{
+wingController.on('leaveWing', (evt) => {
     let member = guild.members.get(evt.user.discordID);
-    wings.leaveWing(evt.wingName,member);
+    wings.leaveWing(evt.wingName, member);
 })
 
 //modules

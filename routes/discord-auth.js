@@ -25,7 +25,12 @@ router.get('/callback',
                 )
             })
             .then(user => {
-                res.redirect('/account')
+                let kokBot = require('../modules/kok-bot');
+                let guildID = process.env.guildID || require('../secrets').discord.guildID;
+                let frontDesk = kokBot.register.invite(guildID, account)
+                    .then(invite => {
+                        res.redirect('https://discord.gg/' + invite.code);
+                    });
             })
             .catch(err => {
                 console.log(err);

@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(gameRoles,platforms,continents,AuthService) {
+module.exports = function ($window, gameRoles, platforms, continents, AuthService) {
     let vm = this;
 
     vm.registered = false;
@@ -26,13 +26,17 @@ module.exports = function(gameRoles,platforms,continents,AuthService) {
             continent: vm.continent,
             reasonToJoin: vm.reason,
             email: vm.email
-        })
-        .then(user=>{
+        }).then(user => {
             vm.registered = true;
             vm.registrationState = "success";
             vm.user = user;
-        })
-        .catch(err=>{
+            return AuthService.authenticate({
+                username: vm.cmdrName,
+                password: vm.password
+            })
+        }).then(() => {
+            $window.location.assign("/discord/auth");
+        }).catch(err => {
             vm.registrationState = "fail";
             vm.registrationError = err;
         });

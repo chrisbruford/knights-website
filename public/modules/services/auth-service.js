@@ -36,8 +36,7 @@ module.exports = function ($http, $q, $rootScope) {
             $http.post('/api/register', newUser)
                 .then(res => {
                     resolve(res.config.data);
-                }
-                ) 
+                })
                 .catch(err => reject(err));
         });
     }

@@ -18,6 +18,10 @@ let guild = new Schema({
         type: String,
         unique: true
     },
+    frontDeskChannelID: {
+        type: String,
+        unique: true
+    },
     logChannelID: {
         type: String,
         unique: true

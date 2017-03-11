@@ -3,7 +3,9 @@ let express = require('express');
 let router = express.Router();
 let passport = require('passport');
 
-router.post('/', passport.authenticate('local'), 
+let dbConnected = require('../middleware/dbconnected');
+
+router.post('/', dbConnected, passport.authenticate('local'), 
 function(req, res) {
         require('../models/user')
         .then(userModel=>{

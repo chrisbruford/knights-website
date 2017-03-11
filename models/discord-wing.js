@@ -4,11 +4,6 @@ let db = require('../db');
 let mongoose = db.mongoose;
 let wing = require('./wing');
 
-if (mongoose.connection.readyState != 0) {
-    console.log(`Not connected to DB. Requesting new connection.`);
-    db.connect();
-}
-
 let Schema = mongoose.Schema;
 
 let discordWing = new Schema({

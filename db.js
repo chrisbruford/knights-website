@@ -19,8 +19,13 @@ let options = {
 
 //logging events
 mongoose.connection.on('connected',()=>console.log(`Connected to ${url}`));
+
 mongoose.connection.on('error',err=>console.log(`Mongoose error ${err}`));
-mongoose.connection.on('disconnected',()=>{console.log(`Mongoose connection disconnected`)})
+
+mongoose.connection.on('disconnected',()=>{
+    console.log(`Mongoose connection disconnected`);
+    connect();
+})
 
 //terminate connection if node process ends
 process.on('SIGINT',()=>{

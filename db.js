@@ -18,13 +18,31 @@ let options = {
 }
 
 //logging events
-mongoose.connection.on('connected',()=>console.log(`Connected to ${url}`));
-mongoose.connection.on('error',err=>console.log(`Mongoose error ${err}`));
-mongoose.connection.on('disconnected',()=>{console.log(`Mongoose connection disconnected`)})
+mongoose.connection.on('connected', () => console.log(`Connected to ${url}`));
+
+mongoose.connection.on('error', err => console.log(`Mongoose error ${err}`));
+
+(function () {
+    let tracker = 0;
+    mongoose.connection.on('disconnected', () => {
+        console.log(`Mongoose connection disconnected`);
+        if (tracker < 5) {
+            console.log('Mongoose disconnected. Reconnecting in 5 seconds');
+            
+            tracker++;
+
+            setTimeout(() => {
+                tracker--;
+            }, 60000)
+
+            setTimeout(()=>{connect()}, 5000);
+        }
+    })
+})()
 
 //terminate connection if node process ends
-process.on('SIGINT',()=>{
-    mongoose.connection.close(()=>{
+process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
         console.log('Connection closed via app termination');
         process.exit(0);
     })

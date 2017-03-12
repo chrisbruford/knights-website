@@ -76,6 +76,10 @@ function Whois() {
                                     author = author + " ~ " + nick;
                                 }
 
+                                if (roles === "") {
+                                    roles = "None";
+                                }
+
                                 var embed = new Discord.RichEmbed();
                                 embed.setAuthor(author);
                                 embed.setColor(colour);
@@ -85,7 +89,10 @@ function Whois() {
                                 embed.setFooter("Member #" + memberCount + "  |  UserID: " + userId);
                                 embed.setThumbnail(thumbnail);
 
-                                msg.channel.sendEmbed(embed);
+                                msg.channel.sendEmbed(embed)
+                                    .catch(err => {
+                                        console.log(err);
+                                    });
                             }
                         }
                     }

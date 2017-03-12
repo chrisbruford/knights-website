@@ -33,25 +33,38 @@ function Dist() {
                     let system1 = request(entityUrl1);
                     let system2 = request(entityUrl2);
 
-                    Promise.all([system1, system2]).then(body => {
-                        x1 = JSON.parse('[' + body + ']')[0].coords.x;
-                        y1 = JSON.parse('[' + body + ']')[0].coords.y;
-                        z1 = JSON.parse('[' + body + ']')[0].coords.z;
+                    Promise.all([system1, system2])
+                        .then(body => {
+                            if (JSON.parse('[' + body + ']')[0].name) {
+                                x1 = JSON.parse('[' + body + ']')[0].coords.x;
+                                y1 = JSON.parse('[' + body + ']')[0].coords.y;
+                                z1 = JSON.parse('[' + body + ']')[0].coords.z;
+                            } else {
+                                msg.channel.sendMessage(entity1.toUpperCase() + " not found");
+                            }
+                            if (JSON.parse('[' + body + ']')[1].name) {
+                                x2 = JSON.parse('[' + body + ']')[1].coords.x;
+                                y2 = JSON.parse('[' + body + ']')[1].coords.y;
+                                z2 = JSON.parse('[' + body + ']')[1].coords.z;
+                            } else {
+                                msg.channel.sendMessage(entity2.toUpperCase() + " not found");
+                            }
+                            if (JSON.parse('[' + body + ']')[0].name && JSON.parse('[' + body + ']')[1].name) {
 
-                        x2 = JSON.parse('[' + body + ']')[1].coords.x;
-                        y2 = JSON.parse('[' + body + ']')[1].coords.y;
-                        z2 = JSON.parse('[' + body + ']')[1].coords.z;
+                                let x = x2 - x1;
+                                let y = y2 - y1;
+                                let z = z2 - z1;
 
-                        let x = x2 - x1;
-                        let y = y2 - y1;
-                        let z = z2 - z1;
+                                let distance = Math.sqrt(x * x + y * y + z * z);
 
-                        let distance = Math.sqrt(x * x + y * y + z * z);
+                                distance = (Math.round(distance * 100)) / 100;
 
-                        distance = (Math.round(distance * 100)) / 100;
-
-                        msg.channel.sendMessage(distance + " LY");
-                    })
+                                msg.channel.sendMessage(distance + " LY");
+                            }
+                        })
+                        .catch(error => {
+                            console.log("Error:" + error);
+                        })
                 }).catch(err => {
                     console.log(err);
                     msg.channel.sendMessage(responseDict.fail());

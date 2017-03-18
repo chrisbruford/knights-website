@@ -27,6 +27,9 @@ client.login(token)
 const commands = require('./modules/common/commands');
 commands.initiateCommands();
 
+//events
+require('./modules/common/events');
+
 //event listeners
 const wings = require('./modules/wings')
 const wingController = require('../../controllers/wingController');

@@ -13,6 +13,10 @@ let guild = new Schema({
         type: String,
         unique: true
     },
+    botChannelID: {
+        type: String,
+        unique: true
+    },
     logChannelID: {
         type: String,
         unique: true

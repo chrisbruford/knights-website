@@ -32,6 +32,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("guildinfo", require("./guildinfo"));
     this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
+    this.commandsMap.set("welcome", require("./welcome"));
 }
 
 client.on("message", msg => {

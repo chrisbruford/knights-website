@@ -4,13 +4,13 @@ const responseDict = require('../common/responseDict');
 
 module.exports = (msg, commandArguments) => {
     let argsArray = commandArguments.split(" ");
-    let botChannelID = argsArray[0];
+    let logChannelID = argsArray[0];
     let thisGuild = msg.guild;
 
-    if (thisGuild.channels.get(botChannelID)) {
+    if (thisGuild.channels.get(logChannelID)) {
         discordGuildModel.findOneAndUpdate(
             { guildID: msg.guild.id },
-            { $set: { botChannelID: botChannelID } },
+            { $set: { logChannelID: logChannelID } },
             {
                 upsert: true,
                 runValidators: true,

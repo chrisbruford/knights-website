@@ -4,9 +4,9 @@ const responseDict = require('../responseDict');
 const channels = require('../../channels');
 const help = require("./help");
 
-module.exports = new AddBotChannel();
+module.exports = new AddLogChannel();
 
-function AddBotChannel() {
+function AddLogChannel() {
 
     this.exec = (msg, commandArguments) => {
         let argsArray = [];
@@ -16,7 +16,7 @@ function AddBotChannel() {
         if (argsArray.length === 1) {
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
-                    channels.addBotChannel(msg, argsArray[0]);
+                    channels.addLogChannel(msg, argsArray[0]);
                 })
                 .catch(err => {
                     console.log(err);
@@ -30,6 +30,6 @@ function AddBotChannel() {
     }
 }
 
-let helpMessage = "addbotchannel <channel Id> - Adds the specified channel as the bot channel";
+let helpMessage = "addlogchannel <channel Id> - Adds the specified channel as the bot channel";
 
-help.AddHelp("addbotchannel", helpMessage);
+help.AddHelp("addlogchannel", helpMessage);

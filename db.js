@@ -52,7 +52,6 @@ process.on('SIGINT', () => {
 function connect() {
     mongoose.connect(url, options, (err, db) => {
         if (err) { return console.log(err) }
-        console.log('Connected to DB');
     });
 }
 

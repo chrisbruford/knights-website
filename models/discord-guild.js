@@ -4,11 +4,6 @@ let db = require('../db');
 let mongoose = db.mongoose;
 let Schema = mongoose.Schema;
 
-if (mongoose.connection.readyState != 0) {
-    console.log(`Not connected to DB. Requesting new connection.`);
-    db.connect();
-}
-
 let guild = new Schema({
     guildID: {
         type: String,
@@ -30,7 +25,8 @@ let guild = new Schema({
     ignoreChannels: [String],
     adminRoles: [String],
     moderatorRoles: [String],
-    memberRoles: [String]
+    memberRoles: [String],
+    publicRoles: [String]
 });
 
 let model = mongoose.model('discordGuild', guild);

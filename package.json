@@ -18,7 +18,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "^2.2.0",
     "del": "^2.2.2",
-    "discord.js": "^11.0.0",
+    "discord.js": "github:hydrabolt/discord.js",
     "express": "~4.13.4",
     "express-session": "^1.14.2",
     "foundation-sites": "^6.3.1",

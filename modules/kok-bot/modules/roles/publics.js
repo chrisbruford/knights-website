@@ -6,12 +6,12 @@ module.exports = new Publics();
 
 function Publics() {
     //add a record in to db of a public role
-    this.add = (publicRoleID, thisGuild) => {
+    this.add = (publicRoleName, publicRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(publicRoleID)) {
                 discordGuildModel.findOneAndUpdate(
-                    { guildID: thisGuild.id },
-                    { $addToSet: { publicRoles: publicRoleID } },
+                    { guildID: thisGuild.id, 'publicRoles.id': {$ne: publicRoleID} },
+                    { $push: { publicRoles: {name: publicRoleName, id: publicRoleID} } },
                     {
                         upsert: true,
                         runValidators: true,
@@ -36,7 +36,7 @@ function Publics() {
             if (thisGuild.roles.get(publicRoleID)) {
                 discordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
-                    { $pull: { publicRoles: publicRoleID } },
+                    { $pull: { publicRoles: {id: publicRoleID } } },
                     {
                         upsert: true,
                         runValidators: true,
@@ -67,10 +67,10 @@ function Publics() {
                 .then(guild => {
                     if (guild && guild.publicRoles.length > 0) {
                         let message = "```";
-                        guild.publicRoles.forEach(publicRoleID => {
-                            let foundPublicRole = discordRoles.get(publicRoleID);
+                        guild.publicRoles.forEach(publicRole => {
+                            let foundPublicRole = discordRoles.get(publicRole.id);
                             if (foundPublicRole) {
-                                let newLine = `${foundPublicRole.name} : ${publicRoleID}\n`;
+                                let newLine = `${foundPublicRole.name} : ${publicRole.id}\n`;
                                 message += newLine;
                             }
                         })

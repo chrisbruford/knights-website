@@ -1,12 +1,12 @@
 "use strict";
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
-const roles = require('../../roles');
+const inactiveTracker = require('../../inactive-tracker');
 const help = require("./help");
 
-module.exports = new PublicRoles();
+module.exports = new InactiveTrackerCommands();
 
-function PublicRoles() {
+function InactiveTrackerCommands() {
 
     this.exec = (msg, commandArguments) => {
         let argsArray = [];
@@ -30,10 +30,9 @@ function PublicRoles() {
         if (argsArray.length === 2) {
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
-                    let publicRoleID = argsArray[1];
-                    let publicRoleName = msg.guild.roles.get(publicRoleID).name;
+                    let inactiveRoleID = argsArray[1];
                     let thisGuild = msg.guild;
-                    return roles.publics.add(publicRoleName, publicRoleID, thisGuild);
+                    return inactiveTracker.inactives.add(inactiveRoleID, thisGuild);
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
@@ -48,19 +47,19 @@ function PublicRoles() {
     }
 
     this.remove = (msg, argsArray) => {
-        if (argsArray.length === 2) {
+        if (argsArray.length === 1) {
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
-                    let publicRoleID = argsArray[1];
+                    let inactiveRoleID = argsArray[1];
                     let thisGuild = msg.guild;
-                    return roles.publics.remove(publicRoleID, thisGuild);
+                    return inactiveTracker.inactives.remove(thisGuild);
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
                     console.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
-        } else if (argsArray.length > 2) {
+        } else if (argsArray.length > 1) {
             msg.channel.sendMessage(responseDict.tooManyParams());
         } else {
             msg.channel.sendMessage(responseDict.noParams());
@@ -70,7 +69,7 @@ function PublicRoles() {
     this.list = (msg, argsArray) => {
         if (argsArray.length === 1) {
             reqAccess(msg.guild, msg.member, 3)
-                .then(() => roles.publics.list(msg.guild.id))
+                .then(() => inactiveTracker.inactives.list(msg.guild.id))
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
@@ -91,6 +90,6 @@ function PublicRoles() {
     }
 }
 
-let helpMessage = "publicroles <add|remove|list> <role Id> - Adds,Removes the specified role as a public role or lists the public roles";
+let helpMessage = "inactiveroles <add|remove|list> <role Id> - Adds,Removes the specified role as the inactive role or lists the inactive role";
 
-help.AddHelp("publicroles", helpMessage);
+help.AddHelp("inactiveroles", helpMessage);

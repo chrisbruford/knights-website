@@ -26,7 +26,8 @@ let guild = new Schema({
     adminRoles: [String],
     moderatorRoles: [String],
     memberRoles: [String],
-    publicRoles: [String]
+    publicRoles: [{name: String, id: String}],
+    inactiveRole: String
 });
 
 let model = mongoose.model('discordGuild', guild);

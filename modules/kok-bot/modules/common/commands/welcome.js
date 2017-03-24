@@ -55,10 +55,17 @@ class Welcome {
             let newWelcomeChannel = args[1];
             let newWelcomeMessage = args.slice(2).join(" ");
             if (msg.guild.channels.has(newWelcomeChannel)) {
-                guildModel.findOneAndUpdate({ guildID: msg.guild.id }, {
+                guildModel.findOneAndUpdate({ guildID: msg.guild.id }, 
+                {
                     welcomeMessage: newWelcomeMessage,
                     frontDeskChannelID: newWelcomeChannel
-                }).then(guild => {
+                },
+                {
+                    upsert: true,
+                    runValidators: true,
+                    setDefaultsOnInsert: true
+                }
+            ).then(guild => {
                     if (guild) {
                         msg.channel.sendMessage(responseDict.success());
                     } else {

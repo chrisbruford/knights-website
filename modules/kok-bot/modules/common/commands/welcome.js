@@ -22,10 +22,13 @@ class Welcome {
         client.on("guildMemberAdd", member => {
             guildModel.findOne({ guildID: member.guild.id })
                 .then(guild => {
-                    if (guild.welcomeMessage && guild.frontDeskChannelID) {
+                    if (guild && guild.welcomeMessage && guild.frontDeskChannelID) {
                         let welcomeChannel = member.guild.channels.get(guild.frontDeskChannelID);
                         sendWelcome.get(this)(welcomeChannel, member.user, guild.welcomeMessage);
                     }
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         })
     }
@@ -91,7 +94,7 @@ class Welcome {
     show(msg, args) {
         guildModel.findOne({ guildID: msg.guild.id })
             .then(guild => {
-                if (guild.welcomeMessage && guild.frontDeskChannelID) {
+                if ( guild && guild.welcomeMessage && guild.frontDeskChannelID) {
                     sendWelcome.get(this)(msg.channel, msg.member, guild.welcomeMessage);
                     msg.channel.sendMessage(`This welcome message will be sent to ${msg.guild.channels.get(guild.frontDeskChannelID)}`);
                 } else {
@@ -100,6 +103,9 @@ class Welcome {
                     console.log(`guild.frontDeskChannelID: ${guild.frontDeskChannelID}`);
                     msg.channel.sendMessage(`Welcome message not set`);
                 }
+            })
+            .catch(err => {
+                console.log(err);
             })
     }
 

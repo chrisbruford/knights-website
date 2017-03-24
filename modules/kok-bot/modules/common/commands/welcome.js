@@ -99,13 +99,12 @@ class Welcome {
                     msg.channel.sendMessage(`This welcome message will be sent to ${msg.guild.channels.get(guild.frontDeskChannelID)}`);
                 } else {
                     console.log(guild);
-                    console.log(`guild.welcomeMessage: ${guild.welcomeMessage}`);
-                    console.log(`guild.frontDeskChannelID: ${guild.frontDeskChannelID}`);
                     msg.channel.sendMessage(`Welcome message not set`);
                 }
             })
             .catch(err => {
                 console.log(err);
+                msg.channel.sendMessage(responseDict.fail());
             })
     }
 

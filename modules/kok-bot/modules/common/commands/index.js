@@ -47,15 +47,17 @@ client.on("message", msg => {
         } else {
             msg.channel.sendMessage(responseDict.notACommand());
         }
-    } else {
-        if (msg.mentions.users.filterArray(function (user) {
-            if (user.id === client.user.id) {
-                return true;
-            } else {
-                return false;
-            }
-        }).length > 0) {
-            msg.channel.sendMessage(responseDict.botMentioned());
+    } else if (msg.mentions.users.filterArray(function (user) {
+        if (user.id === client.user.id) {
+            return true;
+        } else {
+            return false;
+        }
+    }).length > 0) {
+        msg.channel.sendMessage(responseDict.botMentioned());
+    } else if (msg.content.indexOf('@everyone') > -1 || msg.content.indexOf('@here') > -1) {
+        if (msg.member.user.id !== client.user.id && !msg.member.permissions.hasPermission('MENTION_EVERYONE')) {
+            msg.channel.sendMessage("^^ @here");
         }
     }
 });

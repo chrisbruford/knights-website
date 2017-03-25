@@ -63,7 +63,8 @@ class Welcome {
                 {
                     upsert: true,
                     runValidators: true,
-                    setDefaultsOnInsert: true
+                    setDefaultsOnInsert: true,
+                    new: true
                 }
             ).then(guild => {
                     if (guild) {

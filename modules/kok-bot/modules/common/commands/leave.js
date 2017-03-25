@@ -12,7 +12,7 @@ class Leave {
         }
 
         if (argsArray.length > 0) {
-            let targetRole = argsArray[0].toLowerCase();
+            let targetRole = commandArguments.toLowerCase();
             guildModel.findOne({guildID: msg.guild.id})
             .then(guild=>{
                 let publicRole = guild.publicRoles.find(elem=>{

@@ -52,7 +52,7 @@ class Welcome {
     add(msg, args) {
         if (args.length > 2) {
             let newWelcomeChannel = args[1];
-            let newWelcomeMessage = args.slice(2).join(" ");
+            let newWelcomeMessage = args.slice(2).join(" ").replace(/\\n/g,"\n"); //put linebreaks back in
             if (msg.guild.channels.has(newWelcomeChannel)) {
                 guildModel.findOneAndUpdate({ guildID: msg.guild.id }, 
                 {

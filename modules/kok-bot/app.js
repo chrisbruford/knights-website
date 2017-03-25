@@ -1,5 +1,7 @@
 "use strict";
 console.log('starting kokbot');
+require('./modules/common/stringHelper'); //adds methods to String proto
+
 const client = require('./modules/common/client');
 let token = process.env.discordToken || require('../../secrets').discord.token;
 let kokGuildID = process.env.guildID || require('../../secrets').discord.guildID;

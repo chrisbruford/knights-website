@@ -22,10 +22,13 @@ class Welcome {
         client.on("guildMemberAdd", member => {
             guildModel.findOne({ guildID: member.guild.id })
                 .then(guild => {
-                    if (guild.welcomeMessage && guild.frontDeskChannelID) {
+                    if (guild && guild.welcomeMessage && guild.frontDeskChannelID) {
                         let welcomeChannel = member.guild.channels.get(guild.frontDeskChannelID);
                         sendWelcome.get(this)(welcomeChannel, member.user, guild.welcomeMessage);
                     }
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         })
     }
@@ -48,14 +51,21 @@ class Welcome {
 
     add(msg, args) {
         if (args.length > 2) {
-            console.log(args);
             let newWelcomeChannel = args[1];
-            let newWelcomeMessage = args.slice(2).join(" ");
+            let newWelcomeMessage = args.slice(2).join(" ").replace(/\\n/g,"\n"); //put linebreaks back in
             if (msg.guild.channels.has(newWelcomeChannel)) {
-                guildModel.findOneAndUpdate({ guildID: msg.guild.id }, {
+                guildModel.findOneAndUpdate({ guildID: msg.guild.id }, 
+                {
                     welcomeMessage: newWelcomeMessage,
                     frontDeskChannelID: newWelcomeChannel
-                }).then(guild => {
+                },
+                {
+                    upsert: true,
+                    runValidators: true,
+                    setDefaultsOnInsert: true,
+                    new: true
+                }
+            ).then(guild => {
                     if (guild) {
                         msg.channel.sendMessage(responseDict.success());
                     } else {
@@ -67,8 +77,6 @@ class Welcome {
                     msg.channel.sendMessage(responseDict.fail());
                 })
             } else {
-                console.log(`Unknown channel: ${newWelcomeChannel}`);
-                console.log(`All channels: ${msg.guild.channels}`);
                 msg.channel.sendMessage("Unknown channel");
             }
         } else {
@@ -77,7 +85,7 @@ class Welcome {
     }
 
     remove(msg, args) {
-        guildModel.findOneAdUpdate({ guildID: msg.guild.id }, {
+        guildModel.findOneAndUpdate({ guildID: msg.guild.id }, {
             welcomeMessage: undefined,
             frontDeskChannelID: undefined
         }).then(guild => {
@@ -91,15 +99,17 @@ class Welcome {
     show(msg, args) {
         guildModel.findOne({ guildID: msg.guild.id })
             .then(guild => {
-                if (guild.welcomeMessage && guild.frontDeskChannelID) {
+                if ( guild && guild.welcomeMessage && guild.frontDeskChannelID) {
                     sendWelcome.get(this)(msg.channel, msg.member, guild.welcomeMessage);
                     msg.channel.sendMessage(`This welcome message will be sent to ${msg.guild.channels.get(guild.frontDeskChannelID)}`);
                 } else {
                     console.log(guild);
-                    console.log(`guild.welcomeMessage: ${guild.welcomeMessage}`);
-                    console.log(`guild.frontDeskChannelID: ${guild.frontDeskChannelID}`);
                     msg.channel.sendMessage(`Welcome message not set`);
                 }
+            })
+            .catch(err => {
+                console.log(err);
+                msg.channel.sendMessage(responseDict.fail());
             })
     }
 

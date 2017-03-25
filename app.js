@@ -108,6 +108,9 @@ function requireHTTPS(req, res, next) {
   next();
 }
 
+//for Let's Encrypt
+app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
+
 //serve
 app.use('/', home);
 app.use('/secure', secure);
@@ -122,9 +125,6 @@ app.use('/api/recover', recover);
 app.use('/api/resetpassword', resetPassword);
 app.use('/api/wing', wing);
 app.use('/discord', discordAuth);
-
-//for Let's Encrypt
-app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
 //checks auth level before sending these
 app.use('/secure', secure);

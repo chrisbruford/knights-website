@@ -51,7 +51,6 @@ class Welcome {
 
     add(msg, args) {
         if (args.length > 2) {
-            console.log(args);
             let newWelcomeChannel = args[1];
             let newWelcomeMessage = args.slice(2).join(" ");
             if (msg.guild.channels.has(newWelcomeChannel)) {
@@ -78,8 +77,6 @@ class Welcome {
                     msg.channel.sendMessage(responseDict.fail());
                 })
             } else {
-                console.log(`Unknown channel: ${newWelcomeChannel}`);
-                console.log(`All channels: ${msg.guild.channels}`);
                 msg.channel.sendMessage("Unknown channel");
             }
         } else {
@@ -88,7 +85,7 @@ class Welcome {
     }
 
     remove(msg, args) {
-        guildModel.findOneAdUpdate({ guildID: msg.guild.id }, {
+        guildModel.findOneAndUpdate({ guildID: msg.guild.id }, {
             welcomeMessage: undefined,
             frontDeskChannelID: undefined
         }).then(guild => {

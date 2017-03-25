@@ -15,6 +15,10 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("adminroles", require("./adminRoles"));
     this.commandsMap.set("moderatorroles", require("./moderatorRoles"));
     this.commandsMap.set("memberroles", require("./memberRoles"));
+    this.commandsMap.set("publicroles", require("./publicRoles"));
+    this.commandsMap.set("inactiverole", require("./inactiveRole"));
+    this.commandsMap.set("join", require("./join"));
+    this.commandsMap.set("leave", require("./leave"));
     this.commandsMap.set("listchannels", require("./listChannels"));
     this.commandsMap.set("addadminchannel", require("./addAdminChannel"));
     this.commandsMap.set("addfrontdeskchannel", require("./addfrontdeskChannel"));
@@ -28,6 +32,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("guildinfo", require("./guildinfo"));
     this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
+    this.commandsMap.set("welcome", require("./welcome"));
 }
 
 client.on("message", msg => {
@@ -41,6 +46,7 @@ client.on("message", msg => {
         if (messageArray.length > 1) {
             commandArguments = messageArray.slice(1, messageArray.length).join(" ");
         }
+
         if (this.commandsMap.has(command)) {
             console.log(command + " command requested");
             this.commandsMap.get(command).exec(msg, commandArguments);

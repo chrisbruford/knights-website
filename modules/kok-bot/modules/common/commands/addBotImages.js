@@ -70,6 +70,6 @@ function AddBotImages() {
     }
 }
 
-let helpMessage = "addadminchannel <channel Id> - Adds the specified channel as an admin channel";
+let helpMessage = "addbotimages <image Type> <Attached Image> - Adds an image to the list of specific images that the bot can show";
 
-help.AddHelp("addadminchannel", helpMessage);
+help.AddHelp("addbotimages", helpMessage);

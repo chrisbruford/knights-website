@@ -8,7 +8,7 @@ module.exports = function MessageEdit(oldMessage, newMessage, guildID) {
     guildModel.findOne({ guildID })
         .then(guild => {
             if (guild) {
-                let botChannel = client.channels.get(guild.botChannelID.toString());
+                let botChannel = client.channels.get(guild.logChannelID.toString());
 
                 var createdOn = dateHelper.getUTCObj(oldMessage.createdAt);
                 var editedOn = dateHelper.getUTCObj(newMessage.createdAt);

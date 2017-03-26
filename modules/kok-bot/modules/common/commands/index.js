@@ -33,13 +33,14 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
     this.commandsMap.set("welcome", require("./welcome"));
+    this.commandsMap.set("addbotimages", require("./addbotimages"));
 }
 
 client.on("message", msg => {
     //don't bother with anything if it didn't even starts with prefix
     if (msg.content.startsWith(prefix)) {
         //strips extra whitespaces and trims as well as encoding linebreaks to preserve
-        let messageString = msg.content.replace(/ +/g, ' ').replace(/\n/g,"\\n").trim();
+        let messageString = msg.content.replace(/ +/g, ' ').replace(/\n/g, "\\n").trim();
         let messageArray = messageString.split(" ");
         let command = messageArray[0].toLowerCase().substring(1);
         let commandArguments = "";

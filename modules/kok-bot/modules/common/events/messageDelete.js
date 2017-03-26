@@ -8,7 +8,7 @@ module.exports = function MessageDelete(deletedMessage, guildID) {
     guildModel.findOne({ guildID })
         .then(guild => {
             if (guild) {
-                let botChannel = client.channels.get(guild.botChannelID.toString());
+                let botChannel = client.channels.get(guild.logChannelID.toString());
 
                 var createdOn = dateHelper.getUTCObj(deletedMessage.createdAt);
                 var deletedOn = dateHelper.getUTCObj(new Date());

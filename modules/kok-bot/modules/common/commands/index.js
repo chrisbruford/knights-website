@@ -65,19 +65,15 @@ client.on("message", msg => {
         msg.channel.sendMessage(responseDict.botMentioned());
     } else if (msg.content.indexOf('@everyone') > -1 || msg.content.indexOf('@here') > -1) {
         if (msg.member.user.id !== client.user.id && !msg.member.permissions.hasPermission('MENTION_EVERYONE')) {
-            if (msg.content.indexOf('@everyone') > -1) {
-                let botImages = require('../../../../../models/bot-images')
-                botImages.findOne({ guildID: msg.guild.id })
-                    .then(images => {
-                        let image = images.smh[Math.floor(Math.random() * images.smh.length)];
-                        msg.channel.sendFile(image)
-                            .catch(err => {
-                                console.log(err);
-                            });
-                    })
-            } else {
-                msg.channel.sendMessage("^^ @here");
-            }
+            let botImages = require('../../../../../models/bot-images')
+            botImages.findOne({ guildID: msg.guild.id })
+                .then(images => {
+                    let image = images.smh[Math.floor(Math.random() * images.smh.length)];
+                    msg.channel.sendFile(image)
+                        .catch(err => {
+                            console.log(err);
+                        });
+                })
         }
     }
 });

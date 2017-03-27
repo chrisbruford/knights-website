@@ -109,7 +109,9 @@ function requireHTTPS(req, res, next) {
 }
 
 //for Let's Encrypt
-app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
+app.get('/.well-known/acme-challenge/:fileid', function(req, res){
+  res.sendFile(path.join(__dirname, `.well-known/acme-challenge/${req.params.fileid}`));
+});
 
 //serve
 app.use('/', home);

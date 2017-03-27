@@ -13,7 +13,7 @@ function Whois() {
         let argsArray = [];
         if (commandArguments.length !== 0) {
             argsArray = commandArguments.split(",");
-            reqAccess(msg.guild, msg.member, 2)
+            reqAccess(msg.guild, msg.member, 1)
                 .then(() => {
                     var members = msg.guild.members.array();
                     var sortedMember = members.sort(function (member1, member2) {

@@ -33,13 +33,14 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
     this.commandsMap.set("welcome", require("./welcome"));
+    this.commandsMap.set("addbotimages", require("./addbotimages"));
 }
 
 client.on("message", msg => {
     //don't bother with anything if it didn't even starts with prefix
     if (msg.content.startsWith(prefix)) {
         //strips extra whitespaces and trims as well as encoding linebreaks to preserve
-        let messageString = msg.content.replace(/ +/g, ' ').replace(/\n/g,"\\n").trim();
+        let messageString = msg.content.replace(/ +/g, ' ').replace(/\n/g, "\\n").trim();
         let messageArray = messageString.split(" ");
         let command = messageArray[0].toLowerCase().substring(1);
         let commandArguments = "";
@@ -54,8 +55,29 @@ client.on("message", msg => {
         } else {
             msg.channel.sendMessage(responseDict.notACommand());
         }
-
-    } else if (msg.mentions.users.find(user => user.id === client.user.id)) {
+    } else if (msg.mentions.users.filterArray(function (user) {
+        if (user.id === client.user.id) {
+            return true;
+        } else {
+            return false;
+        }
+    }).length > 0) {
         msg.channel.sendMessage(responseDict.botMentioned());
+    } else if (msg.content.indexOf('@everyone') > -1 || msg.content.indexOf('@here') > -1) {
+        if (msg.member.user.id !== client.user.id && !msg.member.permissions.hasPermission('MENTION_EVERYONE')) {
+            if (msg.content.indexOf('@everyone') > -1) {
+                let botImages = require('../../../../../models/bot-images')
+                botImages.findOne({ guildID: msg.guild.id })
+                    .then(images => {
+                        let image = images.smh[Math.floor(Math.random() * images.smh.length)];
+                        msg.channel.sendFile(image)
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    })
+            } else {
+                msg.channel.sendMessage("^^ @here");
+            }
+        }
     }
 });

@@ -26,16 +26,13 @@ module.exports = function MessageEdit(oldMessage, newMessage, guildID) {
                     + dateHelper.DateFormat(editedOn.utcMinutes, 2);
 
                 var embed = new Discord.RichEmbed();
-                embed.setAuthor("Message Edited");
-                // embed.setColor(colour);
+                embed.setTitle(`Message Edited by ${newMessage.author.username}`);
+                embed.setTimestamp(new Date(newMessage.createdAt));
+                embed.setColor(110011);
                 embed.addField("Original Message\n", oldMessage.content);
                 embed.addField("Edited Message\n", newMessage.content);
-                embed.addField("Messaged by ", oldMessage.author.username);
-                embed.addField("Message was posted in ", oldMessage.channel.name);
-                embed.addField("Message created at ", createdString);
-                embed.addField("Message edited at ", editedString);
-                // embed.setFooter("Message deleted in" + memberCount + "  |  UserID: " + userId);
-                // embed.setThumbnail(thumbnail);
+                embed.setFooter(`#${oldMessage.channel.name}`);
+                //embed.setThumbnail(thumbnail);
 
                 botChannel.sendEmbed(embed)
                     .then(msg => {

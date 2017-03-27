@@ -30,6 +30,12 @@ let discordAuth = require('./routes/discord-auth')
 
 let app = express();
 
+//for Let's Encrypt
+app.use('/.well-known/acme-challenge/:fileid', function(req, res){
+  res.sendFile(path.join(__dirname, `.well-known/acme-challenge/${req.params.fileid}`));
+});
+
+
 //security headers
 
 app.use(helmet({
@@ -39,8 +45,9 @@ app.use(helmet({
   }
 }))
 
-app.use(requireHTTPS);
+// app.use(requireHTTPS);
 app.use(function (req, res, next) {
+  console.log('setting header');
   res.header("X-powered-by", "Blood, sweat, and tears")
   next()
 })
@@ -107,11 +114,6 @@ function requireHTTPS(req, res, next) {
 
   next();
 }
-
-//for Let's Encrypt
-app.get('/.well-known/acme-challenge/:fileid', function(req, res){
-  res.sendFile(path.join(__dirname, `.well-known/acme-challenge/${req.params.fileid}`));
-});
 
 //serve
 app.use('/', home);

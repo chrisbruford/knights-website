@@ -11,7 +11,10 @@ module.exports = (member,maxAge) => {
                 return user.id === member.id;
             });
 
-            if (!userLog) {return console.log("no such user found")}
+            if (!userLog) {
+                //not spoken since this function was implemented
+                return mark(member);
+            }
 
             let elapsedTime = Date.now() - userLog.lastMessage;
 

@@ -30,10 +30,18 @@ function Whois() {
                     for (var i in sortedMember) {
                         memberCount++;
                         var member = sortedMember[i];
-                        for (var j in argsArray) {
+                        for (let j = 0; j < argsArray.length; j++) {
                             var inputName = argsArray[j].trim().toLowerCase();
+                            if (inputName.length < 3) {
+                                msg.channel.sendMessage(`I need at least 3 characters to search, skipping ${inputName}`);
+                                argsArray.splice(j,1);
+                                j--; //compensate for removal of 1 element
+                                continue;
+                            }
+
                             var username = member.user.username.toLowerCase();
                             var nickname = member.nickname ? member.nickname.toLowerCase():member.nickname;
+
                             if (username.includes(inputName) || (member.nickname && nickname.includes(inputName))) {
                                 inputNameCount++;
                                 var createdOn = dateHelper.getUTCObj(member.user.createdAt);

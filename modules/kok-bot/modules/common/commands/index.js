@@ -20,9 +20,9 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("join", require("./join"));
     this.commandsMap.set("leave", require("./leave"));
     this.commandsMap.set("listchannels", require("./listChannels"));
-    this.commandsMap.set("addadminchannel", require("./addAdminChannel"));
-    this.commandsMap.set("addfrontdeskchannel", require("./addfrontdeskChannel"));
-    this.commandsMap.set("addlogchannel", require("./addLogChannel"));
+    this.commandsMap.set("adminchannel", require("./adminChannel"));
+    this.commandsMap.set("frontdeskchannel", require("./frontdeskChannel"));
+    this.commandsMap.set("logchannel", require("./logChannel"));
     this.commandsMap.set("listroles", require("./listRoles"));
     this.commandsMap.set("hi", require("./hi"));
     this.commandsMap.set("notes", require("./notes"));

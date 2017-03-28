@@ -21,7 +21,6 @@ class MessageLogger {
 
         if (!this.flushTimer) {
             this.flushTimer = setTimeout(() => {
-                
                 //custom static method to find document, if none found then creates new one
                 //query is returned in either event with a document
                 guildUsersModel.findOneOrCreate({guildID},{guildID})
@@ -36,20 +35,21 @@ class MessageLogger {
                                 if (user.id === userID) {
                                     users[index].lastMessage = timestamp;
                                     duplicate = true;
-                                    guildUsers.save();
-                                    delete this.flushTimer;
-                                    this.messageTimestamps.clear();
                                 }
                             })
 
                             //new record created for this user
                             if (!duplicate) {
                                 guildUsers.users.push({id:userID,lastMessage:timestamp});
-                                guildUsers.save();
-                                delete this.flushTimer;
-                                this.messageTimestamps.clear();
                             }
                         }
+
+                        //save model, clear timer and Map having flushed each user through to DB
+                        guildUsers.save()
+                        .catch(err=>console.log(err));
+                        delete this.flushTimer;
+                        this.messageTimestamps.clear();
+
                     } else {
                         throw new Error("findOneOrCreate() has not returned a model");
                     }

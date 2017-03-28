@@ -41,13 +41,13 @@ app.use('/.well-known/acme-challenge/:fileid', function(req, res){
 app.use(helmet({
   hsts: {
     force: true,
-    maxAge: 300
+    maxAge: 604800, //7 days
+    preload: true
   }
 }))
 
-// app.use(requireHTTPS);
+app.use(requireHTTPS);
 app.use(function (req, res, next) {
-  console.log('setting header');
   res.header("X-powered-by", "Blood, sweat, and tears")
   next()
 })

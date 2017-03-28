@@ -31,15 +31,15 @@ function Whois() {
                         memberCount++;
                         var member = sortedMember[i];
                         for (var j in argsArray) {
-                            var inputName = argsArray[j].trim();
-                            if (member.user.username == inputName) {
+                            var inputName = argsArray[j].trim().toLowerCase();
+                            var username = member.user.username.toLowerCase();
+                            if (username.includes(inputName)) {
                                 inputNameCount++;
                                 var createdOn = dateHelper.getUTCObj(member.user.createdAt);
                                 var joinedOn = dateHelper.getUTCObj(member.joinedAt);
                                 var rolesArray = member.roles.array();
                                 var userId = member.id
                                 var colour = member.highestRole.color;
-                                var username = member.user.username;
                                 var nick = member.nickname;
                                 var thumbnail = member.user.avatarURL;
                                 var author = username + "#" + member.user.discriminator;

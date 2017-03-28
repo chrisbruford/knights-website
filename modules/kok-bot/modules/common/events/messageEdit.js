@@ -10,21 +10,6 @@ module.exports = function MessageEdit(oldMessage, newMessage, guildID) {
             if (guild) {
                 let botChannel = client.channels.get(guild.logChannelID.toString());
 
-                var createdOn = dateHelper.getUTCObj(oldMessage.createdAt);
-                var editedOn = dateHelper.getUTCObj(newMessage.createdAt);
-
-                var createdString = dateHelper.DateFormat(createdOn.utcDate, 2) + " "
-                    + dateHelper.months(createdOn.utcMonth) + " "
-                    + createdOn.utcFullYear + " "
-                    + dateHelper.DateFormat(createdOn.utcHours, 2) + ":"
-                    + dateHelper.DateFormat(createdOn.utcMinutes, 2);
-
-                var editedString = dateHelper.DateFormat(editedOn.utcDate, 2) + " "
-                    + dateHelper.months(editedOn.utcMonth) + " "
-                    + editedOn.utcFullYear + " "
-                    + dateHelper.DateFormat(editedOn.utcHours, 2) + ":"
-                    + dateHelper.DateFormat(editedOn.utcMinutes, 2);
-
                 var embed = new Discord.RichEmbed();
                 embed.setTitle(`Message Edited by ${newMessage.author.username}`);
                 embed.setTimestamp(new Date(newMessage.createdAt));

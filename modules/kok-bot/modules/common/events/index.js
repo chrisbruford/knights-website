@@ -20,7 +20,11 @@ client.on("message",msg=>{
 
 client.on("presenceUpdate",(oldMember,newMember)=>{
     if (oldMember.presence.status === "offline") {
+        console.log(`${newMember.user.username} has come online, checking activity`);
         inactiveTracker.check(newMember,1.21e9) //14 days
+        .then(()=>{
+            console.log("checking complete");
+        })
         .catch(err=>{
             console.log(err);
         })

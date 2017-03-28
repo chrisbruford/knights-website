@@ -34,7 +34,7 @@ function Whois() {
                             var inputName = argsArray[j].trim().toLowerCase();
                             var username = member.user.username.toLowerCase();
                             var nickname = member.nickname.toLowerCase();
-                            if (username.includes(inputName) || nickname.includs(inputName)) {
+                            if (username.includes(inputName) || nickname.includes(inputName)) {
                                 inputNameCount++;
                                 var createdOn = dateHelper.getUTCObj(member.user.createdAt);
                                 var joinedOn = dateHelper.getUTCObj(member.joinedAt);

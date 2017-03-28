@@ -13,6 +13,10 @@ client.on("ready", () => {
     guild = client.guilds.get(kokGuildID);
 });
 
+client.on("reconnecting",()=>{
+    console.log('kokbot reconnecting');
+})
+
 client.on("error", err => {
     console.log('kokbot error:', err)
 })

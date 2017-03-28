@@ -6,12 +6,11 @@ const messageLogger = require('../messageLogger');
 const inactiveTracker = require('../../inactive-tracker');
 
 client.on("messageDelete", msg => {
-    console.log("message deleted");
     require("./messageDelete.js")(msg, guildID);
 });
 
 client.on("messageUpdate", (msgOld, msgNew) => {
-    console.log("message edited");
+    if (msgOld.content === msgNew.content) { return; }
     require("./messageEdit.js")(msgOld, msgNew, guildID);
 });
 
@@ -21,7 +20,11 @@ client.on("message",msg=>{
 
 client.on("presenceUpdate",(oldMember,newMember)=>{
     if (oldMember.presence.status === "offline") {
+        console.log(`${newMember.user.username} has come online, checking activity`);
         inactiveTracker.check(newMember,1.21e9) //14 days
+        .then(()=>{
+            console.log("checking complete");
+        })
         .catch(err=>{
             console.log(err);
         })

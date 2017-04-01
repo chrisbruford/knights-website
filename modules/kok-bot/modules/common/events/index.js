@@ -31,6 +31,14 @@ client.on("presenceUpdate", (oldMember, newMember) => {
                 console.log(err);
             })
     }
+});
+
+client.on("guildMemberRemove", (guildMember) => {
+    require("./serverLeave.js")(guildMember, guildID);
 })
+
+client.on("guildMemberAdd", (guildMember => {
+    require("./serverAdd.js")(guildMember, guildID);
+}))
 
 console.log("Events ready");

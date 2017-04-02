@@ -26,6 +26,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("listroles", require("./listRoles"));
     this.commandsMap.set("hi", require("./hi"));
     this.commandsMap.set("notes", require("./notes"));
+    this.commandsMap.set("roll", require("./roll"));
     this.commandsMap.set("dist", require("./dist"));
     this.commandsMap.set("time", require("./time"));
     this.commandsMap.set("whois", require("./whois"));

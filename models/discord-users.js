@@ -11,11 +11,12 @@ let guildUsers = new Schema({
             unique: true,
             type: String
         },
-        lastMessage: Date
+        lastMessage: Date,
+        notes: [String]
     }]
 });
 
-guildUsers.statics.findOneOrCreate = function(condition, doc) {
+guildUsers.statics.findOneOrCreate = function (condition, doc) {
     return this.findOne(condition)
         .then(guildUsers => {
             if (guildUsers) {

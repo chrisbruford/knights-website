@@ -53,7 +53,7 @@ function Roll() {
                             sum = sum + roll;
                         })
 
-                        msg.channel.sendMessage(`You :game_die: ${rolls} (Sum : ${sum})`);
+                        msg.channel.sendMessage(`:game_die: You rolled ${rolls} (Sum : ${sum})`);
                     } else {
                         msg.channel.sendMessage(responseDict.fail());
                     }

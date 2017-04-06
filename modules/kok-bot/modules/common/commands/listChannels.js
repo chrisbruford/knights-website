@@ -28,6 +28,7 @@ function ListChannels() {
     }
 }
 
-let helpMessage = "listchannels - Lists down all the channels present in the server";
+let helpMessage = "Lists down all the channels present in the server";
+let template = "listchannels";
 
-help.AddHelp("listchannels", helpMessage);
+help.AddHelp("listchannels", helpMessage, template);

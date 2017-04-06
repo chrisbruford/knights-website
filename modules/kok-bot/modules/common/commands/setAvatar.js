@@ -29,6 +29,7 @@ function SetAvatar() {
     }
 }
 
-let helpMessage = "setavatar - Attach the image along with this command to set the avatar";
+let helpMessage = "Attach the image along with this command to set the avatar";
+let template = "setavatar";
 
-help.AddHelp("setavatar", helpMessage);
+help.AddHelp("setavatar", helpMessage, template);

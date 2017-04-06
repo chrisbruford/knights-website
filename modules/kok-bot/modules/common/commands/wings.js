@@ -180,6 +180,7 @@ function Wings() {
     }
 }
 
-let helpMessage = "wings <add|remove|list|join|leave|members> <role Id> - Adds,Removes the specified role as a wing or lists the wings. Also to join,leave the wing and display all members of a wing";
+let helpMessage = "Adds,Removes the specified role as a wing or lists the wings. Also to join,leave the wing and display all members of a wing";
+let template = "wings <add|remove|list|join|leave|members> <role Id>";
 
-help.AddHelp("wings", helpMessage);
+help.AddHelp("wings", helpMessage, template);

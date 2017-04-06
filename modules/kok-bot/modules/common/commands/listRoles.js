@@ -27,6 +27,7 @@ function ListRoles() {
     }
 }
 
-let helpMessage = "listroles - Lists down all the roles present in the server";
+let helpMessage = "Lists down all the roles present in the server";
+let template = "listroles";
 
-help.AddHelp("listroles", helpMessage);
+help.AddHelp("listroles", helpMessage, template);

@@ -26,6 +26,7 @@ function Ping() {
     }
 }
 
-let helpMessage = "ping - Display latency of the server";
+let helpMessage = "Display latency of the server";
+let template = "ping";
 
-help.AddHelp("ping", helpMessage);
+help.AddHelp("ping", helpMessage, template);

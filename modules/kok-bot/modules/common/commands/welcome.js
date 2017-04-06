@@ -115,7 +115,9 @@ class Welcome {
 
 }
 
-let helpMessage = "welcome <add|remove|show> <channel> <message> - Adds,Removes or Shows the welcome message for this Guild.";
-help.AddHelp("welcome", helpMessage);
+let helpMessage = "Adds,Removes or Shows the welcome message for this Guild.";
+let template = "welcome <add|remove|show> <channel> <message>";
+
+help.AddHelp("welcome", helpMessage, template);
 
 module.exports = new Welcome();

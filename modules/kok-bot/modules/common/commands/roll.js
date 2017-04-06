@@ -69,6 +69,7 @@ function Roll() {
     }
 }
 
-let helpMessage = "roll <xdy> - Rolls a y sided dice x times. Both x and y are optional and defaults to 1 and 6 respectively";
+let helpMessage = "Rolls a y sided dice x times. Both x and y are optional and defaults to 1 and 6 respectively";
+let template = "roll <xdy>";
 
-help.AddHelp("roll", helpMessage);
+help.AddHelp("roll", helpMessage, template);

@@ -91,6 +91,7 @@ function PublicRoles() {
     }
 }
 
-let helpMessage = "publicroles <add|remove|list> <role Id> - Adds,Removes the specified role as a public role or lists the public roles";
+let helpMessage = "Adds,Removes the specified role as a public role or lists the public roles";
+let template = "publicroles <add|remove|list> <role Id>";
 
-help.AddHelp("publicroles", helpMessage);
+help.AddHelp("publicroles", helpMessage, template);

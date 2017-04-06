@@ -89,6 +89,7 @@ function AdminChannel() {
     }
 }
 
-let helpMessage = "adminchannel <add|remove|list> <channel Id> - Adds,Removes the specified channel as an admin channel or lists the admin channel";
+let helpMessage = "Adds,Removes the specified channel as an admin channel or lists the admin channel";
+let template = "adminchannel <add|remove|list> <channel Id>";
 
-help.AddHelp("adminchannel", helpMessage);
+help.AddHelp("adminchannel", helpMessage, template);

@@ -90,6 +90,7 @@ function MemberRoles() {
     }
 }
 
-let helpMessage = "memberroles <add|remove|list> <role Id> - Adds,Removes the specified role as a member role or lists the member roles";
+let helpMessage = "Adds,Removes the specified role as a member role or lists the member roles";
+let template = "memberroles <add|remove|list> <role Id>";
 
-help.AddHelp("memberroles", helpMessage);
+help.AddHelp("memberroles", helpMessage, template);

@@ -99,7 +99,11 @@ function HelpList(displayCommands, embed, msg) {
         embed.addField(`${index + 1}. ${help.command}`, help.helpMessage);
     });
 
-    return msg.channel.sendEmbed(embed);
+    if (msg.member) {
+        return msg.member.sendEmbed(embed);
+    } else {
+        return msg.channel.sendEmbed(embed);
+    }
 }
 
 function HelpEmoji(displayCommands, displayState, maxDisplayState, msg) {
@@ -168,5 +172,9 @@ function HelpDescription(command, embed, msg) {
     embed.addField("Description", command.helpMessage);
     embed.addField("Example", command.template);
 
-    return msg.channel.sendEmbed(embed);
+    if (msg.member) {
+        return msg.member.sendEmbed(embed);
+    } else {
+        return msg.channel.sendEmbed(embed);
+    }
 }

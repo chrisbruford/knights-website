@@ -19,6 +19,7 @@ function Help() {
         this.displayState = 0;
         this.helpDepth = 0;
         this.numberSelected = 0;
+        msg.channel.sendMessage("I have DM'd the help documents to you");
         this.Display(msg);
     }
 

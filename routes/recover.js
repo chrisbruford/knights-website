@@ -22,7 +22,7 @@ router.get('/:username', function (req, res) {
                                 token.setToken().then(uuid => {
                                     let nodemailer = require('../modules/mailer');
                                     let domain = process.env.domain || require('../secrets').domain;
-                                    let url = `${domain}/#/resetpassword/${uuid}`
+                                    let url = `${domain}/changepassword/${uuid}`
 
                                     let options = {
                                         from: 'admin@mail.knightsofkarma.com',

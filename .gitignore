@@ -3,3 +3,4 @@ azure.err
 *.publishsettings
 secrets.js
 npm-debug.log.*
+.DS_Store

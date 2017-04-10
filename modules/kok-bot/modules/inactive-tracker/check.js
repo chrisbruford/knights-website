@@ -13,11 +13,16 @@ module.exports = (member,maxAge) => {
 
             let timeAsMember = Date.now() - member.joinedAt;
 
-            if (!userLog && timeAsMember > maxAge) {
-                //not spoken since this function was implemented
-                //and been in server for longer than maxAge
-                console.log(`marking unknown member ${member.user.username}`);
-                return mark(member);
+            if (!userLog) {
+                if (!timeAsMember > maxAge) {
+                    //not spoken since this function was implemented
+                    //and been in server for longer than maxAge
+                    console.log(`marking member ${member.user.username} who has never spoken`);
+                    return mark(member);
+                } else {
+                    console.log(`not marking new member ${member.user.username}`);
+                    return;
+                }
             }
 
             let elapsedTime = Date.now() - userLog.lastMessage;

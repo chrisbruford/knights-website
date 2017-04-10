@@ -11,8 +11,11 @@ module.exports = (member,maxAge) => {
                 return user.id === member.id;
             });
 
-            if (!userLog) {
+            let timeAsMember = Date.now() - member.joinedAt;
+
+            if (!userLog && timeAsMember > maxAge) {
                 //not spoken since this function was implemented
+                //and been in server for longer than maxAge
                 console.log(`marking unknown member ${member.user.username}`);
                 return mark(member);
             }

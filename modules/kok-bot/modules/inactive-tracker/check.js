@@ -1,13 +1,22 @@
 let discordUsers = require('../../../../models/discord-users');
+const GuildController = require('../controllers/guild-controller');
 let mark = require('./mark');
 let unmark = require('./unmark');
 
-module.exports = (member,maxAge) => {
-    return discordUsers.findOne({guildID: member.guild.id})
-        .then(guild=>{
-            if (!guild) {return console.log("no such guild found")}
+module.exports = (member, maxAge) => {
 
-            userLog = guild.users.find(user=>{
+    return GuildController.find(member.guild.id).then(guild => {
+        return new Promise((resolve, reject) => {
+            if (!guild.inactiveRole) {
+                reject("No inactiveRole set");
+            }
+            resolve(discordUsers.findOne({ guildID: member.guild.id }));
+        })
+    })
+        .then(guild => {
+            if (!guild) { return console.log("no such guild found") }
+
+            userLog = guild.users.find(user => {
                 return user.id === member.id;
             });
 
@@ -27,7 +36,7 @@ module.exports = (member,maxAge) => {
 
             let elapsedTime = Date.now() - userLog.lastMessage;
 
-            if (elapsedTime>maxAge) {
+            if (elapsedTime > maxAge) {
                 console.log(`marking member ${member.user.username}`);
                 return mark(member);
             } else {
@@ -35,7 +44,7 @@ module.exports = (member,maxAge) => {
                 return unmark(member);
             }
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err);
         })
 }

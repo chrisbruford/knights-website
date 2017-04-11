@@ -12,7 +12,8 @@ let guildUsers = new Schema({
             type: String
         },
         lastMessage: Date,
-        notes: [String]
+        notes: [String],
+        activityRolesRemoved: [String]
     }]
 });
 

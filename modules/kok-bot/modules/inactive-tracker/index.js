@@ -2,6 +2,7 @@ let mark = require('./mark');
 let unmark = require('./unmark');
 let check = require('./check');
 let inactives = require('./inactive-role');
+let activityRoles = require('./activity-roles');
 
 //fetch guilds that are tracking inactive users by testing for
 //existance of inactiveRole and adding guildID to a set.
@@ -18,5 +19,6 @@ module.exports = {
     mark,
     unmark,
     check,
-    inactives
+    inactives,
+    activityRoles
 }

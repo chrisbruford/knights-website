@@ -10,6 +10,22 @@ module.exports = (member, maxAge) => {
             if (!guild.inactiveRole) {
                 reject("No inactiveRole set");
             }
+
+            //if member has no activityRoles on them, then ignore
+            let noTrack = true;
+
+            for (let i = 0; i < guild.activityRoles.length; i++) {
+                let activityRole = guild.activityRoles[i];
+                if (member.roles.get(activityRole)) {
+                    noTrack = false;
+                    break;
+                }
+            }
+
+            if (noTrack) { 
+                reject("User should not be tracked") 
+            }
+            
             resolve(discordUsers.findOne({ guildID: member.guild.id }));
         })
     })

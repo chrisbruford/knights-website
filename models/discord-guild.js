@@ -19,6 +19,7 @@ let guild = new Schema({
     memberRoles: [String],
     publicRoles: [{name: String, id: String}],
     inactiveRole: String,
+    activityRoles: [String],
     welcomeMessage: String,
     welcomeChannelID: String
 });

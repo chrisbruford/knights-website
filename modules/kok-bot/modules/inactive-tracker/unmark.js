@@ -1,9 +1,10 @@
-const guildModel = require('../../../../models/discord-guild');
+const GuildController = require('../controllers/guild-controller');
 
 module.exports = (member) => {
-    return guildModel.findOne({guildID: member.guild.id})
+    return GuildController.find(member.guild.id)
         .then(guild=>{
             if (!guild) {return console.log('no such guild found')}
+            if (!guild.inactiveRole) {return console.log('no inactiveRole set')}
             return member.removeRole(guild.inactiveRole);
         })
         .catch(err=>{

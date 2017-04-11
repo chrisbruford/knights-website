@@ -1,6 +1,7 @@
 "use strict";
 const discordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
+const GuildController = require('../controllers/guild-controller');
 
 module.exports = new Inactives();
 
@@ -9,14 +10,17 @@ function Inactives() {
     this.add = (inactiveRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(inactiveRoleID)) {
-                discordGuildModel.findOneAndUpdate(
-                    { guildID: thisGuild.id },
-                    { $set: { inactiveRole: inactiveRoleID } },
-                    {
-                        upsert: true,
-                        runValidators: true,
-                        setDefaultsOnInsert: true
-                    })
+                GuildController.find(thisGuild.id).then(guild => {
+                    if (guild) {
+                        guild.inactiveRole = inactiveRoleID;
+                        return guild.save();
+                    } else {
+                        return discordGuildModel.create({
+                            guildID: thisGuild.id,
+                            inactiveRole: inactiveRoleID
+                        })
+                    }
+                })
                     .then(guild => resolve(guild))
                     .catch(err => {
                         console.log(err);
@@ -33,21 +37,20 @@ function Inactives() {
     //remove the role from the server
     this.remove = (thisGuild) => {
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOneAndUpdate(
-                { guildID: thisGuild.id },
-                { $unset: { inactiveRole: 1 } },
-                {
-                    upsert: true,
-                    runValidators: true,
-                    setDefaultsOnInsert: true
-                })
+            GuildController.find(thisGuild.id)
                 .then(guild => {
-                    resolve(guild);
+                    if (guild) {
+                        guild.inactiveRole = undefined;
+                        return guild.save();
+                    } else {
+                        reject(new Error('No guild found'));
+                    }
                 })
+                .then(guild => resolve(guild))
                 .catch(err => {
                     console.log(err);
                     reject(err);
-                })
+                });
         });
     }
 
@@ -59,17 +62,17 @@ function Inactives() {
         let discordRoles = discordGuild.roles;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
-                .then(guild => {
-                    if (guild && guild.inactiveRole) {
-                        let inactiveRole = discordRoles.get(guild.inactiveRole);
-                        if (inactiveRole) {
-                            resolve("```" + `${inactiveRole.name} : ${inactiveRole.id}` + "```");
-                        }
-                    } else {
-                        reject(new Error("Could not find any roles"))
+
+            GuildController.find(guildID).then(guild => {
+                if (guild && guild.inactiveRole) {
+                    let inactiveRole = discordRoles.get(guild.inactiveRole);
+                    if (inactiveRole) {
+                        resolve("```" + `${inactiveRole.name} : ${inactiveRole.id}` + "```");
                     }
-                })
+                } else {
+                    reject(new Error("Could not find any roles"))
+                }
+            })
                 .catch(err => {
                     console.log(err);
                     reject(err);

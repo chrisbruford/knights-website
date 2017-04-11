@@ -64,13 +64,15 @@ class ActivityRoles {
         return new Promise((resolve, reject) => {
 
             GuildController.find(guildID).then(guild => {
-                if (guild && guild.activityRoles) {
-
+                if (guild && guild.activityRoles.length>0) {
                     let message = "```";
 
                     guild.activityRoles.forEach(activityRole=>{
+                        console.log(`searching for ${activityRole}`);
                         let foundActivityRole = discordRoles.get(activityRole);
+                        console.log(`result: ${foundActivityRole}`);
                         if (foundActivityRole) {
+                            console.log(`adding ${foundActivityRole.name} to message`);
                             message += `${foundActivityRole.name} : ${foundActivityRole.id}\n`;
                         }
                     })

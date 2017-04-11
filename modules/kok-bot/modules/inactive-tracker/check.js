@@ -39,7 +39,7 @@ module.exports = (member, maxAge) => {
             let timeAsMember = Date.now() - member.joinedAt;
 
             if (!userLog) {
-                if (!timeAsMember > maxAge) {
+                if (timeAsMember > maxAge) {
                     //not spoken since this function was implemented
                     //and been in server for longer than maxAge
                     console.log(`marking member ${member.user.username} who has never spoken`);

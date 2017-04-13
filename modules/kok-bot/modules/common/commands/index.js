@@ -17,6 +17,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("memberroles", require("./memberRoles"));
     this.commandsMap.set("publicroles", require("./publicRoles"));
     this.commandsMap.set("inactiverole", require("./inactiveRole"));
+    this.commandsMap.set("activityroles", require("./activityRoles"));
     this.commandsMap.set("join", require("./join"));
     this.commandsMap.set("leave", require("./leave"));
     this.commandsMap.set("listchannels", require("./listChannels"));

@@ -76,7 +76,7 @@ function Karma() {
 
     this.add = (msg, argsArray) => {
         if (argsArray.length === 3) {
-            reqAccess(msg.guild, msg.member, 3)
+            reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
                     return new Promise((resolve, reject) => {
                         let karma = argsArray[1];
@@ -136,7 +136,7 @@ function Karma() {
 
     this.remove = (msg, argsArray) => {
         if (argsArray.length === 3) {
-            reqAccess(msg.guild, msg.member, 3)
+            reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
                     return new Promise((resolve, reject) => {
                         let karma = argsArray[1];
@@ -196,7 +196,7 @@ function Karma() {
 
     this.give = (msg, argsArray) => {
         if (argsArray.length === 3) {
-            reqAccess(msg.guild, msg.member, 3)
+            reqAccess(msg.guild, msg.member, 0)
                 .then(() => {
                     return new Promise((resolve, reject) => {
                         let karma = argsArray[1];

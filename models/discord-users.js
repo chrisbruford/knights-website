@@ -13,7 +13,8 @@ let guildUsers = new Schema({
         },
         lastMessage: Date,
         notes: [String],
-        activityRolesRemoved: [String]
+        activityRolesRemoved: [String],
+        karma: Number
     }]
 });
 

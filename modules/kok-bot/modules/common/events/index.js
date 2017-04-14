@@ -31,7 +31,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
                 console.log("checking complete");
             })
             .catch(err => {
-                console.log(err);
+                logger.log(err);
             })
     }
 });

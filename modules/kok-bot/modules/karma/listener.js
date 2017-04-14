@@ -3,7 +3,7 @@ let client = require('../common/client');
 let guildUsersModel = require('../../../../models/discord-users.js');
 
 client.on("message", msg => {
-    if (msg.content.match(/(thanks)|(thank)|(cheers)|(thnks)|(thnx)|(thx)/igm)) {
+    if (msg.content.match(/(^|\s)(thanks)($|\s)|(^|\s)(thank)($|\s)|(^|\s)(cheers)($|\s)|(^|\s)(thnks)($|\s)|(^|\s)(thnx)($|\s)|(^|\s)(thx)|(^|\s)(ty)(\s|$)/igm)) {
 
         var mentioned = msg.mentions.users;
         var mentionUsers = new Array();

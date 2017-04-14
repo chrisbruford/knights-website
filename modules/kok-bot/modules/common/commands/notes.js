@@ -28,7 +28,7 @@ function Notes() {
     }
 
     this.add = (msg, argsArray) => {
-        if (argsArray.length > 2) {
+        if (argsArray.length >= 2) {
             reqAccess(msg.guild, msg.member, 0)
                 .then(() => {
                     return new Promise((resolve, reject) => {

@@ -1,6 +1,7 @@
 "use strict";
 console.log('starting kokbot');
 require('./modules/common/stringHelper'); //adds methods to String proto
+require('./modules/karma');
 const logger = require('../logger');
 
 const client = require('./modules/common/client');

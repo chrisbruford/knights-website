@@ -78,18 +78,24 @@ function Help() {
                 .then(msg => {
                     this.helpMessageID = msg.id;
                     HelpEmoji(displayCommands, this.displayState, maxDisplayState, msg);
+                })
+                .catch(err => {
+                    console.log(err);
                 });
         } else if (this.helpDepth === 1) {
             HelpDescription(this.helpArray[this.displayState * 10 + this.numberSelected - 1], embed, msg)
                 .then(msg => {
                     this.helpMessageID = msg.id;
                     msg.react("⬅")
-                        .then(msgReaction => {
-                            resolve(msgReaction.message);
-                        })
+                        // .then(msgReaction => {
+                        //     resolve(msgReaction.message);
+                        // })
                         .catch(err => {
-                            reject(err);
+                            console.log(err);
                         });
+                })
+                .catch(err => {
+                    console.log(err);
                 });
         }
     }

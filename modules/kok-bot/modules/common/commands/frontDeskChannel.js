@@ -89,6 +89,7 @@ function FrontDeskChannel() {
     }
 }
 
-let helpMessage = "frontDeskchannel <add|remove|list> <channel Id> - Adds,Removes the specified channel as an front desk channel or lists the front desk channel";
+let helpMessage = "Adds,Removes the specified channel as an front desk channel or lists the front desk channel";
+let template = "frontDeskchannel <add|remove|list> <channel Id>";
 
-help.AddHelp("frontdeskchannel", helpMessage);
+help.AddHelp("frontdeskchannel", helpMessage, template);

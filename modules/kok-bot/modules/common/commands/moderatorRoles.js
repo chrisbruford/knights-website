@@ -90,6 +90,7 @@ function ModeratorRoles() {
     }
 }
 
-let helpMessage = "moderatorroles <add|remove|list> <role Id> - Adds,Removes the specified role as a moderator role or lists the moderator roles";
+let helpMessage = "Adds,Removes the specified role as a moderator role or lists the moderator roles";
+let template = "moderatorroles <add|remove|list> <role Id>";
 
-help.AddHelp("moderatorroles", helpMessage);
+help.AddHelp("moderatorroles", helpMessage, template);

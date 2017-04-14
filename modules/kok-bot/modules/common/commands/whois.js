@@ -118,6 +118,7 @@ function Whois() {
     }
 }
 
-let helpMessage = "whois <user1,user2,...> - Find users in the server";
+let helpMessage = "Find users in the server";
+let template = "whois <user1,user2,...>";
 
-help.AddHelp("whois", helpMessage);
+help.AddHelp("whois", helpMessage, template);

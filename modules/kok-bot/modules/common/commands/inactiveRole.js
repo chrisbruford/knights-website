@@ -90,6 +90,7 @@ function InactiveTrackerCommands() {
     }
 }
 
-let helpMessage = "inactiveroles <add|remove|list> <role Id> - Adds,Removes the specified role as the inactive role or lists the inactive role";
+let helpMessage = "Adds,Removes the specified role as the inactive role or lists the inactive role";
+let template = "inactiveroles <add|remove|list> <role Id>";
 
-help.AddHelp("inactiveroles", helpMessage);
+help.AddHelp("inactiveroles", helpMessage, template);

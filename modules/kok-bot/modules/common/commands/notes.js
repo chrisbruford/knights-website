@@ -167,6 +167,7 @@ function Notes() {
     }
 }
 
-let helpMessage = "notes <add|remove|list> <note|index> - Adds a note, Removes a note of specified index or DMs you all the notes";
+let helpMessage = "Adds a note, Removes a note of specified index or DMs you all the notes";
+let template = "notes <add|remove|list> <note|index>";
 
-help.AddHelp("notes", helpMessage);
+help.AddHelp("notes", helpMessage, template);

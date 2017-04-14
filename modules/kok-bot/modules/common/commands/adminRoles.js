@@ -90,6 +90,7 @@ function AdminRoles() {
     }
 }
 
-let helpMessage = "adminroles <add|remove|list> <role Id> - Adds,Removes the specified role as an admin role or lists the admin roles";
+let helpMessage = "Adds,Removes the specified role as an admin role or lists the admin roles";
+let template = "adminroles <add|remove|list> <role Id>";
 
-help.AddHelp("adminroles", helpMessage);
+help.AddHelp("adminroles", helpMessage, template);

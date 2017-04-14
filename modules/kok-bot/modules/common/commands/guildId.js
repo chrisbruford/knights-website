@@ -27,6 +27,7 @@ function GuildId() {
     }
 }
 
-let helpMessage = "guildid - Displays the id of the server";
+let helpMessage = "Displays the id of the server";
+let template = "guildid";
 
-help.AddHelp("guildid", helpMessage);
+help.AddHelp("guildid", helpMessage, template);

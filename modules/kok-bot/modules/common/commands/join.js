@@ -39,7 +39,8 @@ class Join {
 
 }
 
-let helpMessage = "join <role name> - Assigns a public role to you";
-help.AddHelp("join", helpMessage);
+let helpMessage = "Assigns a public role to you";
+let template = "join <role name>";
+help.AddHelp("join", helpMessage, template);
 
 module.exports = new Join();

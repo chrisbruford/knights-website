@@ -89,6 +89,7 @@ function LogChannel() {
     }
 }
 
-let helpMessage = "logchannel <add|remove|list> <channel Id> - Adds,Removes the specified channel as an log channel or lists the log channel";
+let helpMessage = "Adds,Removes the specified channel as an log channel or lists the log channel";
+let template = "logchannel <add|remove|list> <channel Id>";
 
-help.AddHelp("logchannel", helpMessage);
+help.AddHelp("logchannel", helpMessage, template);

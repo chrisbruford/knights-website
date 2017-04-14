@@ -84,6 +84,7 @@ function Guildinfo() {
     }
 }
 
-let helpMessage = "guildinfo - Display information about the server";
+let helpMessage = "Display information about the server";
+let template = "guildinfo";
 
-help.AddHelp("guildinfo", helpMessage);
+help.AddHelp("guildinfo", helpMessage, template);

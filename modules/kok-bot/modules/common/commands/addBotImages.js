@@ -70,6 +70,7 @@ function AddBotImages() {
     }
 }
 
-let helpMessage = "addbotimages <image Type> <Attached Image> - Adds an image to the list of specific images that the bot can show";
+let helpMessage = "Adds an image to the list of specific images that the bot can show";
+let template = "addbotimages <image Type> <Attached Image>";
 
-help.AddHelp("addbotimages", helpMessage);
+help.AddHelp("addbotimages", helpMessage, template);

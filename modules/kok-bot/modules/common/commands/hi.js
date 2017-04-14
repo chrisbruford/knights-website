@@ -11,6 +11,7 @@ function Hi() {
     }
 }
 
-let helpMessage = "hi - Replies with Hello";
+let helpMessage = "Replies with Hello";
+let template = "hi";
 
-help.AddHelp("hi", helpMessage);
+help.AddHelp("hi", helpMessage, template);

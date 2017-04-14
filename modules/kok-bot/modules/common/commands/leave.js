@@ -40,7 +40,8 @@ class Leave {
 
 }
 
-let helpMessage = "leave <role name> - Removes a public role from you";
-help.AddHelp("leave", helpMessage);
+let helpMessage = "Removes a public role from you";
+let template = "leave <role name>";
+help.AddHelp("leave", helpMessage, template);
 
 module.exports = new Leave();

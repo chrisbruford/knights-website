@@ -1,6 +1,7 @@
 "use strict";
 console.log('starting kokbot');
 require('./modules/common/stringHelper'); //adds methods to String proto
+const logger = require('../logger');
 
 const client = require('./modules/common/client');
 let token = process.env.discordToken || require('../../secrets').discord.token;
@@ -39,7 +40,7 @@ client.on("reconnecting", () => {
 })
 
 client.on("error", err => {
-    console.log('kokbot error:', err)
+    logger.log(err);
 })
 
 client.login(token)
@@ -47,8 +48,12 @@ client.login(token)
         console.log('bot logged in okay');
     })
     .catch(err => {
-        console.log('login error:', err);
+        logger.log(err);
     })
+
+client.on("disconnect",(err)=>{
+    logger.log(err);
+})
 
 //modules
 let register = require('./modules/register');

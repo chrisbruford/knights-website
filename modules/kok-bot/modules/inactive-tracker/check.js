@@ -9,21 +9,32 @@ module.exports = (member, maxAge) => {
         return new Promise((resolve, reject) => {
             if (!guild.inactiveRole) {
                 reject("No inactiveRole set");
+                return;
             }
 
-            //if member has no activityRoles on them, then ignore
+            //if member has no activityRoles or the inactiveRole on them, then ignore
             let noTrack = true;
 
-            for (let i = 0; i < guild.activityRoles.length; i++) {
-                let activityRole = guild.activityRoles[i];
-                if (member.roles.get(activityRole)) {
-                    noTrack = false;
-                    break;
+            //quick win check - if they are marked as inactive then we need to track
+            //and need not check user for each of the activity roles
+            if (member.roles.get(guild.inactiveRole)) {
+                noTrack = false;
+            } else if (guild.activityRoles) {
+                for (let i = 0; i < guild.activityRoles.length; i++) {
+                    let activityRole = guild.activityRoles[i];
+                    if (member.roles.get(activityRole)) {
+                        noTrack = false;
+                        break;
+                    }
                 }
+            } else {
+                reject("No activity roles set");
+                return;
             }
 
             if (noTrack) { 
-                reject("User should not be tracked") 
+                reject("User should not be tracked");
+                return;
             }
             
             resolve(discordUsers.findOne({ guildID: member.guild.id }));

@@ -61,7 +61,8 @@ module.exports = (member, maxAge) => {
                 }
             }
 
-            let elapsedTime = Date.now() - userLog.lastMessage;
+            //if user has never spoken then set elapsedTime to infinity
+            let elapsedTime = userLog.lastMessage ? Date.now() - userLog.lastMessage : Infinity;
 
             if (elapsedTime > maxAge) {
                 console.log(`marking member ${member.user.username}`);

@@ -8,7 +8,8 @@ let botImages = new Schema({
     },
     smh: [String],
     banHammer: [String],
-    lol: [String]
+    lol: [String],
+    shame: [String]
 });
 
 module.exports = mongoose.model('botImages', botImages);

@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 let guildUsersModel = require('../../../../../models/discord-users.js');
@@ -26,52 +27,87 @@ function Karma() {
             }
         } else {
             if (this["show"]) {
-                this["show"](msg)
+                this["show"](msg, [])
             } else {
                 msg.channel.sendMessage("Unknown command");
             }
         }
     }
 
-    this.show = msg => {
-        reqAccess(msg.guild, msg.member, 0)
-            .then(() => {
-                let guildID = msg.guild.id;
-                guildUsersModel.findOneOrCreate({ guildID }, { guildID })
-                    .then(guildUsers => {
-                        if (guildUsers) {
-                            let duplicate = false;
-                            guildUsers.users.forEach((user, index, users) => {
-                                if (user.id === msg.author.id) {
-                                    if (!users[index].karma) {
-                                        users[index].karma = 0;
-                                    }
-                                    msg.channel.sendMessage(`You have got ${user.karma} karma`)
-                                    duplicate = true;
-                                }
-                            });
-                            if (!duplicate) {
-                                guildUsers.users.push({ id: msg.member.id, karma: 0 });
-                            }
-                            guildUsers.save()
-                                .catch(err => {
-                                    console.log(err);
-                                });
-                        } else {
-                            throw new Error("findOneOrCreate() has not returned a model");
+    this.show = (msg, argsArray) => {
+        let showKarma = (msg, mention) => {
+            let guildID = msg.guild.id;
+            guildUsersModel.findOneOrCreate({ guildID }, { guildID })
+                .then(guildUsers => {
+                    if (guildUsers) {
+                        let duplicate = false;
+                        let karmaUser = msg.author;
+                        if (mention) {
+                            karmaUser = mention;
                         }
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
-                    })
-            })
-            .catch(err => {
-                console.log(err);
-                msg.channel.sendMessage(responseDict.fail())
-                    .catch(err => console.log(err));
-            })
+                        guildUsers.users.forEach((user, index, users) => {
+                            if (user.id === karmaUser.id) {
+                                if (!users[index].karma) {
+                                    users[index].karma = 0;
+                                }
+                                if (mention) {
+                                    msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got ${user.karma} karma`);
+                                } else {
+                                    msg.channel.sendMessage(`You have got ${user.karma} karma`);
+                                }
+                                duplicate = true;
+                            }
+                        });
+                        if (!duplicate) {
+                            guildUsers.users.push({ id: karmaUser.id, karma: 0 });
+                            if (mention) {
+                                msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got 0 karma`);
+                            } else {
+                                msg.channel.sendMessage(`You have got 0 karma`);
+                            }
+                        }
+                        guildUsers.save()
+                            .catch(err => {
+                                logger.log(err);
+                            });
+                    } else {
+                        throw new Error("findOneOrCreate() has not returned a model");
+                    }
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail())
+                        .catch(err => logger.log(err));
+                })
+        }
+        if (argsArray.length === 2) {
+
+            reqAccess(msg.guild, msg.member, 3)
+                .then(() => {
+                    if (msg.mentions.users.array().length === 1) {
+                        showKarma(msg, msg.mentions.users.first());
+                    }
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail())
+                        .catch(err => logger.log(err));
+                })
+        } else if (argsArray.length === 0) {
+            reqAccess(msg.guild, msg.member, 0)
+                .then(() => {
+                    showKarma(msg);
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail())
+                        .catch(err => logger.log(err));
+                })
+        } else if (argsArray.length > 2) {
+            msg.channel.sendMessage(responseDict.tooManyParams());
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
+        }
     }
 
     this.add = (msg, argsArray) => {
@@ -108,7 +144,7 @@ function Karma() {
                                                 resolve(guild);
                                             })
                                             .catch(err => {
-                                                console.log(err);
+                                                logger.log(err);
                                                 reject(err);
                                             });
                                     } else {
@@ -116,7 +152,7 @@ function Karma() {
                                     }
                                 })
                                 .catch(err => {
-                                    console.log(err);
+                                    logger.log(err);
                                     reject(err);
                                 })
                         }
@@ -124,7 +160,7 @@ function Karma() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
@@ -168,7 +204,7 @@ function Karma() {
                                                 resolve(guild);
                                             })
                                             .catch(err => {
-                                                console.log(err);
+                                                logger.log(err);
                                                 reject(err);
                                             });
                                     } else {
@@ -176,7 +212,7 @@ function Karma() {
                                     }
                                 })
                                 .catch(err => {
-                                    console.log(err);
+                                    logger.log(err);
                                     reject(err);
                                 })
                         }
@@ -184,7 +220,7 @@ function Karma() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
@@ -240,7 +276,7 @@ function Karma() {
                                                 resolve(guild);
                                             })
                                             .catch(err => {
-                                                console.log(err);
+                                                logger.log(err);
                                                 reject(err);
                                             });
                                     } else {
@@ -248,7 +284,7 @@ function Karma() {
                                     }
                                 })
                                 .catch(err => {
-                                    console.log(err);
+                                    logger.log(err);
                                     reject(err);
                                 })
                         }
@@ -256,7 +292,7 @@ function Karma() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
@@ -316,15 +352,15 @@ function Karma() {
                             msg.channel.sendMessage(output.join("\n"));
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             msg.channel.sendMessage(responseDict.fail())
-                                .catch(err => console.log(err));
+                                .catch(err => logger.log(err));
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());

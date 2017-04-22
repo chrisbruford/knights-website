@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const roles = require('../../roles');
@@ -18,7 +19,7 @@ function ListRoles() {
                 .then(() => {
                     roles.listRoles(msg);
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -29,5 +30,6 @@ function ListRoles() {
 
 let helpMessage = "Lists down all the roles present in the server";
 let template = "listroles";
+let example = ["`-listroles`"];
 
-help.AddHelp("listroles", helpMessage, template);
+help.AddHelp("listroles", helpMessage, template, example);

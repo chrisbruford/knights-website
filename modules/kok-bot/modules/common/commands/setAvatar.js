@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const client = require('../client');
@@ -20,7 +21,7 @@ function SetAvatar() {
                     client.user.setAvatar(attachment.proxyURL);
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -30,6 +31,7 @@ function SetAvatar() {
 }
 
 let helpMessage = "Attach the image along with this command to set the avatar";
-let template = "setavatar";
+let template = "setavatar <Attached Image>";
+let example = ["`-setavatar <Attached Image>`"];
 
-help.AddHelp("setavatar", helpMessage, template);
+help.AddHelp("setavatar", helpMessage, template, example);

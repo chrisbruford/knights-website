@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const roles = require('../../roles');
@@ -36,7 +37,7 @@ function AdminRoles() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -56,7 +57,7 @@ function AdminRoles() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -73,16 +74,16 @@ function AdminRoles() {
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     } else {
                         msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -92,5 +93,9 @@ function AdminRoles() {
 
 let helpMessage = "Adds,Removes the specified role as an admin role or lists the admin roles";
 let template = "adminroles <add|remove|list> <role Id>";
+let example = [
+    "`-adminroles add 1234567890`",
+    "`-adminroles remove 1234567890`",
+    "`-adminroles list`"];
 
-help.AddHelp("adminroles", helpMessage, template);
+help.AddHelp("adminroles", helpMessage, template, example);

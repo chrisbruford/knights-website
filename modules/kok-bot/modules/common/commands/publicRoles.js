@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const roles = require('../../roles');
@@ -37,7 +38,7 @@ function PublicRoles() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -57,7 +58,7 @@ function PublicRoles() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -74,16 +75,16 @@ function PublicRoles() {
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     } else {
                         msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -93,5 +94,9 @@ function PublicRoles() {
 
 let helpMessage = "Adds,Removes the specified role as a public role or lists the public roles";
 let template = "publicroles <add|remove|list> <role Id>";
+let example = [
+    "`-publicroles add 1234567890`",
+    "`-publicroles remove 1234567890`",
+    "`-publicroles list`"];
 
-help.AddHelp("publicroles", helpMessage, template);
+help.AddHelp("publicroles", helpMessage, template, example);

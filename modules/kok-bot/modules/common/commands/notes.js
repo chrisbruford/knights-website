@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 let guildUsersModel = require('../../../../../models/discord-users.js');
@@ -52,7 +53,7 @@ function Notes() {
                                             resolve(guild);
                                         })
                                         .catch(err => {
-                                            console.log(err);
+                                            logger.log(err);
                                             reject(err);
                                         });
                                 } else {
@@ -60,14 +61,14 @@ function Notes() {
                                 }
                             })
                             .catch(err => {
-                                console.log(err);
+                                logger.log(err);
                                 reject(err);
                             })
                     })
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -94,7 +95,7 @@ function Notes() {
                                                     resolve(guild);
                                                 })
                                                 .catch(err => {
-                                                    console.log(err);
+                                                    logger.log(err);
                                                     reject(err);
                                                 });
                                         } else {
@@ -105,14 +106,14 @@ function Notes() {
 
                             })
                             .catch(err => {
-                                console.log(err);
+                                logger.log(err);
                                 reject(err);
                             })
                     })
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -141,7 +142,7 @@ function Notes() {
                                         });
                                         msg.member.user.sendEmbed(embed)
                                             .catch(err => {
-                                                console.log(err);
+                                                logger.log(err);
                                             });
                                     } else {
                                         msg.channel.sendMessage("You don't have any notes to show");
@@ -151,15 +152,15 @@ function Notes() {
 
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             msg.channel.sendMessage(responseDict.fail())
-                                .catch(err => console.log(err));
+                                .catch(err => logger.log(err));
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -169,5 +170,9 @@ function Notes() {
 
 let helpMessage = "Adds a note, Removes a note of specified index or DMs you all the notes";
 let template = "notes <add|remove|list> <note|index>";
+let example = [
+    "`-notes add This is a note`",
+    "`-notes remove 1`",
+    "`-notes list`"];
 
-help.AddHelp("notes", helpMessage, template);
+help.AddHelp("notes", helpMessage, template, example);

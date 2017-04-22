@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const dateHelper = require('../dateHelper.js');
 const help = require("./help");
@@ -19,7 +20,7 @@ function Ping() {
                             msg.channel.sendMessage("My response time is " + latency + "ms.");
                         })
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         }
@@ -28,5 +29,6 @@ function Ping() {
 
 let helpMessage = "Display latency of the server";
 let template = "ping";
+let example = ["`-ping`"];
 
-help.AddHelp("ping", helpMessage, template);
+help.AddHelp("ping", helpMessage, template, example);

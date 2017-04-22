@@ -34,5 +34,6 @@ function Time() {
 
 let helpMessage = "Find the UTC Time";
 let template = "time";
+let example = ["`-time`"];
 
-help.AddHelp("time", helpMessage, template);
+help.AddHelp("time", helpMessage, template, example);

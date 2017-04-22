@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const help = require("./help");
@@ -18,7 +19,7 @@ function GuildId() {
                     msg.channel.sendMessage(`This Guild's ID: ${msg.guild.id}`);
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -29,5 +30,6 @@ function GuildId() {
 
 let helpMessage = "Displays the id of the server";
 let template = "guildid";
+let example = ["`-guildid`"];
 
-help.AddHelp("guildid", helpMessage, template);
+help.AddHelp("guildid", helpMessage, template, example);

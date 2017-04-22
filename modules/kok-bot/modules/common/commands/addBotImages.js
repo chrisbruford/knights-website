@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const files = require('../../files');
@@ -31,7 +32,7 @@ function AddBotImages() {
 
                     fs.ensureDir(directory, err => {
                         if (err) {
-                            console.log(err);
+                            logger.log(err);
                         } else {
                             var datetimestamp = Date.now();
                             var fileExtension = Url.pathname.split('/').pop().split('.').pop();
@@ -40,7 +41,7 @@ function AddBotImages() {
 
                             https.get(options, (res) => {
                                 if (res.statusCode != 200) {
-                                    console.log("Error!" + res.statusCode);
+                                    logger.log("Error!" + res.statusCode);
                                 } else {
                                     res.pipe(file);
                                     file.on('finish', () => {
@@ -50,7 +51,7 @@ function AddBotImages() {
                                     });
 
                                     file.on('error', (error) => {
-                                        console.log(error);
+                                        logger.log(error);
                                         file.close();
                                     })
                                 }
@@ -59,7 +60,7 @@ function AddBotImages() {
                     });
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
@@ -72,5 +73,7 @@ function AddBotImages() {
 
 let helpMessage = "Adds an image to the list of specific images that the bot can show";
 let template = "addbotimages <image Type> <Attached Image>";
+let example = ["`-addbotimages lol <Attached Image>`"];
 
-help.AddHelp("addbotimages", helpMessage, template);
+
+help.AddHelp("addbotimages", helpMessage, template, example);

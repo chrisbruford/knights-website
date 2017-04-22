@@ -368,7 +368,14 @@ function Karma() {
     }
 }
 
-let helpMessage = "Adds a note, Removes a note of specified index or DMs you all the notes";
-let template = "karma <show|add|remove|list> <karma value> <user>";
+let helpMessage = "See your karma or give some karma to others. Also see the leaderboard. Admins can add or remove karma from anyone";
+let template = "karma <show|add|remove|give|leaderboard> <karma value> <user>";
+let example = [
+    "`-karma`",
+    "`-karma show @User#1234`",
+    "`-karma add 2 @User#1234`",
+    "`-karma remove 2 @User#1234`",
+    "`-karma give 2 @User#1234`",
+    "`-karma leaderboard`"];
 
-help.AddHelp("karma", helpMessage, template);
+help.AddHelp("karma", helpMessage, template, example);

@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const channels = require('../../channels');
@@ -19,7 +20,7 @@ function ListChannels() {
                     channels.listChannels(msg)
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -30,5 +31,6 @@ function ListChannels() {
 
 let helpMessage = "Lists down all the channels present in the server";
 let template = "listchannels";
+let example = ["`-listchannels`"];
 
-help.AddHelp("listchannels", helpMessage, template);
+help.AddHelp("listchannels", helpMessage, template, example);

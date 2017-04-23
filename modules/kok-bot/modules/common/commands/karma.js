@@ -5,6 +5,7 @@ const responseDict = require('../responseDict');
 let guildUsersModel = require('../../../../../models/discord-users.js');
 const help = require("./help");
 const Discord = require('discord.js');
+const karma = require('../../karma');
 
 module.exports = new Karma();
 
@@ -35,58 +36,16 @@ function Karma() {
     }
 
     this.show = (msg, argsArray) => {
-        let showKarma = (msg, mention) => {
-            let guildID = msg.guild.id;
-            guildUsersModel.findOneOrCreate({ guildID }, { guildID })
-                .then(guildUsers => {
-                    if (guildUsers) {
-                        let duplicate = false;
-                        let karmaUser = msg.author;
-                        if (mention) {
-                            karmaUser = mention;
-                        }
-                        guildUsers.users.forEach((user, index, users) => {
-                            if (user.id === karmaUser.id) {
-                                if (!users[index].karma) {
-                                    users[index].karma = 0;
-                                }
-                                if (mention) {
-                                    msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got ${user.karma} karma`);
-                                } else {
-                                    msg.channel.sendMessage(`You have got ${user.karma} karma`);
-                                }
-                                duplicate = true;
-                            }
-                        });
-                        if (!duplicate) {
-                            guildUsers.users.push({ id: karmaUser.id, karma: 0 });
-                            if (mention) {
-                                msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got 0 karma`);
-                            } else {
-                                msg.channel.sendMessage(`You have got 0 karma`);
-                            }
-                        }
-                        guildUsers.save()
-                            .catch(err => {
-                                logger.log(err);
-                            });
-                    } else {
-                        throw new Error("findOneOrCreate() has not returned a model");
-                    }
-                })
-                .catch(err => {
-                    logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => logger.log(err));
-                })
-        }
         if (argsArray.length === 2) {
-
+            var mention = msg.mentions.users.first();
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
                     if (msg.mentions.users.array().length === 1) {
-                        showKarma(msg, msg.mentions.users.first());
+                        return karma.handler.show(mention.id, msg.guild);
                     }
+                })
+                .then((karmaVal) => {
+                    msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got ${karmaVal} karma`);
                 })
                 .catch(err => {
                     logger.log(err);
@@ -96,7 +55,11 @@ function Karma() {
         } else if (argsArray.length === 0) {
             reqAccess(msg.guild, msg.member, 0)
                 .then(() => {
-                    showKarma(msg);
+                    var mention = msg.author;
+                    return karma.handler.show(mention.id, msg.guild);
+                })
+                .then((karmaVal) => {
+                    msg.channel.sendMessage(`You have got ${karmaVal} karma`);
                 })
                 .catch(err => {
                     logger.log(err);
@@ -114,49 +77,17 @@ function Karma() {
         if (argsArray.length === 3) {
             reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
-                    return new Promise((resolve, reject) => {
-                        let karma = argsArray[1];
-                        let mentions = msg.mentions.users;
-                        if (karma < 1) {
-                            msg.channel.sendMessage("Please add at least 1 karma.");
-                        } else if (mentions.array().length > 1) {
-                            msg.channel.sendMessage("Please add karma to one user at a time");
-                        } else {
-                            let guildID = msg.guild.id
-                            guildUsersModel.findOneOrCreate({ guildID }, { guildID })
-                                .then(guildUsers => {
-                                    if (guildUsers) {
-                                        let duplicate = false;
-                                        guildUsers.users.forEach((user, index, users) => {
-                                            if (user.id === mentions.first().id) {
-                                                if (!users[index].karma) {
-                                                    users[index].karma = 0;
-                                                }
-                                                users[index].karma += parseInt(karma);
-                                                duplicate = true;
-                                            }
-                                        });
-                                        if (!duplicate) {
-                                            guildUsers.users.push({ id: mentions.first().id, karma: karma });
-                                        }
-                                        guildUsers.save()
-                                            .then(guild => {
-                                                resolve(guild);
-                                            })
-                                            .catch(err => {
-                                                logger.log(err);
-                                                reject(err);
-                                            });
-                                    } else {
-                                        reject(new Error("findOneOrCreate() has not returned a model"));
-                                    }
-                                })
-                                .catch(err => {
-                                    logger.log(err);
-                                    reject(err);
-                                })
-                        }
-                    })
+                    let karmaVal = argsArray[1];
+                    let mentions = msg.mentions.users;
+                    if (karmaVal < 1) {
+                        msg.channel.sendMessage("Please add at least 1 karma.");
+                        return Promise.reject("Add at least 1 karma");
+                    } else if (mentions.array().length > 1) {
+                        msg.channel.sendMessage("Please add karma to one user at a time");
+                        return Promise.reject("Add karma to one user only");
+                    } else {
+                        return karma.handler.add(karmaVal, mentions.first().id, msg.guild);
+                    }
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
@@ -174,49 +105,17 @@ function Karma() {
         if (argsArray.length === 3) {
             reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
-                    return new Promise((resolve, reject) => {
-                        let karma = argsArray[1];
-                        let mentions = msg.mentions.users;
-                        if (karma < 1) {
-                            msg.channel.sendMessage("Please remove at least 1 karma.");
-                        } else if (mentions.array().length > 1) {
-                            msg.channel.sendMessage("Please remove karma from one user at a time");
-                        } else {
-                            let guildID = msg.guild.id
-                            guildUsersModel.findOneOrCreate({ guildID }, { guildID })
-                                .then(guildUsers => {
-                                    if (guildUsers) {
-                                        let duplicate = false;
-                                        guildUsers.users.forEach((user, index, users) => {
-                                            if (user.id === mentions.first().id) {
-                                                if (!users[index].karma) {
-                                                    users[index].karma = 0;
-                                                }
-                                                users[index].karma -= parseInt(karma);
-                                                duplicate = true;
-                                            }
-                                        });
-                                        if (!duplicate) {
-                                            guildUsers.users.push({ id: mentions.first().id, karma: -karma });
-                                        }
-                                        guildUsers.save()
-                                            .then(guild => {
-                                                resolve(guild);
-                                            })
-                                            .catch(err => {
-                                                logger.log(err);
-                                                reject(err);
-                                            });
-                                    } else {
-                                        reject(new Error("findOneOrCreate() has not returned a model"));
-                                    }
-                                })
-                                .catch(err => {
-                                    logger.log(err);
-                                    reject(err);
-                                })
-                        }
-                    })
+                    let karmaVal = argsArray[1];
+                    let mentions = msg.mentions.users;
+                    if (karmaVal < 1) {
+                        msg.channel.sendMessage("Please remove at least 1 karma.");
+                        return Promise.reject("Remove at least 1 karma");
+                    } else if (mentions.array().length > 1) {
+                        msg.channel.sendMessage("Please remove karma from one user at a time");
+                        return Promise.reject("Remove karma from one user only");
+                    } else {
+                        return karma.handler.remove(karmaVal, mentions.first().id, msg.guild);
+                    }
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
@@ -234,61 +133,17 @@ function Karma() {
         if (argsArray.length === 3) {
             reqAccess(msg.guild, msg.member, 0)
                 .then(() => {
-                    return new Promise((resolve, reject) => {
-                        let karma = argsArray[1];
-                        let mentions = msg.mentions.users;
-                        if (karma < 1) {
-                            msg.channel.sendMessage("Please give at least 1 karma.");
-                        } else if (mentions.array().length > 1) {
-                            msg.channel.sendMessage("Please give karma to one user at a time");
-                        } else {
-                            let guildID = msg.guild.id
-                            guildUsersModel.findOneOrCreate({ guildID }, { guildID })
-                                .then(guildUsers => {
-                                    if (guildUsers) {
-                                        let found = false;
-                                        guildUsers.users.forEach((user, index, users) => {
-                                            if (user.id === msg.author.id && users[index].karma && users[index].karma >= karma) {
-                                                users[index].karma -= parseInt(karma);
-                                                found = true;
-                                            }
-                                        });
-                                        if (!found) {
-                                            msg.channel.sendMessage("You don't have enough karma to give");
-                                            reject(new Error("Not enough karma"));
-                                            return;
-                                        }
-                                        let duplicate = false;
-                                        guildUsers.users.forEach((user, index, users) => {
-                                            if (user.id === mentions.first().id) {
-                                                if (!users[index].karma) {
-                                                    users[index].karma = 0;
-                                                }
-                                                users[index].karma += parseInt(karma);
-                                                duplicate = true;
-                                            }
-                                        });
-                                        if (!duplicate) {
-                                            guildUsers.users.push({ id: mentions.first().id, karma: karma });
-                                        }
-                                        guildUsers.save()
-                                            .then(guild => {
-                                                resolve(guild);
-                                            })
-                                            .catch(err => {
-                                                logger.log(err);
-                                                reject(err);
-                                            });
-                                    } else {
-                                        reject(new Error("findOneOrCreate() has not returned a model"));
-                                    }
-                                })
-                                .catch(err => {
-                                    logger.log(err);
-                                    reject(err);
-                                })
-                        }
-                    })
+                    let karmaVal = argsArray[1];
+                    let mentions = msg.mentions.users;
+                    if (karmaVal < 1) {
+                        msg.channel.sendMessage("Please give at least 1 karma.");
+                        return Promise.reject("Give at least 1 karma");
+                    } else if (mentions.array().length > 1) {
+                        msg.channel.sendMessage("Please give karma to one user at a time");
+                        return Promise.reject("Give karma to one user only");
+                    } else {
+                        return karma.handler.give(karmaVal, msg.author.id, mentions.first().id, msg.guild);
+                    }
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {

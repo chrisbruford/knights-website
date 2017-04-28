@@ -63,7 +63,7 @@ function Help() {
         var embed = new Discord.RichEmbed();
         embed.setColor(6684774);
         embed.setTitle(`:grey_question: KOKBOT Help`);
-        embed.setDescription(`Help Associated with KoKBot commands`);
+        embed.setDescription(`Help Associated with KoKBot commands - KoKBot ver-${require('../../../app').version}`);
 
         var length = this.helpArray.length;
 

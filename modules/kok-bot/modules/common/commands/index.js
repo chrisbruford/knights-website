@@ -39,6 +39,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("addbotimages", require("./addbotimages"));
     this.commandsMap.set("karma", require("./karma"));
     this.commandsMap.set("errorlogs", require("./error-logs"));
+    this.commandsMap.set("version", require("./version"));
 }
 
 client.on("message", msg => {

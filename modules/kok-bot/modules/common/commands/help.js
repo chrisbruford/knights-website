@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const Discord = require('discord.js');
 
 module.exports = new Help();
@@ -23,7 +24,7 @@ function Help() {
         this.Display(msg);
     }
 
-    this.AddHelp = (command, helpMessage, template) => {
+    this.AddHelp = (command, helpMessage, template, example) => {
         this.helpsMap.set(command, helpMessage);
 
         var helpObject = new Object();
@@ -31,6 +32,7 @@ function Help() {
         helpObject.command = command;
         helpObject.helpMessage = helpMessage;
         helpObject.template = template;
+        helpObject.example = example;
         this.helpArray.push(helpObject);
         console.log("Added help for " + command);
     }
@@ -80,22 +82,19 @@ function Help() {
                     HelpEmoji(displayCommands, this.displayState, maxDisplayState, msg);
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                 });
         } else if (this.helpDepth === 1) {
             HelpDescription(this.helpArray[this.displayState * 10 + this.numberSelected - 1], embed, msg)
                 .then(msg => {
                     this.helpMessageID = msg.id;
                     msg.react("⬅")
-                        // .then(msgReaction => {
-                        //     resolve(msgReaction.message);
-                        // })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                         });
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                 });
         }
     }
@@ -170,14 +169,19 @@ function HelpEmoji(displayCommands, displayState, maxDisplayState, msg) {
     lastPromise.then(msg => {
         return forward(displayState, maxDisplayState, msg);
     }).catch(err => {
-        console.log(err);
+        logger.log(err);
     });
 }
 
 function HelpDescription(command, embed, msg) {
     embed.addField("Command:", `-${command.command}`);
     embed.addField("Description", command.helpMessage);
-    embed.addField("Example", command.template);
+    embed.addField("Template", command.template);
+    let exampleString = "";
+    command.example.forEach((example, index, examples) => {
+        exampleString = exampleString + (index + 1) + ". " + example + "\n";
+    });
+    embed.addField("Examples", exampleString);
 
     if (msg.member) {
         return msg.member.sendEmbed(embed);

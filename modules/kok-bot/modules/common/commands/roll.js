@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const help = require("./help");
@@ -82,7 +83,7 @@ function Roll() {
                         msg.channel.sendMessage(responseDict.fail());
                     }
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
@@ -95,5 +96,12 @@ function Roll() {
 
 let helpMessage = "Rolls a y sided dice x times adding or subtracting z. x, y and z are optional and defaults to 1, 6 and 0 respectively.";
 let template = "roll <xdy+/-z>";
+let example = [
+    "`-roll`",
+    "`-roll d10`",
+    "`-roll 3`",
+    "`-roll 3d10`",
+    "`-roll 3d10+4`",
+    "`-roll 3d10-2`"];
 
-help.AddHelp("roll", helpMessage, template);
+help.AddHelp("roll", helpMessage, template, example);

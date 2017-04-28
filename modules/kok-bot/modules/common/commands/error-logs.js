@@ -52,7 +52,8 @@ class errorlogger {
 
 let helpMessage = "Retrieve log files";
 let template = "errorlogs <get>";
+let example = ["`-errorlogs get`"];
 
-help.AddHelp("errorlogs", helpMessage, template);
+help.AddHelp("errorlogs", helpMessage, template, example);
 
 module.exports = new errorlogger();

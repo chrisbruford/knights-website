@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const channels = require('../../channels');
@@ -36,7 +37,7 @@ function AdminChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -55,7 +56,7 @@ function AdminChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
@@ -72,16 +73,16 @@ function AdminChannel() {
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     } else {
                         msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -91,5 +92,10 @@ function AdminChannel() {
 
 let helpMessage = "Adds,Removes the specified channel as an admin channel or lists the admin channel";
 let template = "adminchannel <add|remove|list> <channel Id>";
+let example = [
+    "`-adminchannel add 1234567890`",
+    "`-adminchannel remove 1234567890`",
+    "`-adminchannel list`"];
 
-help.AddHelp("adminchannel", helpMessage, template);
+
+help.AddHelp("adminchannel", helpMessage, template, example);

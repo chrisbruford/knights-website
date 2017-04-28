@@ -21,6 +21,9 @@ client.on("ready", () => {
     //events
     require('./modules/common/events');
 
+    //anti-spam
+    require('./modules/anti-spam');
+
     //event listeners
     const wings = require('./modules/wings')
     const wingController = require('../../controllers/wingController');
@@ -52,7 +55,7 @@ client.login(token)
         logger.log(err);
     })
 
-client.on("disconnect",(err)=>{
+client.on("disconnect", (err) => {
     logger.log(err);
 })
 

@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const help = require("./help");
@@ -63,10 +64,10 @@ function Dist() {
                             }
                         })
                         .catch(error => {
-                            console.log("Error:" + error);
+                            logger.log("Error:" + error);
                         })
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -79,5 +80,6 @@ function Dist() {
 
 let helpMessage = "Find the straight line distance between the two systems";
 let template = "dist <system1,system2>";
+let example = ["`-dist Qa'wakana, Panoi`"];
 
-help.AddHelp("dist", helpMessage, template);
+help.AddHelp("dist", helpMessage, template, example);

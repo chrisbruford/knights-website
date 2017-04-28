@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const dateHelper = require('../dateHelper.js');
@@ -77,7 +78,7 @@ function Guildinfo() {
 
                     msg.channel.sendEmbed(embed);
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         }
@@ -86,5 +87,6 @@ function Guildinfo() {
 
 let helpMessage = "Display information about the server";
 let template = "guildinfo";
+let example = ["`-guildinfo`"];
 
-help.AddHelp("guildinfo", helpMessage, template);
+help.AddHelp("guildinfo", helpMessage, template, example);

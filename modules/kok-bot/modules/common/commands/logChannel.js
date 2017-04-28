@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const channels = require('../../channels');
@@ -36,7 +37,7 @@ function LogChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -55,7 +56,7 @@ function LogChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
@@ -72,16 +73,16 @@ function LogChannel() {
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     } else {
                         msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -91,5 +92,9 @@ function LogChannel() {
 
 let helpMessage = "Adds,Removes the specified channel as an log channel or lists the log channel";
 let template = "logchannel <add|remove|list> <channel Id>";
+let example = [
+    "`-logchannel add 1234567890`",
+    "`-logchannel remove 1234567890`",
+    "`-logchannel list`"];
 
-help.AddHelp("logchannel", helpMessage, template);
+help.AddHelp("logchannel", helpMessage, template, example);

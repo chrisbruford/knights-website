@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const guildModel = require('../../../../../models/discord-guild');
 const responseDict = require('../responseDict');
 const help = require("./help");
@@ -33,14 +34,13 @@ class Join {
         } else {
             msg.channel.sendMessage(responseDict.noParams());
         }
-
     }
-
-
 }
 
 let helpMessage = "Assigns a public role to you";
 let template = "join <role name>";
-help.AddHelp("join", helpMessage, template);
+let example = ["`-join Guest`"];
+
+help.AddHelp("join", helpMessage, template, example);
 
 module.exports = new Join();

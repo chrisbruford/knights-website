@@ -2,6 +2,7 @@
 
 const prefix = "-";
 const client = require('../client');
+const memes = require('../../memefication');
 const responseDict = require('../responseDict');
 
 this.commandsMap = new Map();
@@ -16,7 +17,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("moderatorroles", require("./moderatorRoles"));
     this.commandsMap.set("memberroles", require("./memberRoles"));
     this.commandsMap.set("publicroles", require("./publicRoles"));
-    this.commandsMap.set("inactiverole", require("./inactiveRole"));
+    this.commandsMap.set("inactiveroles", require("./inactiveRoles"));
     this.commandsMap.set("activityroles", require("./activityRoles"));
     this.commandsMap.set("join", require("./join"));
     this.commandsMap.set("leave", require("./leave"));
@@ -69,15 +70,7 @@ client.on("message", msg => {
         msg.channel.sendMessage(responseDict.botMentioned());
     } else if (msg.content.indexOf('@everyone') > -1 || msg.content.indexOf('@here') > -1) {
         if (msg.member.user.id !== client.user.id && !msg.member.permissions.hasPermission('MENTION_EVERYONE')) {
-            let botImages = require('../../../../../models/bot-images')
-            botImages.findOne({ guildID: msg.guild.id })
-                .then(images => {
-                    let image = images.smh[Math.floor(Math.random() * images.smh.length)];
-                    msg.channel.sendFile(image)
-                        .catch(err => {
-                            console.log(err);
-                        });
-                })
+            memes.smh(msg.channel);
         }
     }
 });

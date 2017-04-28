@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const dateHelper = require('../dateHelper.js');
@@ -34,13 +35,13 @@ function Whois() {
                             var inputName = argsArray[j].trim().toLowerCase();
                             if (inputName.length < 3) {
                                 msg.channel.sendMessage(`I need at least 3 characters to search, skipping ${inputName}`);
-                                argsArray.splice(j,1);
+                                argsArray.splice(j, 1);
                                 j--; //compensate for removal of 1 element
                                 continue;
                             }
 
                             var username = member.user.username.toLowerCase();
-                            var nickname = member.nickname ? member.nickname.toLowerCase():member.nickname;
+                            var nickname = member.nickname ? member.nickname.toLowerCase() : member.nickname;
 
                             if (username.includes(inputName) || (member.nickname && nickname.includes(inputName))) {
                                 inputNameCount++;
@@ -100,7 +101,7 @@ function Whois() {
 
                                 msg.channel.sendEmbed(embed)
                                     .catch(err => {
-                                        console.log(err);
+                                        logger.log(err);
                                     });
                             }
                         }
@@ -109,7 +110,7 @@ function Whois() {
                         msg.channel.sendMessage("Nothing Found");
                     }
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -120,5 +121,8 @@ function Whois() {
 
 let helpMessage = "Find users in the server";
 let template = "whois <user1,user2,...>";
+let example = [
+    "`-whois User1`",
+    "`-whois User1, User2`"];
 
-help.AddHelp("whois", helpMessage, template);
+help.AddHelp("whois", helpMessage, template, example);

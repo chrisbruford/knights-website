@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const wings = require('../../wings');
@@ -38,7 +39,7 @@ function Wings() {
                 })
                 .then(wing => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
@@ -56,12 +57,12 @@ function Wings() {
                     wings.removeWing(wingName)
                         .then((res) => msg.channel.sendMessage(responseDict.success()))
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             msg.channel.sendMessage(responseDict.fail())
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -80,7 +81,7 @@ function Wings() {
                         .catch(err => msg.channel.sendMessage(responseDict.fail()))
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else {
@@ -103,13 +104,13 @@ function Wings() {
                     ])
                         .then(wing => msg.channel.sendMessage(responseDict.success()))
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             msg.channel.sendMessage(responseDict.fail());
                         })
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else if (argsArray.length > 2) {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -130,14 +131,14 @@ function Wings() {
                     ])
                         .then(wing => msg.channel.sendMessage(responseDict.success()))
                         .catch(err => {
-                            console.log(err)
+                            logger.log(err)
                             msg.channel.sendMessage(responseDict.fail())
-                                .catch(err => console.log(err))
+                                .catch(err => logger.log(err))
                         })
                 }).catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else if (argsArray.length > 2) {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -168,7 +169,7 @@ function Wings() {
                             }
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             msg.channel.sendMessage(responseDict.fail());
                         })
                 })
@@ -181,6 +182,13 @@ function Wings() {
 }
 
 let helpMessage = "Adds,Removes the specified role as a wing or lists the wings. Also to join,leave the wing and display all members of a wing";
-let template = "wings <add|remove|list|join|leave|members> <role Id>";
+let template = "wings <add|remove|list|join|leave|members> <wing Name> <role Id>";
+let example = [
+    "`-wings add Wing1 1234567890`",
+    "`-wings remove Wing1`",
+    "`-wings list`",
+    "`-wings join Wing1`",
+    "`-wings leave Wing1`",
+    "`-wings members`"];
 
-help.AddHelp("wings", helpMessage, template);
+help.AddHelp("wings", helpMessage, template, example);

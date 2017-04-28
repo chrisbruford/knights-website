@@ -1,4 +1,5 @@
 "use strict";
+const logger = require('../../../../logger');
 const reqAccess = require("../reqAccess");
 const responseDict = require('../responseDict');
 const channels = require('../../channels');
@@ -36,7 +37,7 @@ function FrontDeskChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
@@ -55,7 +56,7 @@ function FrontDeskChannel() {
                 })
                 .then(() => msg.channel.sendMessage(responseDict.success()))
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
@@ -72,16 +73,16 @@ function FrontDeskChannel() {
                 .then(res => {
                     if (res) {
                         msg.channel.sendMessage(res)
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     } else {
                         msg.channel.sendMessage(responseDict.fail())
-                            .catch(err => console.log(err));
+                            .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     msg.channel.sendMessage(responseDict.fail())
-                        .catch(err => console.log(err));
+                        .catch(err => logger.log(err));
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
@@ -91,5 +92,9 @@ function FrontDeskChannel() {
 
 let helpMessage = "Adds,Removes the specified channel as an front desk channel or lists the front desk channel";
 let template = "frontDeskchannel <add|remove|list> <channel Id>";
+let example = [
+    "`-frontDeskchannel add 1234567890`",
+    "`-frontDeskchannel remove 1234567890`",
+    "`-frontDeskchannel list`"];
 
-help.AddHelp("frontdeskchannel", helpMessage, template);
+help.AddHelp("frontdeskchannel", helpMessage, template, example);

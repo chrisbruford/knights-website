@@ -13,22 +13,24 @@ client.on("message", msg => {
 
         var reply = new Array();
 
-        guildUsersModel.findOne({ guildID: msg.guild.id, "users.id": msg.author.id }, { users: { $elemMatch: { id: msg.author.id } } })
-            .then(guildUsers => {
-                if (guildUsers && guildUsers.users.length > 0) {
-                    if (!guildUsers.users[0].lastKarmaCreated) {
-                        createKarma();
-                    } else if (Date.now() - guildUsers.users[0].lastKarmaCreated > karmaCreateInterval) {
-                        createKarma();
-                    }
-                    guildUsers.users[0].lastKarmaCreated = Date.now();
+        if (mentioned.array().length !== 0) {
+            guildUsersModel.findOne({ guildID: msg.guild.id, "users.id": msg.author.id }, { users: { $elemMatch: { id: msg.author.id } } })
+                .then(guildUsers => {
+                    if (guildUsers && guildUsers.users.length > 0) {
+                        if (!guildUsers.users[0].lastKarmaCreated) {
+                            createKarma();
+                        } else if (Date.now() - guildUsers.users[0].lastKarmaCreated > karmaCreateInterval) {
+                            createKarma();
+                        }
+                        guildUsers.users[0].lastKarmaCreated = Date.now();
 
-                    guildUsers.save()
-                        .catch(err => logger.log());
-                } else {
-                    throw new Error("findOne has not returned a model");
-                }
-            });
+                        guildUsers.save()
+                            .catch(err => logger.log());
+                    } else {
+                        throw new Error("findOne has not returned a model");
+                    }
+                });
+        }
 
         function createKarma() {
             mentioned.array().forEach((mention, index, mentions) => {

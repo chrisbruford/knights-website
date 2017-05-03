@@ -42,6 +42,8 @@ function Karma() {
                 .then(() => {
                     if (msg.mentions.users.array().length === 1) {
                         return karma.handler.show(mention.id, msg.guild);
+                    } else {
+                        throw new Error("Karma show called without a mention or more than 1 mention");
                     }
                 })
                 .then((karmaVal) => {

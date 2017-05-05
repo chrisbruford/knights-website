@@ -38,7 +38,11 @@ client.on("message", msg => {
                     reply.push(`Trying to give yourself karma ${mention.username}. Shame!`);
                     memes.shame(msg.channel);
                 } else {
-                    mentionUsers.push(mention.username);
+                    if (mention.bot && mention.id === client.user.id) {
+                        reply.push(`Yaay! Sweet karma for me :laughing:`);
+                    } else {
+                        mentionUsers.push(mention.username);
+                    }
                     let guildID = msg.guild.id;
                     guildUsersModel.findOneOrCreate({ guildID }, { guildID })
                         .then(guildUsers => {

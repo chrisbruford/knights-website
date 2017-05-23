@@ -48,7 +48,11 @@ function Handler() {
                                 if (!users[index].karma) {
                                     users[index].karma = 0;
                                 }
-                                users[index].karma += parseInt(karma);
+                                let changeKarma = parseInt(karma);
+                                if (isNaN(changeKarma)) {
+                                    return reject(new Error("Karma value is not a number"));
+                                }
+                                users[index].karma += changeKarma;
                                 duplicate = true;
                             }
                         });
@@ -84,7 +88,11 @@ function Handler() {
                                 if (!users[index].karma) {
                                     users[index].karma = 0;
                                 }
-                                users[index].karma -= parseInt(karma);
+                                let changeKarma = parseInt(karma);
+                                if (isNaN(changeKarma)) {
+                                    return reject(new Error("Karma value is not a number"));
+                                }
+                                users[index].karma -= changeKarma;
                                 duplicate = true;
                             }
                         });
@@ -117,7 +125,11 @@ function Handler() {
                         let found = false;
                         guildUsers.users.forEach((user, index, users) => {
                             if (user.id === fromUserID && users[index].karma && users[index].karma >= karma) {
-                                users[index].karma -= parseInt(karma);
+                                let changeKarma = parseInt(karma);
+                                if (isNaN(changeKarma)) {
+                                    return reject(new Error("Karma value is not a number"));
+                                }
+                                users[index].karma -= changeKarma;
                                 found = true;
                             }
                         });
@@ -130,7 +142,11 @@ function Handler() {
                                 if (!users[index].karma) {
                                     users[index].karma = 0;
                                 }
-                                users[index].karma += parseInt(karma);
+                                let changeKarma = parseInt(karma);
+                                if (isNaN(changeKarma)) {
+                                    return reject(new Error("Karma value is not a number"));
+                                }
+                                users[index].karma += changeKarma;
                                 duplicate = true;
                             }
                         });

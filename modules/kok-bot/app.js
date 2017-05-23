@@ -9,6 +9,8 @@ let token = process.env.discordToken || require('../../secrets').discord.token;
 let kokGuildID = process.env.guildID || require('../../secrets').discord.guildID;
 var guild;
 
+module.exports.version = "1.1.0";
+
 //initialise
 client.on("ready", () => {
     console.log('kokbot ready');

@@ -8,7 +8,7 @@ let spams = [];
 
 const spamLength = 10;
 const spamInterval = 10000;
-const spamCount = 4;
+const spamCount = 10;
 
 client.on("message", msg => {
     if (!msg.author.bot) {

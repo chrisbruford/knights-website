@@ -1,6 +1,7 @@
 "use strict";
 const dateHelper = require('../dateHelper.js');
 const help = require("./help");
+const responseDict = require('../responseDict.js');
 
 module.exports = new Time();
 

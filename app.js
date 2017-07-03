@@ -26,7 +26,8 @@ let recover = require('./routes/recover');
 let resetPassword = require('./routes/resetPassword');
 let uploads = require('./routes/uploads');
 let wing = require('./routes/wing');
-let discordAuth = require('./routes/discord-auth')
+let discordAuth = require('./routes/discord-auth');
+let interdicted = require('./routes/companion-app/interdicted');
 
 let app = express();
 
@@ -129,6 +130,8 @@ app.use('/api/recover', recover);
 app.use('/api/resetpassword', resetPassword);
 app.use('/api/wing', wing);
 app.use('/discord', discordAuth);
+//companion app routes
+app.use('/api/interdicted', interdicted);
 
 //checks auth level before sending these
 app.use('/secure', secure);

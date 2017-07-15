@@ -10,8 +10,8 @@ function Publics() {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(publicRoleID)) {
                 discordGuildModel.findOneAndUpdate(
-                    { guildID: thisGuild.id, 'publicRoles.id': {$ne: publicRoleID} },
-                    { $push: { publicRoles: {name: publicRoleName, id: publicRoleID} } },
+                    { guildID: thisGuild.id, 'publicRoles.id': { $ne: publicRoleID } },
+                    { $push: { publicRoles: { name: publicRoleName, id: publicRoleID } } },
                     {
                         upsert: true,
                         runValidators: true,
@@ -36,7 +36,7 @@ function Publics() {
             if (thisGuild.roles.get(publicRoleID)) {
                 discordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
-                    { $pull: { publicRoles: {id: publicRoleID } } },
+                    { $pull: { publicRoles: { id: publicRoleID } } },
                     {
                         upsert: true,
                         runValidators: true,
@@ -85,5 +85,26 @@ function Publics() {
                     reject(err);
                 })
         })
+    }
+
+    //list members of said role
+    this.members = (roleName, guild) => {
+        return new Promise((resolve, reject) => {
+            let roleFound = false;
+            for (let [id,role] of guild.roles) {
+                if (role.name.toLowerCase() === roleName.toLowerCase()) {
+                    roleFound = true;
+                    let roleMembers = role.members;
+                    let memberList = '';
+                    for (let [id,member] of roleMembers) {
+                        memberList += `${member.nickname || member.user.username} \n`;
+                    }
+                    resolve(memberList)
+                }
+            }
+
+           if (!roleFound) { reject('No such role') }
+
+        });
     }
 }

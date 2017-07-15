@@ -93,7 +93,7 @@ function PublicRoles() {
     }
     
     this.members = (msg, argsArray) => {
-        if (argsArray.length === 2) {
+        if (argsArray.length < 2) {
             reqAccess(msg.guild, msg.member, 1)
                 .then(() => roles.publics.members(argsArray[1],msg.guild))
                 .then(message => {
@@ -107,8 +107,6 @@ function PublicRoles() {
                     logger.log(err);
                     msg.channel.sendMessage(responseDict.fail());
                 })
-        } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
         } else {
             msg.channel.sendMessage(responseDict.noParams());
         }

@@ -4,6 +4,7 @@ const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const roles = require('../../roles');
 const help = require("./help");
+const Discord = require('discord.js');
 
 module.exports = new PublicRoles();
 
@@ -88,6 +89,28 @@ function PublicRoles() {
                 })
         } else {
             msg.channel.sendMessage(responseDict.tooManyParams());
+        }
+    }
+    
+    this.members = (msg, argsArray) => {
+        if (argsArray.length === 2) {
+            reqAccess(msg.guild, msg.member, 1)
+                .then(() => roles.publics.members(argsArray[1],msg.guild))
+                .then(message => {
+                    let embed = new Discord.RichEmbed();
+                    embed.setColor(0x663399);
+                    embed.setTitle(`Members of ${argsArray[1]}`);
+                    embed.setDescription(message);
+                    msg.channel.sendEmbed(embed);
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail());
+                })
+        } else if (argsArray.length > 2) {
+            msg.channel.sendMessage(responseDict.tooManyParams());
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
         }
     }
 }

@@ -27,7 +27,8 @@ router.post('/:cmdr',(req,res)=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let interdictedEvent = req.body.interdicted;
-            let response = interdicted.alert("141575893691793408",interdictedEvent,cmdrName);
+            let system = req.body.system;
+            let response = interdicted.alert("141575893691793408",interdictedEvent,cmdrName, system);
             res.sendStatus(200);
         })
         .catch(err=>{

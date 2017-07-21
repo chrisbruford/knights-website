@@ -93,13 +93,14 @@ function PublicRoles() {
     }
     
     this.members = (msg, argsArray) => {
-        if (argsArray.length < 2) {
+        if (argsArray.length >= 2) {
+            let roleToFind = argsArray.slice(1).join(" ");
             reqAccess(msg.guild, msg.member, 1)
-                .then(() => roles.publics.members(argsArray[1],msg.guild))
+                .then(() => roles.publics.members(roleToFind,msg.guild))
                 .then(message => {
                     let embed = new Discord.RichEmbed();
                     embed.setColor(0x663399);
-                    embed.setTitle(`Members of ${argsArray[1]}`);
+                    embed.setTitle(`Members of ${roleToFind}`);
                     embed.setDescription(message);
                     msg.channel.sendEmbed(embed);
                 })
@@ -113,11 +114,13 @@ function PublicRoles() {
     }
 }
 
-let helpMessage = "Adds,Removes the specified role as a public role or lists the public roles";
-let template = "publicroles <add|remove|list> <role Id>";
+let helpMessage = "Adds,Removes the specified role as a public role or lists the public roles or members of the public role";
+let template = "publicroles <add|remove|list|members> <role Id>";
 let example = [
     "`-publicroles add 1234567890`",
     "`-publicroles remove 1234567890`",
-    "`-publicroles list`"];
+    "`-publicroles list`",
+    "`-publicroles members Arma Session`"
+];
 
 help.AddHelp("publicroles", helpMessage, template, example);

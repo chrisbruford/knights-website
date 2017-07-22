@@ -5,16 +5,17 @@ const responseDict = require('../responseDict');
 const help = require("./help");
 const Discord = require('discord.js');
 const events = require('../../events/');
+const dateHelper = require('../dateHelper');
 
 class Events {
 
     constructor() {
-        let helpMessage = "Add or Remove the specified event";
-        let template = "event <add|remove> <startIn> <duration> <role> <title>";
+        let helpMessage = "Add, Remove or List the specified event";
+        let template = "event <add|remove|list> <startIn> <duration> <role> <title>";
         let example = [
-            "`-event add 120 60 334760699379056643 Funday Sunday Arma Session`",
-            "`-event remove Funday Sunday Arma Session"
-            ];
+            "`-event add 120 60 @Arma Session Funday Sunday Arma`",
+            "`-event remove Funday Sunday Arma"
+        ];
 
         help.AddHelp("events", helpMessage, template, example);
     }
@@ -38,20 +39,84 @@ class Events {
     }
 
     add(msg, argsArray) {
-        if (argsArray.length > 2) {
+        if (argsArray.length >= 5) {
             reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
-                    let startIn = parseInt(argsArray[1]) > 0 ? parseInt(argsArray[1]) : 0;
-                    let duration = parseInt(argsArray[2]) > 0 ? parseInt(argsArray[2]) : 0;
-                    let role = argsArray[3];
-                    let channel = argsArray[4];
-                    let title = argsArray.slice[5];
-                    
-                    return events.start(msg.member.id, title, role, channel, startIn, duration);
+                    let startIn = parseFloat(argsArray[1]) > 0 ? parseFloat(argsArray[1]) : 0;
+                    let duration = parseFloat(argsArray[2]) > 0 ? parseFloat(argsArray[2]) : 0;
+                    let role = msg.mentions.roles.first() || msg.guild.roles.get(argsArray[3]);
+                    let title = argsArray.slice(4).join(" ");
+
+                    if (!role) {
+                        throw new Error("No role found");
+                    }
+
+                    return events.start(msg.member.id, title, role, startIn, duration);
                 })
                 .then((event) => {
-                    event.on('reminder',evt=>msg.channel.sendMessage(`**${evt.title}** commences in ${evt.time} minutes`));
-                    event.on('end',evt=>msg.channel.sendMessage(`**${evt.title}** has ended`));
+                    event.on('reminder', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** commences in ${evt.time} minutes`));
+                    event.on('end', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** has ended`));
+                    event.on('start', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** is due to start now`));
+                    msg.channel.sendMessage(`<@${msg.member.id}> has created a new event for members of <@&${event.role.id}>`)
+                        .then(data => {
+                            let embed = new Discord.RichEmbed();
+                            embed.setColor(0x663399);
+                            let entries = `Start: ${dateHelper.UTCTime(event.startTime)} UTC`
+                            entries += `\nDuration: ${event.duration} minutes`
+                            entries += `\nRole: ${event.role.name}`
+                            embed.addField(event.title, entries, false);
+
+                            let now = new Date();
+                            embed.setFooter(`Current time: ${dateHelper.UTCTime(new Date())} UTC`);
+                            msg.channel.sendEmbed(embed);
+                        })
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail());
+                })
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
+        }
+    }
+
+    list(msg, argsArray) {
+        if (argsArray.length >= 1) {
+            reqAccess(msg.guild, msg.member, 2)
+                .then(() => {
+                    return events.list(msg.member.id);
+                })
+                .then((events) => {
+                    let embed = new Discord.RichEmbed();
+                    embed.setColor(0x663399);
+                    embed.setTitle(`${msg.member.nickname || msg.member.user.username}'s Events`);
+                    for (let event of events) {
+                        let entries = `Start: ${dateHelper.UTCTime(event.startTime)} UTC`
+                        entries += `\nDuration: ${event.duration} minutes`
+                        entries += `\nRole: ${event.role.name}`
+                        embed.addField(event.title, entries, false);
+                    }
+                    let now = new Date();
+                    embed.setFooter(`Current time: ${dateHelper.UTCTime(new Date())} UTC`);
+                    msg.channel.sendEmbed(embed);
+                })
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.sendMessage(responseDict.fail());
+                })
+        } else {
+            msg.channel.sendMessage(responseDict.noParams());
+        }
+    }
+
+    remove(msg, argsArray) {
+        if (argsArray.length > 1) {
+            reqAccess(msg.guild, msg.member, 2)
+                .then(() => {
+                    let title = argsArray.slice(1).join(" ");
+                    return events.end(msg.member.id, title);
+                })
+                .then((event) => {
                     msg.channel.sendMessage(responseDict.success());
                 })
                 .catch(err => {

@@ -67,3 +67,9 @@ module.exports.DateFormat = (date, digits) => {
 
     return date.slice(-digits);
 }
+
+module.exports.UTCTime = (date) => {
+    let h = (date.getUTCHours() > 9 ? "":"0") + date.getUTCHours();
+    let m = (date.getUTCMinutes() > 9 ? "":"0") + date.getUTCMinutes();
+    return `${h}:${m}`
+}

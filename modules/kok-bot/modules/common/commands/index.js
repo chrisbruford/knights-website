@@ -40,6 +40,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("karma", require("./karma"));
     this.commandsMap.set("errorlogs", require("./error-logs"));
     this.commandsMap.set("version", require("./version"));
+    this.commandsMap.set("events", require("./events.js"));
 }
 
 client.on("message", msg => {

@@ -126,5 +126,5 @@ gulp.task('cache:clear', function (callback) {
 });
 
 gulp.task('default', function () {
-    runSequence(['sass', 'browserify'], 'browserSync', 'watch', 'test');
+    runSequence(['sass', 'browserify'], 'browserSync', 'watch');
 });

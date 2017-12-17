@@ -63,9 +63,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //mongo session store
-
-let store = new MongoStore({ mongooseConnection: mongoose.connection });
-
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.cookieSecret || require('./secrets').cookieSecret

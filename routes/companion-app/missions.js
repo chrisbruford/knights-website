@@ -3,7 +3,7 @@ let {missionCompleted} = require('../../modules/kok-bot/modules/companion');
 let logger = require('../../modules/logger');
 
 router.post('/completed/:cmdr',(req,res)=>{
-    let cmdrName = req.params.cmdr;
+    let cmdrName = decodeURIComponent(req.params.cmdr);
     
     if (!cmdrName) { 
         res.sendStatus(400) ;
@@ -27,7 +27,7 @@ router.post('/completed/:cmdr',(req,res)=>{
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let missionCompletedEvent = req.body.missionCompleted;
             //TODO: Refactor so that guildID is pulled from the logged in user and sent to THEIR guild(s)
-            let response = interdicted.alert("141575893691793408",interdictedEvent,cmdrName, system);
+            let response = missionCompleted.alert("141575893691793408",missionCompletedEvent,cmdrName);
             res.sendStatus(200);
         })
         .catch(err=>{

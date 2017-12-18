@@ -27,8 +27,10 @@ router.post('/completed/:cmdr',(req,res)=>{
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let missionCompletedEvent = req.body.missionCompleted;
             //TODO: Refactor so that guildID is pulled from the logged in user and sent to THEIR guild(s)
-            let response = missionCompleted.alert("141575893691793408",missionCompletedEvent,cmdrName);
-            res.sendStatus(200);
+            return missionCompleted.alert("141575893691793408",missionCompletedEvent,cmdrName)
+                .then(response=>{
+                    res.sendStatus(200).json(response);
+                })
         })
         .catch(err=>{
             logger.log(err);

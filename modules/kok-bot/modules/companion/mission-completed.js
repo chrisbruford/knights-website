@@ -6,6 +6,13 @@ function alert(guildID, missionCompleted, cmdrName) {
 
     let response;
 
+    let defaults = {
+        cmdrName: "Unknown CMDR",
+        Name: "Unknown Mission",
+        originator: "Unknown Faction"
+    }
+    missionCompleted = Object.assign(defaults, missionCompleted);
+
     discordGuildModel.findOne({guildID})
         .then(guild=>{
             if (guild) {

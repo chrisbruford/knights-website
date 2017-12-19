@@ -5,11 +5,13 @@ let passport = require('passport');
 
 router.get('/', function (req, res) {
     if (req.user) {
+        console.dir(req.user);
         require('../models/user')
         .then(User=>{
-            return User.findOne(req.user);
+            return User.findOne({username: req.user.username});
         })
         .then(user=>{
+            console.dir(user)
             res.json(user);
         })
         .catch(err=>{
@@ -18,6 +20,7 @@ router.get('/', function (req, res) {
         })
     }
     else {
+        console.dir(req);
         res.json(null);
     }
 });

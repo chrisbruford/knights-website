@@ -18,8 +18,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "^2.2.0",
     "del": "^2.2.2",
-    "discord.js": "github:hydrabolt/discord.js",
-    "erlpack": "github:hammerandchisel/erlpack",
+    "discord.js": "^11.2.1",
     "express": "~4.13.4",
     "express-session": "^1.14.2",
     "foundation-sites": "^6.3.1",
@@ -75,6 +74,6 @@
     "wiredep": "^4.0.0"
   },
   "engines": {
-    "node": "^6.9.1"
+    "node": "^8.9.3"
   }
 }

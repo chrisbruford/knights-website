@@ -1,10 +1,9 @@
-let express = require('express');
-let router = express.Router();
-let {interdicted} = require('../../modules/kok-bot/modules/companion');
+let router = require('express').Router();
+let {missionCompleted} = require('../../modules/kok-bot/modules/companion');
 let logger = require('../../modules/logger');
 
-router.post('/:cmdr',(req,res)=>{
-    let cmdrName = req.params.cmdr;
+router.post('/completed/:cmdr',(req,res)=>{
+    let cmdrName = decodeURIComponent(req.params.cmdr);
     
     if (!cmdrName) { 
         res.sendStatus(400) ;
@@ -14,7 +13,7 @@ router.post('/:cmdr',(req,res)=>{
     
     if (!req.user) {
         res.sendStatus(403)
-        logger.log(new Error("non-logged in user attempted to do an interdiction alert"));
+        logger.log(new Error("non-logged in user attempted to do a mission completed alert"));
         return
     }
 
@@ -26,11 +25,12 @@ router.post('/:cmdr',(req,res)=>{
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
-            let interdictedEvent = req.body.interdicted;
-            let system = req.body.system;
+            let missionCompletedEvent = req.body.missionCompleted;
             //TODO: Refactor so that guildID is pulled from the logged in user and sent to THEIR guild(s)
-            let response = interdicted.alert("141575893691793408",interdictedEvent,cmdrName, system);
-            res.sendStatus(200);
+            return missionCompleted.alert("141575893691793408",missionCompletedEvent,cmdrName)
+                .then(response=>{
+                    res.sendStatus(200).json(response);
+                })
         })
         .catch(err=>{
             logger.log(err);

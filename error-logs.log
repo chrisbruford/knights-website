@@ -16,3 +16,8 @@ Error: No such user found: undefined
     at process._tickCallback (internal/process/next_tick.js:109:7)
 Mon, 03 Jul 2017 20:58:11 GMT:
 'non-logged in user attempted to do an interdiction alert'
+Tue, 19 Dec 2017 20:09:32 GMT:
+TypeError: Cannot read property 'toString' of undefined
+    at guildModel.findOne.then.guild (/Users/chrisbruford/Documents/Dev/kok_web/modules/kok-bot/modules/register/announce.js:12:73)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)

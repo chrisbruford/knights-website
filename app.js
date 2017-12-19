@@ -28,6 +28,7 @@ let uploads = require('./routes/uploads');
 let wing = require('./routes/wing');
 let discordAuth = require('./routes/discord-auth');
 let interdicted = require('./routes/companion-app/interdicted');
+let missions = require('./routes/companion-app/missions');
 
 let app = express();
 
@@ -62,9 +63,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //mongo session store
-
-let store = new MongoStore({ mongooseConnection: mongoose.connection });
-
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.cookieSecret || require('./secrets').cookieSecret
@@ -132,6 +130,7 @@ app.use('/api/wing', wing);
 app.use('/discord', discordAuth);
 //companion app routes
 app.use('/api/interdicted', interdicted);
+app.use('/api/missions', missions);
 
 //checks auth level before sending these
 app.use('/secure', secure);

@@ -39,6 +39,12 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="checkbox" name="remember" id="remember" ng-model="LoginCtrl.remember">
+                <label for="remember">Remember me</label>
+            </div>
+        </div>
         <div class="row align-middle">
             <div class="shrink columns">
                 <button type="submit" class="button" ng-disabled="loginForm.$invalid">Submit</button>

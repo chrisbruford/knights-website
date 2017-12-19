@@ -6,6 +6,7 @@ module.exports = function (UserService, AuthService, $scope) {
 
     vm.passwordRecovery = false;
     vm.recoverySubmitted = false;
+    vm.remember = false;
 
     vm.authentication = {
         success: false,
@@ -30,7 +31,8 @@ module.exports = function (UserService, AuthService, $scope) {
         vm.loginState = "loading"
         return AuthService.authenticate({
             username: vm.cmdrName,
-            password: vm.password
+            password: vm.password,
+            remember: vm.remember
         })
             .then(data => {
                 vm.loginState = "success"

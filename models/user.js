@@ -72,7 +72,8 @@ module.exports = new Promise((resolve, reject) => {
             required: true
         },
         wings: [wing],
-        discordID: String
+        discordID: String,
+        broadcastGuilds: [String]
     });
 
     User.methods.setToken = function () {

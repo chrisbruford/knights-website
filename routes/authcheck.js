@@ -18,6 +18,8 @@ router.get('/', function (req, res) {
         })
     }
     else {
+        console.log('No user on req object');
+        console.dir(req);
         res.json(null);
     }
 });

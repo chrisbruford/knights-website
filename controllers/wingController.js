@@ -25,7 +25,7 @@ function WingController() {
                         })
                         .catch(err => {
                             console.log(err);
-                            reject(err)
+                            reject(err);
                         })
                 })
                 .catch(err => {
@@ -41,6 +41,9 @@ function WingController() {
                 .then(userModel => {
                     userModel.findOneAndUpdate(searchParams, { $pull: { wings: { name: wingName } } })
                         .then(user => {
+                            if (!user) {
+                                return reject(false);
+                            }
                             //see if wing was in original set anyway
                             let exists = user.wings.filter(wing => {
                                 return wing.name === wingName;

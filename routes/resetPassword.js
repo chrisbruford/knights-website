@@ -17,7 +17,7 @@ router.post('/newpass', function (req, res, next) {
 
             //change password if user is logged in
             if (user) {
-                User.findOne(user)
+                User.findOne({username: user.username})
                     .then(user => changePassword(user))
                     .then(() => {return});
             }
@@ -137,7 +137,7 @@ router.get('/:token?', function (req, res, next) {
 
     require('../models/user')
         .then(User => {
-            return User.findOne(user);
+            return User.findOne({username: user.username});
         })
         .then(user => {
             if (user) {

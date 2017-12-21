@@ -1,6 +1,7 @@
 "use strict";
 const util = require('util');
 const eventEmitter = require('events').EventEmitter;
+const logger = require('../modules/logger/logger');
 
 function WingController() {
 
@@ -24,12 +25,12 @@ function WingController() {
                             }
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             reject(err);
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     reject(err);
                 })
         })
@@ -57,12 +58,12 @@ function WingController() {
                             }
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             reject(err);
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     reject(err);
                 })
         })
@@ -74,16 +75,16 @@ function WingController() {
                 .then(userModel => {
                     userModel.find({ "wings.name": { $eq: wingName } }, { username: 1 })
                         .then(users => {
-                            console.log(users);
+                            logger.log(users);
                             resolve(users);
                         })
                         .catch(err => {
-                            console.log(err);
+                            logger.log(err);
                             reject(err);
                         })
                 })
                 .catch(err => {
-                    console.log(err);
+                    logger.log(err);
                     reject(err);
                 })
         })

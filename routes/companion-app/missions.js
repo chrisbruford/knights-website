@@ -20,17 +20,21 @@ router.post('/completed/:cmdr',(req,res)=>{
     require('../../models/user')
         .then(User=>{
             if (!User) { throw new Error("Fatal model error: no user model found"); }
-            return User.findOne(req.user)
+            return User.findOne({username: req.user.username})
         })
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let missionCompletedEvent = req.body.missionCompleted;
-            //TODO: Refactor so that guildID is pulled from the logged in user and sent to THEIR guild(s)
-            return missionCompleted.alert("141575893691793408",missionCompletedEvent,cmdrName)
+            let broadcastPromises = [];
+            for (guildID of user.broadcastGuilds) {
+                broadcastPromises.push(missionCompleted.alert(guildID,missionCompletedEvent,cmdrName));
+            }
+            return Promise.all(broadcastPromises)
                 .then(response=>{
-                    res.sendStatus(200).json(response);
+                    res.json(true);
                 })
+                .catch(err=>logger.log(err));
         })
         .catch(err=>{
             logger.log(err);

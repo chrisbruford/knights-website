@@ -15,7 +15,11 @@ function alert(guildID, missionCompleted, cmdrName) {
             if (guild) {
                 let targetChannelID = guild.logChannelID;
                 let targetChannel = client.channels.get(targetChannelID);
-                targetChannel.sendMessage(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
+                if (targetChannel) {
+                    targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
+                } else {
+                    throw new Error("Trying to send a message to a Guild I'm no longer in");
+                }
             } else {
                 throw new Error('no such guild');
             }

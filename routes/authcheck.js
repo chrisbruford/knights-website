@@ -2,25 +2,23 @@
 let express = require('express');
 let router = express.Router();
 let passport = require('passport');
+let logger = require('../modules/logger');
 
 router.get('/', function (req, res) {
     if (req.user) {
-        console.dir(req.user);
         require('../models/user')
         .then(User=>{
             return User.findOne({username: req.user.username});
         })
         .then(user=>{
-            console.dir(user)
             res.json(user);
         })
         .catch(err=>{
-            console.log(err);
+            logger.log(err);
             res.json(null);
         })
     }
     else {
-        console.dir(req);
         res.json(null);
     }
 });

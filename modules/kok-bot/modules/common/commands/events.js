@@ -40,7 +40,7 @@ class Events {
 
     add(msg, argsArray) {
         if (argsArray.length >= 5) {
-            reqAccess(msg.guild, msg.member, 2)
+            reqAccess(msg.guild, msg.member, 1)
                 .then(() => {
                     let startIn = parseFloat(argsArray[1]) > 0 ? parseFloat(argsArray[1]) : 0;
                     let duration = parseFloat(argsArray[2]) > 0 ? parseFloat(argsArray[2]) : 0;
@@ -82,7 +82,7 @@ class Events {
 
     list(msg, argsArray) {
         if (argsArray.length >= 1) {
-            reqAccess(msg.guild, msg.member, 2)
+            reqAccess(msg.guild, msg.member, 1)
                 .then(() => {
                     return events.list(msg.member.id);
                 })
@@ -111,7 +111,7 @@ class Events {
 
     remove(msg, argsArray) {
         if (argsArray.length > 1) {
-            reqAccess(msg.guild, msg.member, 2)
+            reqAccess(msg.guild, msg.member, 1)
                 .then(() => {
                     let title = argsArray.slice(1).join(" ");
                     return events.end(msg.member.id, title);

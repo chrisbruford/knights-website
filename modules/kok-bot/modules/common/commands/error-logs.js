@@ -50,8 +50,8 @@ class errorlogger {
     }
 }
 
-let helpMessage = "Retrieve log files";
-let template = "errorlogs <get>";
+let helpMessage = "Retrieve or clear the log file";
+let template = "errorlogs <get|clear>";
 let example = ["`-errorlogs get`"];
 
 help.AddHelp("errorlogs", helpMessage, template, example);

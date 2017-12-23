@@ -10,7 +10,7 @@ router.post('/completed/:cmdr',(req,res)=>{
         logger.log(new Error("No cmdrName provided to route"));
         return
     }
-    
+
     if (!req.user) {
         res.sendStatus(403)
         logger.log(new Error("non-logged in user attempted to do a mission completed alert"));

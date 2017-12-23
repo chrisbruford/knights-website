@@ -42,6 +42,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("version", require("./version"));
     this.commandsMap.set("events", require("./events"));
     this.commandsMap.set("broadcasts", require("./broadcasts"));
+    this.commandsMap.set("companionchannel", require("./companionChannel"));
 }
 
 client.on("message", msg => {

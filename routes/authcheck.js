@@ -15,11 +15,11 @@ router.get('/', function (req, res) {
         })
         .catch(err=>{
             logger.log(err);
-            res.json(null);
+            res.sendStatus(500);
         })
     }
     else {
-        res.json(null);
+        res.sendStatus(403);
     }
 });
 

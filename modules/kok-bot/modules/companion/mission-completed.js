@@ -13,12 +13,17 @@ function alert(guildID, missionCompleted, cmdrName) {
     return discordGuildModel.findOne({guildID})
         .then(guild=>{
             if (guild) {
-                let targetChannelID = guild.logChannelID;
+                let targetChannelID = guild.companionChannelID;
+
+                if (!targetChannelID) {
+                    return "No companion channel set"
+                }
+
                 let targetChannel = client.channels.get(targetChannelID);
                 if (targetChannel) {
                     targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
                 } else {
-                    throw new Error("Trying to send a message to a Guild I'm no longer in");
+                    throw new Error("Trying to send a message to a channel I'm not in");
                 }
             } else {
                 throw new Error('no such guild');

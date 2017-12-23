@@ -12,6 +12,7 @@ let guild = new Schema({
     adminChannelID: String,
     frontDeskChannelID: String,
     logChannelID: String,
+    companionChannelID: String,
     ignoreUsers: [String],
     ignoreChannels: [String],
     adminRoles: [String],

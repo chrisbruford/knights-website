@@ -21,12 +21,12 @@ function alert(guildID, missionCompleted, cmdrName) {
 
                 let targetChannel = client.channels.get(targetChannelID);
                 if (targetChannel) {
-                    targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
+                    return targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
                 } else {
-                    return reject(new Error("Trying to send a message to a channel I'm not in"));
+                    return Promise.reject(new Error("Trying to send a message to a channel I'm not in"));
                 }
             } else {
-                return reject(new Error('no such guild'));
+                return Promise.reject(new Error('no such guild'));
             }
         })
         .catch(err=>{

@@ -23,14 +23,15 @@ function alert(guildID, missionCompleted, cmdrName) {
                 if (targetChannel) {
                     targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
                 } else {
-                    throw new Error("Trying to send a message to a channel I'm not in");
+                    return reject(new Error("Trying to send a message to a channel I'm not in"));
                 }
             } else {
-                throw new Error('no such guild');
+                return reject(new Error('no such guild'));
             }
         })
         .catch(err=>{
             logger.log(err);
+            return Promise.reject(err)
         })
 }
 

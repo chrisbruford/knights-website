@@ -16,14 +16,16 @@ function alert(guildID, missionCompleted, cmdrName) {
                 let targetChannelID = guild.companionChannelID;
 
                 if (!targetChannelID) {
-                    return "No companion channel set"
+                    return "No companion channel set";
                 }
 
                 let targetChannel = client.channels.get(targetChannelID);
+                
                 if (targetChannel) {
                     return targetChannel.send(`mission completed: ${cmdrName.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`);
                 } else {
-                    return Promise.reject(new Error("Trying to send a message to a channel I'm not in"));
+                    logger.log("Trying to send a message to a channel I'm not in");
+                    return Promise.reject("Trying to send a message to a channel I'm not in");
                 }
             } else {
                 return Promise.reject(new Error('no such guild'));
@@ -31,7 +33,7 @@ function alert(guildID, missionCompleted, cmdrName) {
         })
         .catch(err=>{
             logger.log(err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         })
 }
 

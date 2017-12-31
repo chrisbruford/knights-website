@@ -6,7 +6,7 @@ router.post('/completed/:cmdr',(req,res)=>{
     let cmdrName = decodeURIComponent(req.params.cmdr);
     
     if (!cmdrName) { 
-        res.sendStatus(400) ;
+        res.sendStatus(400);
         logger.log(new Error("No cmdrName provided to route"));
         return
     }
@@ -20,26 +20,25 @@ router.post('/completed/:cmdr',(req,res)=>{
     require('../../models/user')
         .then(User=>{
             if (!User) { throw new Error("Fatal model error: no user model found"); }
-            return User.findOne({username: req.user.username})
+            return User.findOne({username: req.user.username});
         })
         .then(user=>{
-            if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
+            if (!user) { throw new Error(`No such user found: ${req.user.username}`); }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let missionCompletedEvent = req.body.missionCompleted;
             let broadcastPromises = [];
             for (guildID of user.broadcastGuilds) {
                 broadcastPromises.push(missionCompleted.alert(guildID,missionCompletedEvent,cmdrName));
             }
-            return Promise.all(broadcastPromises)
-                .then(response=>{
-                    res.json(true);
-                })
-                .catch(err=>logger.log(err));
+            return Promise.all(broadcastPromises);
+        })
+        .then(response=>{
+            res.json(true);
         })
         .catch(err=>{
             logger.log(err);
-            res.sendStatus(500);
-        })
-})
+            res.json(false);
+        });
+});
 
 module.exports = router;

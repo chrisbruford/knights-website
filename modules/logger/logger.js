@@ -10,27 +10,27 @@ class Logger {
         let now = new Date();
         console.log(input);
         let logString = `${now.toUTCString()}:\n${util.inspect(input)}\n`
-        fs.appendFile(logFile, logString, err => {
-            if (err) {
-                console.log("----LOGGER ERROR----");
-                console.log(err);
-            }
-            console.log('this error has been logged to error-logs.log');
-        });
+        // fs.appendFile(logFile, logString, err => {
+        //     if (err) {
+        //         console.log("----LOGGER ERROR----");
+        //         console.log(err);
+        //     }
+        //     console.log(`this error has been logged to ${logFile}`);
+        // });
     }
 
     clear() {
-        return new Promise((resolve, reject) => {
-            fs.writeFile(logFile, '', err => {
-                if (err) {
-                    console.log("----LOGGER ERROR----");
-                    console.log(err);
-                    reject(err);
-                }
-                console.log('log file cleared');
-                resolve('log file cleared');
-            })
-        })
+        // return new Promise((resolve, reject) => {
+        //     fs.writeFile(logFile, '', err => {
+        //         if (err) {
+        //             console.log("----LOGGER ERROR----");
+        //             console.log(err);
+        //             reject(err);
+        //         }
+        //         console.log('log file cleared');
+        //         resolve('log file cleared');
+        //     })
+        // })
     }
 
     getLogString() {

@@ -3,7 +3,7 @@ const logger = require('../../../logger');
 
 module.exports = (guildID, userID) => {
     return new Promise((resolve, reject) => {
-        User.then(User=>User.findOneAndUpdate({ discordID: userID }, { $addToSet: { broadcastGuilds: guildID } }))
+        User.then(User=>User.updateMany({ discordID: userID }, { $addToSet: { broadcastGuilds: guildID } }))
             .then(user => {
                 if (!user) {
                     reject('No user found');

@@ -1,5 +1,5 @@
 "use strict";
-module.exports.getUTCObj = (UTCDate) => {
+function getUTCObj(UTCDate) {
     var utcDate = UTCDate.getUTCDate();
     var utcDay = UTCDate.getUTCDay();
     var utcFullYear = UTCDate.getUTCFullYear();
@@ -22,7 +22,7 @@ module.exports.getUTCObj = (UTCDate) => {
     return UTCDateObj;
 }
 
-module.exports.weekdays = (day) => {
+function weekdays(day) {
     var dayArray = [
         'Sunday',
         'Monday',
@@ -36,7 +36,7 @@ module.exports.weekdays = (day) => {
     return dayArray[day];
 }
 
-module.exports.months = (month) => {
+function months(month) {
     var monthArray = [
         'January',
         'February',
@@ -55,12 +55,12 @@ module.exports.months = (month) => {
     return monthArray[month];
 }
 
-module.exports.daysInBetween = (date) => {
+function daysInBetween(date) {
     var currentTime = Date.now();
     return Math.floor((currentTime - date.getTime()) / 1000 / 60 / 60 / 24)
 }
 
-module.exports.DateFormat = (date, digits) => {
+function DateFormat(date, digits) {
     for (var i = 0; i < digits; i++) {
         date = "0" + date;
     }
@@ -68,8 +68,17 @@ module.exports.DateFormat = (date, digits) => {
     return date.slice(-digits);
 }
 
-module.exports.UTCTime = (date) => {
+function UTCTime(date) {
     let h = (date.getUTCHours() > 9 ? "":"0") + date.getUTCHours();
     let m = (date.getUTCMinutes() > 9 ? "":"0") + date.getUTCMinutes();
     return `${h}:${m}`
+}
+
+module.exports = {
+    UTCTime,
+    DateFormat,
+    daysInBetween,
+    months,
+    weekdays,
+    getUTCObj
 }

@@ -21,7 +21,7 @@ router.post('/:cmdr',(req,res)=>{
     require('../../models/user')
         .then(User=>{
             if (!User) { throw new Error("Fatal model error: no user model found"); }
-            return User.findOne(req.user)
+            return User.findOne({username: req.user.username});
         })
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }

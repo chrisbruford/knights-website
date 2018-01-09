@@ -2,39 +2,80 @@
 const dateHelper = require('../dateHelper.js');
 const help = require("./help");
 const responseDict = require('../responseDict.js');
+const Discord = require('discord.js');
 
-module.exports = new Time();
 
-function Time() {
+class Time {
 
-    this.exec = (msg, commandArguments) => {
+    constructor() {
+        this.timezones = new Map([
+            ['pst', { hours: -8, minutes: 0, name: 'Pacific Standard Time', abbreviation: 'PST' }],
+            ['cst', { hours: -6, minutes: 0, name: 'Central Standard Time', abbreviation: 'CST' }],
+            ['ct', { hours: -6, minutes: 0, name: 'Central Time', abbreviation: 'CT' }],
+            ['est', { hours: -5, minutes: 0, name: 'Eastern Standard Time', abbreviation: 'EST' }],
+            ['utc', { hours: 0, minutes: 0, name: 'Coordinated Universal Time', abbreviation: 'UTC' }],
+            ['cet', { hours: 1, minutes: 0, name: 'Central European Time', abbreviation: 'CET' }],
+            ['bst', { hours: 1, minutes: 0, name: 'British Summer Time', abbreviation: 'BST' }],
+            ['ist', { hours: 5, minutes: 30, name: 'India Standard Time', abbreviation: 'IST' }]
+        ]);
+
+        this.clocks = {
+            '1': {oclock:'🕐',thirty:'🕜'},
+            '2': {oclock:'🕑',thirty:'🕝'},
+            '3': {oclock:'🕒',thirty:'🕞'},
+            '4': {oclock:'🕓',thirty:'🕟'},
+            '5': {oclock:'🕔',thirty:'🕠'},
+            '6': {oclock:'🕕',thirty:'🕡'},
+            '7': {oclock:'🕖',thirty:'🕢'},
+            '8': {oclock:'🕗',thirty:'🕣'},
+            '9': {oclock:'🕘',thirty:'🕤'},
+            '10': {oclock:'🕙',thirty:'🕥'},
+            '11': {oclock:'🕚',thirty:'🕦'},
+            '12': {oclock:'🕛',thirty:'🕧'}
+        }
+    }
+
+    exec(msg, commandArguments) {
         let argsArray = [];
-        if (commandArguments.length === 0) {
-            var date = new Date();
+        argsArray = commandArguments ? commandArguments.split(" ") : ['utc'];
 
-            var utcDateObj = dateHelper.getUTCObj(date);
+        let timeAbbr = argsArray[0].toLowerCase();
+        let timezone = this.timezones.get(timeAbbr);
 
-            var utcDate = utcDateObj.utcDate;
-            var utcDay = utcDateObj.utcDay;
-            var utcFullYear = utcDateObj.utcFullYear;
-            var utcHours = utcDateObj.utcHours;
-            var utcMinutes = utcDateObj.utcMinutes;
-            var utcMonth = utcDateObj.utcMonth;
-            var utcSeconds = utcDateObj.utcSeconds;
+        if (timezone) {
 
-            var output = "UTC Time :timer:\n";
+            this.date = new Date();
+            
+            this.date.setUTCHours(this.date.getUTCHours() + timezone.hours);
+            this.date.setUTCMinutes(this.date.getUTCMinutes() + timezone.minutes);
+            
+            //select emoji clock that is nearest current time
+            let hour = this.date.getUTCHours()
+            let minute = this.date.getUTCMinutes();
+            let nearest30 = minute > 15 && minute < 46 ? 'thirty':'oclock';
+            let clock = this.clocks[hour<13 ? hour:hour-12][nearest30];
 
-            output = output + dateHelper.weekdays(utcDay) + ', ' + dateHelper.months(utcMonth) + ' ' + dateHelper.DateFormat(utcDate, 2) + ', ' + utcFullYear + '\n' + dateHelper.DateFormat(utcHours, 2) + ':' + dateHelper.DateFormat(utcMinutes, 2) + ':' + dateHelper.DateFormat(utcSeconds, 2);
 
-            msg.channel.sendMessage(output);
+            let signChar = timezone.hours < 0 ? '' : '+';
+            let time = `${dateHelper.UTCTime(this.date)}`;
+            let date = this.date.getUTCDate() > 9 ? this.date.getUTCDate() : `0${this.date.getUTCDate()}`;
+            let month = dateHelper.months(this.date.getUTCMonth());
+
+            this.embed = new Discord.RichEmbed()
+                .setAuthor(`${clock} ${time}`)
+                .addField(timezone.name, `UTC${signChar}${(timezone.hours+((timezone.minutes/60)))}`)
+                .setTimestamp(new Date())
+            msg.channel.send(this.embed);
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send("Unknown timezone");
         }
     }
 }
 
-let helpMessage = "Find the UTC Time";
-let template = "time";
-let example = ["`-time`"];
+module.exports = new Time();
+
+let helpMessage = "Find the Time in a number of timezones";
+let template = "time <timezone>";
+let example = ["`-time EST`"];
 
 help.AddHelp("time", helpMessage, template, example);

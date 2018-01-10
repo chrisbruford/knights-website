@@ -41,7 +41,7 @@ module.exports.tooManyParams = () => {
 
 module.exports.notACommand = () => {
     let dictionary = [
-        "Um...Were you try to give me a command? If so you may be using the wrong one"
+        "Um...Were you trying to give me a command? If so you may be using the wrong one"
     ];
 
     return dictionary[Math.floor(Math.random() * dictionary.length)];

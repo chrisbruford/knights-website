@@ -28,9 +28,10 @@ router.post('/:cmdr',(req,res)=>{
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
             let interdictedEvent = req.body.interdicted;
             let system = req.body.system;
-            //TODO: Refactor so that guildID is pulled from the logged in user and sent to THEIR guild(s)
-            let response = interdicted.alert("141575893691793408",interdictedEvent,cmdrName, system);
-            res.sendStatus(200);
+            return interdicted.alert(user, interdictedEvent, system);
+        })
+        .then(()=>{
+            res.json(true);
         })
         .catch(err=>{
             logger.log(err);

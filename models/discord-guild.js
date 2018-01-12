@@ -22,7 +22,8 @@ let guild = new Schema({
     inactiveRole: String,
     activityRoles: [String],
     welcomeMessage: String,
-    welcomeChannelID: String
+    welcomeChannelID: String,
+    muteChannelID: String
 });
 
 let model = mongoose.model('discordGuild', guild);

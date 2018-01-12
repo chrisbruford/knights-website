@@ -1,29 +1,15 @@
-const discordGuildModel = require('../../../../models/discord-guild');
-const client = require('../common/client');
+const broadcast = require('../broadcasts/broadcast');
 const logger = require('../../../logger');
 
-function alert(guildID, interdictedEvt, cmdrName, system) {
+function alert(user, interdictedEvt, system) {
 
-    let response;
+    let message = `INTERDICTION ALERT: ${user.username.toUpperCase()} interdicted by ${interdictedEvt.Interdictor} in ${system}`
 
-    discordGuildModel.findOne({guildID})
-        .then(guild=>{
-            if (guild) {
-                let targetChannelID = guild.logChannelID;
-                let targetChannel = client.channels.get(targetChannelID);
-                targetChannel.sendMessage(`INTERDICTION ALERT: ${cmdrName.toUpperCase()} interdicted by ${interdictedEvt.Interdictor} in ${system}`);
-                reponse = true;
-            } else {
-                logger.log()
-            }
-        })
+    return broadcast(user,message)
         .catch(err=>{
             logger.log(err);
-            response = false;
-        })
-
-    return response
-
+            return Promise.reject(err);
+        });
 }
 
 module.exports = {

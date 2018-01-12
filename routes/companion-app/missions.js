@@ -26,11 +26,7 @@ router.post('/completed/:cmdr',(req,res)=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`); }
             if (user.username.toLowerCase() !== cmdrName.toLowerCase()) { throw new Error("commander name mismatch"); }
             let missionCompletedEvent = req.body.missionCompleted;
-            let broadcastPromises = [];
-            for (guildID of user.broadcastGuilds) {
-                broadcastPromises.push(missionCompleted.alert(guildID,missionCompletedEvent,user.username, user.discordID));
-            }
-            return Promise.all(broadcastPromises);
+            return missionCompleted.alert(user, missionCompletedEvent);
         })
         .then(response=>{
             res.json(true);

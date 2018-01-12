@@ -16,7 +16,9 @@ class Time {
             ['utc', { hours: 0, minutes: 0, name: 'Coordinated Universal Time', abbreviation: 'UTC' }],
             ['cet', { hours: 1, minutes: 0, name: 'Central European Time', abbreviation: 'CET' }],
             ['bst', { hours: 1, minutes: 0, name: 'British Summer Time', abbreviation: 'BST' }],
-            ['ist', { hours: 5, minutes: 30, name: 'India Standard Time', abbreviation: 'IST' }]
+            ['ist', { hours: 5, minutes: 30, name: 'India Standard Time', abbreviation: 'IST' }],
+            ['aedt',{ hours: 11, minutes: 0, name: 'Australian Eastern Daylight Time', abbreviation: 'AEDT'}],
+            ['aest',{ hours: 10, minutes: 0, name: 'Australian Eastern Standard Time', abbreviation: 'AEST'}]
         ]);
 
         this.clocks = {
@@ -52,6 +54,7 @@ class Time {
             //select emoji clock that is nearest current time
             let hour = this.date.getUTCHours()
             let minute = this.date.getUTCMinutes();
+            if (minute > 45) { hour++ }
             let nearest30 = minute > 15 && minute < 46 ? 'thirty':'oclock';
             let clock = this.clocks[hour<13 ? hour:hour-12][nearest30];
 

@@ -22,7 +22,7 @@ module.exports = userID => {
                             })
                             message += "```";
                         } else {
-                            message = `\`\`\`${user.username} is not broadcasting to any guilds\`\`\``;
+                            message += `\`\`\`${user.username} is not broadcasting to any guilds\`\`\``;
                         }
                     })
                     resolve(message);

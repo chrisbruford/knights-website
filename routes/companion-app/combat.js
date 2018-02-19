@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let { factionKillBond, interdicted } = require('../../modules/kok-bot/modules/companion');
+let { redeemVoucher, interdicted } = require('../../modules/kok-bot/modules/companion');
 let logger = require('../../modules/logger');
 
 router.post('/interdicted/:cmdr',(req,res)=>{
@@ -39,7 +39,7 @@ router.post('/interdicted/:cmdr',(req,res)=>{
         })
 })
 
-router.post('/factionkillbond',(req,res)=>{
+router.post('/redeemVoucher',(req,res)=>{
     let cmdrName = req.body.cmdrName;
     
     if (!cmdrName) { 
@@ -50,7 +50,7 @@ router.post('/factionkillbond',(req,res)=>{
     
     if (!req.user) {
         res.sendStatus(403)
-        logger.log(new Error("non-logged in user attempted to do a factionkillbond alert"));
+        logger.log(new Error("non-logged in user attempted to do a redeemVoucher alert"));
         return
     }
 
@@ -62,8 +62,8 @@ router.post('/factionkillbond',(req,res)=>{
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
-            let factionKillBond = req.body.factionKillBond;
-            return factionKillBond.alert(user, factionKillBond);
+            let redeemVoucher = req.body.redeemVoucher;
+            return redeemVoucher.alert(user, redeemVoucher);
         })
         .then(()=>{
             res.json(true);

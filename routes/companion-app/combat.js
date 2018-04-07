@@ -62,8 +62,8 @@ router.post('/redeemVoucher',(req,res)=>{
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
             if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
-            let redeemVoucher = req.body.redeemVoucher;
-            return redeemVoucher.alert(user, redeemVoucher);
+            let redeemVoucherEvt = req.body.redeemVoucher;
+            return redeemVoucher.alert(user, redeemVoucherEvt);
         })
         .then(()=>{
             res.json(true);

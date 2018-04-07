@@ -6,7 +6,7 @@ const help = require("./help");
 const Discord = require('discord.js');
 const guildModel = require('../../../../../models/discord-guild');
 
-function Mute() {
+function Unmute() {
 
     this.exec = (msg, commandArguments) => {
         let argsArray = [];
@@ -113,10 +113,10 @@ function Mute() {
     }
 }
 
-module.exports = new Mute();
+module.exports = new Unmute();
 
 let helpMessage = "Unmute a user - **be careful** you may unmute someone who was not muted via the mute command";
 let template = "unmute <@user> <@user2>";
 let example = ["`-unmute @Blood Drunk @Garud`"];
 
-help.AddHelp("mute", helpMessage, template, example);
+help.AddHelp("unmute", helpMessage, template, example);

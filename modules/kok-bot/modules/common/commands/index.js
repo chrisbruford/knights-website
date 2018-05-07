@@ -46,6 +46,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("mutechannel", require("./muteChannel"));
     this.commandsMap.set("mute", require("./mute"));
     this.commandsMap.set("unmute", require("./unmute"));
+    this.commandsMap.set("objectives", require('./objectives'));
 }
 
 client.on("message", msg => {

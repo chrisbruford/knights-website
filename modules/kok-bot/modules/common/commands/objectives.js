@@ -71,7 +71,7 @@ class Objectives {
 
     list(msg, argsArray) {
         if (argsArray.length === 1) {
-            reqAccess(msg.guild, msg.member, 3)
+            reqAccess(msg.guild, msg.member, 1)
                 .then(() => objectivesController.listObjectives(msg.guild.id))
                 .then(objectives => {
                     if (objectives) {

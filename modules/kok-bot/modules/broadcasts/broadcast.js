@@ -4,21 +4,13 @@ const logger = require('../../../logger');
 const reqAccess = require('../common/reqAccess');
 
 module.exports = (user, message) => {
-    console.log('entering function');
-
     let discordID = user.discordID;
     if (!discordID) {
-        console.log('no discord id');
         return Promise.reject('User has not linked their Discord account');
     }
 
-    console.log('all good so far');
-
     let broadcastPromises = [];
-    console.log(user.broadcastGuilds);
-    console.log(user);
     for (guildID of user.broadcastGuilds) {
-        console.log('loop');
         broadcastPromises.push(discordGuildModel.findOne({ guildID })
             .then(guild => {
                 if (guild) {
@@ -49,11 +41,9 @@ module.exports = (user, message) => {
                 }
             })
             .then(() => {
-                console.log('sending msg');
                 targetChannel.send(message);
             })
         );
     }
-    console.log('returning');
     return Promise.all(broadcastPromises);
 }

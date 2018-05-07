@@ -23,7 +23,15 @@ let guild = new Schema({
     activityRoles: [String],
     welcomeMessage: String,
     welcomeChannelID: String,
-    muteChannelID: String
+    muteChannelID: String,
+    objectives: [{
+            objectiveID: {
+                type: String,
+                unique: true,
+                sparse: true
+            }, 
+            title: String
+    }]
 });
 
 let model = mongoose.model('discordGuild', guild);

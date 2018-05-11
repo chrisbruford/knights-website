@@ -57,28 +57,32 @@ function Roll() {
                     var rolled = [];
 
                     if (!isNaN(rolls) && !isNaN(sides) && !isNaN(addition)) {
-                        for (var i = 0; i < rolls; i++) {
-                            rolled.push(Math.floor((Math.random() * sides) + 1));
+                        if (rolls > 50 || sides > 50 || addition > 999) {
+                            msg.channel.sendMessage(`The number of rolls and dice sides should not be more than 50 and addendum lesser than 1000`);
+                        } else {
+                            for (var i = 0; i < rolls; i++) {
+                                rolled.push(Math.floor((Math.random() * sides) + 1));
+                            }
+
+                            var sum = 0;
+                            rolled.forEach((roll, index, rolls) => {
+                                if (add) {
+                                    rolls[index] = roll + addition;
+                                    roll = roll + addition;
+                                } else {
+                                    rolls[index] = roll - addition;
+                                    roll = roll - addition;
+                                }
+                                if (roll < 1) {
+                                    rolls[index] = 0;
+                                    roll = 0;
+                                }
+                                sum = sum + roll;
+                            });
+                            var rolls = rolled.join(", ");
+
+                            msg.channel.sendMessage(`:game_die: You rolled ${rolls} (Sum : ${sum})`);
                         }
-
-                        var sum = 0;
-                        rolled.forEach((roll, index, rolls) => {
-                            if (add) {
-                                rolls[index] = roll + addition;
-                                roll = roll + addition;
-                            } else {
-                                rolls[index] = roll - addition;
-                                roll = roll - addition;
-                            }
-                            if (roll < 1) {
-                                rolls[index] = 0;
-                                roll = 0;
-                            }
-                            sum = sum + roll;
-                        });
-                        var rolls = rolled.join(", ");
-
-                        msg.channel.sendMessage(`:game_die: You rolled ${rolls} (Sum : ${sum})`);
                     } else {
                         msg.channel.sendMessage(responseDict.fail());
                     }

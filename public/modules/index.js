@@ -15,7 +15,6 @@ require('./admin');
 require('./account');
 require('./myAccount');
 require('./ajaxLoader');
-require('./leaderboard');
 require('./activate');
 require('./common');
 require('./resetPassword');

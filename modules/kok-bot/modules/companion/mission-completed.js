@@ -13,10 +13,6 @@ function alert(user, missionCompleted) {
     let message = `mission completed: ${user.username.toUpperCase()} completed ${LocalisedName.toUpperCase()} for ${originator.toUpperCase()}`
 
     return broadcast(user, message)
-        .catch(err=>{
-            logger.log(err);
-            return Promise.reject(err);
-        })
 }
 
 module.exports = {

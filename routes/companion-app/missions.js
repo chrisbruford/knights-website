@@ -32,8 +32,11 @@ router.post('/completed/:cmdr',(req,res)=>{
             res.json(true);
         })
         .catch(err=>{
+
+            if (!err) { res.status(500).json({error: "Unable to complete sending mission alert to Discord"})}
+
             logger.log(err);
-            res.json(false);
+            res.status(500).json({error: "Unable to complete sending mission alert to Discord", message: err.message});
         });
 });
 

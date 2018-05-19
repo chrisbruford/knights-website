@@ -10,11 +10,12 @@ module.exports = (user, message) => {
     }
 
     let broadcastPromises = [];
-    for (guildID of user.broadcastGuilds) {
+    for (let guildID of user.broadcastGuilds) {
+        let targetChannel;
         broadcastPromises.push(discordGuildModel.findOne({ guildID })
             .then(guild => {
                 if (guild) {
-                    targetChannelID = guild.companionChannelID;
+                    let targetChannelID = guild.companionChannelID;
                     if (!targetChannelID) {
                         return Promise.reject(new Error("No companion channel set"));
                     }

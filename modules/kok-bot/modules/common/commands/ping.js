@@ -14,14 +14,14 @@ function Ping() {
         if (commandArguments.length === 0) {
             reqAccess(msg.guild, msg.member, 2)
                 .then(() => {
-                    msg.channel.sendMessage("Pong")
+                    msg.channel.send("Pong")
                         .then(sentMessage => {
                             var latency = sentMessage.createdTimestamp - msg.createdTimestamp;
-                            msg.channel.sendMessage("My response time is " + latency + "ms.");
+                            msg.channel.send("My response time is " + latency + "ms.");
                         })
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         }
     }

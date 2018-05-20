@@ -20,10 +20,10 @@ function FrontDeskChannel() {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -35,15 +35,15 @@ function FrontDeskChannel() {
                     let thisGuild = msg.guild;
                     return channels.frontDesk.add(frontDeskChannelID, thisGuild);
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -54,15 +54,15 @@ function FrontDeskChannel() {
                     let thisGuild = msg.guild;
                     return channels.frontDesk.remove(thisGuild);
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -72,20 +72,20 @@ function FrontDeskChannel() {
                 .then(() => channels.frontDesk.list(msg.guild.id))
                 .then(res => {
                     if (res) {
-                        msg.channel.sendMessage(res)
+                        msg.channel.send(res)
                             .catch(err => logger.log(err));
                     } else {
-                        msg.channel.sendMessage(responseDict.fail())
+                        msg.channel.send(responseDict.fail())
                             .catch(err => logger.log(err));
                     }
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         }
     }
 }

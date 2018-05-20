@@ -66,7 +66,7 @@ client.on("message", msg => {
             console.log(command + " command requested");
             this.commandsMap.get(command).exec(msg, commandArguments);
         } else {
-            msg.channel.sendMessage(responseDict.notACommand());
+            msg.channel.send(responseDict.notACommand());
         }
     } else if (msg.mentions.users.filterArray(function (user) {
         if (user.id === client.user.id) {
@@ -75,7 +75,7 @@ client.on("message", msg => {
             return false;
         }
     }).length > 0) {
-        msg.channel.sendMessage(responseDict.botMentioned());
+        msg.channel.send(responseDict.botMentioned());
     } else if (msg.content.indexOf('@everyone') > -1 || msg.content.indexOf('@here') > -1) {
         if (msg.member.user.id !== client.user.id && !msg.member.permissions.hasPermission('MENTION_EVERYONE')) {
             memes.smh(msg.channel);

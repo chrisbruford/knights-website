@@ -7,7 +7,7 @@ module.exports = new Hi();
 function Hi() {
 
     this.exec = (msg, commandArguments) => {
-        msg.channel.sendMessage("Hello")
+        msg.channel.send("Hello")
             .catch(err => logger.log(err));
     }
 }

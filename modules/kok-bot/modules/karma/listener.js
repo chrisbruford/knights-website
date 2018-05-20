@@ -77,7 +77,7 @@ client.on("message", msg => {
             if (mentionUsers.length > 0) {
                 reply.push(`Nice one, ${mentionUsers.join(', ')}. Your karma goes up!`);
             }
-            msg.channel.sendMessage(reply.join('\n'));
+            msg.channel.send(reply.join('\n'));
         }
     }
 });

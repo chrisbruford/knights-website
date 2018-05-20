@@ -79,7 +79,7 @@ function Guildinfo() {
                     msg.channel.sendEmbed(embed);
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         }
     }

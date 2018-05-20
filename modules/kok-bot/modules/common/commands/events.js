@@ -31,10 +31,10 @@ class Events {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -54,10 +54,10 @@ class Events {
                     return events.start(msg.member.id, title, role, startIn, duration);
                 })
                 .then((event) => {
-                    event.on('reminder', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** commences in ${evt.time} minutes`));
-                    event.on('end', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** has ended`));
-                    event.on('start', evt => msg.channel.sendMessage(`<@&${evt.role.id}> **${evt.title}** is due to start now`));
-                    msg.channel.sendMessage(`<@${msg.member.id}> has created a new event for members of <@&${event.role.id}>`)
+                    event.on('reminder', evt => msg.channel.send(`<@&${evt.role.id}> **${evt.title}** commences in ${evt.time} minutes`));
+                    event.on('end', evt => msg.channel.send(`<@&${evt.role.id}> **${evt.title}** has ended`));
+                    event.on('start', evt => msg.channel.send(`<@&${evt.role.id}> **${evt.title}** is due to start now`));
+                    msg.channel.send(`<@${msg.member.id}> has created a new event for members of <@&${event.role.id}>`)
                         .then(data => {
                             let embed = new Discord.RichEmbed();
                             embed.setColor(0x663399);
@@ -73,10 +73,10 @@ class Events {
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -102,10 +102,10 @@ class Events {
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -117,14 +117,14 @@ class Events {
                     return events.end(msg.member.id, title);
                 })
                 .then((event) => {
-                    msg.channel.sendMessage(responseDict.success());
+                    msg.channel.send(responseDict.success());
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

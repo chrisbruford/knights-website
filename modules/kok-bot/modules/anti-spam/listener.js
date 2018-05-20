@@ -108,15 +108,15 @@ client.on("message", msg => {
 
 function checkSpamStatus(warning, msg) {
     if (warning === 1) {
-        msg.channel.sendMessage(`${msg.member.displayName}, you are spamming. Please keep it down or you'll lose karma.`);
+        msg.channel.send(`${msg.member.displayName}, you are spamming. Please keep it down or you'll lose karma.`);
     } else if (warning === 2) {
-        msg.channel.sendMessage(`${msg.member.displayName}, you are spamming. There goes one of your precious karma.`);
+        msg.channel.send(`${msg.member.displayName}, you are spamming. There goes one of your precious karma.`);
         karma.handler.remove(1, msg.author.id, msg.guild);
     } else if (warning === 3) {
-        msg.channel.sendMessage(`${msg.member.displayName}, you are spamming. This one costs you 3 karma.`);
+        msg.channel.send(`${msg.member.displayName}, you are spamming. This one costs you 3 karma.`);
         karma.handler.remove(3, msg.author.id, msg.guild);
     } else if (warning > 3) {
-        msg.channel.sendMessage(`${msg.member.displayName}, you are spamming. -10 karma for you. Seriously, STAHP!`);
+        msg.channel.send(`${msg.member.displayName}, you are spamming. -10 karma for you. Seriously, STAHP!`);
         karma.handler.remove(10, msg.author.id, msg.guild);
     }
 }

@@ -34,7 +34,7 @@ function Whois() {
                         for (let j = 0; j < argsArray.length; j++) {
                             var inputName = argsArray[j].trim().toLowerCase();
                             if (inputName.length < 3) {
-                                msg.channel.sendMessage(`I need at least 3 characters to search, skipping ${inputName}`);
+                                msg.channel.send(`I need at least 3 characters to search, skipping ${inputName}`);
                                 argsArray.splice(j, 1);
                                 j--; //compensate for removal of 1 element
                                 continue;
@@ -107,14 +107,14 @@ function Whois() {
                         }
                     }
                     if (inputNameCount === 0) {
-                        msg.channel.sendMessage("Nothing Found");
+                        msg.channel.send("Nothing Found");
                     }
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

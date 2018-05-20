@@ -19,7 +19,7 @@ class Welcome {
             //known substitutions should be added below, anything else will get treated as a normal string
             message = message.replace(/\${user}/ig, `${user}`);
             //send message
-            channel.sendMessage(message);
+            channel.send(message);
         })
 
         client.on("guildMemberAdd", member => {
@@ -44,10 +44,10 @@ class Welcome {
             if (this[command]) {
                 this[command](msg, args);
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
 
     }
@@ -70,20 +70,20 @@ class Welcome {
                     }
                 ).then(guild => {
                     if (guild) {
-                        msg.channel.sendMessage(responseDict.success());
+                        msg.channel.send(responseDict.success());
                     } else {
                         console.log('Guild not found');
-                        msg.channel.sendMessage(`Failed to save this change`);
+                        msg.channel.send(`Failed to save this change`);
                     }
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
             } else {
-                msg.channel.sendMessage("Unknown channel");
+                msg.channel.send("Unknown channel");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -92,10 +92,10 @@ class Welcome {
             welcomeMessage: undefined,
             frontDeskChannelID: undefined
         }).then(guild => {
-            msg.channel.sendMessage(responseDict.success());
+            msg.channel.send(responseDict.success());
         }).catch(err => {
             logger.log(err);
-            msg.channel.sendMessage(responseDict.fail());
+            msg.channel.send(responseDict.fail());
         })
     }
 
@@ -104,15 +104,15 @@ class Welcome {
             .then(guild => {
                 if (guild && guild.welcomeMessage && guild.frontDeskChannelID) {
                     sendWelcome.get(this)(msg.channel, msg.member, guild.welcomeMessage);
-                    msg.channel.sendMessage(`This welcome message will be sent to ${msg.guild.channels.get(guild.frontDeskChannelID)}`);
+                    msg.channel.send(`This welcome message will be sent to ${msg.guild.channels.get(guild.frontDeskChannelID)}`);
                 } else {
                     console.log(guild);
-                    msg.channel.sendMessage(`Welcome message not set`);
+                    msg.channel.send(`Welcome message not set`);
                 }
             })
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 

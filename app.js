@@ -13,6 +13,7 @@ let DiscordStrategy = require('passport-discord').Strategy;
 let session = require('express-session');
 let helmet = require('helmet');
 let MongoStore = require('connect-mongo')(session);
+const IP_MONITOR = require('./middleware/ip-monitor');
 
 //routes
 let home = require('./routes/index');
@@ -32,6 +33,8 @@ let missions = require('./routes/companion-app/missions');
 let combat = require('./routes/companion-app/combat');
 
 let app = express();
+
+app.use(IP_MONITOR);
 
 //for Let's Encrypt
 app.use('/.well-known/acme-challenge/:fileid', function(req, res){

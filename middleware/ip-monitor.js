@@ -7,7 +7,7 @@ const MAX_REQUESTS = 100;
 const MAX_TIME = 3000;
 
 module.exports = (req,res,next) => {
-    const IP = req.ip || req.connection.remoteAddress;
+    let IP = req.ip || req.connection.remoteAddress;
 
     if (!IP) {
         let xff = req.headers['x-forwarded-for'];

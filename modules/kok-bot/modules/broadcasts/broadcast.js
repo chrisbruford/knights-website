@@ -11,7 +11,6 @@ module.exports = (user, message) => {
 
     let broadcastPromises = [];
     for (let guildID of user.broadcastGuilds) {
-        console.log(`broadcasting to guildID ${guildID}`);
         let targetChannel;
         broadcastPromises.push(discordGuildModel.findOne({ guildID })
             .then(guild => {
@@ -33,7 +32,6 @@ module.exports = (user, message) => {
                     }
 
                     if (targetChannel) {
-                        console.log(`checking reqAccess for ${discordGuild.id}`);
                         return reqAccess(discordGuild, member, 1);
                     } else {
                         return Promise.reject(new Error("Trying to send a message to a channel I'm not in"));
@@ -42,10 +40,7 @@ module.exports = (user, message) => {
                     return Promise.reject(new Error('no such guild'));
                 }
             })
-            .then(() => {
-                console.log(`Sending mission message: ${message} to ${targetChannel.id}`);
-                targetChannel.send(message);
-            })
+            .then(() => targetChannel.send(message))
             .catch(err=>{
                 logger.log(err);
             })

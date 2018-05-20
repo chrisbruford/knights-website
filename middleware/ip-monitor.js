@@ -7,9 +7,11 @@ const MAX_REQUESTS = 100;
 const MAX_TIME = 1000;
 
 module.exports = (req,res,next) => {
-    const IP = req.ip;
+    const IP = req.ip || req.connection.remoteAddress;
+    //if no IP then connection already gone, so ditch it
+    if (!IP) return;
     let hits = IP_MAP.get(IP);
-
+    
     if (!hits) { 
         IP_MAP.set(IP,1);
         setTimeout(decrement, MAX_TIME, IP);
@@ -19,7 +21,6 @@ module.exports = (req,res,next) => {
         IP_MAP.set(IP,++hits);
         setTimeout(decrement, MAX_TIME, IP);
         if (hits >= MAX_REQUESTS) {
-            LOGGER.log(`Ignoring ${IP} for too many requests`);
             return
         } else {
             next();

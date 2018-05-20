@@ -7,7 +7,15 @@ const MAX_REQUESTS = 100;
 const MAX_TIME = 3000;
 
 module.exports = (req,res,next) => {
-    const IP = req.ip || req.connection.remoteAddress || req.headers['x-forwarded-for'];
+    const IP = req.ip || req.connection.remoteAddress;
+
+    if (!IP) {
+        let xff = req.headers['x-forwarded-for'];
+        if (xff.length > 0) {
+            IP = xff.slice(0,xff.indexOf(":"))
+        }
+    }
+
     LOGGER.log(`Request from ${IP}`);
     //if no IP then connection already gone, so ditch it
     if (!IP) return;
@@ -22,7 +30,6 @@ module.exports = (req,res,next) => {
         IP_MAP.set(IP,++hits);
         setTimeout(decrement, MAX_TIME, IP);
         if (hits >= MAX_REQUESTS) {
-            console.log(`Ignoring ${IP} due to too many requests`);
             return
         } else {
             next();

@@ -41,14 +41,14 @@ function Dist() {
                                 y1 = JSON.parse('[' + body + ']')[0].coords.y;
                                 z1 = JSON.parse('[' + body + ']')[0].coords.z;
                             } else {
-                                msg.channel.sendMessage(entity1.toUpperCase() + " not found");
+                                msg.channel.send(entity1.toUpperCase() + " not found");
                             }
                             if (JSON.parse('[' + body + ']')[1].name) {
                                 x2 = JSON.parse('[' + body + ']')[1].coords.x;
                                 y2 = JSON.parse('[' + body + ']')[1].coords.y;
                                 z2 = JSON.parse('[' + body + ']')[1].coords.z;
                             } else {
-                                msg.channel.sendMessage(entity2.toUpperCase() + " not found");
+                                msg.channel.send(entity2.toUpperCase() + " not found");
                             }
                             if (JSON.parse('[' + body + ']')[0].name && JSON.parse('[' + body + ']')[1].name) {
 
@@ -60,7 +60,7 @@ function Dist() {
 
                                 distance = (Math.round(distance * 100)) / 100;
 
-                                msg.channel.sendMessage(distance + " LY");
+                                msg.channel.send(distance + " LY");
                             }
                         })
                         .catch(error => {
@@ -68,12 +68,12 @@ function Dist() {
                         })
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

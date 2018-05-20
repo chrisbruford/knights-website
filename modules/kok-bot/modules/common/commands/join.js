@@ -22,17 +22,17 @@ class Join {
 
                 if (publicRole) {
                     msg.member.addRole(publicRole.id);
-                    msg.channel.sendMessage(responseDict.success());
+                    msg.channel.send(responseDict.success());
                 } else {
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 }
             })
             .catch(err=>{
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
             
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

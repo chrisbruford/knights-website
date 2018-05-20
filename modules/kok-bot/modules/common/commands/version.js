@@ -7,7 +7,7 @@ module.exports = new Version();
 function Version() {
 
     this.exec = (msg, commandArguments) => {
-        msg.channel.sendMessage(`${require('../../../app').version}`)
+        msg.channel.send(`${require('../../../app').version}`)
             .catch(err => logger.log(err));
     }
 }

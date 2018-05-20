@@ -15,10 +15,10 @@ module.exports = (msg, imageCat, path) => {
             setDefaultsOnInsert: true
         })
         .then(guild => {
-            msg.channel.sendMessage(responseDict.success());
+            msg.channel.send(responseDict.success());
         })
         .catch(err => {
             console.log(err);
-            msg.channel.sendMessage(responseDict.fail());
+            msg.channel.send(responseDict.fail());
         })
 }

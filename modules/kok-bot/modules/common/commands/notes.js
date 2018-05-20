@@ -21,10 +21,10 @@ function Notes() {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -66,13 +66,13 @@ function Notes() {
                             })
                     })
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -111,15 +111,15 @@ function Notes() {
                             })
                     })
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -133,7 +133,7 @@ function Notes() {
                             guildUsers.users.forEach((user, index, users) => {
                                 if (user.id === msg.member.id) {
                                     if (user.notes.length > 0) {
-                                        msg.channel.sendMessage("I have DM'd your notes to you");
+                                        msg.channel.send("I have DM'd your notes to you");
                                         var embed = new Discord.RichEmbed();
                                         embed.setColor(6684774);
                                         embed.setTitle(`You have ${user.notes.length} note(s).`);
@@ -145,7 +145,7 @@ function Notes() {
                                                 logger.log(err);
                                             });
                                     } else {
-                                        msg.channel.sendMessage("You don't have any notes to show");
+                                        msg.channel.send("You don't have any notes to show");
                                     }
                                 }
                             });
@@ -153,17 +153,17 @@ function Notes() {
                         })
                         .catch(err => {
                             logger.log(err);
-                            msg.channel.sendMessage(responseDict.fail())
+                            msg.channel.send(responseDict.fail())
                                 .catch(err => logger.log(err));
                         })
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         }
     }
 }

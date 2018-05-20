@@ -61,12 +61,12 @@ function AddBotImages() {
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

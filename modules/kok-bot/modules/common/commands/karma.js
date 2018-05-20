@@ -21,16 +21,16 @@ function Karma() {
                 if (this[command]) {
                     this[command](msg, argsArray)
                 } else {
-                    msg.channel.sendMessage("Unknown command");
+                    msg.channel.send("Unknown command");
                 }
             } else {
-                msg.channel.sendMessage(responseDict.noParams());
+                msg.channel.send(responseDict.noParams());
             }
         } else {
             if (this["show"]) {
                 this["show"](msg, [])
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         }
     }
@@ -47,11 +47,11 @@ function Karma() {
                     }
                 })
                 .then((karmaVal) => {
-                    msg.channel.sendMessage(`${msg.guild.members.get(mention.id).displayName} has got ${karmaVal} karma`);
+                    msg.channel.send(`${msg.guild.members.get(mention.id).displayName} has got ${karmaVal} karma`);
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else if (argsArray.length === 0) {
@@ -61,17 +61,17 @@ function Karma() {
                     return karma.handler.show(mention.id, msg.guild);
                 })
                 .then((karmaVal) => {
-                    msg.channel.sendMessage(`You have got ${karmaVal} karma`);
+                    msg.channel.send(`You have got ${karmaVal} karma`);
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -82,24 +82,24 @@ function Karma() {
                     let karmaVal = argsArray[1];
                     let mentions = msg.mentions.users;
                     if (karmaVal < 1) {
-                        msg.channel.sendMessage("Please add at least 1 karma.");
+                        msg.channel.send("Please add at least 1 karma.");
                         return Promise.reject("Add at least 1 karma");
                     } else if (mentions.array().length > 1) {
-                        msg.channel.sendMessage("Please add karma to one user at a time");
+                        msg.channel.send("Please add karma to one user at a time");
                         return Promise.reject("Add karma to one user only");
                     } else {
                         return karma.handler.add(karmaVal, mentions.first().id, msg.guild);
                     }
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -110,24 +110,24 @@ function Karma() {
                     let karmaVal = argsArray[1];
                     let mentions = msg.mentions.users;
                     if (karmaVal < 1) {
-                        msg.channel.sendMessage("Please remove at least 1 karma.");
+                        msg.channel.send("Please remove at least 1 karma.");
                         return Promise.reject("Remove at least 1 karma");
                     } else if (mentions.array().length > 1) {
-                        msg.channel.sendMessage("Please remove karma from one user at a time");
+                        msg.channel.send("Please remove karma from one user at a time");
                         return Promise.reject("Remove karma from one user only");
                     } else {
                         return karma.handler.remove(karmaVal, mentions.first().id, msg.guild);
                     }
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -138,24 +138,24 @@ function Karma() {
                     let karmaVal = argsArray[1];
                     let mentions = msg.mentions.users;
                     if (karmaVal < 1) {
-                        msg.channel.sendMessage("Please give at least 1 karma.");
+                        msg.channel.send("Please give at least 1 karma.");
                         return Promise.reject("Give at least 1 karma");
                     } else if (mentions.array().length > 1) {
-                        msg.channel.sendMessage("Please give karma to one user at a time");
+                        msg.channel.send("Please give karma to one user at a time");
                         return Promise.reject("Give karma to one user only");
                     } else {
                         return karma.handler.give(karmaVal, msg.author.id, mentions.first().id, msg.guild);
                     }
                 })
-                .then(() => msg.channel.sendMessage(responseDict.success()))
+                .then(() => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -206,21 +206,21 @@ function Karma() {
                             output.push("----------------------------------------");
                             output.push("```");
 
-                            msg.channel.sendMessage(output.join("\n"));
+                            msg.channel.send(output.join("\n"));
                         })
                         .catch(err => {
                             logger.log(err);
-                            msg.channel.sendMessage(responseDict.fail())
+                            msg.channel.send(responseDict.fail())
                                 .catch(err => logger.log(err));
                         })
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         }
     }
 }

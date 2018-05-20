@@ -16,14 +16,14 @@ function GuildId() {
         if (argsArray.length === 0) {
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
-                    msg.channel.sendMessage(`This Guild's ID: ${msg.guild.id}`);
+                    msg.channel.send(`This Guild's ID: ${msg.guild.id}`);
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         }
     }
 }

@@ -10,7 +10,7 @@ module.exports = (guildID,username) => {
     .then(guild=>{
         if (guild) {
             let adminChannel = client.channels.get(guild.adminChannelID.toString());
-            adminChannel.sendMessage(`${username} signed up on the website.`);
+            adminChannel.send(`${username} signed up on the website.`);
         } else {
             throw new Error(`Couldn't find ${guildID} to announce registration of ${username}`);
         }

@@ -21,10 +21,10 @@ function Wings() {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -37,15 +37,15 @@ function Wings() {
                     let thisGuild = msg.guild;
                     return wings.addWing(wingName, roleID, thisGuild);
                 })
-                .then(wing => msg.channel.sendMessage(responseDict.success()))
+                .then(wing => msg.channel.send(responseDict.success()))
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 3) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -55,20 +55,20 @@ function Wings() {
                 .then(() => {
                     let wingName = argsArray[1];
                     wings.removeWing(wingName)
-                        .then((res) => msg.channel.sendMessage(responseDict.success()))
+                        .then((res) => msg.channel.send(responseDict.success()))
                         .catch(err => {
                             logger.log(err);
-                            msg.channel.sendMessage(responseDict.fail())
+                            msg.channel.send(responseDict.fail())
                         })
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -77,15 +77,15 @@ function Wings() {
             reqAccess(msg.guild, msg.member, 3)
                 .then(() => {
                     wings.listWings()
-                        .then(res => msg.channel.sendMessage(res))
-                        .catch(err => msg.channel.sendMessage(responseDict.fail()))
+                        .then(res => msg.channel.send(res))
+                        .catch(err => msg.channel.send(responseDict.fail()))
                 })
                 .catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         }
     }
 
@@ -102,20 +102,20 @@ function Wings() {
                         wings.joinWing(wingName, member),
                         wingController.joinWing({ discordID: member.id }, wingName)
                     ])
-                        .then(wing => msg.channel.sendMessage(responseDict.success()))
+                        .then(wing => msg.channel.send(responseDict.success()))
                         .catch(err => {
                             logger.log(err);
-                            msg.channel.sendMessage(responseDict.fail());
+                            msg.channel.send(responseDict.fail());
                         })
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -129,21 +129,21 @@ function Wings() {
                         wings.leaveWing(wingName, msg.member),
                         wingController.leaveWing({ discordID: member.id }, wingName)
                     ])
-                        .then(wing => msg.channel.sendMessage(responseDict.success()))
+                        .then(wing => msg.channel.send(responseDict.success()))
                         .catch(err => {
                             logger.log(err)
-                            msg.channel.sendMessage(responseDict.fail())
+                            msg.channel.send(responseDict.fail())
                                 .catch(err => logger.log(err))
                         })
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail())
+                    msg.channel.send(responseDict.fail())
                         .catch(err => logger.log(err));
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -163,20 +163,20 @@ function Wings() {
                                     message += `${user.username} \n`;
                                 })
                                 message += "```"
-                                msg.channel.sendMessage(message);
+                                msg.channel.send(message);
                             } else {
-                                msg.channel.sendMessage("No users in that wing I'm afraid!");
+                                msg.channel.send("No users in that wing I'm afraid!");
                             }
                         })
                         .catch(err => {
                             logger.log(err);
-                            msg.channel.sendMessage(responseDict.fail());
+                            msg.channel.send(responseDict.fail());
                         })
                 })
         } else if (argsArray.length > 2) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

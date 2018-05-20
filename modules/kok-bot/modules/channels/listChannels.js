@@ -10,5 +10,5 @@ module.exports = msg => {
 
     message += "```";
 
-    msg.channel.sendMessage(message);
+    msg.channel.send(message);
 }

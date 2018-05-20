@@ -18,10 +18,10 @@ class Broadcasts {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -31,10 +31,10 @@ class Broadcasts {
                 let thisGuild = msg.guild;
                 return broadcast.add(thisGuild.id, msg.member.id);
             })
-            .then(wing => msg.channel.sendMessage(responseDict.success()))
+            .then(wing => msg.channel.send(responseDict.success()))
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 
@@ -43,10 +43,10 @@ class Broadcasts {
             .then(() => {
                 return broadcast.remove(msg.guild.id, msg.member.id);
             })
-            .then(wing => msg.channel.sendMessage(responseDict.success()))
+            .then(wing => msg.channel.send(responseDict.success()))
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 
@@ -56,10 +56,10 @@ class Broadcasts {
                 let thisGuild = msg.guild;
                 return broadcast.list(msg.member.id);
             })
-            .then(res => msg.member.sendMessage(res))
+            .then(res => msg.member.send(res))
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 }

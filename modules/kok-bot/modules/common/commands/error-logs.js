@@ -16,10 +16,10 @@ class errorlogger {
             if (this[command]) {
                 this[command](msg, argsArray)
             } else {
-                msg.channel.sendMessage("Unknown command");
+                msg.channel.send("Unknown command");
             }
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 
@@ -32,7 +32,7 @@ class errorlogger {
             .then((file) => msg.member.sendFile(file,"logfile.log"))
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 
@@ -42,10 +42,10 @@ class errorlogger {
             .then(() => {
                 return logger.clear();
             })
-            .then(()=>msg.channel.sendMessage(responseDict.success()))
+            .then(()=>msg.channel.send(responseDict.success()))
             .catch(err => {
                 logger.log(err);
-                msg.channel.sendMessage(responseDict.fail());
+                msg.channel.send(responseDict.fail());
             })
     }
 }

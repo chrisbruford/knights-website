@@ -58,7 +58,7 @@ function Roll() {
 
                     if (!isNaN(rolls) && !isNaN(sides) && !isNaN(addition)) {
                         if (rolls > 50 || sides > 50 || addition > 999) {
-                            msg.channel.sendMessage(`The number of rolls and dice sides should not be more than 50 and addendum lesser than 1000`);
+                            msg.channel.send(`The number of rolls and dice sides should not be more than 50 and addendum lesser than 1000`);
                         } else {
                             for (var i = 0; i < rolls; i++) {
                                 rolled.push(Math.floor((Math.random() * sides) + 1));
@@ -81,19 +81,19 @@ function Roll() {
                             });
                             var rolls = rolled.join(", ");
 
-                            msg.channel.sendMessage(`:game_die: You rolled ${rolls} (Sum : ${sum})`);
+                            msg.channel.send(`:game_die: You rolled ${rolls} (Sum : ${sum})`);
                         }
                     } else {
-                        msg.channel.sendMessage(responseDict.fail());
+                        msg.channel.send(responseDict.fail());
                     }
                 }).catch(err => {
                     logger.log(err);
-                    msg.channel.sendMessage(responseDict.fail());
+                    msg.channel.send(responseDict.fail());
                 })
         } else if (argsArray.length > 1) {
-            msg.channel.sendMessage(responseDict.tooManyParams());
+            msg.channel.send(responseDict.tooManyParams());
         } else {
-            msg.channel.sendMessage(responseDict.noParams());
+            msg.channel.send(responseDict.noParams());
         }
     }
 }

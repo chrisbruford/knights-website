@@ -34,6 +34,7 @@ let combat = require('./routes/companion-app/combat');
 
 let app = express();
 
+//IP Monitor
 app.use(IP_MONITOR);
 
 //for Let's Encrypt

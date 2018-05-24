@@ -22,6 +22,7 @@ class Time {
         ]);
 
         this.clocks = {
+            '0': {oclock:'🕛',thirty:'🕧'},
             '1': {oclock:'🕐',thirty:'🕜'},
             '2': {oclock:'🕑',thirty:'🕝'},
             '3': {oclock:'🕒',thirty:'🕞'},

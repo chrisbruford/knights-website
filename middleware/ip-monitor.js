@@ -16,7 +16,6 @@ module.exports = (req,res,next) => {
         }
     }
 
-    LOGGER.log(`Request from ${IP}`);
     //if no IP then connection already gone, so ditch it
     if (!IP) return;
     let hits = IP_MAP.get(IP);

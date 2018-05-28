@@ -15,7 +15,7 @@ router.get('/callback',
     passport.authorize('discord', { failureRedirect: '/' }),
     function (req, res) {
         let user = req.user;
-        let username = user.username;
+        let username = user.username.toLowerCase();
         let account = req.account;
 
         require('../models/user')

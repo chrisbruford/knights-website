@@ -30,7 +30,7 @@ module.exports = function (UserService, AuthService, $scope) {
     vm.authenticate = function () {
         vm.loginState = "loading"
         return AuthService.authenticate({
-            username: vm.cmdrName,
+            username: vm.cmdrName.toLowerCase(),
             password: vm.password,
             remember: vm.remember
         })

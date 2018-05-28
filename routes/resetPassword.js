@@ -17,7 +17,7 @@ router.post('/newpass', function (req, res, next) {
 
             //change password if user is logged in
             if (user) {
-                User.findOne({username: user.username})
+                User.findOne({username: user.username.toLowerCase()})
                     .then(user => changePassword(user))
                     .then(() => {return});
             }
@@ -27,7 +27,7 @@ router.post('/newpass', function (req, res, next) {
                 recoveryToken.findOne({ uuid: token })
                     .then(token => {
                         if (token) {
-                            User.findOne({ username: token.username })
+                            User.findOne({ username: token.username.toLowerCase() })
                                 .then(user => changePassword(user,token))
                                 .catch(err => {
                                     console.log('user error:', err);
@@ -91,7 +91,7 @@ router.get('/:token?', function (req, res, next) {
                     let token = req.params.token;
                     recoveryToken.findOne({ uuid: token }).then(token => {
                         if (token) {
-                            User.findOne({ username: token.username })
+                            User.findOne({ username: token.username.toLowerCase() })
                                 .then(user => {
                                     if (user) {
                                         //user and token found
@@ -137,7 +137,7 @@ router.get('/:token?', function (req, res, next) {
 
     require('../models/user')
         .then(User => {
-            return User.findOne({username: user.username});
+            return User.findOne({username: user.username.toLowerCase()});
         })
         .then(user => {
             if (user) {

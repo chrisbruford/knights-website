@@ -6,7 +6,7 @@ let passport = require('passport');
 router.get('/:username', function (req, res) {
     require('../models/user')
         .then(User => {
-            let username = req.params.username;
+            let username = req.params.username.toLowerCase();
             User.findOne({ username })
                 .then(user => {
                     if (user) {
@@ -16,7 +16,7 @@ router.get('/:username', function (req, res) {
                             //unique URL which is then emailed to user
                             .then(Token => {
                                 let token = new Token({
-                                    username: user.username
+                                    username: user.username.toLowerCase()
                                 });
 
                                 token.setToken().then(uuid => {
@@ -35,7 +35,7 @@ router.get('/:username', function (req, res) {
                                     <head></head>
                                     <body>
                                         <h1>Knights of Karma Registration</h1>
-                                        <p>Hi ${user.username},</p>
+                                        <p>Hi ${user.displayname},</p>
                                         <p>Someone requested a password reset on this account. If this was you, please follow this link:</p>
                                         <p><a href=${url}>${url}</a></p>
                                         <p>If this wasn't you, don't worry - just ignore this e-mail</p>

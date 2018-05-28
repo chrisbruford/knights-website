@@ -7,7 +7,8 @@ router.post('/', (req, res) => {
     require('../models/user')
         .then(User => {
             let newUser = new User({
-                username: req.body.username,
+                displayname: req.body.username,
+                username: req.body.username.toLowerCase(),
                 gameRole: req.body.gameRole,
                 platform: req.body.platform,
                 continent: req.body.continent,
@@ -41,7 +42,7 @@ router.post('/', (req, res) => {
                                         <head></head>
                                         <body>
                                             <h1>Knights of Karma Registration</h1>
-                                            <p>Hi ${user.username},</p>
+                                            <p>Hi ${user.displayname},</p>
                                             <p>Please follow this link to activate your login</p>
                                             <p><a href=${url}>${url}</a></p>
                                         </body>
@@ -57,7 +58,7 @@ router.post('/', (req, res) => {
                             res.json(user);
                             let kokBot = require('../modules/kok-bot');
                             let guildID = process.env.guildID || require('../secrets').discord.guildID;
-                            kokBot.register.announce(guildID,user.username);
+                            kokBot.register.announce(guildID,user.displayname);
                         })
                         .catch(err=>{
                             console.log('token error',err);

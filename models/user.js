@@ -10,6 +10,10 @@ module.exports = new Promise((resolve, reject) => {
     let passportLocalMongoose = require('passport-local-mongoose');
 
     let User = new Schema({
+        displayname: {
+            type: String,
+            required: true
+        },
         level: {
             type: Number,
             required: true

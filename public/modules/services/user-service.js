@@ -1,6 +1,7 @@
 "use strict";
 module.exports = function($http) {
     this.updateUser = function(user) {
+        user.username = user.username.toLowerCase();
         return $http.post('/api/members/update',{user}).then(res=>res.data);
     }
 
@@ -13,7 +14,7 @@ module.exports = function($http) {
     }
 
     this.recoverPassword = function(user) {
-        return $http.get(`/api/recover/${user.username}`).then(res=>res.data);
+        return $http.get(`/api/recover/${user.username.toLowerCase()}`).then(res=>res.data);
     }
 
     this.resetPassword = function(token) {

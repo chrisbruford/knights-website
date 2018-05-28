@@ -9,7 +9,7 @@ router.post('/', dbConnected, passport.authenticate('local'),
     function (req, res) {
         require('../models/user')
             .then(userModel => {
-                return userModel.findOne({ username: req.user.username });
+                return userModel.findOne({ username: req.user.username.toLowerCase() });
             })
             .then(user => {
                 if (req.body.remember) {

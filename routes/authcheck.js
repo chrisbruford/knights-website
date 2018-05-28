@@ -8,9 +8,12 @@ router.get('/', function (req, res) {
     if (req.user) {
         require('../models/user')
         .then(User=>{
-            return User.findOne({username: req.user.username});
+            return User.findOne({username: req.user.username.toLowerCase()});
         })
         .then(user=>{
+            if (!user) {
+                return res.sendStatus(500);
+            }
             res.json(user);
         })
         .catch(err=>{

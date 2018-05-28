@@ -7,7 +7,7 @@ router.get('/user/:username', (req, res) => {
         require('../models/user')
             .then(User => {
                 let username = req.params.username;
-                let userToFind = username != 'undefined' ? { username } : {};
+                let userToFind = username != 'undefined' ? { username: username.toLowerCase() } : {};
                 User.find(userToFind)
                     .then(result => {
                         res.json(result);

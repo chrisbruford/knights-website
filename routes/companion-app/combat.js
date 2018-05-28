@@ -21,11 +21,11 @@ router.post('/interdicted/:cmdr',(req,res)=>{
     require('../../models/user')
         .then(User=>{
             if (!User) { throw new Error("Fatal model error: no user model found"); }
-            return User.findOne({username: req.user.username});
+            return User.findOne({username: req.user.username.toLowerCase()});
         })
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
-            if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
+            if (user.username.toLowerCase() !== cmdrName.toLowerCase()) { throw new Error("commander name mismatch"); }
             let interdictedEvent = req.body.interdicted;
             let system = req.body.system;
             return interdicted.alert(user, interdictedEvent, system);
@@ -57,11 +57,11 @@ router.post('/redeemVoucher',(req,res)=>{
     require('../../models/user')
         .then(User=>{
             if (!User) { throw new Error("Fatal model error: no user model found"); }
-            return User.findOne({username: req.user.username});
+            return User.findOne({username: req.user.username.toLowerCase()});
         })
         .then(user=>{
             if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
-            if (user.username !== cmdrName) { throw new Error("commander name mismatch"); }
+            if (user.username.toLowerCase() !== cmdrName) { throw new Error("commander name mismatch"); }
             let redeemVoucherEvt = req.body.redeemVoucher;
             return redeemVoucher.alert(user, redeemVoucherEvt);
         })

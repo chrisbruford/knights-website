@@ -60,8 +60,8 @@ router.post('/redeemVoucher',(req,res)=>{
             return User.findOne({username: req.user.username.toLowerCase()});
         })
         .then(user=>{
-            if (!user) { throw new Error(`No such user found: ${req.user.username}`) }
-            if (user.username.toLowerCase() !== cmdrName) { throw new Error("commander name mismatch"); }
+            if (!user) { throw new Error(`No such user found: ${req.user.username}`); }
+            if (user.username.toLowerCase() !== cmdrName.toLowerCase()) { throw new Error("commander name mismatch"); }
             let redeemVoucherEvt = req.body.redeemVoucher;
             return redeemVoucher.alert(user, redeemVoucherEvt);
         })

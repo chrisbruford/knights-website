@@ -3,6 +3,8 @@ const logger = require('../../../../logger');
 const reqAccess = require('../reqAccess');
 const responseDict = require('../responseDict');
 const help = require("./help");
+const dateHelper = require('../../common/dateHelper');
+const Discord = require('discord.js');
 
 var request = require('request-promise');
 
@@ -57,10 +59,15 @@ function Dist() {
                                 let z = z2 - z1;
 
                                 let distance = Math.sqrt(x * x + y * y + z * z);
-
                                 distance = (Math.round(distance * 100)) / 100;
+                                
+                                let transferTime = dateHelper.msToTime((distance*9.75+300)*1000);
 
-                                msg.channel.send(distance + " LY");
+                                let embed = new Discord.RichEmbed();
+                                embed.setColor(6684774)
+                                embed.setTitle(`Distance: ${distance} LY`);
+                                embed.addField('Transfer time',transferTime, true);
+                                msg.channel.send(embed);
                             }
                         })
                         .catch(error => {

@@ -18,7 +18,7 @@ function getUTCObj(UTCDate) {
         "utcMonth": utcMonth,
         "utcSeconds": utcSeconds,
         "utcMilliseconds": utcMilliseconds
-    }
+    };
     return UTCDateObj;
 }
 
@@ -57,7 +57,7 @@ function months(month) {
 
 function daysInBetween(date) {
     var currentTime = Date.now();
-    return Math.floor((currentTime - date.getTime()) / 1000 / 60 / 60 / 24)
+    return Math.floor((currentTime - date.getTime()) / 1000 / 60 / 60 / 24);
 }
 
 function DateFormat(date, digits) {
@@ -69,9 +69,37 @@ function DateFormat(date, digits) {
 }
 
 function UTCTime(date) {
-    let h = (date.getUTCHours() > 9 ? "":"0") + date.getUTCHours();
-    let m = (date.getUTCMinutes() > 9 ? "":"0") + date.getUTCMinutes();
-    return `${h}:${m}`
+    let h = (date.getUTCHours() > 9 ? "" : "0") + date.getUTCHours();
+    let m = (date.getUTCMinutes() > 9 ? "" : "0") + date.getUTCMinutes();
+    return `${h}:${m}`;
+}
+
+function msToTime(time) {
+    let result = {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    };
+
+    result.seconds = time / 1000;
+
+    if (result.seconds >= 60) {
+        result.minutes = Math.floor(result.seconds/60);
+        result.seconds %= 60;
+    }
+
+    if (result.minutes >= 60) {
+        result.hours = Math.floor(result.minutes/60);
+        result.minutes %= 60;
+    }
+    
+    if (result.hours >= 24) {
+        result.days = Math.floor(result.hours/24);
+        result.hours %= 24;
+    }
+
+    return(result);
 }
 
 module.exports = {
@@ -80,5 +108,6 @@ module.exports = {
     daysInBetween,
     months,
     weekdays,
-    getUTCObj
-}
+    getUTCObj,
+    msToTime
+};

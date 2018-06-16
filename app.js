@@ -48,16 +48,16 @@ app.use('/.well-known/acme-challenge/:fileid', function(req, res){
 app.use(helmet({
   hsts: {
     force: true,
-    maxAge: 604800, //7 days
+    maxAge: 2419200, //4 weeks
     preload: true
   }
-}))
+}));
 
 app.use(requireHTTPS);
 app.use(function (req, res, next) {
-  res.header("X-powered-by", "Blood, sweat, and tears")
-  next()
-})
+  res.header("X-powered-by", "Blood, sweat, and tears");
+  next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -70,7 +70,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //mongo session store
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  secret: process.env.cookieSecret || require('./secrets').cookieSecret
+  secret: process.env.cookieSecret || require('./secrets').cookieSecret,
+  secure: true
 }))
 
 app.use(passport.initialize());

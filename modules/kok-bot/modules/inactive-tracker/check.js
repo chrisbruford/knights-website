@@ -1,47 +1,50 @@
-let discordUsers = require('../../../../models/discord-users');
+const discordUsers = require('../../../../models/discord-users');
 const GuildController = require('../controllers/guild-controller');
-let mark = require('./mark');
-let unmark = require('./unmark');
+const mark = require('./mark');
+const unmark = require('./unmark');
+const logger = require('../../../logger');
 
 module.exports = (member, maxAge) => {
 
-    return GuildController.find(member.guild.id).then(guild => {
-        return new Promise((resolve, reject) => {
-            if (!guild.inactiveRole) {
-                reject("No inactiveRole set");
-                return;
-            }
-
-            //if member has no activityRoles or the inactiveRole on them, then ignore
-            let noTrack = true;
-
-            //quick win check - if they are marked as inactive then we need to track
-            //and need not check user for each of the activity roles
-            if (member.roles.get(guild.inactiveRole)) {
-                noTrack = false;
-            } else if (guild.activityRoles) {
-                for (let i = 0; i < guild.activityRoles.length; i++) {
-                    let activityRole = guild.activityRoles[i];
-                    if (member.roles.get(activityRole)) {
-                        noTrack = false;
-                        break;
-                    }
-                }
-            } else {
-                reject("No activity roles set");
-                return;
-            }
-
-            if (noTrack) { 
-                reject("User should not be tracked");
-                return;
-            }
-            
-            resolve(discordUsers.findOne({ guildID: member.guild.id }));
-        })
-    })
+    return GuildController.find(member.guild.id)
         .then(guild => {
-            if (!guild) { return console.log("no such guild found") }
+            return new Promise((resolve, reject) => {
+                if (!guild.inactiveRole) {
+                    reject("No inactiveRole set");
+                    return;
+                }
+
+                //if member has no activityRoles or the inactiveRole on them, then ignore
+                let noTrack = true;
+
+                //quick win check - if they are marked as inactive then we need to track
+                //and need not check user for each of the activity roles
+                if (member.roles.get(guild.inactiveRole)) {
+                    noTrack = false;
+                } 
+                else if (guild.activityRoles) {
+                    for (let i = 0; i < guild.activityRoles.length; i++) {
+                        let activityRole = guild.activityRoles[i];
+                        if (member.roles.get(activityRole)) {
+                            noTrack = false;
+                            break;
+                        }
+                    }
+                } else {
+                    reject("No activity roles set");
+                    return;
+                }
+
+                if (noTrack) {
+                    reject("User should not be tracked");
+                    return;
+                }
+
+                resolve(discordUsers.findOneOrCreate({ guildID: member.guild.id },{ guildID: member.guild.id }));
+            })
+        })
+        .then(guild => {
+            if (!guild) { return logger.log("no such guild found"); }
 
             userLog = guild.users.find(user => {
                 return user.id === member.id;
@@ -68,7 +71,5 @@ module.exports = (member, maxAge) => {
                 return unmark(member);
             }
         })
-        .catch(err => {
-            console.log(err);
-        })
+        .catch(err => logger.log);
 }

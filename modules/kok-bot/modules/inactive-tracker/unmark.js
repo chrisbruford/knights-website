@@ -22,7 +22,7 @@ module.exports = (member) => {
                         })
                 });
 
-            User.findOneAndUpdate({discordID: member.id},{active: true})
+            User.then(User=>User.findOneAndUpdate({discordID: member.id},{active: true}))
                 .catch(logger.log);
         })
         .catch(err => {

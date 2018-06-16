@@ -36,14 +36,11 @@ class GuildController {
                     guildModel.findOne({ guildID })
                         .then(guild => {
                             if (guild) {
-                                console.log(`adding ${guild.id} to Map`);
                                 guilds.set(guildID, guild);
                             } else {
-                                console.log('No such guild found in DB');
                             }
                         })
                         .catch(err=>{
-                            console.log(err);
                             reject(err);
                         })
                 )

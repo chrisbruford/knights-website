@@ -1,11 +1,11 @@
 "use strict";
 let guildUsersModel = require('../../../../models/discord-users.js');
-let responseDict = require('./responseDict');
+let logger = require('../../../logger');
 
 class MessageLogger {
 
     constructor() {
-        this.flushInterval = 3600000 //1hr
+        this.flushInterval = 6e5; //10 mins
         this.flushTimer = null;
         this.guilds = new Map();
     }
@@ -46,7 +46,7 @@ class MessageLogger {
 
                             //save model, clear timer and Map having flushed each user through to DB
                             guildUsers.save()
-                                .catch(err => console.log(err));
+                                .catch(err => logger.log);
                             delete this.flushTimer;
                             this.messageTimestamps.clear();
 
@@ -54,9 +54,7 @@ class MessageLogger {
                             throw new Error("findOneOrCreate() has not returned a model");
                         }
                     })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                    .catch(err => logger.log);
             }, this.flushInterval);
         }
 

@@ -13,7 +13,7 @@ router.post('/', dbConnected, passport.authenticate('local'),
             })
             .then(user => {
                 if (req.body.remember) {
-                    let cookieMaxAge = 1000 * 60 * 60 * 24 * 14 //14 days
+                    let cookieMaxAge = 1000 * 60 * 60 * 24 * 28; //28 days
                     req.session.cookie.expires = new Date(Date.now() + cookieMaxAge);
                     req.session.cookie.maxAge = cookieMaxAge;
                 }

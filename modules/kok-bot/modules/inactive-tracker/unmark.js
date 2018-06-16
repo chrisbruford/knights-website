@@ -1,6 +1,7 @@
 const GuildController = require('../controllers/guild-controller');
 const discordUsers = require('../../../../models/discord-users');
-const logger = require('../../../logger')
+const logger = require('../../../logger');
+const User = require('../../../../models/user');
 
 module.exports = (member) => {
     return GuildController.find(member.guild.id)
@@ -19,9 +20,12 @@ module.exports = (member) => {
                             foundUser.activityRolesRemoved = undefined;
                             guild.save();
                         })
-                })
+                });
+
+            User.findOneAndUpdate({discordID: member.id},{active: true})
+                .catch(logger.log);
         })
         .catch(err => {
             logger.log(err);
-        })
+        });
 }

@@ -1,5 +1,6 @@
 "use strict";
 module.exports = [
     "Xbox",
-    "PC"
+    "PC",
+    "PS4"
 ]

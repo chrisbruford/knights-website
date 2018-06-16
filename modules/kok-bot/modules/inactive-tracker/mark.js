@@ -6,8 +6,8 @@ const logger = require('../../../logger');
 module.exports = (member) => {
     return GuildController.find(member.guild.id)
         .then(guild => {
-            if (!guild) { return logger.log('no such guild found') }
-            if (!guild.inactiveRole) { return logger.log('no inactiveRole set') }
+            if (!guild) { return logger.log('no such guild found'); }
+            if (!guild.inactiveRole) { return logger.log('no inactiveRole set'); }
             //checks each role on member if it's an Activity Role
             //if it is, then it is removed and a record kept on their entry in the DB
             discordUsers.findOneOrCreate({ guildID: member.guild.id }, { guildID: member.guild.id })
@@ -40,7 +40,7 @@ module.exports = (member) => {
                     usersGuild.save();
                 });
 
-            User.findOneAndUpdate({discordID: member.id},{active: false})
+            User.then(User=>User.findOneAndUpdate({discordID: member.id},{active: false}))
                 .catch(logger.log);
 
             return member.addRole(guild.inactiveRole);

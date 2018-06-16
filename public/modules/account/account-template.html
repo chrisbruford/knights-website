@@ -10,7 +10,7 @@
 
     <form name="accountForm">
         <label for="username">CMDR Name</label>
-        <input type="text" name="username" id="username" ng-model="AccountCtrl.user.username" disabled>
+        <input type="text" name="username" id="username" ng-model="AccountCtrl.user.displayname" disabled>
 
         <label for="continent">Continent</label>
         <select name="continent" id="continent" ng-options="continent for continent in AccountCtrl.continents" ng-model="AccountCtrl.user.continent"></select>

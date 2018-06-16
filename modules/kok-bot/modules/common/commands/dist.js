@@ -62,10 +62,15 @@ function Dist() {
                                 distance = (Math.round(distance * 100)) / 100;
                                 
                                 let transferTime = dateHelper.msToTime((distance*9.75+300)*1000);
+                                let days = transferTime.days ? `${transferTime.days} days`:``;
+                                let hours = transferTime.hours ? `${transferTime.hours} hours`:``;
+                                let minutes = transferTime.minutes ? `${transferTime.minutes} minutes`:``;
+                                let seconds = transferTime.seconds ? `${transferTime.seconds} seconds`:``;
+                                transferTime = `${days} ${minutes} ${hours} ${seconds}`;
 
                                 let embed = new Discord.RichEmbed();
                                 embed.setColor(6684774)
-                                embed.setTitle(`Distance: ${distance} LY`);
+                                embed.setTitle(`${distance} LY`);
                                 embed.addField('Transfer time',transferTime, true);
                                 msg.channel.send(embed);
                             }

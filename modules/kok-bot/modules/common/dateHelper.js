@@ -82,7 +82,7 @@ function msToTime(time) {
         seconds: 0
     };
 
-    result.seconds = time / 1000;
+    result.seconds = Math.round(time / 1000);
 
     if (result.seconds >= 60) {
         result.minutes = Math.floor(result.seconds/60);

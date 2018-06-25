@@ -69,7 +69,7 @@ function Dist() {
                                 transferTime = `${days} ${hours} ${minutes} ${seconds}`;
 
                                 let embed = new Discord.RichEmbed();
-                                embed.setColor(6684774)
+                                embed.setColor(6684774);
                                 embed.setTitle(`${distance} LY`);
                                 embed.addField('Transfer time',transferTime, true);
                                 msg.channel.send(embed);

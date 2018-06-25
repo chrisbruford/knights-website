@@ -17,8 +17,8 @@ function alert(user, redeemVoucher) {
         case "bounty":
             let factionGrid = "```";
             if (redeemVoucher.Factions) {
-                for (bounty of redeemVoucher.Factions) {
-                    factionGrid += `${bounty.Faction}: ${bounty.Amount}\n`;
+                for (let bounty of redeemVoucher.Factions) {
+                    factionGrid += `${bounty.Faction || 'Unknown faction'}: ${bounty.Amount}\n`;
                 }
             }
             factionGrid += "```";

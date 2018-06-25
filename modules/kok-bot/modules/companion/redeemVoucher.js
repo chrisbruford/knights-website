@@ -1,32 +1,33 @@
 const logger = require('../../../logger');
 const broadcast = require('../broadcasts/broadcast');
+const Discord = require('discord.js');
 
 function alert(user, redeemVoucher) {
-    let targetChannel;
 
     let {
         Faction = "Unknown Faction",
         Amount = 0
     } = redeemVoucher;
 
-    let message;
+    let embed = new Discord.RichEmbed();
+    embed.setColor(6684774);
+    
     switch (redeemVoucher.Type) {
         case "CombatBond":
-            message = `🛡️ ${user.username.toUpperCase()} has redeemed combat bonds for ${Amount} credits on behalf of ${Faction}`;
+            embed.setTitle(`🛡️ ${user.username.toUpperCase()} has redeemed combat bonds`);
+            embed.setDescription(`${Amount} credits on behalf of ${Faction || 'Unknown faction'}`);
         break;
         case "bounty":
-            let factionGrid = "```";
+            embed.setTitle(`🛡️ ${user.username.toUpperCase()} has redeemed ${Amount} in bounties`);
             if (redeemVoucher.Factions) {
                 for (let bounty of redeemVoucher.Factions) {
-                    factionGrid += `${bounty.Faction || 'Unknown faction'}: ${bounty.Amount}\n`;
+                    embed.addField(`${bounty.Faction || 'Unknown faction'}`, `${bounty.Amount}`);
                 }
             }
-            factionGrid += "```";
-            message = `🛡️ ${user.username.toUpperCase()} has redeemed ${Amount} in bounty vouchers \n ${factionGrid}`;
         break;
     }
     
-    return broadcast(user, message)
+    return broadcast(user, embed)
         .catch(err=>{
             logger.log(err);
             return Promise.reject(err);

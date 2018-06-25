@@ -66,7 +66,7 @@ function Dist() {
                                 let hours = transferTime.hours ? `${transferTime.hours} hours`:``;
                                 let minutes = transferTime.minutes ? `${transferTime.minutes} minutes`:``;
                                 let seconds = transferTime.seconds ? `${transferTime.seconds} seconds`:``;
-                                transferTime = `${days} ${minutes} ${hours} ${seconds}`;
+                                transferTime = `${days} ${hours} ${minutes} ${seconds}`;
 
                                 let embed = new Discord.RichEmbed();
                                 embed.setColor(6684774)

@@ -71,5 +71,5 @@ module.exports = (member, maxAge) => {
                 return unmark(member);
             }
         })
-        .catch(err => logger.log);
+        .catch(logger.log);
 }

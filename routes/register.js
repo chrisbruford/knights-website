@@ -20,7 +20,15 @@ router.post('/', (req, res) => {
 
             User.register(newUser, req.body.password, (err, user) => {
 
-                if (err) { console.log(err); return res.json(err); }
+                if (err) { 
+                    switch (err.name) {
+                        case 'UserExistsError': 
+                            return res.sendStatus(400); 
+                            break
+                        default: 
+                            return res.sendStatus(500);
+                    }
+                }
 
                 else {
                     //set token on user and send email with url containing token

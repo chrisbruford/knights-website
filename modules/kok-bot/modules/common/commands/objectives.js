@@ -69,6 +69,27 @@ class Objectives {
         }
     }
 
+    edit(msg, argsArray) {
+        if (argsArray.length >= 3) {
+            reqAccess(msg.guild, msg.member, 3)
+                .then(() => {
+                    let thisGuildID = msg.guild.id;
+                    let objectiveID = argsArray[1];
+                    let newTitle = argsArray.slice(2).join(" ");
+                    return objectivesController.editObjective(thisGuildID, objectiveID, newTitle);
+                })
+                .then(() => msg.channel.send(responseDict.success()))
+                .catch(err => {
+                    logger.log(err);
+                    msg.channel.send(responseDict.fail());
+                })
+        } else if (argsArray.length < 3) {
+            msg.channel.send(responseDict.tooManyParams());
+        } else {
+            msg.channel.send(responseDict.noParams());
+        }
+    }
+
     list(msg, argsArray) {
         if (argsArray.length === 1) {
             reqAccess(msg.guild, msg.member, 1)
@@ -104,10 +125,11 @@ class Objectives {
 }
 
 let helpMessage = "Adds,Removes or Lists the objectives for this server";
-let template = "objectives <add|remove|list> <objective title | objective ID>";
+let template = "objectives <add|remove|edit|list> <objective title | objective ID>";
 let example = [
-    "`-objectives add completed missions on behalf of KOK in LHS 3437`",
+    "`-objectives add Complete missions on behalf of KOK in LHS 3437`",
     "`-objectives remove 1234567890`",
+    "`-objectives edit 1234567890 Some different objective`",
     "`-objectives list`"];
 
 help.AddHelp("objectives", helpMessage, template, example);

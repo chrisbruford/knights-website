@@ -55,6 +55,28 @@ class ObjectiveController {
         });
     }
 
+    editObjective(guildID, objectiveID, newTitle) {
+        console.log("Attempting to edit objective");
+        console.log(objectiveID);
+        console.log(newTitle);
+        return new Promise((resolve, reject) => {
+            Guild.findOneAndUpdate({ 
+                guildID: guildID,
+                'objectives.objectiveID': objectiveID
+            }, {
+                $set: {
+                    'objectives.$.title': newTitle
+                }
+            })
+                .then(resolve)
+
+                .catch(err=>{
+                    logger.log(err);
+                    reject(err);
+                });
+        });
+    }
+
     clearObjectives(guildID) {
 
     }

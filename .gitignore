@@ -4,3 +4,4 @@ azure.err
 secrets.js
 npm-debug.log.*
 .DS_Store
+.bashrc

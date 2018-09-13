@@ -36,7 +36,7 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("ping", require("./ping"));
     this.commandsMap.set("help", require("./help"));
     this.commandsMap.set("welcome", require("./welcome"));
-    this.commandsMap.set("addbotimages", require("./addbotimages"));
+    this.commandsMap.set("addbotimages", require("./addBotImages"));
     this.commandsMap.set("karma", require("./karma"));
     this.commandsMap.set("errorlogs", require("./error-logs"));
     this.commandsMap.set("version", require("./version"));

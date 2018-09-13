@@ -4,7 +4,7 @@ const logger = require('../../../logger');
 const User = require('../../../../models/user');
 
 module.exports = (member) => {
-    return DiscordGuildModel.findOne(member.guild.id)
+    return DiscordGuildModel.findOne({ guildID: member.guild.id })
         .then(guild => {
             if (!guild) { return console.log('no such guild found') }
             if (!guild.inactiveRole) { return console.log('no inactiveRole set') }

@@ -8,12 +8,12 @@ let activityRoles = require('./activity-roles');
 //existance of inactiveRole and adding guildID to a set.
 const guildModel = require('../../../../models/discord-guild');
 let isTracking = new Set();
-guildModel.find({inactiveRole: {$exists:true}})
-.then(guilds=>{
-    guilds.forEach(guild=>{
-        isTracking.add(guild.guildID);
+guildModel.find({ inactiveRole: { $exists: true } })
+    .then(guilds => {
+        guilds.forEach(guild => {
+            isTracking.add(guild.guildID);
+        });
     });
-});
 
 module.exports = {
     mark,

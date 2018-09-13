@@ -6,7 +6,7 @@ const logger = require('../../../logger');
 
 module.exports = (member, maxAge) => {
 
-    return DiscordGuildModel.findOne(member.guild.id)
+    return DiscordGuildModel.findOne({ guildID: member.guild.id })
         .then(guild => {
             return new Promise((resolve, reject) => {
                 if (!guild || !guild.inactiveRole) {

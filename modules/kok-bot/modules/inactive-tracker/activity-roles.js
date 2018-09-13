@@ -7,7 +7,7 @@ class ActivityRoles {
     add(activityRoleID, thisGuild) {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(activityRoleID)) {
-                DiscordGuildModel.findOne(thisGuild.id)
+                DiscordGuildModel.findOne({ guildID: thisGuild.id })
                     .then(guild => {
                         if (guild) {
                             guild.activityRoles.addToSet(activityRoleID);
@@ -37,7 +37,7 @@ class ActivityRoles {
     //remove the role from the server
     remove(activityRoleID, thisGuild) {
         return new Promise((resolve, reject) => {
-            DiscordGuildModel.findOne(thisGuild.id)
+            DiscordGuildModel.findOne({ guildID: thisGuild.id })
                 .then(guild => {
                     if (guild) {
                         guild.activityRoles.pull(activityRoleID);
@@ -57,7 +57,6 @@ class ActivityRoles {
 
     //list inactive roles recorded for this server
     list(guildID) {
-
         let discordGuild = client.guilds.get(guildID);
         let discordRoles = discordGuild.roles;
 

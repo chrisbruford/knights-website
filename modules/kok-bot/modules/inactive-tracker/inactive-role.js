@@ -9,7 +9,7 @@ function Inactives() {
     this.add = (inactiveRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(inactiveRoleID)) {
-                DiscordGuildModel.findOne(thisGuild.id)
+                DiscordGuildModel.findOne({ guildID: thisGuild.id })
                     .then(guild => {
                         if (guild) {
                             guild.inactiveRole = inactiveRoleID;
@@ -37,7 +37,7 @@ function Inactives() {
     //remove the role from the server
     this.remove = (thisGuild) => {
         return new Promise((resolve, reject) => {
-            DiscordGuildModel.findOne(thisGuild.id)
+            DiscordGuildModel.findOne({ guildID: thisGuild.id })
                 .then(guild => {
                     if (guild) {
                         guild.inactiveRole = undefined;
@@ -63,16 +63,17 @@ function Inactives() {
 
         return new Promise((resolve, reject) => {
 
-            DiscordGuildModel.findOne(guildID).then(guild => {
-                if (guild && guild.inactiveRole) {
-                    let inactiveRole = discordRoles.get(guild.inactiveRole);
-                    if (inactiveRole) {
-                        resolve("```" + `${inactiveRole.name} : ${inactiveRole.id}` + "```");
+            DiscordGuildModel.findOne({ guildID: guildID })
+                .then(guild => {
+                    if (guild && guild.inactiveRole) {
+                        let inactiveRole = discordRoles.get(guild.inactiveRole);
+                        if (inactiveRole) {
+                            resolve("```" + `${inactiveRole.name} : ${inactiveRole.id}` + "```");
+                        }
+                    } else {
+                        reject(new Error("Could not find any roles"))
                     }
-                } else {
-                    reject(new Error("Could not find any roles"))
-                }
-            })
+                })
                 .catch(err => {
                     console.log(err);
                     reject(err);

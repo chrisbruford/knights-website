@@ -4,7 +4,7 @@ const User = require('../../../../models/user');
 const logger = require('../../../logger');
 
 module.exports = (member) => {
-    return DiscordGuildModel.findOne(member.guild.id)
+    return DiscordGuildModel.findOne({ guildID: member.guild.id })
         .then(guild => {
             if (!guild) { return logger.log('no such guild found'); }
             if (!guild.inactiveRole) { return logger.log('no inactiveRole set'); }
@@ -32,7 +32,7 @@ module.exports = (member) => {
                             activityRolesRemoved: activityRoles
                         });
                     } else {
-                        activityRoles.forEach(role=>{
+                        activityRoles.forEach(role => {
                             foundUser.activityRolesRemoved.addToSet(role);
                         });
                     }
@@ -40,7 +40,7 @@ module.exports = (member) => {
                     usersGuild.save();
                 });
 
-            User.then(User=>User.findOneAndUpdate({discordID: member.id},{active: false}))
+            User.then(User => User.findOneAndUpdate({ discordID: member.id }, { active: false }))
                 .catch(logger.log);
 
             return member.addRole(guild.inactiveRole);

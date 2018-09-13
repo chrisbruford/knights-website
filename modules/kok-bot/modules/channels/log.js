@@ -1,5 +1,5 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 module.exports = new Log();
@@ -8,7 +8,7 @@ function Log() {
     this.add = (logChannelID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.channels.get(logChannelID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $set: { logChannelID: logChannelID } },
                     {
@@ -29,7 +29,7 @@ function Log() {
 
     this.remove = (thisGuild) => {
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOneAndUpdate(
+            DiscordGuildModel.findOneAndUpdate(
                 { guildID: thisGuild.id },
                 { $unset: { logChannelID: "" } },
                 {
@@ -53,7 +53,7 @@ function Log() {
         let discordChannels = discordGuild.channels;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.logChannelID.length > 0) {
                         let logChannel = discordChannels.get(guild.logChannelID);

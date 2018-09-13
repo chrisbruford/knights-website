@@ -1,12 +1,12 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 class Mute {
     add(muteChannelID, thisGuild) {
         return new Promise((resolve, reject) => {
             if (thisGuild.channels.get(muteChannelID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $set: { muteChannelID: muteChannelID } },
                     {
@@ -27,7 +27,7 @@ class Mute {
 
     remove(thisGuild) {
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOneAndUpdate(
+            DiscordGuildModel.findOneAndUpdate(
                 { guildID: thisGuild.id },
                 { $unset: { muteChannelID: "" } },
                 {
@@ -51,7 +51,7 @@ class Mute {
         let discordChannels = discordGuild.channels;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.muteChannelID && guild.muteChannelID.length > 0) {
                         let muteChannel = discordChannels.get(guild.muteChannelID);

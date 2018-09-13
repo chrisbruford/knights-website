@@ -1,5 +1,5 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 module.exports = new Publics();
@@ -9,7 +9,7 @@ function Publics() {
     this.add = (publicRoleName, publicRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(publicRoleID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id, 'publicRoles.id': { $ne: publicRoleID } },
                     { $push: { publicRoles: { name: publicRoleName, id: publicRoleID } } },
                     {
@@ -34,7 +34,7 @@ function Publics() {
     this.remove = (publicRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(publicRoleID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $pull: { publicRoles: { id: publicRoleID } } },
                     {
@@ -63,7 +63,7 @@ function Publics() {
         let discordRoles = discordGuild.roles;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.publicRoles.length > 0) {
                         let message = "```";

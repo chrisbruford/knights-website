@@ -1,5 +1,5 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 module.exports = new Moderators();
@@ -9,7 +9,7 @@ function Moderators() {
     this.add = (moderatorRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(moderatorRoleID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $addToSet: { moderatorRoles: moderatorRoleID } },
                     {
@@ -34,7 +34,7 @@ function Moderators() {
     this.remove = (moderatorRoleID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.roles.get(moderatorRoleID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $pull: { moderatorRoles: moderatorRoleID } },
                     {
@@ -63,7 +63,7 @@ function Moderators() {
         let discordRoles = discordGuild.roles;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.moderatorRoles.length > 0) {
                         let message = "```";

@@ -1,15 +1,15 @@
 const discordUsers = require('../../../../models/discord-users');
-const GuildController = require('../controllers/guild-controller');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const mark = require('./mark');
 const unmark = require('./unmark');
 const logger = require('../../../logger');
 
 module.exports = (member, maxAge) => {
 
-    return GuildController.find(member.guild.id)
+    return DiscordGuildModel.findOne(member.guild.id)
         .then(guild => {
             return new Promise((resolve, reject) => {
-                if (!guild.inactiveRole) {
+                if (!guild || !guild.inactiveRole) {
                     reject("No inactiveRole set");
                     return;
                 }
@@ -21,7 +21,7 @@ module.exports = (member, maxAge) => {
                 //and need not check user for each of the activity roles
                 if (member.roles.get(guild.inactiveRole)) {
                     noTrack = false;
-                } 
+                }
                 else if (guild.activityRoles) {
                     for (let i = 0; i < guild.activityRoles.length; i++) {
                         let activityRole = guild.activityRoles[i];
@@ -40,7 +40,7 @@ module.exports = (member, maxAge) => {
                     return;
                 }
 
-                resolve(discordUsers.findOneOrCreate({ guildID: member.guild.id },{ guildID: member.guild.id }));
+                resolve(discordUsers.findOneOrCreate({ guildID: member.guild.id }, { guildID: member.guild.id }));
             })
         })
         .then(guild => {

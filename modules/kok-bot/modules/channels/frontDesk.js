@@ -1,5 +1,5 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 module.exports = new FrontDesk();
@@ -8,7 +8,7 @@ function FrontDesk() {
     this.add = (frontDeskChannelID, thisGuild) => {
         return new Promise((resolve, reject) => {
             if (thisGuild.channels.get(frontDeskChannelID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $set: { frontDeskChannelID: frontDeskChannelID } },
                     {
@@ -29,7 +29,7 @@ function FrontDesk() {
 
     this.remove = (thisGuild) => {
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOneAndUpdate(
+            DiscordGuildModel.findOneAndUpdate(
                 { guildID: thisGuild.id },
                 { $unset: { frontDeskChannelID: "" } },
                 {
@@ -53,7 +53,7 @@ function FrontDesk() {
         let discordChannels = discordGuild.channels;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.frontDeskChannelID.length > 0) {
                         let frontDeskChannel = discordChannels.get(guild.frontDeskChannelID);

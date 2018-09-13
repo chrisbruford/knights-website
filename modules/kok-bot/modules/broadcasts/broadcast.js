@@ -1,4 +1,4 @@
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 const logger = require('../../../logger');
 const reqAccess = require('../common/reqAccess');
@@ -12,7 +12,7 @@ module.exports = (user, message) => {
     let broadcastPromises = [];
     for (let guildID of user.broadcastGuilds) {
         let targetChannel;
-        broadcastPromises.push(discordGuildModel.findOne({ guildID })
+        broadcastPromises.push(DiscordGuildModel.findOne({ guildID })
             .then(guild => {
                 if (guild) {
                     let targetChannelID = guild.companionChannelID;

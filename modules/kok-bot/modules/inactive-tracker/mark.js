@@ -1,10 +1,10 @@
-const GuildController = require('../controllers/guild-controller');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const discordUsers = require('../../../../models/discord-users');
 const User = require('../../../../models/user');
 const logger = require('../../../logger');
 
 module.exports = (member) => {
-    return GuildController.find(member.guild.id)
+    return DiscordGuildModel.findOne(member.guild.id)
         .then(guild => {
             if (!guild) { return logger.log('no such guild found'); }
             if (!guild.inactiveRole) { return logger.log('no inactiveRole set'); }

@@ -1,12 +1,12 @@
 "use strict";
-const discordGuildModel = require('../../../../models/discord-guild');
+const DiscordGuildModel = require('../../../../models/discord-guild');
 const client = require('../common/client');
 
 class CompanionChannel {
     add(companionChannelID, thisGuild) {
         return new Promise((resolve, reject) => {
             if (thisGuild.channels.get(companionChannelID)) {
-                discordGuildModel.findOneAndUpdate(
+                DiscordGuildModel.findOneAndUpdate(
                     { guildID: thisGuild.id },
                     { $set: { companionChannelID: companionChannelID } },
                     {
@@ -27,7 +27,7 @@ class CompanionChannel {
 
     remove(thisGuild) {
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOneAndUpdate(
+            DiscordGuildModel.findOneAndUpdate(
                 { guildID: thisGuild.id },
                 { $unset: { companionChannelID: "" } },
                 {
@@ -49,7 +49,7 @@ class CompanionChannel {
         let discordChannels = discordGuild.channels;
 
         return new Promise((resolve, reject) => {
-            discordGuildModel.findOne({ guildID })
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (!guild) { reject(new Error("Could not find guild"))}
                     else if (!guild.companionChannelID || guild.companionChannelID.length <= 0) { reject(new Error("No companion channel set")) }

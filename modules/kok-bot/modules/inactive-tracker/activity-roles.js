@@ -62,7 +62,7 @@ class ActivityRoles {
 
         return new Promise((resolve, reject) => {
 
-            DiscordGuildModel.findOne(guildID)
+            DiscordGuildModel.findOne({ guildID })
                 .then(guild => {
                     if (guild && guild.activityRoles.length > 0) {
                         let message = "```";

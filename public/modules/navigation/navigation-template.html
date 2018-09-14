@@ -25,7 +25,7 @@
     </div>
 
     <div class="top-bar-right">
-        <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+        <ul class="vertical medium-horizontal menu" data-responsive-menu="medium-dropdown">
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
             <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3" ng-class="{selected: NavigationCtrl.isActive('/admin') || NavigationCtrl.isActive('/gallerydashmod')}">

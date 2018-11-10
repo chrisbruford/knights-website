@@ -1,17 +1,42 @@
 "use strict";
 const logger = require('../../../logger');
+const guildID = process.env.guildID || require('../../../../secrets').discord.guildID;
 const memes = require('../memefication');
 let client = require('../common/client');
 let karma = require('../karma');
+let guildModel = require('../../../../models/discord-guild');
 
 let spams = [];
+let spamIgnore = {};
 
 const spamLength = 10;
 const spamInterval = 10000;
 const spamCount = 10;
 
+client.on("ready", () => {
+    guildModel.find({}, '-_id spamIgnoreRoles spamIgnoreChannels guildID')
+        .then(guilds => {
+            spamIgnore = {};
+            guilds.forEach(guild => {
+                spamIgnore[guild.guildID] = {
+                    spamIgnoreChannels: guild.spamIgnoreChannels,
+                    spamIgnoreRoles: guild.spamIgnoreRoles
+                }
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
+
 client.on("message", msg => {
-    if (!msg.author.bot) {
+    if (!msg.author.bot
+        && msg.guild.available
+        && !(spamIgnore[msg.guild.id]
+            && spamIgnore[msg.guild.id].spamIgnoreChannels
+            && spamIgnore[msg.guild.id].spamIgnoreRoles
+            && (spamIgnore[msg.guild.id].spamIgnoreChannels.indexOf(msg.channel.id) !== -1
+                || ignoreRoleCheck(spamIgnore[msg.guild.id].spamIgnoreRoles, msg)))) {
         //Very short messages can constitute to spamming
         var isSpam = false;
         // if (msg.content.length < spamLength) {
@@ -106,6 +131,12 @@ client.on("message", msg => {
     }
 });
 
+function ignoreRoleCheck(ignoreRoles, msg) {
+    return msg.member.roles.some(role => {
+        return ignoreRoles.indexOf(role.id) !== -1;
+    })
+}
+
 function checkSpamStatus(warning, msg) {
     if (warning === 1) {
         msg.channel.send(`${msg.member.displayName}, you are spamming. Please keep it down or you'll lose karma.`);
@@ -118,5 +149,15 @@ function checkSpamStatus(warning, msg) {
     } else if (warning > 3) {
         msg.channel.send(`${msg.member.displayName}, you are spamming. -10 karma for you. Seriously, STAHP!`);
         karma.handler.remove(10, msg.author.id, msg.guild);
+    }
+}
+
+module.exports.updateSpamIgnore = (updateType, guildId, dataType, id) => {
+    if (updateType === 'add') {
+        spamIgnore[guildId][dataType].push(id);
+    }
+    if (updateType === 'remove') {
+        let index = spamIgnore[guildId][dataType].indexOf(id);
+        spamIgnore[guildId][dataType].splice(index, 1);
     }
 }

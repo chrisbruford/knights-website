@@ -13,8 +13,10 @@ let guild = new Schema({
     frontDeskChannelID: String,
     logChannelID: String,
     companionChannelID: String,
-    ignoreUsers: [String],
+    ignoreUsers: [String],  // Todo: No idea what these 2 fields are getting used for
     ignoreChannels: [String],
+    spamIgnoreRoles: [String],
+    spamIgnoreChannels: [String],
     adminRoles: [String],
     moderatorRoles: [String],
     memberRoles: [String],

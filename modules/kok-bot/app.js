@@ -2,6 +2,12 @@
 console.log('starting kokbot');
 require('./modules/common/stringHelper'); //adds methods to String proto
 require('./modules/karma');
+
+//events
+require('./modules/common/events');
+
+//anti-spam
+require('./modules/anti-spam');
 const logger = require('../logger');
 
 const client = require('./modules/common/client');
@@ -19,12 +25,6 @@ client.on("ready", () => {
     //commands
     const commands = require('./modules/common/commands');
     commands.initiateCommands();
-
-    //events
-    require('./modules/common/events');
-
-    //anti-spam
-    require('./modules/anti-spam');
 
     //event listeners
     const wings = require('./modules/wings')

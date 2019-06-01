@@ -7,14 +7,12 @@
     require('angular-route');
     require('angular-messages');
     require('angular-animate');
-    require('ng-file-upload');
-    require('ng-image-gallery');
 
-    angular.module('kokApp', ['ngRoute', 'ngMessages', 'ngFileUpload', 'thatisuday.ng-image-gallery'])
+    angular.module('kokApp', ['ngRoute', 'ngMessages'])
         .run(['$document', '$rootScope', function ($document, $rootScope) {
             $($document).foundation();
         }])
-        .config(['$routeProvider', '$locationProvider', 'ngImageGalleryOptsProvider', function ($routeProvider, $locationProvider, ngImageGalleryOptsProvider) {
+        .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
                     templateUrl: 'routes/home.html',
@@ -28,9 +26,9 @@
                     templateUrl: 'routes/roster.html',
                     routePage: 'Roster'
                 })
-                .when('/gallery', {
-                    templateUrl: 'routes/gallery.html',
-                    routePage: 'Gallery'
+                .when('/howtojoin', {
+                    templateUrl: 'routes/howtojoin.html',
+                    routePage: 'HowToJoin'
                 })
                 .when('/wings', {
                     templateUrl: 'routes/wings.html',
@@ -50,24 +48,12 @@
                 .when('/changepassword/:token?', {
                     templateUrl: 'routes/resetpassword.html'
                 })
-                .when('/gallerydashmod',{
-                    templateUrl: 'routes/gallerydashmod.html'
-                })
                 .otherwise(({
                     redirectTo: '/'
                 }));
 
             $locationProvider.html5Mode(true);
             $locationProvider.hashPrefix('');
-
-            ngImageGalleryOptsProvider.setOpts({
-                thumbnails: true,
-                inline: false,
-                imgBubbles: false,
-                bgClose: true,
-                bubbles: true,
-                imgAnim: 'fadeup',
-            });
         }]);
 })();
 

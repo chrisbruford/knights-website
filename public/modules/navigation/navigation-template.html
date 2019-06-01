@@ -17,7 +17,7 @@
             <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/contact')}"><a href="/contact">Contact</a></li>
             <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/wings')}"><a href="/wings">Wings</a></li>
             <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/roster')}"><a href="/roster">Roster</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/gallery')}"><a href="/gallery">Gallery</a></li>
+            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/howtojoin')}"><a href="/howtojoin">How to Join</a></li>
             <li class="hide-for-medium-up">
                 <hr>
             </li>
@@ -28,11 +28,10 @@
         <ul class="vertical medium-horizontal menu" data-responsive-menu="medium-dropdown">
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
             <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
-            <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3" ng-class="{selected: NavigationCtrl.isActive('/admin') || NavigationCtrl.isActive('/gallerydashmod')}">
+            <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3" ng-class="{selected: NavigationCtrl.isActive('/admin')}">
                 <a>Admin</a>
                 <ul class="menu">
                     <li><a href="/admin">Manage Accounts</a></li>
-                    <li><a href="/gallerydashmod">Manage Gallery</a></li>
                 </ul>
             </li>
             <li class="menu-item" ng-show="NavigationCtrl.user" ng-class="{selected: NavigationCtrl.isActive('/account') || NavigationCtrl.isActive('/resetpassword')}">

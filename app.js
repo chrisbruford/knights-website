@@ -26,7 +26,6 @@ let secure = require('./routes/secure');
 let activate = require('./routes/activate');
 let recover = require('./routes/recover');
 let resetPassword = require('./routes/resetPassword');
-let uploads = require('./routes/uploads');
 let wing = require('./routes/wing');
 let discordAuth = require('./routes/discord-auth');
 let missions = require('./routes/companion-app/missions');
@@ -123,7 +122,6 @@ function requireHTTPS(req, res, next) {
 //serve
 app.use('/', home);
 app.use('/secure', secure);
-app.use('/api/uploads', uploads);
 app.use('/api/register', register);
 app.use('/api/members', members);
 app.use('/api/login', login);

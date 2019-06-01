@@ -5,8 +5,6 @@ require('./signup');
 require('./services');
 require('./discord');
 require('./profiles');
-require('./gallery');
-require('./galleryDash');
 require('./wings');
 require('./navigation');
 require('./footer')
@@ -18,5 +16,4 @@ require('./ajaxLoader');
 require('./activate');
 require('./common');
 require('./resetPassword');
-require('./myActions');
 require('./messageBar');

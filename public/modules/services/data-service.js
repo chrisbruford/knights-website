@@ -25,9 +25,4 @@ module.exports = function($http,$q) {
         return $http.get(`/api/members/active`) 
             .then(res => res.data);
     }
-    
-    this.getGallery = () => {
-        return $http.get('/api/uploads/gallery')
-        .then(res => res.data);
-    }
 }

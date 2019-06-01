@@ -47,6 +47,8 @@ module.exports.initiateCommands = () => {
     this.commandsMap.set("mute", require("./mute"));
     this.commandsMap.set("unmute", require("./unmute"));
     this.commandsMap.set("objectives", require('./objectives'));
+    this.commandsMap.set("spamignorechannels", require('./spamIgnoreChannels'));
+    this.commandsMap.set("spamignoreroles", require('./spamIgnoreRoles'));
 }
 
 client.on("message", msg => {

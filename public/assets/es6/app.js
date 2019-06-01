@@ -32,6 +32,10 @@
                     templateUrl: 'routes/gallery.html',
                     routePage: 'Gallery'
                 })
+                .when('/howtojoin', {
+                    templateUrl: 'routes/howtojoin.html',
+                    routePage: 'HowToJoin'
+                })
                 .when('/wings', {
                     templateUrl: 'routes/wings.html',
                     routePage: 'Wings'

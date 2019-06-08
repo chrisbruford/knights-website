@@ -176,13 +176,21 @@ function Karma() {
                                 return b.karma - a.karma;
                             });
 
-                            let output = new Array();
-                            output.push("```");
-                            output.push("--------------Leaderboards--------------");
-                            output.push("|             Karma | User             |");
-                            output.push("----------------------------------------");
+                            let output
+                            let pagination = 10;
 
                             leaderboard.forEach((user, index, users) => {
+                                if (index % pagination === 0) {
+                                    output = new Array();
+                                    output.push("```");
+                                    if (index === 0) {
+                                        output.push("--------------Leaderboards--------------");
+                                    } else {
+                                        output.push("----------------------------------------");
+                                    }
+                                    output.push("|             Karma | User             |");
+                                    output.push("----------------------------------------");
+                                }
                                 let karmaSpaces = ((user) => {
                                     let space = new Array();
                                     for (var index = 0; index < 19 - user.karma.toString().length; index++) {
@@ -201,12 +209,18 @@ function Karma() {
                                     return space.join(" ");
                                 })(name);
                                 output.push(`|${karmaSpaces}${user.karma} | ${name}${nameSpaces}|`);
+
+                                if ((index + 1) % pagination === 0 || index === users.length - 1) {
+                                    if (index !== users.length - 1) {
+                                        output.push("----------------CONTINUED---------------");
+                                    } else {
+                                        output.push("----------------------------------------");
+                                    }
+                                    output.push("```");
+
+                                    msg.channel.send(output.join("\n"));
+                                }
                             });
-
-                            output.push("----------------------------------------");
-                            output.push("```");
-
-                            msg.channel.send(output.join("\n"));
                         })
                         .catch(err => {
                             logger.log(err);

@@ -175,6 +175,9 @@ function Karma() {
                             leaderboard.sort((a, b) => {
                                 return b.karma - a.karma;
                             });
+                            leaderboard = leaderboard.filter(user => {
+                                return thisGuild.members.get(user.id);
+                            });
 
                             let output
                             let pagination = 10;
@@ -199,28 +202,26 @@ function Karma() {
                                     return space.join(" ");
                                 })(user);
 
-                                let guildDiscordUser = thisGuild.members.get(user.id);
-                                if (guildDiscordUser) {
-                                    let name = guildDiscordUser.displayName;
-                                    let nameSpaces = ((name) => {
-                                        let space = new Array();
-                                        for (var index = 0; index < 18 - name.length; index++) {
-                                            space.push("");
-                                        }
-                                        return space.join(" ");
-                                    })(name);
-                                    output.push(`|${karmaSpaces}${user.karma} | ${name}${nameSpaces}|`);
+                                let name = thisGuild.members.get(user.id).displayName;
 
-                                    if ((index + 1) % pagination === 0 || index === users.length - 1) {
-                                        if (index !== users.length - 1) {
-                                            output.push("----------------CONTINUED---------------");
-                                        } else {
-                                            output.push("----------------------------------------");
-                                        }
-                                        output.push("```");
-
-                                        msg.channel.send(output.join("\n"));
+                                let nameSpaces = ((name) => {
+                                    let space = new Array();
+                                    for (var index = 0; index < 18 - name.length; index++) {
+                                        space.push("");
                                     }
+                                    return space.join(" ");
+                                })(name);
+                                output.push(`|${karmaSpaces}${user.karma} | ${name}${nameSpaces}|`);
+
+                                if ((index + 1) % pagination === 0 || index === users.length - 1) {
+                                    if (index !== users.length - 1) {
+                                        output.push("----------------CONTINUED---------------");
+                                    } else {
+                                        output.push("----------------------------------------");
+                                    }
+                                    output.push("```");
+
+                                    msg.channel.send(output.join("\n"));
                                 }
                             });
                         })

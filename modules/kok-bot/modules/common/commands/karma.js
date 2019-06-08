@@ -199,26 +199,28 @@ function Karma() {
                                     return space.join(" ");
                                 })(user);
 
-                                let name = thisGuild.members.get(user.id).displayName;
+                                let guildDiscordUser = thisGuild.members.get(user.id);
+                                if (guildDiscordUser) {
+                                    let name = guildDiscordUser.displayName;
+                                    let nameSpaces = ((name) => {
+                                        let space = new Array();
+                                        for (var index = 0; index < 18 - name.length; index++) {
+                                            space.push("");
+                                        }
+                                        return space.join(" ");
+                                    })(name);
+                                    output.push(`|${karmaSpaces}${user.karma} | ${name}${nameSpaces}|`);
 
-                                let nameSpaces = ((name) => {
-                                    let space = new Array();
-                                    for (var index = 0; index < 18 - name.length; index++) {
-                                        space.push("");
+                                    if ((index + 1) % pagination === 0 || index === users.length - 1) {
+                                        if (index !== users.length - 1) {
+                                            output.push("----------------CONTINUED---------------");
+                                        } else {
+                                            output.push("----------------------------------------");
+                                        }
+                                        output.push("```");
+
+                                        msg.channel.send(output.join("\n"));
                                     }
-                                    return space.join(" ");
-                                })(name);
-                                output.push(`|${karmaSpaces}${user.karma} | ${name}${nameSpaces}|`);
-
-                                if ((index + 1) % pagination === 0 || index === users.length - 1) {
-                                    if (index !== users.length - 1) {
-                                        output.push("----------------CONTINUED---------------");
-                                    } else {
-                                        output.push("----------------------------------------");
-                                    }
-                                    output.push("```");
-
-                                    msg.channel.send(output.join("\n"));
                                 }
                             });
                         })

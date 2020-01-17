@@ -25,7 +25,7 @@
     "fs-extra": "^8.0.1",
     "helmet": "^3.3.0",
     "jimp": "^0.2.27",
-    "jquery": "^3.1.1",
+    "jquery": "^3.4.0",
     "mongoose": "^4.13.17",
     "morgan": "~1.7.0",
     "motion-ui": "^1.2.2",

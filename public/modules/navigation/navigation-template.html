@@ -1,48 +1,101 @@
 <div class="title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
-    <button class="menu-icon" type="button" data-toggle></button>
+  <button class="menu-icon" type="button" data-toggle></button>
 </div>
 
-<nav id="top-menu" class="top-bar" data-options="marginTop:0;" style="width:100%">
-    <div class="top-bar-title">
-        <ul class="vertical medium-horizontal menu">
-            <li class="menu-text">
-                <a href="/#/"><img src="images/Coat of Arms.png" alt="Knights of Karma logo" style="height:1.2em"></a>
-            </li>
-        </ul>
-    </div>
+<nav
+  id="top-menu"
+  class="top-bar"
+  data-options="marginTop:0;"
+  style="width: 100%;"
+>
+  <div class="top-bar-title">
+    <ul class="vertical medium-horizontal menu">
+      <li class="menu-text">
+        <a href="/#/"
+          ><img
+            src="images/Coat of Arms.png"
+            alt="Knights of Karma logo"
+            style="height: 1.2em;"
+        /></a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="top-bar-left">
-        <ul class="vertical medium-horizontal menu">
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/')}"><a href="/">Home</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/contact')}"><a href="/contact">Contact</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/wings')}"><a href="/wings">Wings</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/roster')}"><a href="/roster">Roster</a></li>
-            <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/howtojoin')}"><a href="/howtojoin">How to Join</a></li>
-            <li class="hide-for-medium-up">
-                <hr>
-            </li>
-        </ul>
-    </div>
+  <div class="top-bar-left">
+    <ul class="vertical medium-horizontal menu">
+      <li class="menu-item" ng-class="{selected: NavigationCtrl.isActive('/')}">
+        <a href="/">Home</a>
+      </li>
+      <li
+        class="menu-item"
+        ng-class="{selected: NavigationCtrl.isActive('/contact')}"
+      >
+        <a href="/contact">Contact</a>
+      </li>
+      <li
+        class="menu-item"
+        ng-class="{selected: NavigationCtrl.isActive('/wings')}"
+      >
+        <a href="/wings">Wings</a>
+      </li>
+      <li
+        class="menu-item"
+        ng-class="{selected: NavigationCtrl.isActive('/roster')}"
+      >
+        <a href="/roster">Roster</a>
+      </li>
+      <li
+        class="menu-item"
+        ng-class="{selected: NavigationCtrl.isActive('/howtojoin')}"
+      >
+        <a href="/howtojoin">How to Join</a>
+      </li>
+      <li class="hide-for-medium-up">
+        <hr />
+      </li>
+    </ul>
+  </div>
 
-    <div class="top-bar-right">
-        <ul class="vertical medium-horizontal menu" data-responsive-menu="medium-dropdown">
-            <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="signUpModal">Join Us</a></li>
-            <li class="menu-item" ng-show="!NavigationCtrl.user"><a data-open="loginModal">Login</a></li>
-            <li class="menu-item" ng-show="NavigationCtrl.user.level >= 3" ng-class="{selected: NavigationCtrl.isActive('/admin')}">
-                <a>Admin</a>
-                <ul class="menu">
-                    <li><a href="/admin">Manage Accounts</a></li>
-                </ul>
-            </li>
-            <li class="menu-item" ng-show="NavigationCtrl.user" ng-class="{selected: NavigationCtrl.isActive('/account') || NavigationCtrl.isActive('/resetpassword')}">
-                <a>Account</a>
-                <ul class="menu">
-                    <li><a href="/account">Profile</a></li>
-                    <li><a href="/changepassword" ng-class="NavigationCtrl.selectAccount">Change Password</a></li>
-                </ul>
-            </li>
-            <li class="menu-item" ng-show="NavigationCtrl.user"><a ng-click="NavigationCtrl.logout()">Logout</a></li>
+  <div class="top-bar-right">
+    <ul
+      class="vertical medium-horizontal menu"
+      data-responsive-menu="medium-dropdown"
+    >
+      <li class="menu-item" ng-show="!NavigationCtrl.user">
+        <a data-open="signUpModal">Join Us</a>
+      </li>
+      <li class="menu-item" ng-show="!NavigationCtrl.user">
+        <a data-open="loginModal">Login</a>
+      </li>
+      <li
+        class="menu-item"
+        ng-show="NavigationCtrl.user.level >= 3"
+        ng-class="{selected: NavigationCtrl.isActive('/admin')}"
+      >
+        <a>Admin</a>
+        <ul class="menu">
+          <li><a href="/admin">Manage Accounts</a></li>
         </ul>
-    </div>
+      </li>
+      <li
+        class="menu-item"
+        ng-show="NavigationCtrl.user"
+        ng-class="{selected: NavigationCtrl.isActive('/account') || NavigationCtrl.isActive('/resetpassword')}"
+      >
+        <a>Account</a>
+        <ul class="menu">
+          <li><a href="/account">Profile</a></li>
+          <li>
+            <a href="/changepassword" ng-class="NavigationCtrl.selectAccount"
+              >Change Password</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item" ng-show="NavigationCtrl.user">
+        <a ng-click="NavigationCtrl.logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <kok-message-bar user="user"></kok-message-bar>

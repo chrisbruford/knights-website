@@ -1,8 +1,8 @@
 @charset 'utf-8';
 
-@import 'settings';
-@import 'foundation';
-@import 'motion-ui';
+@import "settings";
+@import "foundation";
+@import "motion-ui";
 
 @include foundation-global-styles;
 //@include foundation-grid;
@@ -23,7 +23,7 @@
 @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
-@include foundation-flex-video;
+@include foundation-responsive-embed;
 @include foundation-label;
 @include foundation-media-object;
 @include foundation-off-canvas;

@@ -41,7 +41,7 @@
 //  36. Tooltip
 //  37. Top Bar
 
-@import 'util/util';
+@import "util/util";
 
 // 1. Global
 // ---------
@@ -63,7 +63,7 @@ $black: #0a0a0a;
 $white: #fefefe;
 $body-background: $black;
 $body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -107,26 +107,50 @@ $block-grid-max: 8;
 $header-font-family: $body-font-family;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
-$font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
+$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 $header-color: inherit;
 $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-styles: (
   small: (
-    'h1': ('font-size': 24),
-    'h2': ('font-size': 20),
-    'h3': ('font-size': 19),
-    'h4': ('font-size': 18),
-    'h5': ('font-size': 17),
-    'h6': ('font-size': 16),
+    "h1": (
+      "font-size": 24,
+    ),
+    "h2": (
+      "font-size": 20,
+    ),
+    "h3": (
+      "font-size": 19,
+    ),
+    "h4": (
+      "font-size": 18,
+    ),
+    "h5": (
+      "font-size": 17,
+    ),
+    "h6": (
+      "font-size": 16,
+    ),
   ),
   medium: (
-    'h1': ('font-size': 48),
-    'h2': ('font-size': 40),
-    'h3': ('font-size': 31),
-    'h4': ('font-size': 25),
-    'h5': ('font-size': 20),
-    'h6': ('font-size': 16),
+    "h1": (
+      "font-size": 48,
+    ),
+    "h2": (
+      "font-size": 40,
+    ),
+    "h3": (
+      "font-size": 31,
+    ),
+    "h4": (
+      "font-size": 25,
+    ),
+    "h5": (
+      "font-size": 20,
+    ),
+    "h6": (
+      "font-size": 16,
+    ),
   ),
 );
 $header-text-rendering: optimizeLegibility;
@@ -166,7 +190,7 @@ $blockquote-padding: rem-calc(9 20 0 19);
 $blockquote-border: 1px solid $medium-gray;
 $cite-font-size: rem-calc(13);
 $cite-color: $dark-gray;
-$cite-pseudo-content: '\2014 \0020';
+$cite-pseudo-content: "\2014 \0020";
 $keystroke-font: $font-family-monospace;
 $keystroke-color: $black;
 $keystroke-background: $light-gray;
@@ -269,7 +293,7 @@ $button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
 $buttongroup-margin: 1rem;
 $buttongroup-spacing: 1px;
-$buttongroup-child-selector: '.button';
+$buttongroup-child-selector: ".button";
 $buttongroup-expand-max: 6;
 $buttongroup-radius-on-each: true;
 
@@ -349,7 +373,7 @@ $dropdownmenu-arrows: true;
 $dropdownmenu-arrow-color: $anchor-color;
 $dropdownmenu-arrow-size: 6px;
 $dropdownmenu-min-width: 200px;
-$dropdownmenu-background: $white;
+$dropdownmenu-background: $black;
 $dropdownmenu-border: 1px solid $medium-gray;
 
 // 19. Forms
@@ -446,7 +470,7 @@ $offcanvas-transition-length: 0.5s;
 $offcanvas-transition-timing: ease;
 $offcanvas-fixed-reveal: true;
 $offcanvas-exit-background: rgba($white, 0.25);
-$maincontent-class: 'off-canvas-content';
+$maincontent-class: "off-canvas-content";
 
 // 25. Orbit
 // ---------
@@ -550,7 +574,10 @@ $table-border: 1px solid smart-scale($table-background, $table-color-scale);
 $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
-$table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
+$table-row-stripe-hover: darken(
+  $table-background,
+  $table-color-scale + $table-hover-scale
+);
 $table-is-striped: true;
 $table-striped-background: smart-scale($table-background, $table-color-scale);
 $table-stripe: even;
@@ -617,9 +644,8 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-$topbar-background: rgba(0,0,0,0.85);
+$topbar-background: rgba(0, 0, 0, 0.85);
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 0.5rem 1rem 0.5rem 0;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
-

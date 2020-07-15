@@ -1,9 +1,11 @@
-let interdicted = require('./interdicted');
-let missionCompleted = require('./mission-completed');
-let redeemVoucher = require('./redeemVoucher');
+const interdicted = require("./interdicted");
+const missionCompleted = require("./mission-completed");
+const redeemVoucher = require("./redeemVoucher");
+const carrierJumpRequest = require("./carrier-jump-request");
 
 module.exports = {
-    interdicted,
-    missionCompleted,
-    redeemVoucher
-}
+  interdicted,
+  missionCompleted,
+  redeemVoucher,
+  carrierJumpRequest,
+};

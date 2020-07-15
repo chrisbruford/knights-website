@@ -2,56 +2,60 @@ const broadcast = require("../broadcasts/broadcast");
 const logger = require("../../../logger");
 const Discord = require("discord.js");
 const { UTCTime } = require("../common/dateHelper");
+const FleetCarrier = require("../../../../models/fleet-carriers");
+const jumpTimers = require("./jumpTimers");
 
-const JUMP_TIMERS = {
-  jump: 15.5 * 60e3, // jump countdown is about 15mins30seconds
-  lockdown: 12 * 60e3, // lockdown happens 3.5 minutes before jump
-  cooldown: 5 * 60e3,
-};
+const { JUMP_TIMERS } = require("../../../../utils/constants");
+
+function hasJumpScheduled(carrierID) {
+  return FleetCarrier.findOne({ carrierID }).then((fc) => {
+    return !!fc.nextJump;
+  });
+}
 
 function lockdownBroadcast(user, jumpScheduledEvent) {
   const jumpTime = new Date(
     Date.now() + JUMP_TIMERS.jump - JUMP_TIMERS.lockdown
   );
-  let lockdownEmbed = new Discord.RichEmbed();
-  lockdownEmbed.setColor(0xfc7f03);
-  lockdownEmbed.setTitle(`🔒 LOCKDOWN`);
-  lockdownEmbed.addField(`Fleet Carrier`, jumpScheduledEvent.CarrierID);
-  lockdownEmbed.addField(
+  let embed = new Discord.RichEmbed();
+  embed.setColor(0xfc7f03);
+  embed.setTitle(`🔒 LOCKDOWN`);
+  embed.addField(`Fleet Carrier`, jumpScheduledEvent.CarrierID);
+  embed.addField(
     `Target system`,
     jumpScheduledEvent.SystemName.toUpperCase(),
     true
   );
-  lockdownEmbed.addField("Target body", jumpScheduledEvent.Body, true);
+  embed.addField("Target body", jumpScheduledEvent.Body, true);
   embed.setFooter(`Jump at ${UTCTime(jumpTime)} UTC`);
 
-  broadcast(user, lockdownEmbed).catch((err) => {
+  broadcast(user, embed).catch((err) => {
     logger.log(err);
   });
 }
 
 function jumpBroadcast(user, jumpScheduledEvent) {
   //schedule announcement for lockdown
-  let lockdownEmbed = new Discord.RichEmbed();
-  lockdownEmbed.setColor(0x33b53e);
-  lockdownEmbed.setTitle(`🌌 JUMP`);
-  lockdownEmbed.addField(`Fleet Carrier`, jumpScheduledEvent.CarrierID);
-  lockdownEmbed.addField(
+  let embed = new Discord.RichEmbed();
+  embed.setColor(0x33b53e);
+  embed.setTitle(`🌌 JUMP`);
+  embed.addField(`Fleet Carrier`, jumpScheduledEvent.CarrierID);
+  embed.addField(
     `Target system`,
     jumpScheduledEvent.SystemName.toUpperCase(),
     true
   );
-  lockdownEmbed.addField("Target body", jumpScheduledEvent.Body, true);
+  embed.addField("Target body", jumpScheduledEvent.Body, true);
 
-  broadcast(user, lockdownEmbed).catch((err) => {
+  broadcast(user, embed).catch((err) => {
     logger.log(err);
   });
 }
 
 function alert(user, jumpScheduledEvent) {
-  const now = new Date();
-  const lockdownTime = new Date(Date.now() + JUMP_TIMERS.lockdown);
-  const jumpTime = new Date(Date.now() + JUMP_TIMERS.jump);
+  const now = Date.now();
+  const lockdownTime = new Date(now + JUMP_TIMERS.lockdown);
+  const jumpTime = new Date(now + JUMP_TIMERS.jump);
 
   let embed = new Discord.RichEmbed();
   embed.setColor(0xff0000);
@@ -67,12 +71,19 @@ function alert(user, jumpScheduledEvent) {
     `Lockdown at ${UTCTime(lockdownTime)} UTC\nJump at ${UTCTime(jumpTime)} UTC`
   );
 
-  setTimeout(
-    () => lockdownBroadcast(user, jumpScheduledEvent),
-    JUMP_TIMERS.lockdown
-  );
+  jumpTimers.set(jumpScheduledEvent.CarrierID, [
+    setTimeout(() => {
+      if (hasJumpScheduled) {
+        lockdownBroadcast(user, jumpScheduledEvent);
+      }
+    }, JUMP_TIMERS.lockdown),
 
-  setTimeout(() => jumpBroadcast(user, jumpScheduledEvent), JUMP_TIMERS.jump);
+    setTimeout(() => {
+      if (hasJumpScheduled) {
+        jumpBroadcast(user, jumpScheduledEvent);
+      }
+    }, JUMP_TIMERS.jump),
+  ]);
 
   return broadcast(user, embed).catch((err) => {
     logger.log(err);

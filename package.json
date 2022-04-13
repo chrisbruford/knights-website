@@ -11,7 +11,7 @@
     "angular-animate": "^1.8.0",
     "angular-messages": "^1.8.0",
     "angular-route": "^1.8.0",
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",

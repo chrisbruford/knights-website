@@ -33,7 +33,7 @@
     "ng-file-upload": "^12.2.13",
     "ng-image-gallery": "^2.1.4",
     "nodemailer": "^2.7.0",
-    "nodemailer-mailgun-transport": "^1.4.0",
+    "nodemailer-mailgun-transport": "^2.1.5",
     "passport": "^0.3.2",
     "passport-discord": "^0.1.4",
     "passport-local": "^1.0.0",
